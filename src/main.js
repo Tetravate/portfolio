@@ -196,13 +196,15 @@ function renderServices() {
   `).join('');
 }
 
-// Interactive Radial Network: The Founders
+// Interactive Radial Network: The Founders (High-End Studio System)
 function initFoundersRadialNetwork() {
   const foundersLayer = document.getElementById('radialFoundersLayer');
   const linesGroup = document.getElementById('radialLinesGroup');
   const activeTitle = document.getElementById('activeFounderTitle');
   const activeDesc = document.getElementById('activeFounderDesc');
+  const activeTags = document.getElementById('activeFounderTags');
   const activeBadge = document.getElementById('activeFounderBadge');
+  const centralCoreCard = document.getElementById('centralCoreCard');
 
   if (!foundersLayer || !linesGroup) return;
 
@@ -210,14 +212,14 @@ function initFoundersRadialNetwork() {
   const centerY = 400;
   const radius = 275;
 
-  // 5 Founders evenly distributed at 72 degrees, starting at -90deg (top)
+  // 5 Founders positioned in a perfect circle at 72° intervals (-90°, -18°, 54°, 126°, 198°)
   const nodeCoordinates = teamMembers.map((member, idx) => {
     const angleDeg = -90 + idx * 72;
     const angleRad = (angleDeg * Math.PI) / 180;
     const x = centerX + radius * Math.cos(angleRad);
     const y = centerY + radius * Math.sin(angleRad);
 
-    // Subtle organic Bezier curve midpoint with perpendicular curvature
+    // Elegant organic Bezier curve midpoint with subtle perpendicular displacement
     const midX = (centerX + x) / 2;
     const midY = (centerY + y) / 2;
     const dx = x - centerX;
@@ -228,37 +230,74 @@ function initFoundersRadialNetwork() {
     const cpX = midX + 16 * normX;
     const cpY = midY + 16 * normY;
 
+    // Flyout placement based on node quadrant to ensure zero viewport clipping
+    let flyoutClass = 'flyout-bottom';
+    if (idx === 0) flyoutClass = 'flyout-bottom';
+    else if (idx === 1 || idx === 2) flyoutClass = 'flyout-left';
+    else if (idx === 3 || idx === 4) flyoutClass = 'flyout-right';
+
     return {
       idx,
       member,
+      angleDeg,
       x: Number(x.toFixed(1)),
       y: Number(y.toFixed(1)),
       cpX: Number(cpX.toFixed(1)),
       cpY: Number(cpY.toFixed(1)),
       xPercent: Number(((x / 800) * 100).toFixed(2)),
-      yPercent: Number(((y / 800) * 100).toFixed(2))
+      yPercent: Number(((y / 800) * 100).toFixed(2)),
+      flyoutClass
     };
   });
 
-  // Render SVG connecting lines (Each Founder -> Center ONLY)
+  // Render SVG connecting lines with animated particle flows traveling toward Tetravate center
   linesGroup.innerHTML = nodeCoordinates.map(n => `
-    <g class="radial-connection-item" id="connectionItem-${n.idx}">
+    <g class="radial-connection-group" id="connectionGroup-${n.idx}">
+      <!-- Underlying subtle organic curve -->
       <path
         id="radialPath-${n.idx}"
         class="radial-connector-path"
-        d="M ${centerX} ${centerY} Q ${n.cpX} ${n.cpY} ${n.x} ${n.y}"
+        d="M 400 400 Q ${n.cpX} ${n.cpY} ${n.x} ${n.y}"
       />
+      <!-- Active glowing overlay path -->
+      <path
+        id="radialActiveGlow-${n.idx}"
+        class="radial-glow-overlay-path"
+        d="M 400 400 Q ${n.cpX} ${n.cpY} ${n.x} ${n.y}"
+      />
+      <!-- Terminal node anchor dot -->
       <circle
         id="radialDot-${n.idx}"
         class="radial-path-dot"
         cx="${n.x}"
         cy="${n.y}"
-        r="4"
+        r="3.5"
       />
+      <!-- Particle 1 flowing continuously from Founder toward Tetravate Center -->
+      <circle r="2.5" class="radial-flow-particle particle-lead" fill="#34D399" opacity="0.65">
+        <animateMotion
+          dur="3.8s"
+          repeatCount="indefinite"
+          path="M ${n.x} ${n.y} Q ${n.cpX} ${n.cpY} 400 400"
+          keyPoints="0;1"
+          keyTimes="0;1"
+        />
+      </circle>
+      <!-- Particle 2 secondary staggered wave -->
+      <circle r="1.75" class="radial-flow-particle particle-trail" fill="#10B981" opacity="0.45">
+        <animateMotion
+          dur="3.8s"
+          begin="1.9s"
+          repeatCount="indefinite"
+          path="M ${n.x} ${n.y} Q ${n.cpX} ${n.cpY} 400 400"
+          keyPoints="0;1"
+          keyTimes="0;1"
+        />
+      </circle>
     </g>
   `).join('');
 
-  // Render HTML Founder Leaf Nodes
+  // Render HTML Founder Leaf Nodes (Organic/Geometric Capsule with Flyout)
   foundersLayer.innerHTML = nodeCoordinates.map(n => `
     <div
       class="founder-leaf-node"
@@ -267,23 +306,46 @@ function initFoundersRadialNetwork() {
       style="left: ${n.xPercent}%; top: ${n.yPercent}%;"
       tabindex="0"
       role="button"
-      aria-label="${n.member.name}, Founder. Key Strengths: ${n.member.strengths}"
+      aria-label="${n.member.nameUpper}, FOUNDER. ${n.member.tagline}"
     >
-      <div class="founder-leaf-header">
-        <span class="founder-leaf-number">0${n.idx + 1}</span>
-        <span class="founder-leaf-role">Founder</span>
+      <div class="founder-leaf-capsule">
+        <div class="founder-leaf-header">
+          <span class="founder-leaf-number">${n.member.number}</span>
+          <span class="founder-leaf-role">
+            <span class="founder-live-dot"></span>
+            ${n.member.role}
+          </span>
+        </div>
+        <div class="founder-leaf-name">${n.member.nameUpper}</div>
+        <div class="founder-leaf-sub">${n.member.tagline}</div>
       </div>
-      <div class="founder-leaf-name">${n.member.name}</div>
-      <div class="founder-leaf-strengths-preview">
-        ${n.member.strengths}
+
+      <!-- Attached Micro Information Flyout (Reveals on Hover / Focus) -->
+      <div class="founder-flyout-panel ${n.flyoutClass}" aria-hidden="true">
+        <div class="flyout-heading-row">
+          <span class="flyout-name">${n.member.nameUpper}</span>
+          <span class="flyout-badge">FOUNDER</span>
+        </div>
+        <div class="flyout-versatile-label">Builds across the stack</div>
+        <p class="flyout-bio-text">${n.member.bio}</p>
+        <div class="flyout-skills-wrap">
+          ${n.member.skills.map(s => `<span class="flyout-chip">${s}</span>`).join('')}
+        </div>
       </div>
     </div>
   `).join('');
 
-  // Interaction handlers
+  // Interactive System Handlers
   const founderNodes = foundersLayer.querySelectorAll('.founder-leaf-node');
-  const pathElements = linesGroup.querySelectorAll('.radial-connector-path');
-  const dotElements = linesGroup.querySelectorAll('.radial-path-dot');
+  const connectionGroups = linesGroup.querySelectorAll('.radial-connection-group');
+
+  const defaultTagsHTML = `
+    <span class="active-tag-chip">Full-Stack Development</span>
+    <span class="active-tag-chip">Applied AI / ML</span>
+    <span class="active-tag-chip">Backend Systems</span>
+    <span class="active-tag-chip">Data Intelligence</span>
+    <span class="active-tag-chip">Product Delivery</span>
+  `;
 
   function setActiveFounder(activeIdx) {
     founderNodes.forEach((node, idx) => {
@@ -296,29 +358,27 @@ function initFoundersRadialNetwork() {
       }
     });
 
-    pathElements.forEach((path, idx) => {
+    connectionGroups.forEach((group, idx) => {
       if (idx === activeIdx) {
-        path.classList.add('is-active');
-        path.classList.remove('is-dimmed');
+        group.classList.add('is-active');
+        group.classList.remove('is-dimmed');
       } else {
-        path.classList.remove('is-active');
-        path.classList.add('is-dimmed');
+        group.classList.remove('is-active');
+        group.classList.add('is-dimmed');
       }
     });
 
-    dotElements.forEach((dot, idx) => {
-      if (idx === activeIdx) {
-        dot.classList.add('is-active');
-      } else {
-        dot.classList.remove('is-active');
-      }
-    });
+    // Central core node reacts with a pulse
+    if (centralCoreCard) {
+      centralCoreCard.classList.add('core-pulse-active');
+    }
 
-    if (activeTitle && activeDesc && activeBadge) {
+    if (activeTitle && activeDesc && activeTags && activeBadge) {
       const activeMember = teamMembers[activeIdx];
-      activeTitle.textContent = `${activeMember.name} — Founder`;
-      activeDesc.textContent = `${activeMember.bio} • Key Strengths: ${activeMember.strengths}`;
-      activeBadge.textContent = 'ACTIVE LEAF';
+      activeTitle.textContent = `${activeMember.nameUpper} — FOUNDER`;
+      activeDesc.textContent = `${activeMember.bio} • Responsibilities adapt to each project across the entire software stack.`;
+      activeTags.innerHTML = activeMember.skills.map(s => `<span class="active-tag-chip is-highlighted">${s}</span>`).join('');
+      activeBadge.textContent = 'CONNECTED NODE';
     }
   }
 
@@ -328,19 +388,20 @@ function initFoundersRadialNetwork() {
       node.classList.remove('is-dimmed');
     });
 
-    pathElements.forEach(path => {
-      path.classList.remove('is-active');
-      path.classList.remove('is-dimmed');
+    connectionGroups.forEach(group => {
+      group.classList.remove('is-active');
+      group.classList.remove('is-dimmed');
     });
 
-    dotElements.forEach(dot => {
-      dot.classList.remove('is-active');
-    });
+    if (centralCoreCard) {
+      centralCoreCard.classList.remove('core-pulse-active');
+    }
 
-    if (activeTitle && activeDesc && activeBadge) {
+    if (activeTitle && activeDesc && activeTags && activeBadge) {
       activeTitle.textContent = 'All Five Founders • Unified Core';
-      activeDesc.textContent = 'Hover or tap any founder node to inspect their cross-stack contributions and focus areas.';
-      activeBadge.textContent = 'CROSS-STACK';
+      activeDesc.textContent = 'Five builders, one team — everyone builds across the stack, with responsibilities adapting to each project.';
+      activeTags.innerHTML = defaultTagsHTML;
+      activeBadge.textContent = 'VERSATILE CORE';
     }
   }
 
@@ -353,8 +414,13 @@ function initFoundersRadialNetwork() {
     node.addEventListener('mouseleave', resetActiveFounder);
     node.addEventListener('blur', resetActiveFounder);
 
-    node.addEventListener('click', () => {
-      setActiveFounder(idx);
+    node.addEventListener('click', (e) => {
+      // Toggle or set on mobile touch
+      if (node.classList.contains('is-active')) {
+        resetActiveFounder();
+      } else {
+        setActiveFounder(idx);
+      }
     });
   });
 }

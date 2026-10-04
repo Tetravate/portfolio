@@ -266,33 +266,48 @@ export const processSteps = [
 
 export const teamMembers = [
   {
+    number: "01",
     name: "Aadhithya Balu S",
-    role: "Founder",
+    nameUpper: "AADHITHYA BALU S",
+    role: "FOUNDER",
+    tagline: "Builds across the stack",
     bio: "Contributes across full-stack architecture, web applications, and backend systems with a focus on scalable engineering and seamless deployment.",
-    strengths: "Full-Stack Development, Systems & Deployment"
+    skills: ["Full-Stack", "Architecture", "Systems", "Deployment"]
   },
   {
+    number: "02",
     name: "Aswin N S",
-    role: "Founder",
+    nameUpper: "ASWIN N S",
+    role: "FOUNDER",
+    tagline: "Builds across the stack",
     bio: "Builds reliable software foundations, backend systems, and data pipelines while developing end-to-end features across web and mobile products.",
-    strengths: "Backend Systems, Data & Software Engineering"
+    skills: ["Backend Systems", "Data Pipelines", "APIs", "Software Engineering"]
   },
   {
+    number: "03",
     name: "Almas M",
-    role: "Founder",
+    nameUpper: "ALMAS M",
+    role: "FOUNDER",
+    tagline: "Builds across the stack",
     bio: "Engineers applied AI / ML capabilities and data-driven features while contributing across full-stack product development and system architecture.",
-    strengths: "AI / ML, Data & Full-Stack Development"
+    skills: ["Applied AI / ML", "Data Intelligence", "Full-Stack", "Algorithms"]
   },
   {
+    number: "04",
     name: "Giridharan P",
-    role: "Founder",
+    nameUpper: "GIRIDHARAN P",
+    role: "FOUNDER",
+    tagline: "Builds across the stack",
     bio: "Develops intuitive product experiences and robust application logic, bridging product development with reliable full-stack software delivery.",
-    strengths: "Product Development, Full-Stack & Delivery"
+    skills: ["Product Development", "Interface Logic", "Full-Stack", "Delivery"]
   },
   {
+    number: "05",
     name: "Ashwin S",
-    role: "Founder",
+    nameUpper: "ASHWIN S",
+    role: "FOUNDER",
+    tagline: "Builds across the stack",
     bio: "Develops modern application workflows, backend services, and scalable digital solutions while driving software engineering and deployment practices.",
-    strengths: "Software Engineering, Backend & Deployment"
+    skills: ["Software Engineering", "Cloud & Backend", "Modern Workflows", "Deployment"]
   }
 ];

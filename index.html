@@ -452,10 +452,22 @@
     </section>
 
     <!-- ==========================================================================
-         THE FOUNDERS (RADIAL NETWORK)
+         THE FOUNDERS (STUDIO RADIAL NETWORK)
          ========================================================================== -->
     <section class="section founders-section" id="about">
-      <div class="container">
+      <!-- Ambient Blueprint / Technical Grid -->
+      <div class="founders-tech-grid" aria-hidden="true"></div>
+      <div class="founders-ambient-bloom" aria-hidden="true"></div>
+
+      <!-- Studio Telemetry Markers -->
+      <div class="founders-telemetry-badge telemetry-tl" aria-hidden="true">
+        <span class="telemetry-dot"></span> TETRAVATE // 05-NODE RADIAL ARCHITECTURE
+      </div>
+      <div class="founders-telemetry-badge telemetry-tr" aria-hidden="true">
+        EQUIDISTANT 72.0° // SINGLE CORE TOPOLOGY
+      </div>
+
+      <div class="container founders-container">
         <div class="section-header founders-section-header">
           <div class="eyebrow founders-eyebrow">ABOUT TETRAVATE</div>
           <h2 class="section-title founders-section-title">THE FOUNDERS</h2>
@@ -464,97 +476,130 @@
           </p>
         </div>
 
-        <!-- Founders Concept Context -->
-        <div class="founders-concept-banner">
-          <div class="founders-concept-tag">RADIAL NETWORK ARCHITECTURE</div>
-          <p class="founders-concept-lead">
-            Five founders, one team — everyone builds across the stack, with responsibilities adapting to each project.
-          </p>
-        </div>
-
-        <!-- Interactive Radial Network Visualization -->
+        <!-- Interactive Radial Ecosystem Stage -->
         <div class="radial-network-wrapper" id="radialNetworkWrapper">
-          <!-- Ambient glow in background -->
+          <!-- Background Atmospheric Aura -->
           <div class="radial-ambient-glow" aria-hidden="true"></div>
 
-          <!-- SVG Connecting lines layer -->
+          <!-- SVG Connecting Lines & Animated Particles Layer -->
           <svg class="radial-connections-svg" id="radialConnectionsSvg" viewBox="0 0 800 800" aria-hidden="true">
             <defs>
-              <filter id="emeraldGlow" x="-30%" y="-30%" width="160%" height="160%">
-                <feGaussianBlur stdDeviation="5" result="blur" />
+              <filter id="emeraldGlow" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="6" result="blur" />
                 <feMerge>
                   <feMergeNode in="blur" />
                   <feMergeNode in="SourceGraphic" />
                 </feMerge>
               </filter>
-              <radialGradient id="networkCenterGlow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#10B981" stop-opacity="0.25" />
-                <stop offset="50%" stop-color="#10B981" stop-opacity="0.06" />
+              <radialGradient id="networkAtmosphere" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#10B981" stop-opacity="0.18" />
+                <stop offset="45%" stop-color="#10B981" stop-opacity="0.05" />
                 <stop offset="100%" stop-color="#081512" stop-opacity="0" />
               </radialGradient>
+              <linearGradient id="lineGradActive" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#10B981" stop-opacity="0.9" />
+                <stop offset="100%" stop-color="#34D399" stop-opacity="1" />
+              </linearGradient>
             </defs>
 
-            <!-- Radial Background Glow -->
-            <circle cx="400" cy="400" r="380" fill="url(#networkCenterGlow)" />
+            <!-- Radial Background Atmosphere -->
+            <circle cx="400" cy="400" r="390" fill="url(#networkAtmosphere)" />
 
-            <!-- Concentric Orbital Guide Rings -->
-            <circle cx="400" cy="400" r="140" class="radial-orbital-ring ring-inner" />
+            <!-- Orbital Guide Rings with Geometric Precision -->
+            <circle cx="400" cy="400" r="142" class="radial-orbital-ring ring-inner" />
             <circle cx="400" cy="400" r="275" class="radial-orbital-ring ring-outer" />
+            <circle cx="400" cy="400" r="340" class="radial-orbital-ring ring-faint" />
 
-            <!-- Dynamic Connections Group -->
+            <!-- Geometric Radar Ticks at 5 Axes (72 deg intervals from -90 deg) -->
+            <g class="radial-axis-ticks">
+              <line x1="400" y1="250" x2="400" y2="260" class="radial-axis-mark" />
+              <line x1="535" y1="352" x2="525" y2="355" class="radial-axis-mark" />
+              <line x1="482" y1="520" x2="475" y2="512" class="radial-axis-mark" />
+              <line x1="318" y1="520" x2="325" y2="512" class="radial-axis-mark" />
+              <line x1="265" y1="352" x2="275" y2="355" class="radial-axis-mark" />
+            </g>
+
+            <!-- Dynamic SVG Paths & Continuous Contributing Particle Flows -->
             <g id="radialLinesGroup"></g>
           </svg>
 
-          <!-- Central Node: TETRAVATE CORE -->
+          <!-- Central Core Node: TETRAVATE -->
           <div class="central-core-node" id="centralCoreNode" role="region" aria-label="Tetravate Core">
-            <div class="central-core-pulse"></div>
-            <div class="central-core-ring"></div>
-            <div class="central-core-card">
+            <!-- Atmospheric Bloom & Rotating Rings -->
+            <div class="central-core-bloom"></div>
+            <div class="central-core-halo"></div>
+            <div class="central-core-tick-ring"></div>
+
+            <!-- Core Capsule Card -->
+            <div class="central-core-card" id="centralCoreCard">
+              <div class="central-core-sheen"></div>
               <img src="/src/assets/logo-emblem.png" alt="Tetravate Emblem" class="central-core-logo" />
               <div class="central-core-title">TETRAVATE</div>
-              <div class="central-core-badge">CORE</div>
+              <div class="central-core-badge">
+                <span class="core-pulse-pip"></span>
+                <span>CORE</span>
+              </div>
             </div>
           </div>
 
           <!-- 5 Founder Leaf Nodes Layer -->
           <div class="radial-founders-layer" id="radialFoundersLayer">
-            <!-- Populated via main.js -->
+            <!-- Dynamically injected via main.js with structured flyouts -->
           </div>
         </div>
 
-        <!-- Active Founder Detail Bar / Readout -->
+        <!-- Studio Telemetry & Active Detail Panel -->
         <div class="radial-active-bar" id="radialActiveBar" aria-live="polite">
-          <div class="radial-active-indicator"></div>
+          <div class="radial-active-indicator">
+            <span class="indicator-core-pulse"></span>
+          </div>
           <div class="radial-active-info">
             <div class="radial-active-founder" id="activeFounderTitle">All Five Founders &bull; Unified Core</div>
             <div class="radial-active-desc" id="activeFounderDesc">
-              Hover or tap any founder node to inspect their cross-stack contributions and focus areas.
+              Five builders, one team — everyone builds across the stack, with responsibilities adapting to each project.
+            </div>
+            <div class="radial-active-tags" id="activeFounderTags">
+              <span class="active-tag-chip">Full-Stack Development</span>
+              <span class="active-tag-chip">Applied AI / ML</span>
+              <span class="active-tag-chip">Backend Systems</span>
+              <span class="active-tag-chip">Data Intelligence</span>
+              <span class="active-tag-chip">Product Delivery</span>
             </div>
           </div>
-          <div class="radial-active-badge" id="activeFounderBadge">CROSS-STACK</div>
+          <div class="radial-active-badge-wrap">
+            <span class="radial-active-badge" id="activeFounderBadge">VERSATILE CORE</span>
+          </div>
         </div>
 
-        <!-- Core Brand Values Grid (Preserved) -->
+        <!-- Core Brand Values Grid (Preserved in Dark Emerald Theme) -->
         <div class="founders-values-wrapper">
-          <h3 class="founders-values-title">Our Core Principles</h3>
+          <div class="founders-values-header">
+            <span class="founders-values-eyebrow">FOUNDATIONAL ETHOS</span>
+            <h3 class="founders-values-title">Our Core Principles</h3>
+          </div>
           <div class="values-grid founders-values-grid">
             <div class="value-card founders-value-card">
+              <div class="value-card-num">01</div>
               <h4 class="value-card-title">Trust</h4>
               <p class="value-card-desc">No exaggerated claims. Reliable timelines and honest status updates.</p>
             </div>
             <div class="value-card founders-value-card">
+              <div class="value-card-num">02</div>
               <h4 class="value-card-title">Quality</h4>
               <p class="value-card-desc">Resilient code, accessible design, and software that endures.</p>
             </div>
             <div class="value-card founders-value-card">
+              <div class="value-card-num">03</div>
               <h4 class="value-card-title">Thoughts</h4>
               <p class="value-card-desc">Deliberate thinking before coding. Clear problem framing.</p>
             </div>
             <div class="value-card founders-value-card">
+              <div class="value-card-num">04</div>
               <h4 class="value-card-title">Kindness</h4>
               <p class="value-card-desc">Respectful communication and empathy for every end user.</p>
             </div>
             <div class="value-card founders-value-card">
+              <div class="value-card-num">05</div>
               <h4 class="value-card-title">Humanity</h4>
               <p class="value-card-desc">Technology exists to serve people, never the reverse.</p>
             </div>
