@@ -200,11 +200,17 @@ function renderServices() {
 function initFoundersRadialNetwork() {
   const foundersLayer = document.getElementById('radialFoundersLayer');
   const linesGroup = document.getElementById('radialLinesGroup');
+  const centralCoreCard = document.getElementById('centralCoreCard');
+  const showcasePanel = document.getElementById('founderShowcasePanel');
+  const showcaseNodeNum = document.getElementById('showcaseNodeNum');
+  const activeBadge = document.getElementById('activeFounderBadge');
+  const showcaseStatusText = document.getElementById('showcaseStatusText');
+  const showcaseTagline = document.getElementById('showcaseTagline');
   const activeTitle = document.getElementById('activeFounderTitle');
+  const showcaseVersatileTag = document.getElementById('showcaseVersatileTag');
   const activeDesc = document.getElementById('activeFounderDesc');
   const activeTags = document.getElementById('activeFounderTags');
-  const activeBadge = document.getElementById('activeFounderBadge');
-  const centralCoreCard = document.getElementById('centralCoreCard');
+  const showcaseUplinkText = document.getElementById('showcaseUplinkText');
 
   if (!foundersLayer || !linesGroup) return;
 
@@ -219,51 +225,31 @@ function initFoundersRadialNetwork() {
     const x = centerX + radius * Math.cos(angleRad);
     const y = centerY + radius * Math.sin(angleRad);
 
-    // Elegant organic Bezier curve midpoint with subtle perpendicular displacement
-    const midX = (centerX + x) / 2;
-    const midY = (centerY + y) / 2;
-    const dx = x - centerX;
-    const dy = y - centerY;
-    const len = Math.sqrt(dx * dx + dy * dy);
-    const normX = -dy / len;
-    const normY = dx / len;
-    const cpX = midX + 16 * normX;
-    const cpY = midY + 16 * normY;
-
-    // Flyout placement based on node quadrant to ensure zero viewport clipping
-    let flyoutClass = 'flyout-bottom';
-    if (idx === 0) flyoutClass = 'flyout-bottom';
-    else if (idx === 1 || idx === 2) flyoutClass = 'flyout-left';
-    else if (idx === 3 || idx === 4) flyoutClass = 'flyout-right';
-
     return {
       idx,
       member,
       angleDeg,
       x: Number(x.toFixed(1)),
       y: Number(y.toFixed(1)),
-      cpX: Number(cpX.toFixed(1)),
-      cpY: Number(cpY.toFixed(1)),
       xPercent: Number(((x / 800) * 100).toFixed(2)),
-      yPercent: Number(((y / 800) * 100).toFixed(2)),
-      flyoutClass
+      yPercent: Number(((y / 800) * 100).toFixed(2))
     };
   });
 
   // Render SVG connecting lines with animated particle flows traveling toward Tetravate center
   linesGroup.innerHTML = nodeCoordinates.map(n => `
     <g class="radial-connection-group" id="connectionGroup-${n.idx}">
-      <!-- Underlying subtle organic curve -->
+      <!-- Underlying subtle direct connection path -->
       <path
         id="radialPath-${n.idx}"
         class="radial-connector-path"
-        d="M 400 400 Q ${n.cpX} ${n.cpY} ${n.x} ${n.y}"
+        d="M 400 400 L ${n.x} ${n.y}"
       />
       <!-- Active glowing overlay path -->
       <path
         id="radialActiveGlow-${n.idx}"
         class="radial-glow-overlay-path"
-        d="M 400 400 Q ${n.cpX} ${n.cpY} ${n.x} ${n.y}"
+        d="M 400 400 L ${n.x} ${n.y}"
       />
       <!-- Terminal node anchor dot -->
       <circle
@@ -274,22 +260,22 @@ function initFoundersRadialNetwork() {
         r="3.5"
       />
       <!-- Particle 1 flowing continuously from Founder toward Tetravate Center -->
-      <circle r="2.5" class="radial-flow-particle particle-lead" fill="#60A5FA" opacity="0.75">
+      <circle r="2.5" class="radial-flow-particle particle-lead" fill="#2563EB" opacity="0.8">
         <animateMotion
-          dur="3.8s"
+          dur="3.4s"
           repeatCount="indefinite"
-          path="M ${n.x} ${n.y} Q ${n.cpX} ${n.cpY} 400 400"
+          path="M ${n.x} ${n.y} L 400 400"
           keyPoints="0;1"
           keyTimes="0;1"
         />
       </circle>
       <!-- Particle 2 secondary staggered wave -->
-      <circle r="1.75" class="radial-flow-particle particle-trail" fill="#2563EB" opacity="0.55">
+      <circle r="1.75" class="radial-flow-particle particle-trail" fill="#60A5FA" opacity="0.6">
         <animateMotion
-          dur="3.8s"
-          begin="1.9s"
+          dur="3.4s"
+          begin="1.7s"
           repeatCount="indefinite"
-          path="M ${n.x} ${n.y} Q ${n.cpX} ${n.cpY} 400 400"
+          path="M ${n.x} ${n.y} L 400 400"
           keyPoints="0;1"
           keyTimes="0;1"
         />
@@ -297,7 +283,7 @@ function initFoundersRadialNetwork() {
     </g>
   `).join('');
 
-  // Render HTML Founder Leaf Nodes (Organic/Geometric Capsule with Flyout)
+  // Render HTML Founder Leaf Nodes (Clean capsule without local popups - details show on right showcase window)
   foundersLayer.innerHTML = nodeCoordinates.map(n => `
     <div
       class="founder-leaf-node"
@@ -319,19 +305,6 @@ function initFoundersRadialNetwork() {
         <div class="founder-leaf-name">${n.member.nameUpper}</div>
         <div class="founder-leaf-sub">${n.member.tagline}</div>
       </div>
-
-      <!-- Attached Micro Information Flyout (Reveals on Hover / Focus) -->
-      <div class="founder-flyout-panel ${n.flyoutClass}" aria-hidden="true">
-        <div class="flyout-heading-row">
-          <span class="flyout-name">${n.member.nameUpper}</span>
-          <span class="flyout-badge">FOUNDER</span>
-        </div>
-        <div class="flyout-versatile-label">Builds across the stack</div>
-        <p class="flyout-bio-text">${n.member.bio}</p>
-        <div class="flyout-skills-wrap">
-          ${n.member.skills.map(s => `<span class="flyout-chip">${s}</span>`).join('')}
-        </div>
-      </div>
     </div>
   `).join('');
 
@@ -340,11 +313,11 @@ function initFoundersRadialNetwork() {
   const connectionGroups = linesGroup.querySelectorAll('.radial-connection-group');
 
   const defaultTagsHTML = `
-    <span class="active-tag-chip">Full-Stack Development</span>
-    <span class="active-tag-chip">Applied AI / ML</span>
-    <span class="active-tag-chip">Backend Systems</span>
-    <span class="active-tag-chip">Data Intelligence</span>
-    <span class="active-tag-chip">Product Delivery</span>
+    <span class="active-tag-chip">Frontend &amp; UI Systems</span>
+    <span class="active-tag-chip">Backend &amp; Applied AI</span>
+    <span class="active-tag-chip">Full-Stack &amp; Integration</span>
+    <span class="active-tag-chip">Product Logic &amp; Deployment</span>
+    <span class="active-tag-chip">Technology &amp; Product Development</span>
   `;
 
   function setActiveFounder(activeIdx) {
@@ -373,12 +346,31 @@ function initFoundersRadialNetwork() {
       centralCoreCard.classList.add('core-pulse-active');
     }
 
-    if (activeTitle && activeDesc && activeTags && activeBadge) {
-      const activeMember = teamMembers[activeIdx];
-      activeTitle.textContent = `${activeMember.nameUpper} — FOUNDER`;
-      activeDesc.textContent = `${activeMember.bio} • Responsibilities adapt to each project across the entire software stack.`;
-      activeTags.innerHTML = activeMember.skills.map(s => `<span class="active-tag-chip is-highlighted">${s}</span>`).join('');
-      activeBadge.textContent = 'CONNECTED NODE';
+    if (showcasePanel) {
+      showcasePanel.classList.add('is-inspecting');
+    }
+
+    const activeMember = teamMembers[activeIdx];
+    if (activeMember) {
+      if (showcaseNodeNum) showcaseNodeNum.textContent = `NODE ${activeMember.number}`;
+      if (activeBadge) activeBadge.textContent = 'FOUNDER';
+      if (showcaseStatusText) showcaseStatusText.textContent = 'LIVE UPLINK ACTIVE';
+      if (showcaseTagline) showcaseTagline.textContent = activeMember.focus.toUpperCase();
+      if (activeTitle) activeTitle.textContent = activeMember.nameUpper;
+      if (showcaseVersatileTag) showcaseVersatileTag.textContent = 'Builds across the stack • Adapts per project';
+      if (activeDesc) activeDesc.textContent = activeMember.bio;
+      if (activeTags) {
+        activeTags.innerHTML = activeMember.skills.map(s => `<span class="active-tag-chip is-highlighted">${s}</span>`).join('');
+      }
+      if (showcaseUplinkText) {
+        showcaseUplinkText.innerHTML = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 3v6m0 6v6"/>
+          </svg>
+          <span>LEAF NODE ${activeMember.number} &bull; DIRECT TETRAVATE UPLINK (72.0&deg;)</span>
+        `;
+      }
     }
   }
 
@@ -397,11 +389,31 @@ function initFoundersRadialNetwork() {
       centralCoreCard.classList.remove('core-pulse-active');
     }
 
-    if (activeTitle && activeDesc && activeTags && activeBadge) {
-      activeTitle.textContent = 'All Five Founders • Unified Core';
-      activeDesc.textContent = 'Five builders, one team — everyone builds across the stack, with responsibilities adapting to each project.';
+    if (showcasePanel) {
+      showcasePanel.classList.remove('is-inspecting');
+    }
+
+    if (showcaseNodeNum) showcaseNodeNum.textContent = 'CORE';
+    if (activeBadge) activeBadge.textContent = 'VERSATILE CORE';
+    if (showcaseStatusText) showcaseStatusText.textContent = 'ACTIVE TOPOLOGY';
+    if (showcaseTagline) showcaseTagline.textContent = 'TETRAVATE ENGINEERING STUDIO';
+    if (activeTitle) activeTitle.textContent = 'Five Builders • One Core';
+    if (showcaseVersatileTag) showcaseVersatileTag.textContent = 'Adaptive Responsibilities • Full-Stack Versatility';
+    if (activeDesc) {
+      activeDesc.textContent = 'Five builders, one team — everyone builds across the stack, with responsibilities adapting to each project. Hover or tap any founder node on the left to inspect individual architecture domains and engineering capabilities.';
+    }
+    if (activeTags) {
       activeTags.innerHTML = defaultTagsHTML;
-      activeBadge.textContent = 'VERSATILE CORE';
+    }
+    if (showcaseUplinkText) {
+      showcaseUplinkText.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 3v18"/>
+          <path d="M3 12h18"/>
+        </svg>
+        <span>DIRECT SINGLE-VECTOR CONNECTIONS &bull; EQUIDISTANT 72.0&deg;</span>
+      `;
     }
   }
 
@@ -415,7 +427,7 @@ function initFoundersRadialNetwork() {
     node.addEventListener('blur', resetActiveFounder);
 
     node.addEventListener('click', (e) => {
-      // Toggle or set on mobile touch
+      // Toggle on touch / click
       if (node.classList.contains('is-active')) {
         resetActiveFounder();
       } else {
@@ -584,7 +596,7 @@ function checkInitialHash() {
 }
 
 // Pre-select service in inquiry form
-window.preselectService = function (serviceName) {
+window.preselectService = function(serviceName) {
   const select = document.getElementById('inquiryService');
   if (!select) return;
   for (let i = 0; i < select.options.length; i++) {
