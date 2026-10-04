@@ -17,7 +17,7 @@ export const featuredProjects = [
       "Offline-first architecture with automatic sync when connected"
     ],
     techStack: ["React / Mobile Web", "Supabase", "IndexedDB (Offline Cache)", "WhatsApp Business API", "Tailored POS Printing Engine"],
-    
+
     // 8-Point Case Study Structure
     caseStudy: {
       problem: "In traditional retail masala counters, peak shopping hours create severe bottlenecks. The store relied on paper bills and manual ledger books ('khata') to track regular customers' credit balances. During network outages, digital billing apps frequently froze, causing lost sales and frustrated customers.",
@@ -52,7 +52,7 @@ export const featuredProjects = [
       "Calm, distraction-free analytical workspace"
     ],
     techStack: ["Python", "FastAPI", "PostGIS / PostgreSQL", "Geospatial Clustering (DBSCAN)", "NetworkX Graph Engine", "Interactive Mapbox GL"],
-    
+
     // 8-Point Case Study Structure
     caseStudy: {
       problem: "Incident data is frequently logged into static spreadsheets across disconnected precinct jurisdictions. Analysts spend days manually cross-referencing locations, modus operandi, and timestamps to recognize whether repeat incidents share common geographical or chronological links.",
@@ -87,7 +87,7 @@ export const featuredProjects = [
       "Partner dashboard for local businesses offering rest spaces"
     ],
     techStack: ["Progressive Web App (PWA)", "Tailored Location Engine", "Supabase Realtime", "Multi-Language Localization", "Accessible Touch UI"],
-    
+
     // 8-Point Case Study Structure
     caseStudy: {
       problem: "Food delivery riders, parcel couriers, and ride-hailing drivers spend long hours in extreme weather conditions. Despite being the backbone of urban logistics, they are routinely denied access to basic restrooms, clean water, and shelter in commercial complexes where they pick up deliveries.",
@@ -122,7 +122,7 @@ export const featuredProjects = [
       "Calm, encouraging feedback tone avoiding robotic red error marks"
     ],
     techStack: ["Python", "Sequential Trajectory Modeling", "FastAPI", "React / Next-gen Learning UI", "Structured Cognitive Taxonomies"],
-    
+
     // 8-Point Case Study Structure
     caseStudy: {
       problem: "When students struggle with complex STEM concepts, standardized homework platforms simply mark an answer wrong with a red 'X'. This triggers anxiety and discouragement without explaining the exact faulty assumption that derailed the student's reasoning.",
@@ -266,53 +266,27 @@ export const processSteps = [
 
 export const teamMembers = [
   {
-    number: "01",
     name: "Aadhithya Balu S",
-    nameUpper: "AADHITHYA BALU S",
-    role: "Founder",
-    tagline: "Frontend & UI Systems",
-    bio: "Focuses on clean interface architecture, high-performance UI systems, and responsive user experiences while building cross-functionally across the full stack.",
-    focus: "Frontend & UI Systems",
-    skills: ["Frontend & UI Systems", "Architecture", "Full-Stack", "Web Performance"]
+    role: "Founder / Engineering & Architecture",
+    bio: "Passionate about building software that solves concrete everyday problems. Balancing university studies, campus placements, and product development with Tetravate.",
+    focus: "Full-Stack Architecture & Systems"
   },
   {
-    number: "02",
     name: "Aswin N S",
-    nameUpper: "ASWIN N S",
-    role: "Founder",
-    tagline: "Backend & Applied AI Pipelines",
-    bio: "Focuses on robust backend systems, data workflows, and applied AI pipelines while engineering scalable features across all layers of the stack.",
-    focus: "Backend & Applied AI Pipelines",
-    skills: ["Backend & Applied AI", "Data Pipelines", "APIs", "Distributed Systems"]
+    role: "Founder / Systems & Backend Engineering",
+    bio: "Dedicated to reliable architecture, database performance, and robust software that businesses and users can count on every day.",
+    focus: "Cloud Systems & Architecture"
   },
   {
-    number: "03",
     name: "Almas M",
-    nameUpper: "ALMAS M",
-    role: "Founder",
-    tagline: "Full-Stack & Integration",
-    bio: "Focuses on end-to-end full-stack integration, service coordination, and resilient system engineering across web and mobile products.",
-    focus: "Full-Stack & Integration",
-    skills: ["Full-Stack & Integration", "Product Logic", "Cloud Services", "APIs"]
+    role: "Founder / Machine Learning & Analytics",
+    bio: "Focused on practical, explainable data intelligence that aids human decision-making rather than making opaque algorithmic claims.",
+    focus: "Data Science & Applied ML"
   },
   {
-    number: "04",
     name: "Giridharan P",
-    nameUpper: "GIRIDHARAN P",
-    role: "Founder",
-    tagline: "Product Logic & Deployment",
-    bio: "Focuses on product engineering, workflow optimization, and dependable deployment pipelines while contributing across the full software lifecycle.",
-    focus: "Product Logic & Deployment",
-    skills: ["Product Logic & Deployment", "System Architecture", "DevOps", "Reliability"]
-  },
-  {
-    number: "05",
-    name: "Ashwin S",
-    nameUpper: "ASHWIN S",
-    role: "Founder",
-    tagline: "Technology & Product Development",
-    bio: "Focuses on technology strategy, core product engineering, and modern application workflows while contributing across the technology stack.",
-    focus: "Technology & Product Development",
-    skills: ["Technology & Product", "Full-Stack", "Backend Services", "Software Delivery"]
+    role: "Founder / Product Design & Operations",
+    bio: "Ensures projects stay grounded, interfaces remain simple and human, and client relationships are built on honesty, kindness, and clear communication.",
+    focus: "User Experience & Delivery"
   }
 ];
