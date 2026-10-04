@@ -266,39 +266,27 @@ export const processSteps = [
 
 export const teamMembers = [
   {
-    number: "01",
     name: "Aadhithya Balu S",
-    nameUpper: "AADHITHYA BALU S",
-    role: "FOUNDER",
-    tagline: "Frontend & UI Systems",
-    bio: "Focuses on clean interface architecture, high-performance UI systems, and responsive user experiences while building cross-functionally across the full stack.",
-    skills: ["Frontend & UI Systems", "Architecture", "Full-Stack", "Web Performance"]
+    role: "Founder / Engineering & Architecture",
+    bio: "Passionate about building software that solves concrete everyday problems. Balancing university studies, campus placements, and product development with Tetravate.",
+    focus: "Full-Stack Architecture & Systems"
   },
   {
-    number: "02",
     name: "Aswin N S",
-    nameUpper: "ASWIN N S",
-    role: "FOUNDER",
-    tagline: "Backend & Applied AI Pipelines",
-    bio: "Focuses on robust backend systems, data workflows, and applied AI pipelines while engineering scalable features across all layers of the stack.",
-    skills: ["Backend & Applied AI", "Data Pipelines", "APIs", "Distributed Systems"]
+    role: "Founder / Systems & Backend Engineering",
+    bio: "Dedicated to reliable architecture, database performance, and robust software that businesses and users can count on every day.",
+    focus: "Cloud Systems & Architecture"
   },
   {
-    number: "03",
     name: "Almas M",
-    nameUpper: "ALMAS M",
-    role: "FOUNDER",
-    tagline: "Full-Stack & Integration",
-    bio: "Focuses on end-to-end full-stack integration, service coordination, and resilient system engineering across web and mobile products.",
-    skills: ["Full-Stack & Integration", "Product Logic", "Cloud Services", "APIs"]
+    role: "Founder / Machine Learning & Analytics",
+    bio: "Focused on practical, explainable data intelligence that aids human decision-making rather than making opaque algorithmic claims.",
+    focus: "Data Science & Applied ML"
   },
   {
-    number: "04",
     name: "Giridharan P",
-    nameUpper: "GIRIDHARAN P",
-    role: "FOUNDER",
-    tagline: "Product Logic & Deployment",
-    bio: "Focuses on product engineering, workflow optimization, and dependable deployment pipelines while contributing across the full software lifecycle.",
-    skills: ["Product Logic & Deployment", "System Architecture", "DevOps", "Reliability"]
+    role: "Founder / Product Design & Operations",
+    bio: "Ensures projects stay grounded, interfaces remain simple and human, and client relationships are built on honesty, kindness, and clear communication.",
+    focus: "User Experience & Delivery"
   }
 ];
