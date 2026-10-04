@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   renderFeaturedProjects('all');
   renderServices();
-  renderTeam();
+  initFoundersRadialNetwork();
   initProjectFilters();
   initCaseStudyModal();
   initContactForm();
@@ -196,22 +196,221 @@ function renderServices() {
   `).join('');
 }
 
-// Render Team
-function renderTeam() {
-  const container = document.getElementById('teamGrid');
-  if (!container) return;
+// Interactive Radial Network: The Founders (5-Node Studio System)
+function initFoundersRadialNetwork() {
+  const foundersLayer = document.getElementById('radialFoundersLayer');
+  const linesGroup = document.getElementById('radialLinesGroup');
+  const activeTitle = document.getElementById('activeFounderTitle');
+  const activeDesc = document.getElementById('activeFounderDesc');
+  const activeTags = document.getElementById('activeFounderTags');
+  const activeBadge = document.getElementById('activeFounderBadge');
+  const centralCoreCard = document.getElementById('centralCoreCard');
 
-  container.innerHTML = teamMembers.map((member, idx) => `
-    <div class="team-card">
-      <div class="team-avatar-placeholder">
-        0${idx + 1}
+  if (!foundersLayer || !linesGroup) return;
+
+  const centerX = 400;
+  const centerY = 400;
+  const radius = 275;
+
+  // 5 Founders positioned in mathematically equal 72° symmetry (-90°, -18°, 54°, 126°, 198°)
+  const nodeCoordinates = teamMembers.map((member, idx) => {
+    const angleDeg = -90 + idx * 72;
+    const angleRad = (angleDeg * Math.PI) / 180;
+    const x = centerX + radius * Math.cos(angleRad);
+    const y = centerY + radius * Math.sin(angleRad);
+
+    // Dynamic flyout positioning based on radial quadrant to eliminate viewport clipping
+    let flyoutClass = 'flyout-bottom';
+    if (idx === 0) flyoutClass = 'flyout-bottom';
+    else if (idx === 1) flyoutClass = 'flyout-left';
+    else if (idx === 2) flyoutClass = 'flyout-top';
+    else if (idx === 3) flyoutClass = 'flyout-top';
+    else if (idx === 4) flyoutClass = 'flyout-right';
+
+    return {
+      idx,
+      member,
+      angleDeg,
+      x: Number(x.toFixed(1)),
+      y: Number(y.toFixed(1)),
+      xPercent: Number(((x / 800) * 100).toFixed(2)),
+      yPercent: Number(((y / 800) * 100).toFixed(2)),
+      flyoutClass
+    };
+  });
+
+  // Render SVG connecting lines directly from each founder to the central Tetravate core
+  linesGroup.innerHTML = nodeCoordinates.map(n => `
+    <g class="radial-connection-group" id="connectionGroup-${n.idx}">
+      <!-- Underlying low-opacity direct connection path -->
+      <path
+        id="radialPath-${n.idx}"
+        class="radial-connector-path"
+        d="M 400 400 L ${n.x} ${n.y}"
+      />
+      <!-- Active glowing overlay path -->
+      <path
+        id="radialActiveGlow-${n.idx}"
+        class="radial-glow-overlay-path"
+        d="M 400 400 L ${n.x} ${n.y}"
+      />
+      <!-- Terminal node anchor dot -->
+      <circle
+        id="radialDot-${n.idx}"
+        class="radial-path-dot"
+        cx="${n.x}"
+        cy="${n.y}"
+        r="3"
+      />
+      <!-- Particle 1 flowing continuously from Founder toward Tetravate Center -->
+      <circle r="2.25" class="radial-flow-particle particle-lead" fill="#10B981" opacity="0.8">
+        <animateMotion
+          dur="3.2s"
+          repeatCount="indefinite"
+          path="M ${n.x} ${n.y} L 400 400"
+          keyPoints="0;1"
+          keyTimes="0;1"
+        />
+      </circle>
+      <!-- Particle 2 secondary staggered wave -->
+      <circle r="1.5" class="radial-flow-particle particle-trail" fill="#059669" opacity="0.6">
+        <animateMotion
+          dur="3.2s"
+          begin="1.6s"
+          repeatCount="indefinite"
+          path="M ${n.x} ${n.y} L 400 400"
+          keyPoints="0;1"
+          keyTimes="0;1"
+        />
+      </circle>
+    </g>
+  `).join('');
+
+  // Render HTML Founder Leaf Nodes
+  foundersLayer.innerHTML = nodeCoordinates.map(n => `
+    <div
+      class="founder-leaf-node"
+      id="founderLeafNode-${n.idx}"
+      data-idx="${n.idx}"
+      style="left: ${n.xPercent}%; top: ${n.yPercent}%;"
+      tabindex="0"
+      role="button"
+      aria-label="${n.member.nameUpper}, ${n.member.role.toUpperCase()}. ${n.member.tagline}"
+    >
+      <div class="founder-leaf-capsule">
+        <div class="founder-leaf-header">
+          <span class="founder-leaf-number">${n.member.number}</span>
+          <span class="founder-leaf-role">
+            <span class="founder-live-dot"></span>
+            ${n.member.role}
+          </span>
+        </div>
+        <div class="founder-leaf-name">${n.member.nameUpper}</div>
+        <div class="founder-leaf-sub">${n.member.tagline}</div>
       </div>
-      <h4 class="team-member-name">${member.name}</h4>
-      <div class="team-member-role">${member.role}</div>
-      <p class="team-member-bio">${member.bio}</p>
-      <div class="team-member-focus">Core Focus: ${member.focus}</div>
+
+      <!-- Attached Micro Information Flyout (Reveals on Hover / Focus) -->
+      <div class="founder-flyout-panel ${n.flyoutClass}" aria-hidden="true">
+        <div class="flyout-heading-row">
+          <span class="flyout-name">${n.member.nameUpper}</span>
+          <span class="flyout-badge">FOUNDER</span>
+        </div>
+        <div class="flyout-versatile-label">${n.member.tagline}</div>
+        <p class="flyout-bio-text">${n.member.bio}</p>
+        <div class="flyout-skills-wrap">
+          ${n.member.skills.map(s => `<span class="flyout-chip">${s}</span>`).join('')}
+        </div>
+      </div>
     </div>
   `).join('');
+
+  // Interactive System Handlers
+  const founderNodes = foundersLayer.querySelectorAll('.founder-leaf-node');
+  const connectionGroups = linesGroup.querySelectorAll('.radial-connection-group');
+
+  const defaultTagsHTML = `
+    <span class="active-tag-chip">Frontend &amp; UI Systems</span>
+    <span class="active-tag-chip">Backend &amp; Applied AI</span>
+    <span class="active-tag-chip">Full-Stack &amp; Integration</span>
+    <span class="active-tag-chip">Product Logic &amp; Deployment</span>
+    <span class="active-tag-chip">Technology &amp; Product Development</span>
+  `;
+
+  function setActiveFounder(activeIdx) {
+    founderNodes.forEach((node, idx) => {
+      if (idx === activeIdx) {
+        node.classList.add('is-active');
+        node.classList.remove('is-dimmed');
+      } else {
+        node.classList.remove('is-active');
+        node.classList.add('is-dimmed');
+      }
+    });
+
+    connectionGroups.forEach((group, idx) => {
+      if (idx === activeIdx) {
+        group.classList.add('is-active');
+        group.classList.remove('is-dimmed');
+      } else {
+        group.classList.remove('is-active');
+        group.classList.add('is-dimmed');
+      }
+    });
+
+    // Central core node reacts with a pulse
+    if (centralCoreCard) {
+      centralCoreCard.classList.add('core-pulse-active');
+    }
+
+    if (activeTitle && activeDesc && activeTags && activeBadge) {
+      const activeMember = teamMembers[activeIdx];
+      activeTitle.textContent = `${activeMember.nameUpper} — ${activeMember.role.toUpperCase()}`;
+      activeDesc.textContent = `${activeMember.bio} • Cross-functional contributor across the full software lifecycle.`;
+      activeTags.innerHTML = activeMember.skills.map(s => `<span class="active-tag-chip is-highlighted">${s}</span>`).join('');
+      activeBadge.textContent = 'CONNECTED NODE';
+    }
+  }
+
+  function resetActiveFounder() {
+    founderNodes.forEach(node => {
+      node.classList.remove('is-active');
+      node.classList.remove('is-dimmed');
+    });
+
+    connectionGroups.forEach(group => {
+      group.classList.remove('is-active');
+      group.classList.remove('is-dimmed');
+    });
+
+    if (centralCoreCard) {
+      centralCoreCard.classList.remove('core-pulse-active');
+    }
+
+    if (activeTitle && activeDesc && activeTags && activeBadge) {
+      activeTitle.textContent = 'Five Builders • Unified Core';
+      activeDesc.textContent = 'Five builders, one team — everyone builds across the stack, with responsibilities adapting to each project.';
+      activeTags.innerHTML = defaultTagsHTML;
+      activeBadge.textContent = 'VERSATILE CORE';
+    }
+  }
+
+  founderNodes.forEach(node => {
+    const idx = parseInt(node.getAttribute('data-idx'), 10);
+
+    node.addEventListener('mouseenter', () => setActiveFounder(idx));
+    node.addEventListener('focus', () => setActiveFounder(idx));
+
+    node.addEventListener('mouseleave', resetActiveFounder);
+    node.addEventListener('blur', resetActiveFounder);
+
+    node.addEventListener('click', (e) => {
+      if (node.classList.contains('is-active')) {
+        resetActiveFounder();
+      } else {
+        setActiveFounder(idx);
+      }
+    });
+  });
 }
 
 // Case Study Modal System

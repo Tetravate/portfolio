@@ -449,52 +449,150 @@
     </section>
 
     <!-- ==========================================================================
-         ABOUT TETRAVATE (THE TEAM)
+         THE FOUNDERS (5-NODE RADIAL ARCHITECTURE)
          ========================================================================== -->
-    <section class="section" id="about">
-      <div class="container">
-        <div class="section-header">
-          <div class="eyebrow">ABOUT TETRAVATE</div>
-          <h2 class="section-title">A dedicated team building useful things.</h2>
-          <p class="section-subtitle">
-            We are real people who care deeply about craft. We avoid corporate pretenses and focus our energy on building dependable software.
+    <section class="section founders-section" id="about">
+      <!-- Ambient Blueprint / Technical Grid -->
+      <div class="founders-tech-grid" aria-hidden="true"></div>
+      <div class="founders-ambient-bloom" aria-hidden="true"></div>
+
+      <!-- Studio Telemetry Markers -->
+      <div class="founders-telemetry-badge telemetry-tl" aria-hidden="true">
+        <span class="telemetry-dot"></span> TETRAVATE // 05-NODE RADIAL ARCHITECTURE
+      </div>
+      <div class="founders-telemetry-badge telemetry-tr" aria-hidden="true">
+        EQUIDISTANT 72.0° // SINGLE CORE TOPOLOGY
+      </div>
+
+      <div class="container founders-container">
+        <div class="section-header founders-section-header">
+          <div class="eyebrow founders-eyebrow">ABOUT TETRAVATE</div>
+          <h2 class="section-title founders-section-title">THE FOUNDERS</h2>
+          <p class="section-subtitle founders-section-subtitle">
+            Five builders. One core.
           </p>
         </div>
 
-        <!-- Human Team Context -->
-        <div class="team-context-box">
-          <h3 class="team-context-title">Who we are: 4 focused founders</h3>
-          <p class="team-context-desc">
-            Tetravate currently consists of 4 team members. We are passionate engineering students actively balancing college academics, campus placements, competitive technical projects, and building Tetravate. That energy translates into fresh technical discipline, hunger to solve real problems, and deep respect for every client's time and trust.
-          </p>
+        <!-- Interactive Radial Ecosystem Stage -->
+        <div class="radial-network-wrapper" id="radialNetworkWrapper">
+          <!-- Background Atmospheric Aura -->
+          <div class="radial-ambient-glow" aria-hidden="true"></div>
+
+          <!-- SVG Connecting Lines & Animated Particles Layer -->
+          <svg class="radial-connections-svg" id="radialConnectionsSvg" viewBox="0 0 800 800" aria-hidden="true">
+            <defs>
+              <filter id="emeraldGlow" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="6" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <radialGradient id="networkAtmosphere" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#059669" stop-opacity="0.12" />
+                <stop offset="60%" stop-color="#10B981" stop-opacity="0.02" />
+                <stop offset="100%" stop-color="#0B0F12" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+
+            <!-- Radial Background Atmosphere -->
+            <circle cx="400" cy="400" r="390" fill="url(#networkAtmosphere)" />
+
+            <!-- Orbital Guide Rings with Geometric Precision -->
+            <circle cx="400" cy="400" r="142" class="radial-orbital-ring ring-inner" />
+            <circle cx="400" cy="400" r="275" class="radial-orbital-ring ring-outer" />
+            <circle cx="400" cy="400" r="340" class="radial-orbital-ring ring-faint" />
+
+            <!-- Geometric Radar Ticks at 5 Axes (72° intervals from -90°) -->
+            <g class="radial-axis-ticks">
+              <line x1="400" y1="250" x2="400" y2="260" class="radial-axis-mark" />
+              <line x1="543" y1="354" x2="533" y2="357" class="radial-axis-mark" />
+              <line x1="488" y1="521" x2="480" y2="513" class="radial-axis-mark" />
+              <line x1="312" y1="521" x2="320" y2="513" class="radial-axis-mark" />
+              <line x1="257" y1="354" x2="267" y2="357" class="radial-axis-mark" />
+            </g>
+
+            <!-- Dynamic SVG Paths & Continuous Contributing Particle Flows -->
+            <g id="radialLinesGroup"></g>
+          </svg>
+
+          <!-- Central Core Node: TETRAVATE -->
+          <div class="central-core-node" id="centralCoreNode" role="region" aria-label="Tetravate Core">
+            <!-- Atmospheric Bloom & Rotating Rings -->
+            <div class="central-core-bloom"></div>
+            <div class="central-core-halo"></div>
+            <div class="central-core-tick-ring"></div>
+
+            <!-- Core Capsule Card -->
+            <div class="central-core-card" id="centralCoreCard">
+              <div class="central-core-sheen"></div>
+              <img src="/src/assets/logo-emblem.png" alt="Tetravate Emblem" class="central-core-logo" />
+              <div class="central-core-title">TETRAVATE</div>
+              <div class="central-core-badge">
+                <span class="core-pulse-pip"></span>
+                <span>CORE</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5 Founder Leaf Nodes Layer -->
+          <div class="radial-founders-layer" id="radialFoundersLayer">
+            <!-- Dynamically injected via main.js with structured flyouts -->
+          </div>
         </div>
 
-        <!-- Team Members Grid -->
-        <div class="team-grid" id="teamGrid">
-          <!-- Populated dynamically via main.js -->
+        <!-- Studio Telemetry & Active Detail Panel -->
+        <div class="radial-active-bar" id="radialActiveBar" aria-live="polite">
+          <div class="radial-active-indicator">
+            <span class="indicator-core-pulse"></span>
+          </div>
+          <div class="radial-active-info">
+            <div class="radial-active-founder" id="activeFounderTitle">Five Builders &bull; Unified Core</div>
+            <div class="radial-active-desc" id="activeFounderDesc">
+              Five builders, one team — everyone builds across the stack, with responsibilities adapting to each project.
+            </div>
+            <div class="radial-active-tags" id="activeFounderTags">
+              <span class="active-tag-chip">Frontend &amp; UI Systems</span>
+              <span class="active-tag-chip">Backend &amp; Applied AI</span>
+              <span class="active-tag-chip">Full-Stack &amp; Integration</span>
+              <span class="active-tag-chip">Product Logic &amp; Deployment</span>
+              <span class="active-tag-chip">Technology &amp; Product Development</span>
+            </div>
+          </div>
+          <div class="radial-active-badge-wrap">
+            <span class="radial-active-badge" id="activeFounderBadge">VERSATILE CORE</span>
+          </div>
         </div>
 
         <!-- Core Brand Values Grid -->
-        <div style="margin-top: 2rem;">
-          <h3 style="font-size: 1.125rem; font-weight: 700; color: var(--color-navy); margin-bottom: 1rem;">Our Core Principles</h3>
-          <div class="values-grid">
-            <div class="value-card">
+        <div class="founders-values-wrapper">
+          <div class="founders-values-header">
+            <span class="founders-values-eyebrow">FOUNDATIONAL ETHOS</span>
+            <h3 class="founders-values-title">Our Core Principles</h3>
+          </div>
+          <div class="values-grid founders-values-grid">
+            <div class="value-card founders-value-card">
+              <div class="value-card-num">01</div>
               <h4 class="value-card-title">Trust</h4>
               <p class="value-card-desc">No exaggerated claims. Reliable timelines and honest status updates.</p>
             </div>
-            <div class="value-card">
+            <div class="value-card founders-value-card">
+              <div class="value-card-num">02</div>
               <h4 class="value-card-title">Quality</h4>
               <p class="value-card-desc">Resilient code, accessible design, and software that endures.</p>
             </div>
-            <div class="value-card">
+            <div class="value-card founders-value-card">
+              <div class="value-card-num">03</div>
               <h4 class="value-card-title">Thoughts</h4>
               <p class="value-card-desc">Deliberate thinking before coding. Clear problem framing.</p>
             </div>
-            <div class="value-card">
+            <div class="value-card founders-value-card">
+              <div class="value-card-num">04</div>
               <h4 class="value-card-title">Kindness</h4>
               <p class="value-card-desc">Respectful communication and empathy for every end user.</p>
             </div>
-            <div class="value-card">
+            <div class="value-card founders-value-card">
+              <div class="value-card-num">05</div>
               <h4 class="value-card-title">Humanity</h4>
               <p class="value-card-desc">Technology exists to serve people, never the reverse.</p>
             </div>
