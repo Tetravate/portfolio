@@ -270,44 +270,35 @@ export const teamMembers = [
     name: "Aadhithya Balu S",
     nameUpper: "AADHITHYA BALU S",
     role: "FOUNDER",
-    tagline: "Builds across the stack",
-    bio: "Contributes across full-stack architecture, web applications, and backend systems with a focus on scalable engineering and seamless deployment.",
-    skills: ["Full-Stack", "Architecture", "Systems", "Deployment"]
+    tagline: "Frontend & UI Systems",
+    bio: "Focuses on clean interface architecture, high-performance UI systems, and responsive user experiences while building cross-functionally across the full stack.",
+    skills: ["Frontend & UI Systems", "Architecture", "Full-Stack", "Web Performance"]
   },
   {
     number: "02",
     name: "Aswin N S",
     nameUpper: "ASWIN N S",
     role: "FOUNDER",
-    tagline: "Builds across the stack",
-    bio: "Builds reliable software foundations, backend systems, and data pipelines while developing end-to-end features across web and mobile products.",
-    skills: ["Backend Systems", "Data Pipelines", "APIs", "Software Engineering"]
+    tagline: "Backend & Applied AI Pipelines",
+    bio: "Focuses on robust backend systems, data workflows, and applied AI pipelines while engineering scalable features across all layers of the stack.",
+    skills: ["Backend & Applied AI", "Data Pipelines", "APIs", "Distributed Systems"]
   },
   {
     number: "03",
     name: "Almas M",
     nameUpper: "ALMAS M",
     role: "FOUNDER",
-    tagline: "Builds across the stack",
-    bio: "Engineers applied AI / ML capabilities and data-driven features while contributing across full-stack product development and system architecture.",
-    skills: ["Applied AI / ML", "Data Intelligence", "Full-Stack", "Algorithms"]
+    tagline: "Full-Stack & Integration",
+    bio: "Focuses on end-to-end full-stack integration, service coordination, and resilient system engineering across web and mobile products.",
+    skills: ["Full-Stack & Integration", "Product Logic", "Cloud Services", "APIs"]
   },
   {
     number: "04",
     name: "Giridharan P",
     nameUpper: "GIRIDHARAN P",
     role: "FOUNDER",
-    tagline: "Builds across the stack",
-    bio: "Develops intuitive product experiences and robust application logic, bridging product development with reliable full-stack software delivery.",
-    skills: ["Product Development", "Interface Logic", "Full-Stack", "Delivery"]
-  },
-  {
-    number: "05",
-    name: "Ashwin S",
-    nameUpper: "ASHWIN S",
-    role: "FOUNDER",
-    tagline: "Builds across the stack",
-    bio: "Develops modern application workflows, backend services, and scalable digital solutions while driving software engineering and deployment practices.",
-    skills: ["Software Engineering", "Cloud & Backend", "Modern Workflows", "Deployment"]
+    tagline: "Product Logic & Deployment",
+    bio: "Focuses on product engineering, workflow optimization, and dependable deployment pipelines while contributing across the full software lifecycle.",
+    skills: ["Product Logic & Deployment", "System Architecture", "DevOps", "Reliability"]
   }
 ];

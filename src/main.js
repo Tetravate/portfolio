@@ -210,31 +210,21 @@ function initFoundersRadialNetwork() {
 
   const centerX = 400;
   const centerY = 400;
-  const radius = 275;
+  const radius = 265;
 
-  // 5 Founders positioned in a perfect circle at 72° intervals (-90°, -18°, 54°, 126°, 198°)
+  // 4 Founders positioned in perfect 90° symmetry: TOP, RIGHT, BOTTOM, LEFT
   const nodeCoordinates = teamMembers.map((member, idx) => {
-    const angleDeg = -90 + idx * 72;
+    const angleDeg = -90 + idx * 90;
     const angleRad = (angleDeg * Math.PI) / 180;
     const x = centerX + radius * Math.cos(angleRad);
     const y = centerY + radius * Math.sin(angleRad);
 
-    // Elegant organic Bezier curve midpoint with subtle perpendicular displacement
-    const midX = (centerX + x) / 2;
-    const midY = (centerY + y) / 2;
-    const dx = x - centerX;
-    const dy = y - centerY;
-    const len = Math.sqrt(dx * dx + dy * dy);
-    const normX = -dy / len;
-    const normY = dx / len;
-    const cpX = midX + 16 * normX;
-    const cpY = midY + 16 * normY;
-
-    // Flyout placement based on node quadrant to ensure zero viewport clipping
+    // Flyout placement based on node orientation to ensure zero viewport clipping
     let flyoutClass = 'flyout-bottom';
     if (idx === 0) flyoutClass = 'flyout-bottom';
-    else if (idx === 1 || idx === 2) flyoutClass = 'flyout-left';
-    else if (idx === 3 || idx === 4) flyoutClass = 'flyout-right';
+    else if (idx === 1) flyoutClass = 'flyout-left';
+    else if (idx === 2) flyoutClass = 'flyout-top';
+    else if (idx === 3) flyoutClass = 'flyout-right';
 
     return {
       idx,
@@ -242,8 +232,6 @@ function initFoundersRadialNetwork() {
       angleDeg,
       x: Number(x.toFixed(1)),
       y: Number(y.toFixed(1)),
-      cpX: Number(cpX.toFixed(1)),
-      cpY: Number(cpY.toFixed(1)),
       xPercent: Number(((x / 800) * 100).toFixed(2)),
       yPercent: Number(((y / 800) * 100).toFixed(2)),
       flyoutClass
@@ -253,17 +241,17 @@ function initFoundersRadialNetwork() {
   // Render SVG connecting lines with animated particle flows traveling toward Tetravate center
   linesGroup.innerHTML = nodeCoordinates.map(n => `
     <g class="radial-connection-group" id="connectionGroup-${n.idx}">
-      <!-- Underlying subtle organic curve -->
+      <!-- Direct vector connection from founder to central core -->
       <path
         id="radialPath-${n.idx}"
         class="radial-connector-path"
-        d="M 400 400 Q ${n.cpX} ${n.cpY} ${n.x} ${n.y}"
+        d="M 400 400 L ${n.x} ${n.y}"
       />
       <!-- Active glowing overlay path -->
       <path
         id="radialActiveGlow-${n.idx}"
         class="radial-glow-overlay-path"
-        d="M 400 400 Q ${n.cpX} ${n.cpY} ${n.x} ${n.y}"
+        d="M 400 400 L ${n.x} ${n.y}"
       />
       <!-- Terminal node anchor dot -->
       <circle
@@ -271,25 +259,25 @@ function initFoundersRadialNetwork() {
         class="radial-path-dot"
         cx="${n.x}"
         cy="${n.y}"
-        r="3.5"
+        r="3"
       />
       <!-- Particle 1 flowing continuously from Founder toward Tetravate Center -->
-      <circle r="2.5" class="radial-flow-particle particle-lead" fill="#60A5FA" opacity="0.75">
+      <circle r="2.25" class="radial-flow-particle particle-lead" fill="#10B981" opacity="0.8">
         <animateMotion
-          dur="3.8s"
+          dur="3.2s"
           repeatCount="indefinite"
-          path="M ${n.x} ${n.y} Q ${n.cpX} ${n.cpY} 400 400"
+          path="M ${n.x} ${n.y} L 400 400"
           keyPoints="0;1"
           keyTimes="0;1"
         />
       </circle>
       <!-- Particle 2 secondary staggered wave -->
-      <circle r="1.75" class="radial-flow-particle particle-trail" fill="#2563EB" opacity="0.55">
+      <circle r="1.5" class="radial-flow-particle particle-trail" fill="#059669" opacity="0.6">
         <animateMotion
-          dur="3.8s"
-          begin="1.9s"
+          dur="3.2s"
+          begin="1.6s"
           repeatCount="indefinite"
-          path="M ${n.x} ${n.y} Q ${n.cpX} ${n.cpY} 400 400"
+          path="M ${n.x} ${n.y} L 400 400"
           keyPoints="0;1"
           keyTimes="0;1"
         />
@@ -297,7 +285,7 @@ function initFoundersRadialNetwork() {
     </g>
   `).join('');
 
-  // Render HTML Founder Leaf Nodes (Organic/Geometric Capsule with Flyout)
+  // Render HTML Founder Leaf Nodes
   foundersLayer.innerHTML = nodeCoordinates.map(n => `
     <div
       class="founder-leaf-node"
@@ -326,7 +314,7 @@ function initFoundersRadialNetwork() {
           <span class="flyout-name">${n.member.nameUpper}</span>
           <span class="flyout-badge">FOUNDER</span>
         </div>
-        <div class="flyout-versatile-label">Builds across the stack</div>
+        <div class="flyout-versatile-label">${n.member.tagline}</div>
         <p class="flyout-bio-text">${n.member.bio}</p>
         <div class="flyout-skills-wrap">
           ${n.member.skills.map(s => `<span class="flyout-chip">${s}</span>`).join('')}
@@ -340,11 +328,10 @@ function initFoundersRadialNetwork() {
   const connectionGroups = linesGroup.querySelectorAll('.radial-connection-group');
 
   const defaultTagsHTML = `
-    <span class="active-tag-chip">Full-Stack Development</span>
-    <span class="active-tag-chip">Applied AI / ML</span>
-    <span class="active-tag-chip">Backend Systems</span>
-    <span class="active-tag-chip">Data Intelligence</span>
-    <span class="active-tag-chip">Product Delivery</span>
+    <span class="active-tag-chip">Frontend &amp; UI Systems</span>
+    <span class="active-tag-chip">Backend &amp; Applied AI</span>
+    <span class="active-tag-chip">Full-Stack &amp; Integration</span>
+    <span class="active-tag-chip">Product Logic &amp; Deployment</span>
   `;
 
   function setActiveFounder(activeIdx) {
@@ -376,7 +363,7 @@ function initFoundersRadialNetwork() {
     if (activeTitle && activeDesc && activeTags && activeBadge) {
       const activeMember = teamMembers[activeIdx];
       activeTitle.textContent = `${activeMember.nameUpper} — FOUNDER`;
-      activeDesc.textContent = `${activeMember.bio} • Responsibilities adapt to each project across the entire software stack.`;
+      activeDesc.textContent = `${activeMember.bio} • Cross-functional contributor across the full software lifecycle.`;
       activeTags.innerHTML = activeMember.skills.map(s => `<span class="active-tag-chip is-highlighted">${s}</span>`).join('');
       activeBadge.textContent = 'CONNECTED NODE';
     }
@@ -398,8 +385,8 @@ function initFoundersRadialNetwork() {
     }
 
     if (activeTitle && activeDesc && activeTags && activeBadge) {
-      activeTitle.textContent = 'All Five Founders • Unified Core';
-      activeDesc.textContent = 'Five builders, one team — everyone builds across the stack, with responsibilities adapting to each project.';
+      activeTitle.textContent = 'Four Builders • Unified Core';
+      activeDesc.textContent = 'Four builders, one team — everyone builds across the stack, with responsibilities adapting to each project.';
       activeTags.innerHTML = defaultTagsHTML;
       activeBadge.textContent = 'VERSATILE CORE';
     }
