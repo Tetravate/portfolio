@@ -1,3 +1,4 @@
+import './style.css';
 import { featuredProjects, services, processSteps, teamMembers } from './data/projects.js';
 import mockupPos from './assets/mockup-pos.svg';
 import mockupDrishyam from './assets/mockup-drishyam.svg';
