@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   renderFeaturedProjects('all');
   renderServices();
-  renderTeam();
+  initFoundersRadialNetwork();
   initProjectFilters();
   initCaseStudyModal();
   initContactForm();
@@ -196,22 +196,167 @@ function renderServices() {
   `).join('');
 }
 
-// Render Team
-function renderTeam() {
-  const container = document.getElementById('teamGrid');
-  if (!container) return;
+// Interactive Radial Network: The Founders
+function initFoundersRadialNetwork() {
+  const foundersLayer = document.getElementById('radialFoundersLayer');
+  const linesGroup = document.getElementById('radialLinesGroup');
+  const activeTitle = document.getElementById('activeFounderTitle');
+  const activeDesc = document.getElementById('activeFounderDesc');
+  const activeBadge = document.getElementById('activeFounderBadge');
 
-  container.innerHTML = teamMembers.map((member, idx) => `
-    <div class="team-card">
-      <div class="team-avatar-placeholder">
-        0${idx + 1}
+  if (!foundersLayer || !linesGroup) return;
+
+  const centerX = 400;
+  const centerY = 400;
+  const radius = 275;
+
+  // 5 Founders evenly distributed at 72 degrees, starting at -90deg (top)
+  const nodeCoordinates = teamMembers.map((member, idx) => {
+    const angleDeg = -90 + idx * 72;
+    const angleRad = (angleDeg * Math.PI) / 180;
+    const x = centerX + radius * Math.cos(angleRad);
+    const y = centerY + radius * Math.sin(angleRad);
+
+    // Subtle organic Bezier curve midpoint with perpendicular curvature
+    const midX = (centerX + x) / 2;
+    const midY = (centerY + y) / 2;
+    const dx = x - centerX;
+    const dy = y - centerY;
+    const len = Math.sqrt(dx * dx + dy * dy);
+    const normX = -dy / len;
+    const normY = dx / len;
+    const cpX = midX + 16 * normX;
+    const cpY = midY + 16 * normY;
+
+    return {
+      idx,
+      member,
+      x: Number(x.toFixed(1)),
+      y: Number(y.toFixed(1)),
+      cpX: Number(cpX.toFixed(1)),
+      cpY: Number(cpY.toFixed(1)),
+      xPercent: Number(((x / 800) * 100).toFixed(2)),
+      yPercent: Number(((y / 800) * 100).toFixed(2))
+    };
+  });
+
+  // Render SVG connecting lines (Each Founder -> Center ONLY)
+  linesGroup.innerHTML = nodeCoordinates.map(n => `
+    <g class="radial-connection-item" id="connectionItem-${n.idx}">
+      <path
+        id="radialPath-${n.idx}"
+        class="radial-connector-path"
+        d="M ${centerX} ${centerY} Q ${n.cpX} ${n.cpY} ${n.x} ${n.y}"
+      />
+      <circle
+        id="radialDot-${n.idx}"
+        class="radial-path-dot"
+        cx="${n.x}"
+        cy="${n.y}"
+        r="4"
+      />
+    </g>
+  `).join('');
+
+  // Render HTML Founder Leaf Nodes
+  foundersLayer.innerHTML = nodeCoordinates.map(n => `
+    <div
+      class="founder-leaf-node"
+      id="founderLeafNode-${n.idx}"
+      data-idx="${n.idx}"
+      style="left: ${n.xPercent}%; top: ${n.yPercent}%;"
+      tabindex="0"
+      role="button"
+      aria-label="${n.member.name}, Founder. Key Strengths: ${n.member.strengths}"
+    >
+      <div class="founder-leaf-header">
+        <span class="founder-leaf-number">0${n.idx + 1}</span>
+        <span class="founder-leaf-role">Founder</span>
       </div>
-      <h4 class="team-member-name">${member.name}</h4>
-      <div class="team-member-role">${member.role}</div>
-      <p class="team-member-bio">${member.bio}</p>
-      <div class="team-member-focus">Key Strengths: ${member.strengths || member.focus}</div>
+      <div class="founder-leaf-name">${n.member.name}</div>
+      <div class="founder-leaf-strengths-preview">
+        ${n.member.strengths}
+      </div>
     </div>
   `).join('');
+
+  // Interaction handlers
+  const founderNodes = foundersLayer.querySelectorAll('.founder-leaf-node');
+  const pathElements = linesGroup.querySelectorAll('.radial-connector-path');
+  const dotElements = linesGroup.querySelectorAll('.radial-path-dot');
+
+  function setActiveFounder(activeIdx) {
+    founderNodes.forEach((node, idx) => {
+      if (idx === activeIdx) {
+        node.classList.add('is-active');
+        node.classList.remove('is-dimmed');
+      } else {
+        node.classList.remove('is-active');
+        node.classList.add('is-dimmed');
+      }
+    });
+
+    pathElements.forEach((path, idx) => {
+      if (idx === activeIdx) {
+        path.classList.add('is-active');
+        path.classList.remove('is-dimmed');
+      } else {
+        path.classList.remove('is-active');
+        path.classList.add('is-dimmed');
+      }
+    });
+
+    dotElements.forEach((dot, idx) => {
+      if (idx === activeIdx) {
+        dot.classList.add('is-active');
+      } else {
+        dot.classList.remove('is-active');
+      }
+    });
+
+    if (activeTitle && activeDesc && activeBadge) {
+      const activeMember = teamMembers[activeIdx];
+      activeTitle.textContent = `${activeMember.name} — Founder`;
+      activeDesc.textContent = `${activeMember.bio} • Key Strengths: ${activeMember.strengths}`;
+      activeBadge.textContent = 'ACTIVE LEAF';
+    }
+  }
+
+  function resetActiveFounder() {
+    founderNodes.forEach(node => {
+      node.classList.remove('is-active');
+      node.classList.remove('is-dimmed');
+    });
+
+    pathElements.forEach(path => {
+      path.classList.remove('is-active');
+      path.classList.remove('is-dimmed');
+    });
+
+    dotElements.forEach(dot => {
+      dot.classList.remove('is-active');
+    });
+
+    if (activeTitle && activeDesc && activeBadge) {
+      activeTitle.textContent = 'All Five Founders • Unified Core';
+      activeDesc.textContent = 'Hover or tap any founder node to inspect their cross-stack contributions and focus areas.';
+      activeBadge.textContent = 'CROSS-STACK';
+    }
+  }
+
+  founderNodes.forEach(node => {
+    const idx = parseInt(node.getAttribute('data-idx'), 10);
+
+    node.addEventListener('mouseenter', () => setActiveFounder(idx));
+    node.addEventListener('focus', () => setActiveFounder(idx));
+
+    node.addEventListener('mouseleave', resetActiveFounder);
+    node.addEventListener('blur', resetActiveFounder);
+
+    node.addEventListener('click', () => {
+      setActiveFounder(idx);
+    });
+  });
 }
 
 // Case Study Modal System

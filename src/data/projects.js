@@ -267,31 +267,31 @@ export const processSteps = [
 export const teamMembers = [
   {
     name: "Aadhithya Balu S",
-    role: "Founder / Engineering",
+    role: "Founder",
     bio: "Contributes across full-stack architecture, web applications, and backend systems with a focus on scalable engineering and seamless deployment.",
     strengths: "Full-Stack Development, Systems & Deployment"
   },
   {
     name: "Aswin N S",
-    role: "Founder / Engineering",
+    role: "Founder",
     bio: "Builds reliable software foundations, backend systems, and data pipelines while developing end-to-end features across web and mobile products.",
     strengths: "Backend Systems, Data & Software Engineering"
   },
   {
     name: "Almas M",
-    role: "Founder / Engineering",
+    role: "Founder",
     bio: "Engineers applied AI / ML capabilities and data-driven features while contributing across full-stack product development and system architecture.",
     strengths: "AI / ML, Data & Full-Stack Development"
   },
   {
     name: "Giridharan P",
-    role: "Founder / Engineering",
+    role: "Founder",
     bio: "Develops intuitive product experiences and robust application logic, bridging product development with reliable full-stack software delivery.",
     strengths: "Product Development, Full-Stack & Delivery"
   },
   {
     name: "Ashwin S",
-    role: "Founder / Engineering",
+    role: "Founder",
     bio: "Develops modern application workflows, backend services, and scalable digital solutions while driving software engineering and deployment practices.",
     strengths: "Software Engineering, Backend & Deployment"
   }
