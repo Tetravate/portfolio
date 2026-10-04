@@ -1151,23 +1151,21 @@ p:last-child {
 
 /* ==========================================================================
    THE FOUNDERS (HIGH-END STUDIO RADIAL ECOSYSTEM)
-   Strict Color System (Synchronized with Tetravate Brand Identity):
-   Primary background: #071527 (Deep Navy Dark)
-   Secondary surface:  #0E233E / #102747 (Navy Surface)
-   Primary accent:     #2563EB (Tetravate Blue)
-   Accent highlight:   #60A5FA (Light Blue)
-   Primary text:       #FFFFFF (Pure White)
-   Muted text:         rgba(255, 255, 255, 0.7) / #CBD5E1
+   Strict Color System:
+   Section background: #FFFFFF (Clean White)
+   Core Node & Leaf Nodes: Blue & Deep Navy (#1D4ED8, #0B1F3A, #2563EB, #60A5FA)
+   Edges & Connections:    Tetravate Blue (#2563EB) & Light Blue (#60A5FA)
+   Typography:             Dark Navy (#0B1F3A) & Slate (#475569)
    ========================================================================== */
 
 .founders-section {
-  background-color: #071527;
-  color: #FFFFFF;
+  background-color: #FFFFFF;
+  color: #0B1F3A;
   position: relative;
   overflow: hidden;
   padding: 6rem 0 6.5rem 0;
-  border-top: 1px solid rgba(37, 99, 235, 0.2);
-  border-bottom: 1px solid rgba(37, 99, 235, 0.2);
+  border-top: 1px solid var(--color-slate-200);
+  border-bottom: 1px solid var(--color-slate-200);
 }
 
 /* Atmospheric Blueprint Grid & Bloom */
@@ -1175,11 +1173,11 @@ p:last-child {
   position: absolute;
   inset: 0;
   background-image: 
-    linear-gradient(to right, rgba(37, 99, 235, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(37, 99, 235, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(37, 99, 235, 0.045) 1px, transparent 1px);
   background-size: 52px 52px;
-  mask-image: radial-gradient(circle at 50% 45%, black 35%, transparent 80%);
-  -webkit-mask-image: radial-gradient(circle at 50% 45%, black 35%, transparent 80%);
+  mask-image: radial-gradient(circle at 50% 45%, black 40%, transparent 85%);
+  -webkit-mask-image: radial-gradient(circle at 50% 45%, black 40%, transparent 85%);
   pointer-events: none;
   z-index: 1;
 }
@@ -1191,7 +1189,7 @@ p:last-child {
   width: 760px;
   height: 760px;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.14) 0%, rgba(96, 165, 250, 0.035) 50%, transparent 72%);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.07) 0%, rgba(96, 165, 250, 0.02) 50%, transparent 72%);
   pointer-events: none;
   z-index: 1;
 }
@@ -1203,15 +1201,16 @@ p:last-child {
   font-size: 0.625rem;
   font-weight: 600;
   letter-spacing: 0.16em;
-  color: rgba(96, 165, 250, 0.8);
-  background: rgba(11, 31, 58, 0.65);
-  border: 1px solid rgba(37, 99, 235, 0.25);
+  color: #2563EB;
+  background: rgba(241, 245, 249, 0.9);
+  border: 1px solid rgba(37, 99, 235, 0.2);
   padding: 0.3rem 0.75rem;
   border-radius: 4px;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   z-index: 3;
+  box-shadow: 0 1px 3px rgba(11, 31, 58, 0.04);
 }
 
 .telemetry-tl { top: 2.5rem; left: 2.5rem; }
@@ -1237,9 +1236,9 @@ p:last-child {
 }
 
 .founders-eyebrow {
-  color: #60A5FA;
-  background-color: rgba(37, 99, 235, 0.12);
-  border: 1px solid rgba(96, 165, 250, 0.3);
+  color: #2563EB;
+  background-color: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.2);
   display: inline-block;
   padding: 0.35rem 0.95rem;
   border-radius: 9999px;
@@ -1250,7 +1249,7 @@ p:last-child {
 }
 
 .founders-section-title {
-  color: #FFFFFF;
+  color: #0B1F3A;
   font-size: 3rem;
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -1259,7 +1258,7 @@ p:last-child {
 }
 
 .founders-section-subtitle {
-  color: #CBD5E1;
+  color: #475569;
   font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: -0.01em;
@@ -1284,7 +1283,7 @@ p:last-child {
   width: 620px;
   height: 620px;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.18) 0%, rgba(7, 21, 39, 0) 70%);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
   pointer-events: none;
   z-index: 1;
 }
@@ -1306,25 +1305,25 @@ p:last-child {
 }
 
 .radial-orbital-ring.ring-inner {
-  stroke: rgba(37, 99, 235, 0.22);
+  stroke: rgba(37, 99, 235, 0.25);
   stroke-dasharray: 4 6;
   animation: orbitalSpin 80s linear infinite;
   transform-origin: 400px 400px;
 }
 
 .radial-orbital-ring.ring-outer {
-  stroke: rgba(37, 99, 235, 0.15);
+  stroke: rgba(37, 99, 235, 0.18);
   stroke-dasharray: 6 10;
   animation: orbitalSpinReverse 110s linear infinite;
   transform-origin: 400px 400px;
 }
 
 .radial-orbital-ring.ring-faint {
-  stroke: rgba(96, 165, 250, 0.08);
+  stroke: rgba(37, 99, 235, 0.1);
 }
 
 .radial-axis-mark {
-  stroke: rgba(96, 165, 250, 0.35);
+  stroke: rgba(37, 99, 235, 0.45);
   stroke-width: 1.5px;
 }
 
@@ -1338,7 +1337,7 @@ p:last-child {
   to { transform: rotate(0deg); }
 }
 
-/* Connection Groups & Lines */
+/* Connection Groups & Lines (Vivid Blue Edges on White) */
 .radial-connection-group {
   transition: opacity 0.35s ease;
 }
@@ -1346,14 +1345,14 @@ p:last-child {
 .radial-connector-path {
   fill: none;
   stroke: #2563EB;
-  stroke-width: 1.5px;
-  stroke-opacity: 0.25;
+  stroke-width: 1.75px;
+  stroke-opacity: 0.35;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .radial-glow-overlay-path {
   fill: none;
-  stroke: #60A5FA;
+  stroke: #2563EB;
   stroke-width: 3px;
   stroke-opacity: 0;
   filter: url(#blueGlow);
@@ -1361,27 +1360,27 @@ p:last-child {
 }
 
 .radial-connection-group.is-active .radial-connector-path {
-  stroke: #60A5FA;
-  stroke-width: 2.75px;
-  stroke-opacity: 0.95;
+  stroke: #2563EB;
+  stroke-width: 3px;
+  stroke-opacity: 1;
 }
 
 .radial-connection-group.is-active .radial-glow-overlay-path {
-  stroke-opacity: 0.85;
+  stroke-opacity: 0.9;
 }
 
 .radial-connection-group.is-dimmed {
-  opacity: 0.1;
+  opacity: 0.15;
 }
 
 .radial-path-dot {
   fill: #2563EB;
-  opacity: 0.45;
+  opacity: 0.55;
   transition: all 0.35s ease;
 }
 
 .radial-connection-group.is-active .radial-path-dot {
-  fill: #60A5FA;
+  fill: #2563EB;
   opacity: 1;
   r: 4.5px;
   filter: url(#blueGlow);
@@ -1396,7 +1395,7 @@ p:last-child {
   opacity: 1;
 }
 
-/* Central Core Node (TETRAVATE) */
+/* Central Core Node (TETRAVATE) in Blue */
 .central-core-node {
   position: absolute;
   top: 50%;
@@ -1415,7 +1414,7 @@ p:last-child {
   position: absolute;
   inset: -28px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.35) 0%, rgba(96, 165, 250, 0.1) 55%, transparent 75%);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.22) 0%, rgba(96, 165, 250, 0.08) 55%, transparent 75%);
   animation: centralBreathing 5s ease-in-out infinite;
   pointer-events: none;
 }
@@ -1424,7 +1423,7 @@ p:last-child {
   position: absolute;
   inset: -10px;
   border-radius: 50%;
-  border: 1px dashed rgba(96, 165, 250, 0.4);
+  border: 1px dashed rgba(37, 99, 235, 0.45);
   animation: orbitalSpin 45s linear infinite;
   pointer-events: none;
 }
@@ -1442,13 +1441,13 @@ p:last-child {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #163660 0%, #0F2440 60%, #071527 100%);
-  border: 2px solid #2563EB;
+  background: radial-gradient(circle at 35% 30%, #1D4ED8 0%, #0F2A4A 60%, #0B1F3A 100%);
+  border: 2.5px solid #2563EB;
   box-shadow: 
-    0 0 35px rgba(37, 99, 235, 0.4),
-    0 0 15px rgba(96, 165, 250, 0.3),
-    inset 0 1px 1px rgba(255, 255, 255, 0.2),
-    inset 0 0 25px rgba(37, 99, 235, 0.25);
+    0 12px 35px rgba(37, 99, 235, 0.35),
+    0 0 20px rgba(96, 165, 250, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3),
+    inset 0 0 25px rgba(37, 99, 235, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1466,15 +1465,15 @@ p:last-child {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+  background: radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
   pointer-events: none;
 }
 
 .central-core-card.core-pulse-active {
   border-color: #60A5FA;
   box-shadow: 
-    0 0 55px rgba(96, 165, 250, 0.6),
-    0 0 25px rgba(37, 99, 235, 0.5),
+    0 0 55px rgba(37, 99, 235, 0.55),
+    0 0 25px rgba(96, 165, 250, 0.45),
     inset 0 0 30px rgba(96, 165, 250, 0.35);
   transform: scale(1.04);
 }
@@ -1505,8 +1504,8 @@ p:last-child {
   font-weight: 800;
   letter-spacing: 0.14em;
   color: #60A5FA;
-  background: rgba(37, 99, 235, 0.2);
-  border: 1px solid rgba(96, 165, 250, 0.35);
+  background: rgba(37, 99, 235, 0.25);
+  border: 1px solid rgba(96, 165, 250, 0.4);
   padding: 0.18rem 0.55rem;
   border-radius: 9999px;
   line-height: 1;
@@ -1516,7 +1515,7 @@ p:last-child {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background-color: #2563EB;
+  background-color: #60A5FA;
   box-shadow: 0 0 5px #60A5FA;
   animation: indicatorBlink 2s infinite ease-in-out;
 }
@@ -1532,7 +1531,7 @@ p:last-child {
   }
 }
 
-/* Founders Layer & Leaf Nodes */
+/* Founders Layer & Leaf Nodes in Blue */
 .radial-founders-layer {
   position: absolute;
   inset: 0;
@@ -1552,11 +1551,11 @@ p:last-child {
 
 .founder-leaf-capsule {
   position: relative;
-  background: linear-gradient(135deg, rgba(14, 35, 62, 0.88) 0%, rgba(8, 21, 39, 0.95) 100%);
-  border: 1.5px solid rgba(37, 99, 235, 0.3);
+  background: linear-gradient(135deg, #0F2A4A 0%, #0B1F3A 100%);
+  border: 1.5px solid rgba(37, 99, 235, 0.4);
   border-radius: 18px 6px 18px 6px;
   padding: 0.85rem 1rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 25px rgba(11, 31, 58, 0.12), 0 2px 8px rgba(37, 99, 235, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1566,12 +1565,12 @@ p:last-child {
 .founder-leaf-node:hover .founder-leaf-capsule,
 .founder-leaf-node.is-active .founder-leaf-capsule,
 .founder-leaf-node:focus-visible .founder-leaf-capsule {
-  border-color: #60A5FA;
-  background: linear-gradient(135deg, rgba(20, 50, 90, 0.92) 0%, rgba(11, 31, 58, 0.98) 100%);
+  border-color: #2563EB;
+  background: linear-gradient(135deg, #1E40AF 0%, #0B1F3A 100%);
   box-shadow: 
-    0 0 25px rgba(96, 165, 250, 0.4),
-    0 15px 35px rgba(0, 0, 0, 0.7),
-    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    0 12px 30px rgba(37, 99, 235, 0.28),
+    0 0 20px rgba(96, 165, 250, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
 .founder-leaf-node:hover,
@@ -1597,8 +1596,8 @@ p:last-child {
   font-size: 0.6875rem;
   font-weight: 800;
   color: #60A5FA;
-  background: rgba(37, 99, 235, 0.2);
-  border: 1px solid rgba(96, 165, 250, 0.3);
+  background: rgba(37, 99, 235, 0.25);
+  border: 1px solid rgba(96, 165, 250, 0.35);
   padding: 0.15rem 0.45rem;
   border-radius: 4px;
   line-height: 1;
@@ -1634,9 +1633,9 @@ p:last-child {
 .founder-leaf-sub {
   font-size: 0.6875rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.7);
   line-height: 1.35;
-  border-top: 1px dashed rgba(37, 99, 235, 0.25);
+  border-top: 1px dashed rgba(37, 99, 235, 0.35);
   padding-top: 0.4rem;
   transition: color 0.3s ease;
 }
@@ -1650,11 +1649,11 @@ p:last-child {
 .founder-flyout-panel {
   position: absolute;
   width: 250px;
-  background: rgba(7, 21, 39, 0.96);
-  border: 1px solid rgba(96, 165, 250, 0.35);
+  background: rgba(11, 31, 58, 0.98);
+  border: 1px solid rgba(96, 165, 250, 0.4);
   border-radius: 12px;
   padding: 1rem 1.15rem;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 15px 40px rgba(11, 31, 58, 0.25), 0 0 20px rgba(37, 99, 235, 0.2);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   pointer-events: none;
@@ -1764,16 +1763,14 @@ p:last-child {
 .radial-active-bar {
   max-width: 820px;
   margin: 0 auto 3.5rem auto;
-  background: linear-gradient(135deg, rgba(14, 35, 62, 0.9) 0%, rgba(7, 21, 39, 0.95) 100%);
-  border: 1px solid rgba(37, 99, 235, 0.3);
+  background: #FFFFFF;
+  border: 1.5px solid rgba(37, 99, 235, 0.25);
   border-radius: var(--radius-md);
   padding: 1.35rem 1.75rem;
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08), 0 2px 6px rgba(11, 31, 58, 0.04);
   transition: all 0.35s ease;
 }
 
@@ -1792,7 +1789,7 @@ p:last-child {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #60A5FA;
+  background-color: #2563EB;
   box-shadow: 0 0 8px #60A5FA;
   animation: indicatorBlink 2s infinite ease-in-out;
 }
@@ -1810,13 +1807,13 @@ p:last-child {
   font-size: 1.0625rem;
   font-weight: 800;
   letter-spacing: -0.01em;
-  color: #FFFFFF;
+  color: #0B1F3A;
   margin-bottom: 0.35rem;
 }
 
 .radial-active-desc {
   font-size: 0.8125rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: #475569;
   line-height: 1.5;
   margin-bottom: 0.65rem;
 }
@@ -1830,9 +1827,9 @@ p:last-child {
 .active-tag-chip {
   font-size: 0.6875rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.85);
-  background: rgba(37, 99, 235, 0.16);
-  border: 1px solid rgba(96, 165, 250, 0.25);
+  color: #2563EB;
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.2);
   padding: 0.2rem 0.6rem;
   border-radius: 9999px;
   transition: all 0.3s ease;
@@ -1840,9 +1837,9 @@ p:last-child {
 
 .active-tag-chip.is-highlighted {
   color: #FFFFFF;
-  background: rgba(37, 99, 235, 0.45);
-  border-color: #60A5FA;
-  box-shadow: 0 0 10px rgba(96, 165, 250, 0.4);
+  background: #2563EB;
+  border-color: #2563EB;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
 }
 
 .radial-active-badge-wrap {
@@ -1853,18 +1850,18 @@ p:last-child {
   font-size: 0.6875rem;
   font-weight: 800;
   letter-spacing: 0.12em;
-  color: #60A5FA;
-  background: rgba(37, 99, 235, 0.22);
-  border: 1px solid rgba(96, 165, 250, 0.35);
+  color: #2563EB;
+  background: rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(37, 99, 235, 0.25);
   padding: 0.35rem 0.85rem;
   border-radius: 9999px;
   white-space: nowrap;
 }
 
-/* Values Grid in dark ecosystem section */
+/* Values Grid in Founders section */
 .founders-values-wrapper {
   margin-top: 4rem;
-  border-top: 1px solid rgba(37, 99, 235, 0.2);
+  border-top: 1px solid var(--color-slate-200);
   padding-top: 3rem;
 }
 
@@ -1878,7 +1875,7 @@ p:last-child {
   font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.15em;
-  color: #60A5FA;
+  color: #2563EB;
   display: block;
   margin-bottom: 0.4rem;
 }
@@ -1887,7 +1884,7 @@ p:last-child {
   font-size: 1.35rem;
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #FFFFFF;
+  color: #0B1F3A;
 }
 
 .founders-values-grid {
@@ -1898,16 +1895,17 @@ p:last-child {
 
 .founders-value-card {
   position: relative;
-  background: linear-gradient(135deg, rgba(14, 35, 62, 0.7) 0%, rgba(7, 21, 39, 0.85) 100%);
-  border: 1px solid rgba(37, 99, 235, 0.25);
+  background: #FFFFFF;
+  border: 1px solid var(--color-slate-200);
   border-radius: var(--radius-md);
   padding: 1.5rem 1.25rem;
+  box-shadow: 0 2px 8px rgba(11, 31, 58, 0.04);
   transition: all var(--transition-fast);
 }
 
 .founders-value-card:hover {
-  border-color: #60A5FA;
-  box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+  border-color: #2563EB;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
   transform: translateY(-2px);
 }
 
@@ -1915,19 +1913,19 @@ p:last-child {
   font-family: monospace, var(--font-primary);
   font-size: 0.6875rem;
   font-weight: 800;
-  color: rgba(96, 165, 250, 0.65);
+  color: #2563EB;
   margin-bottom: 0.5rem;
 }
 
 .founders-value-card .value-card-title {
-  color: #60A5FA;
+  color: #0B1F3A;
   font-size: 1.0625rem;
   font-weight: 700;
   margin-bottom: 0.45rem;
 }
 
 .founders-value-card .value-card-desc {
-  color: rgba(255, 255, 255, 0.75);
+  color: #475569;
   font-size: 0.8125rem;
   line-height: 1.55;
 }
