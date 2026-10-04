@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" fill="none" aria-label="DRISHYAM Geospatial Crime Intelligence Mockup">
+  <!-- Outer Dashboard Window -->
+  <rect width="720" height="480" rx="16" fill="#0B1F3A" />
+  
+  <!-- Screen Bezel Background -->
+  <rect x="16" y="16" width="688" height="448" rx="10" fill="#0E2442" />
+
+  <!-- Top App Navigation -->
+  <rect x="16" y="16" width="688" height="52" rx="10" fill="#0B1F3A" />
+  <rect x="16" y="58" width="688" height="10" fill="#0B1F3A" />
+  <text x="36" y="47" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">DRISHYAM // Spatial Intelligence</text>
+  
+  <rect x="300" y="28" width="130" height="28" rx="14" fill="#132B4F" stroke="#2563EB" stroke-width="1" />
+  <text x="315" y="46" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="600" fill="#60A5FA">Zone: Metropolitan North</text>
+
+  <rect x="548" y="28" width="136" height="28" rx="6" fill="#2563EB" />
+  <text x="562" y="46" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Export Pattern Log</text>
+
+  <!-- Left Sidebar: Filters & Incident Taxonomy -->
+  <rect x="32" y="80" width="170" height="364" rx="8" fill="#0B1F3A" stroke="#1A365D" />
+  <text x="46" y="106" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">INCIDENT FILTERS</text>
+  
+  <!-- Filter Item 1 -->
+  <rect x="46" y="122" width="142" height="32" rx="6" fill="#132B4F" />
+  <circle cx="58" cy="138" r="4" fill="#2563EB" />
+  <text x="68" y="142" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Commercial Thefts</text>
+  
+  <!-- Filter Item 2 -->
+  <rect x="46" y="162" width="142" height="32" rx="6" fill="#0E2442" stroke="#1A365D" />
+  <circle cx="58" cy="178" r="4" fill="#60A5FA" />
+  <text x="68" y="182" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#CBD5E1">Transit Snatching</text>
+
+  <!-- Filter Item 3 -->
+  <rect x="46" y="202" width="142" height="32" rx="6" fill="#0E2442" stroke="#1A365D" />
+  <circle cx="58" cy="218" r="4" fill="#CBD5E1" />
+  <text x="68" y="222" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#CBD5E1">Vehicle Breaches</text>
+
+  <!-- Temporal Window Slider -->
+  <text x="46" y="265" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="600" fill="#60A5FA">TIME WINDOW</text>
+  <text x="46" y="285" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#FFFFFF">Last 30 Days (Verified)</text>
+  <line x1="46" y1="300" x2="188" y2="300" stroke="#1A365D" stroke-width="4" stroke-linecap="round" />
+  <line x1="46" y1="300" x2="135" y2="300" stroke="#2563EB" stroke-width="4" stroke-linecap="round" />
+  <circle cx="135" cy="300" r="6" fill="#FFFFFF" />
+
+  <text x="46" y="340" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="600" fill="#60A5FA">ANALYTICAL BASE</text>
+  <text x="46" y="360" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#CBD5E1">Spatial Engine: PostGIS</text>
+  <text x="46" y="380" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#CBD5E1">Clustering: DBSCAN</text>
+  <text x="46" y="400" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" fill="#64748B">Zero synthetic claims</text>
+
+  <!-- Center: Map Canvas -->
+  <rect x="214" y="80" width="310" height="364" rx="8" fill="#132B4F" stroke="#1A365D" />
+  
+  <!-- Map Roads and Grid Lines -->
+  <line x1="214" y1="160" x2="524" y2="210" stroke="#1A365D" stroke-width="1.5" />
+  <line x1="214" y1="280" x2="524" y2="260" stroke="#1A365D" stroke-width="2" />
+  <line x1="330" y1="80" x2="360" y2="444" stroke="#1A365D" stroke-width="2" />
+  <line x1="420" y1="80" x2="410" y2="444" stroke="#1A365D" stroke-width="1.5" />
+  <path d="M260 120 C 310 180, 290 280, 460 380" stroke="#1E40AF" stroke-width="1.5" stroke-dasharray="4 4" fill="none" />
+
+  <!-- Precinct Boundary Polygon -->
+  <polygon points="250,140 400,120 480,240 420,380 260,340" fill="#2563EB" fill-opacity="0.1" stroke="#2563EB" stroke-width="1.5" />
+
+  <!-- High Density Spatial Cluster 1 -->
+  <circle cx="340" cy="220" r="38" fill="#2563EB" fill-opacity="0.25" />
+  <circle cx="340" cy="220" r="22" fill="#2563EB" fill-opacity="0.45" />
+  <circle cx="340" cy="220" r="6" fill="#FFFFFF" />
+  <text x="352" y="215" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="700" fill="#FFFFFF">Cluster A-1</text>
+  <text x="352" y="228" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" fill="#60A5FA">14 Recorded Incidents</text>
+
+  <!-- Incident Points -->
+  <circle cx="320" cy="205" r="4" fill="#60A5FA" />
+  <circle cx="355" cy="235" r="4" fill="#60A5FA" />
+  <circle cx="330" cy="240" r="4" fill="#60A5FA" />
+  <circle cx="360" cy="210" r="4" fill="#60A5FA" />
+
+  <!-- Cluster 2 -->
+  <circle cx="430" cy="310" r="28" fill="#2563EB" fill-opacity="0.2" />
+  <circle cx="430" cy="310" r="14" fill="#2563EB" fill-opacity="0.4" />
+  <circle cx="430" cy="310" r="5" fill="#FFFFFF" />
+  <text x="442" y="306" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="700" fill="#FFFFFF">Cluster B-3</text>
+  <text x="442" y="318" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" fill="#60A5FA">8 Recorded Incidents</text>
+
+  <!-- Right Panel: Network Association Graph -->
+  <rect x="536" y="80" width="152" height="364" rx="8" fill="#0B1F3A" stroke="#1A365D" />
+  <text x="548" y="106" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF">ENTITY LINK GRAPH</text>
+  <text x="548" y="122" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" fill="#64748B">Relational Nodes</text>
+
+  <!-- Graph Nodes and Links -->
+  <line x1="612" y1="180" x2="570" y2="240" stroke="#2563EB" stroke-width="1.5" />
+  <line x1="612" y1="180" x2="650" y2="240" stroke="#2563EB" stroke-width="1.5" />
+  <line x1="570" y1="240" x2="612" y2="310" stroke="#1A365D" stroke-width="1.5" stroke-dasharray="3 3" />
+  <line x1="650" y1="240" x2="612" y2="310" stroke="#2563EB" stroke-width="1.5" />
+
+  <!-- Node 1 (Center Target) -->
+  <circle cx="612" cy="180" r="16" fill="#2563EB" />
+  <text x="604" y="184" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="700" fill="#FFFFFF">LOC</text>
+
+  <!-- Node 2 -->
+  <circle cx="570" cy="240" r="12" fill="#132B4F" stroke="#2563EB" stroke-width="1.5" />
+  <text x="564" y="244" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="600" fill="#FFFFFF">TIME</text>
+
+  <!-- Node 3 -->
+  <circle cx="650" cy="240" r="12" fill="#132B4F" stroke="#60A5FA" stroke-width="1.5" />
+  <text x="644" y="244" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="600" fill="#FFFFFF">MOD</text>
+
+  <!-- Node 4 -->
+  <circle cx="612" cy="310" r="14" fill="#0B1F3A" stroke="#FFFFFF" stroke-width="1.5" />
+  <text x="606" y="314" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="600" fill="#FFFFFF">REG</text>
+
+  <rect x="548" y="348" width="128" height="80" rx="6" fill="#0E2442" stroke="#1A365D" />
+  <text x="556" y="368" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="700" fill="#60A5FA">Pattern Summary</text>
+  <text x="556" y="384" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" fill="#CBD5E1">Cluster A-1 correlates</text>
+  <text x="556" y="398" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" fill="#CBD5E1">with 18:00-21:00 weekday</text>
+  <text x="556" y="412" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" fill="#CBD5E1">transit corridor activity.</text>
+</svg>

@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tetravate — From Thought to Thing | Technology &amp; Digital Products</title>
+  <meta name="description" content="Tetravate turns ideas and real-world problems into useful digital products. We build web applications, mobile apps, business software, AI/ML solutions, and social-impact technology." />
+  <meta name="author" content="Tetravate" />
+  <meta name="theme-color" content="#0B1F3A" />
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tetravate — From Thought to Thing" />
+  <meta property="og:description" content="We turn ideas and real-world problems into useful digital products for businesses, people, and communities." />
+  <meta property="og:image" content="/src/assets/logo-emblem.png" />
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="/src/style.css" />
+  <link rel="icon" type="image/png" href="/src/assets/logo-emblem.png" />
+</head>
+<body>
+
+  <!-- ==========================================================================
+       TOP NAVIGATION
+       ========================================================================== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#home" class="nav-brand" aria-label="Tetravate Home">
+        <img src="/src/assets/logo-emblem.png" alt="Tetravate Emblem" class="nav-logo-mark" />
+        <div class="nav-brand-text">
+          <span class="nav-brand-name">Tetravate</span>
+          <span class="nav-brand-tagline">FROM THOUGHT TO THING</span>
+        </div>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#work" class="nav-link">Featured Work</a></li>
+          <li><a href="#process" class="nav-link">How We Work</a></li>
+          <li><a href="#impact" class="nav-link">Social Impact</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="nav-social-icons">
+          <a href="https://github.com/orgs/Tetravate" target="_blank" rel="noopener" class="nav-social-icon-btn" aria-label="Tetravate on GitHub" title="GitHub">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/company/tetravate/" target="_blank" rel="noopener" class="nav-social-icon-btn" aria-label="Tetravate on LinkedIn" title="LinkedIn">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/tetra.vate?utm_source=ig_web_button_share_sheet&amp;stkn=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="nav-social-icon-btn" aria-label="Tetravate on Instagram" title="Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+        </div>
+        <div class="nav-divider" aria-hidden="true"></div>
+        <a href="#contact" class="btn btn-primary btn-sm">Start a Conversation</a>
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+      <ul class="mobile-nav-links">
+        <li><a href="#services" class="mobile-nav-link">Services</a></li>
+        <li><a href="#work" class="mobile-nav-link">Featured Work</a></li>
+        <li><a href="#process" class="mobile-nav-link">How We Work</a></li>
+        <li><a href="#impact" class="mobile-nav-link">Social Impact</a></li>
+        <li><a href="#about" class="mobile-nav-link">About</a></li>
+        <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn btn-primary" style="width: 100%;">Start a Conversation</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- ==========================================================================
+         HERO SECTION
+         ========================================================================== -->
+    <section class="hero-section" id="home">
+      <div class="container hero-grid">
+        <div class="hero-text-side">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            TETRAVATE &bull; DIGITAL PRODUCT STUDIO
+          </div>
+          <h1 class="hero-title">
+            From Thought <span>to Thing.</span>
+          </h1>
+          <p class="hero-lead">
+            We turn ideas and real-world problems into useful digital products for businesses, people, and communities.
+          </p>
+          <div class="hero-ctas">
+            <a href="#contact" class="btn btn-primary btn-lg">
+              Start a Conversation
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </a>
+            <a href="#work" class="btn btn-secondary btn-lg">
+              See Our Work
+            </a>
+          </div>
+
+          <div class="hero-trust-bar">
+            <div class="trust-item">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>Real Problems Solved</span>
+            </div>
+            <div class="trust-item">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>Fact-Based Quality</span>
+            </div>
+            <div class="trust-item">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>Human-Centered</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Transformation Visual Card -->
+        <div class="hero-visual-side">
+          <div class="hero-visual-card">
+            <div class="hero-manifesto-title">
+              <span>The Tetravate Path</span>
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-blue); text-transform: uppercase;">Practical Craft</span>
+            </div>
+            <div class="hero-manifesto-steps">
+              <div class="manifesto-step">
+                <span class="manifesto-step-label">01. Idea &amp; Need</span>
+                <span class="manifesto-step-desc">A real human problem</span>
+              </div>
+              <div class="manifesto-step">
+                <span class="manifesto-step-label">02. Understanding</span>
+                <span class="manifesto-step-desc">Listening to the context</span>
+              </div>
+              <div class="manifesto-step">
+                <span class="manifesto-step-label">03. Clean Design</span>
+                <span class="manifesto-step-desc">Simple &amp; accessible UI</span>
+              </div>
+              <div class="manifesto-step">
+                <span class="manifesto-step-label">04. Technology</span>
+                <span class="manifesto-step-desc">Resilient, proven tools</span>
+              </div>
+              <div class="manifesto-step" style="border-left: 3px solid var(--color-blue);">
+                <span class="manifesto-step-label" style="color: var(--color-blue);">05. Useful Product</span>
+                <span class="manifesto-step-desc" style="font-weight: 600; color: var(--color-navy);">A thing that works</span>
+              </div>
+            </div>
+            <div class="manifesto-footer-note">
+              "Technology is the tool. People and their everyday problems are the reason."
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         BIO & VALUE PROPOSITION BANNER
+         ========================================================================== -->
+    <section class="value-banner" aria-label="Company Overview">
+      <div class="container value-banner-grid">
+        <div class="value-prop-box">
+          <div class="value-prop-tag">Who We Are &bull; Core Purpose</div>
+          <p class="value-prop-statement">
+            Tetravate is a technology team that turns ideas and problems into useful digital products.
+          </p>
+          <p style="font-size: 0.9375rem; color: var(--text-body); margin-top: 0.5rem;">
+            We help clients turn difficult everyday challenges into dependable software: web platforms, mobile apps, business tools, and purposeful automations.
+          </p>
+        </div>
+
+        <div>
+          <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-blue); margin-bottom: 0.5rem;">
+            Who We Help
+          </div>
+          <div class="who-help-list">
+            <span class="client-chip">Small Businesses</span>
+            <span class="client-chip">Retail Merchants</span>
+            <span class="client-chip">Startups</span>
+            <span class="client-chip">Organizations</span>
+            <span class="client-chip">Students &amp; Educators</span>
+            <span class="client-chip">Communities</span>
+            <span class="client-chip">Social-Impact Projects</span>
+          </div>
+          <p style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.875rem;">
+            We build for anyone who values clarity, dependability, and genuine utility over hype.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SERVICES SECTION
+         ========================================================================== -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">WHAT WE OFFER</div>
+          <h2 class="section-title">Practical digital products for real needs.</h2>
+          <p class="section-subtitle">
+            We are not restricted to one technology. We choose the right tools for the problem, ensuring every application is fast, reliable, and straightforward to use.
+          </p>
+        </div>
+
+        <div class="services-grid" id="servicesGrid">
+          <!-- Populated dynamically via main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         FEATURED WORK (CURATED QUALITY)
+         ========================================================================== -->
+    <section class="section section-slate" id="work">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">FEATURED WORK</div>
+          <h2 class="section-title">Selected projects built with purpose.</h2>
+          <p class="section-subtitle">
+            We prioritize curated quality over a crowded portfolio. Every project represents real problem-solving, architectural care, and honest outcomes.
+          </p>
+        </div>
+
+        <!-- Filter bar -->
+        <div class="work-filter-bar">
+          <button type="button" class="filter-btn active" data-filter="all">All Projects</button>
+          <button type="button" class="filter-btn" data-filter="Business Software">Business Software &amp; POS</button>
+          <button type="button" class="filter-btn" data-filter="AI">AI &amp; Analytics</button>
+          <button type="button" class="filter-btn" data-filter="Social Impact">Social Impact</button>
+          <button type="button" class="filter-btn" data-filter="Education">Education &amp; ML</button>
+        </div>
+
+        <!-- Projects List Container -->
+        <div class="projects-list" id="projectsList">
+          <!-- Populated dynamically via main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PROCESS SECTION (HOW WE WORK)
+         ========================================================================== -->
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="eyebrow">HOW WE WORK</div>
+          <h2 class="section-title">From Thought to Thing.</h2>
+          <p class="section-subtitle">
+            Good products do not begin with code. They begin with understanding.
+          </p>
+        </div>
+
+        <!-- Process Diagram -->
+        <div class="process-diagram-wrap">
+          <img src="/src/assets/process-flow.svg" alt="Tetravate 6-step process flow: Understand, Plan, Design, Build, Improve, Deliver" style="width: 100%; height: auto;" />
+        </div>
+
+        <!-- Process Steps Grid -->
+        <div class="process-steps-grid">
+          <div class="process-card">
+            <div class="process-num">01</div>
+            <h3 class="process-card-title">Understand</h3>
+            <p class="process-card-summary">We listen to the idea, problem, and people involved.</p>
+            <p class="process-card-detail">We do not jump into code blindly. We talk to real users, discover where time is lost, and define what actually needs to be solved.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-num">02</div>
+            <h3 class="process-card-title">Plan</h3>
+            <p class="process-card-summary">We define what needs to be built and how.</p>
+            <p class="process-card-detail">We map out technical architecture, select stable databases and frameworks, and eliminate bloated features that add cost without value.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-num">03</div>
+            <h3 class="process-card-title">Design</h3>
+            <p class="process-card-summary">We turn the idea into a clear user experience.</p>
+            <p class="process-card-detail">We build layouts following our age 8 to 80 rule: large click targets, legible fonts, zero confusing jargon, and effortless user journeys.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-num">04</div>
+            <h3 class="process-card-title">Build</h3>
+            <p class="process-card-summary">We develop the product and test along the way.</p>
+            <p class="process-card-detail">We write clean, modular software with resilient offline handling, fast query execution, and clear code comments.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-num">05</div>
+            <h3 class="process-card-title">Improve</h3>
+            <p class="process-card-summary">We learn from feedback and make it better.</p>
+            <p class="process-card-detail">We observe actual counter staff or mobile users interacting with the tool and refine any edge case that creates hesitation.</p>
+          </div>
+
+          <div class="process-card">
+            <div class="process-num">06</div>
+            <h3 class="process-card-title">Deliver</h3>
+            <p class="process-card-summary">We launch a usable product and provide support.</p>
+            <p class="process-card-detail">We handle deployment, data migration, and team training, ensuring a smooth transition into daily everyday operation.</p>
+          </div>
+        </div>
+
+        <div class="process-callout-quote">
+          <div>
+            <div class="process-quote-text">"Good products do not begin with code. They begin with understanding."</div>
+            <div class="process-quote-sub">The Tetravate Engineering &amp; Product Principle</div>
+          </div>
+          <a href="#contact" class="btn btn-primary" style="background-color: var(--color-blue); border-color: var(--color-blue);">
+            Work With Us
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         RESULTS & FACTUAL EVIDENCE
+         ========================================================================== -->
+    <section class="section section-slate" id="results">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">FACTUAL EVIDENCE</div>
+          <h2 class="section-title">Evidence over unsupported claims.</h2>
+          <p class="section-subtitle">
+            We never manufacture marketing statistics. Every number below is grounded in actual technical architecture or verified deployment.
+          </p>
+        </div>
+
+        <div class="metrics-rule-banner">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+          </svg>
+          <span class="metrics-rule-text">
+            Tetravate Transparency Policy: We do not invent client revenue or artificial percentages. We display only verified technical facts or clear placeholders until verified.
+          </span>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-value">100%</div>
+            <div class="metric-label">Offline Resilience</div>
+            <p class="metric-evidence">AGS Masalas POS operates with zero transaction loss during local internet blackouts via local IndexedDB queues.</p>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-value">&lt; 400 KB</div>
+            <div class="metric-label">Mobile App Weight</div>
+            <p class="metric-evidence">Oivu gig worker network PWA is optimized for budget smartphones and weak cellular signals.</p>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-value">Sub-Second</div>
+            <div class="metric-label">Spatial Query Speed</div>
+            <p class="metric-evidence">DRISHYAM PostGIS database engine filters multi-thousand coordinate clusters in real time.</p>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-value">[TO BE ADDED]</div>
+            <div class="metric-label">Client Growth Metric</div>
+            <p class="metric-evidence">Placeholder reserved for verified post-deployment commercial metrics currently in progress.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         HUMANITY & SOCIAL IMPACT
+         ========================================================================== -->
+    <section class="section section-navy" id="impact">
+      <div class="container impact-layout">
+        <div>
+          <div class="eyebrow eyebrow-navy">HUMANITY &bull; SOCIAL PURPOSE</div>
+          <h2 class="impact-core-quote">
+            "Technology is useful when it helps people."
+          </h2>
+          <p class="impact-body-text">
+            We believe technology should not exist simply because it can be built. It should exist because it solves a problem, saves time, creates opportunity, or makes someone's life a little easier.
+          </p>
+          <p class="impact-body-text" style="color: var(--text-white);">
+            Whether helping a small retail merchant track credit without arguments, helping delivery riders find clean drinking water, or easing a student's frustration with patient guidance — we build for human dignity.
+          </p>
+        </div>
+
+        <div class="impact-pillars">
+          <div class="impact-pillar-card">
+            <h3 class="impact-pillar-title">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" />
+              </svg>
+              Everyday Small Businesses
+            </h3>
+            <p class="impact-pillar-desc">
+              Building software for shopkeepers and local enterprises that is as easy to pick up as a pen and notebook.
+            </p>
+          </div>
+
+          <div class="impact-pillar-card">
+            <h3 class="impact-pillar-title">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+              </svg>
+              Dignity for Gig Workers
+            </h3>
+            <p class="impact-pillar-desc">
+              Creating digital coordination for safe rest points, water access, and charging infrastructure for riders who keep our cities moving.
+            </p>
+          </div>
+
+          <div class="impact-pillar-card">
+            <h3 class="impact-pillar-title">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a10.97 10.97 0 01-.25 2.449c-.878.293-1.5 1.134-1.5 2.125 0 1.243 1.007 2.25 2.25 2.25h1.5a2.25 2.25 0 002.25-2.25c0-.991-.622-1.832-1.5-2.125a10.972 10.972 0 01-.25-2.45l2.644-1.133a1 1 0 00.788 0l7-3a1 1 0 000-1.84l-7-3z" />
+              </svg>
+              Encouraging Education
+            </h3>
+            <p class="impact-pillar-desc">
+              Designing learning systems that treat errors as natural learning milestones rather than penalties.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         ABOUT TETRAVATE (THE TEAM)
+         ========================================================================== -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">ABOUT TETRAVATE</div>
+          <h2 class="section-title">A dedicated team building useful things.</h2>
+          <p class="section-subtitle">
+            We are real people who care deeply about craft. We avoid corporate pretenses and focus our energy on building dependable software.
+          </p>
+        </div>
+
+        <!-- Human Team Context -->
+        <div class="team-context-box">
+          <h3 class="team-context-title">Who we are: 4 focused founders</h3>
+          <p class="team-context-desc">
+            Tetravate currently consists of 4 team members. We are passionate engineering students actively balancing college academics, campus placements, competitive technical projects, and building Tetravate. That energy translates into fresh technical discipline, hunger to solve real problems, and deep respect for every client's time and trust.
+          </p>
+        </div>
+
+        <!-- Team Members Grid -->
+        <div class="team-grid" id="teamGrid">
+          <!-- Populated dynamically via main.js -->
+        </div>
+
+        <!-- Core Brand Values Grid -->
+        <div style="margin-top: 2rem;">
+          <h3 style="font-size: 1.125rem; font-weight: 700; color: var(--color-navy); margin-bottom: 1rem;">Our Core Principles</h3>
+          <div class="values-grid">
+            <div class="value-card">
+              <h4 class="value-card-title">Trust</h4>
+              <p class="value-card-desc">No exaggerated claims. Reliable timelines and honest status updates.</p>
+            </div>
+            <div class="value-card">
+              <h4 class="value-card-title">Quality</h4>
+              <p class="value-card-desc">Resilient code, accessible design, and software that endures.</p>
+            </div>
+            <div class="value-card">
+              <h4 class="value-card-title">Thoughts</h4>
+              <p class="value-card-desc">Deliberate thinking before coding. Clear problem framing.</p>
+            </div>
+            <div class="value-card">
+              <h4 class="value-card-title">Kindness</h4>
+              <p class="value-card-desc">Respectful communication and empathy for every end user.</p>
+            </div>
+            <div class="value-card">
+              <h4 class="value-card-title">Humanity</h4>
+              <p class="value-card-desc">Technology exists to serve people, never the reverse.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CREDENTIALS & SOCIAL PROOF
+         ========================================================================== -->
+    <section class="section section-slate" id="credentials">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">CAPABILITIES &bull; PRODUCTION TECH</div>
+          <h2 class="section-title">Technical capabilities &amp; studio deliverables.</h2>
+          <p class="section-subtitle">
+            Proven tools, modern architectures, and dependable engineering across the entire product lifecycle.
+          </p>
+        </div>
+
+        <div class="credentials-grid">
+          <div class="credential-card">
+            <div class="cred-category">Core Specializations</div>
+            <ul class="cred-list">
+              <li class="cred-item">Full-Stack Web &amp; Mobile Apps</li>
+              <li class="cred-item">Spatial Analytics &amp; PostGIS</li>
+              <li class="cred-item">Applied ML &amp; Intelligent Automation</li>
+              <li class="cred-item">Resilient Local-First / PWA Systems</li>
+            </ul>
+          </div>
+
+          <div class="credential-card">
+            <div class="cred-category">Primary Tech Stack</div>
+            <ul class="cred-list">
+              <li class="cred-item"><strong>Frontend:</strong> React, Next.js, Modern UI</li>
+              <li class="cred-item"><strong>Backend:</strong> Python, Node, Go, REST/gRPC</li>
+              <li class="cred-item"><strong>Data:</strong> PostgreSQL, PostGIS, Redis</li>
+              <li class="cred-item"><strong>Cloud:</strong> Docker, Cloudflare, AWS</li>
+            </ul>
+          </div>
+
+          <div class="credential-card">
+            <div class="cred-category">Studio Deliverables</div>
+            <ul class="cred-list">
+              <li class="cred-item">Production-Ready Web &amp; Mobile Apps</li>
+              <li class="cred-item">Custom APIs &amp; Data Pipelines</li>
+              <li class="cred-item">MVP Architecture &amp; Rapid Launches</li>
+              <li class="cred-item">End-to-End System Handoffs</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Transparent Testimonials Box -->
+        <div class="testimonials-transparent-box">
+          <h3 class="testimonials-transparent-title">What People Say</h3>
+          <p class="testimonials-transparent-desc">
+            <strong>Client &amp; Collaborator testimonials coming soon.</strong>
+          </p>
+          <p class="testimonials-transparent-desc" style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.5rem;">
+            We strictly enforce an anti-fabrication policy. We will only publish genuine, verifiable feedback from our retail partners, collaborators, and mentors as ongoing deployments conclude.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CONTACT & INQUIRY SECTION
+         ========================================================================== -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">START A CONVERSATION</div>
+          <h2 class="section-title">Tell us about your idea or problem.</h2>
+          <p class="section-subtitle">
+            Whether you have a specific software specification or just an idea on a napkin, we would love to listen and explain how we can turn it into a working product.
+          </p>
+        </div>
+
+        <div class="contact-layout">
+          <!-- Direct Details Side -->
+          <!-- Direct Details & Social Channels Hub -->
+          <div class="contact-info-panel">
+            <div class="contact-social-hub-title">CONNECT WITH US &bull; OFFICIAL CHANNELS</div>
+            
+            <div class="contact-social-grid">
+              <!-- LinkedIn Card -->
+              <a href="https://www.linkedin.com/company/tetravate/" target="_blank" rel="noopener" class="contact-social-card">
+                <div class="contact-social-left">
+                  <div class="contact-social-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                  </div>
+                  <div class="contact-social-meta">
+                    <div class="contact-social-name-row">
+                      <span class="contact-social-name">LinkedIn</span>
+                      <span class="contact-social-tag">Network</span>
+                    </div>
+                    <span class="contact-social-handle">linkedin.com/company/tetravate</span>
+                  </div>
+                </div>
+                <span class="contact-social-arrow">&nearr;</span>
+              </a>
+
+              <!-- GitHub Card -->
+              <a href="https://github.com/orgs/Tetravate" target="_blank" rel="noopener" class="contact-social-card">
+                <div class="contact-social-left">
+                  <div class="contact-social-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                    </svg>
+                  </div>
+                  <div class="contact-social-meta">
+                    <div class="contact-social-name-row">
+                      <span class="contact-social-name">GitHub</span>
+                      <span class="contact-social-tag">Open Source</span>
+                    </div>
+                    <span class="contact-social-handle">github.com/orgs/Tetravate</span>
+                  </div>
+                </div>
+                <span class="contact-social-arrow">&nearr;</span>
+              </a>
+
+              <!-- Instagram Card -->
+              <a href="https://www.instagram.com/tetra.vate?utm_source=ig_web_button_share_sheet&amp;stkn=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="contact-social-card">
+                <div class="contact-social-left">
+                  <div class="contact-social-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                  </div>
+                  <div class="contact-social-meta">
+                    <div class="contact-social-name-row">
+                      <span class="contact-social-name">Instagram</span>
+                      <span class="contact-social-tag">Studio Builds</span>
+                    </div>
+                    <span class="contact-social-handle">@tetra.vate</span>
+                  </div>
+                </div>
+                <span class="contact-social-arrow">&nearr;</span>
+              </a>
+
+              <!-- Reddit Card -->
+              <a href="https://www.reddit.com/user/Tetravate/" target="_blank" rel="noopener" class="contact-social-card">
+                <div class="contact-social-left">
+                  <div class="contact-social-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                      <circle cx="9" cy="11" r="1.5"/>
+                      <circle cx="15" cy="11" r="1.5"/>
+                      <path d="M9 15c1 1 5 1 6 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <div class="contact-social-meta">
+                    <div class="contact-social-name-row">
+                      <span class="contact-social-name">Reddit</span>
+                      <span class="contact-social-tag">Community</span>
+                    </div>
+                    <span class="contact-social-handle">u/Tetravate</span>
+                  </div>
+                </div>
+                <span class="contact-social-arrow">&nearr;</span>
+              </a>
+
+              <!-- Email Card -->
+              <a href="mailto:tetravate@gmail.com" class="contact-social-card">
+                <div class="contact-social-left">
+                  <div class="contact-social-icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                    </svg>
+                  </div>
+                  <div class="contact-social-meta">
+                    <div class="contact-social-name-row">
+                      <span class="contact-social-name">Direct Email</span>
+                      <span class="contact-social-tag">Official Inbox</span>
+                    </div>
+                    <span class="contact-social-handle">tetravate@gmail.com</span>
+                  </div>
+                </div>
+                <span class="contact-social-arrow">&nearr;</span>
+              </a>
+            </div>
+
+            <!-- Honest Note -->
+            <div style="background-color: var(--color-soft-slate); border: 1px solid var(--color-slate-200); border-radius: var(--radius-md); padding: 1.25rem;">
+              <div style="font-size: 0.875rem; font-weight: 700; color: var(--color-navy); margin-bottom: 0.25rem;">Direct &amp; Responsive</div>
+              <p style="font-size: 0.8125rem; color: var(--text-body); margin: 0;">
+                You will speak directly with the engineering and design founders who build the software — never a commissioned sales representative.
+              </p>
+            </div>
+          </div>
+
+          <!-- Inquiry Form -->
+          <div class="contact-form-card">
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-navy); margin-bottom: 0.5rem;">
+              Project Inquiry Form
+            </h3>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+              Fill in the fields below. We will reply within 24 hours.
+            </p>
+
+            <form id="inquiryForm" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="inquiryName" class="form-label">Your Name *</label>
+                  <input type="text" id="inquiryName" class="form-input" placeholder="e.g. Ramesh or Sarah" required />
+                  <div class="form-error-msg">Please enter your name.</div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inquiryEmail" class="form-label">Email Address *</label>
+                  <input type="email" id="inquiryEmail" class="form-input" placeholder="name@company.com" required />
+                  <div class="form-error-msg">Please enter a valid email address.</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inquiryService" class="form-label">What do you need help with? *</label>
+                <select id="inquiryService" class="form-select">
+                  <option value="Web Applications">Web Application</option>
+                  <option value="Mobile Applications">Mobile Application</option>
+                  <option value="Business Software &amp; POS">Business Software &amp; POS</option>
+                  <option value="AI &amp; Machine Learning">AI &amp; Machine Learning</option>
+                  <option value="Automation">Workflow Automation</option>
+                  <option value="Custom Digital Product">Custom Digital Product</option>
+                  <option value="Not Sure Yet / Consultation">Not sure yet / General consultation</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="inquiryMessage" class="form-label">Tell us about your idea or problem *</label>
+                <textarea id="inquiryMessage" class="form-textarea" placeholder="What problem are you trying to solve? Who is going to use it? What are the key things you need?" required></textarea>
+                <div class="form-error-msg">Please share a few words about your project.</div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="inquiryBudget" class="form-label">Budget Range <span class="optional">(Optional)</span></label>
+                  <input type="text" id="inquiryBudget" class="form-input" placeholder="e.g. Flexible / Staged" />
+                </div>
+
+                <div class="form-group">
+                  <label for="inquiryTimeline" class="form-label">Desired Timeline <span class="optional">(Optional)</span></label>
+                  <input type="text" id="inquiryTimeline" class="form-input" placeholder="e.g. 1–2 months" />
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                Send Inquiry
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                </svg>
+              </button>
+            </form>
+
+            <!-- Success State Banner -->
+            <div class="form-success-banner" id="inquirySuccessBanner">
+              <div class="form-success-title">✓ Thank you for reaching out!</div>
+              <p class="form-success-desc">
+                Your project brief has been recorded. You can also send this inquiry directly via your default email client or WhatsApp below:
+              </p>
+              <div class="form-success-actions">
+                <a href="#" class="btn btn-primary btn-sm" id="openEmailClientBtn" target="_blank" rel="noopener">
+                  Send via Email Client
+                </a>
+                <a href="#" class="btn btn-secondary btn-sm" id="openWhatsAppBtn" target="_blank" rel="noopener">
+                  Send via WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       CASE STUDY DETAIL MODAL (8-STAGE IN-DEPTH BREAKDOWN)
+       ========================================================================== -->
+  <div class="modal-backdrop" id="caseStudyModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalProjectTitle">
+    <div class="case-study-modal">
+      <div class="modal-header-sticky">
+        <div class="modal-title-group">
+          <span class="modal-project-tag" id="modalProjectTag">Case Study</span>
+          <h3 class="modal-project-title" id="modalProjectTitle">Project Title</h3>
+        </div>
+        <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Close Case Study">
+          ✕
+        </button>
+      </div>
+
+      <div class="modal-content-body" id="caseStudyModalBody">
+        <!-- Content injected dynamically via main.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <div class="footer-brand-header">
+            <img src="/src/assets/logo-emblem.png" alt="Tetravate Emblem" class="footer-logo-mark" />
+            <div class="footer-brand-text">
+              <span class="footer-brand-name">Tetravate</span>
+              <span class="footer-brand-tagline">FROM THOUGHT TO THING</span>
+            </div>
+          </div>
+          <p class="footer-brand-desc">
+            We turn ideas and real-world problems into useful digital products for businesses, people, and communities.
+          </p>
+          <div style="font-size: 0.8125rem; color: var(--color-light-blue); font-weight: 600;">
+            Deep Navy &bull; Tetravate Blue &bull; Practical Craft
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-nav-title">Navigation</h4>
+          <ul class="footer-nav-links">
+            <li><a href="#home" class="footer-nav-link">Home</a></li>
+            <li><a href="#services" class="footer-nav-link">Services</a></li>
+            <li><a href="#work" class="footer-nav-link">Featured Work</a></li>
+            <li><a href="#process" class="footer-nav-link">How We Work</a></li>
+            <li><a href="#impact" class="footer-nav-link">Humanity &amp; Impact</a></li>
+            <li><a href="#about" class="footer-nav-link">About Tetravate</a></li>
+            <li><a href="#contact" class="footer-nav-link">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-nav-title">Connect</h4>
+          <ul class="footer-nav-links">
+            <li><a href="mailto:tetravate@gmail.com" class="footer-nav-link">Email: tetravate@gmail.com</a></li>
+            <li><a href="https://www.linkedin.com/company/tetravate/" target="_blank" rel="noopener" class="footer-nav-link">LinkedIn: @tetravate</a></li>
+            <li><a href="https://github.com/orgs/Tetravate" target="_blank" rel="noopener" class="footer-nav-link">GitHub: @Tetravate</a></li>
+            <li><a href="https://www.instagram.com/tetra.vate?utm_source=ig_web_button_share_sheet&amp;stkn=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="footer-nav-link">Instagram: @tetra.vate</a></li>
+            <li><a href="https://www.reddit.com/user/Tetravate/" target="_blank" rel="noopener" class="footer-nav-link">Reddit: u/Tetravate</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div class="copyright-text">
+          &copy; 2026 Tetravate. All rights reserved.
+        </div>
+        <div class="footer-motto">
+          From Thought to Thing.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript Bundle Entry -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

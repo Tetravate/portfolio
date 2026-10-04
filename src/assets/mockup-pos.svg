@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" fill="none" aria-label="AGS Masalas POS Interface Mockup">
+  <!-- Outer Tablet Container -->
+  <rect width="720" height="480" rx="16" fill="#0B1F3A" />
+  
+  <!-- Screen Bezel Background -->
+  <rect x="16" y="16" width="688" height="448" rx="10" fill="#F8FAFC" />
+  
+  <!-- POS App Top Bar -->
+  <rect x="16" y="16" width="688" height="56" rx="10" fill="#0B1F3A" />
+  <rect x="16" y="60" width="688" height="12" fill="#0B1F3A" />
+  
+  <text x="36" y="48" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">AGS Masalas Retail POS</text>
+  <rect x="250" y="32" width="110" height="24" rx="12" fill="#132B4F" />
+  <circle cx="262" cy="44" r="4" fill="#60A5FA" />
+  <text x="272" y="49" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Offline Ready</text>
+  
+  <rect x="530" y="30" width="154" height="28" rx="6" fill="#2563EB" />
+  <text x="548" y="49" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">+ New Sale [F2]</text>
+
+  <!-- Left Side: Catalog & Quick Tiles -->
+  <rect x="36" y="88" width="414" height="44" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+  <text x="56" y="115" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" fill="#64748B">Search masala, pulses, spices or scan code...</text>
+
+  <!-- Category Pills -->
+  <rect x="36" y="144" width="70" height="28" rx="14" fill="#2563EB" />
+  <text x="52" y="162" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">All Spices</text>
+
+  <rect x="114" y="144" width="80" height="28" rx="14" fill="#F1F5F9" stroke="#E2E8F0" />
+  <text x="128" y="162" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="500" fill="#475569">Whole Seeds</text>
+
+  <rect x="202" y="144" width="75" height="28" rx="14" fill="#F1F5F9" stroke="#E2E8F0" />
+  <text x="216" y="162" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="500" fill="#475569">Powders</text>
+
+  <rect x="285" y="144" width="80" height="28" rx="14" fill="#F1F5F9" stroke="#E2E8F0" />
+  <text x="299" y="162" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="500" fill="#475569">Special Mix</text>
+
+  <!-- Product Tiles Grid -->
+  <!-- Tile 1 -->
+  <rect x="36" y="184" width="130" height="120" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5" />
+  <rect x="46" y="194" width="110" height="42" rx="4" fill="#F1F5F9" />
+  <text x="54" y="218" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#2563EB">PREMIUM SELECTION</text>
+  <text x="46" y="254" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="700" fill="#0B1F3A">Jeera / Cumin</text>
+  <text x="46" y="272" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#64748B">₹320 / kg • Stock: 42kg</text>
+  <text x="46" y="292" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="700" fill="#2563EB">Tap to add</text>
+
+  <!-- Tile 2 -->
+  <rect x="178" y="184" width="130" height="120" rx="8" fill="#FFFFFF" stroke="#E2E8F0" />
+  <rect x="188" y="194" width="110" height="42" rx="4" fill="#F1F5F9" />
+  <text x="196" y="218" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#475569">AROMATIC GRADE</text>
+  <text x="188" y="254" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="700" fill="#0B1F3A">Green Cardamom</text>
+  <text x="188" y="272" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#64748B">₹240 / 100g • Stock: 15kg</text>
+  <text x="188" y="292" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="600" fill="#64748B">Tap to add</text>
+
+  <!-- Tile 3 -->
+  <rect x="320" y="184" width="130" height="120" rx="8" fill="#FFFFFF" stroke="#E2E8F0" />
+  <rect x="330" y="194" width="110" height="42" rx="4" fill="#F1F5F9" />
+  <text x="338" y="218" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#475569">PURE ORGANIC</text>
+  <text x="330" y="254" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="700" fill="#0B1F3A">Salem Turmeric</text>
+  <text x="330" y="272" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#64748B">₹190 / kg • Stock: 85kg</text>
+  <text x="330" y="292" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="600" fill="#64748B">Tap to add</text>
+
+  <!-- Tile 4 & 5 (Second row) -->
+  <rect x="36" y="316" width="130" height="120" rx="8" fill="#FFFFFF" stroke="#E2E8F0" />
+  <rect x="46" y="326" width="110" height="42" rx="4" fill="#F1F5F9" />
+  <text x="54" y="350" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#475569">BLACK PEPPER</text>
+  <text x="46" y="386" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="700" fill="#0B1F3A">Malabar Pepper</text>
+  <text x="46" y="404" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#64748B">₹580 / kg • Stock: 31kg</text>
+
+  <rect x="178" y="316" width="130" height="120" rx="8" fill="#FFFFFF" stroke="#E2E8F0" />
+  <rect x="188" y="326" width="110" height="42" rx="4" fill="#F1F5F9" />
+  <text x="196" y="350" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#475569">SPECIAL BLEND</text>
+  <text x="188" y="386" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="700" fill="#0B1F3A">Garam Masala</text>
+  <text x="188" y="404" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#64748B">₹440 / kg • Stock: 18kg</text>
+
+  <rect x="320" y="316" width="130" height="120" rx="8" fill="#FFFFFF" stroke="#E2E8F0" />
+  <rect x="330" y="326" width="110" height="42" rx="4" fill="#F1F5F9" />
+  <text x="338" y="350" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#475569">WHOLE SPICE</text>
+  <text x="330" y="386" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="700" fill="#0B1F3A">Star Anise</text>
+  <text x="330" y="404" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#64748B">₹950 / kg • Stock: 9kg</text>
+
+  <!-- Right Side: Active Cart & Bill Panel -->
+  <rect x="466" y="88" width="218" height="348" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+  
+  <text x="482" y="114" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14" font-weight="700" fill="#0B1F3A">Current Bill #1084</text>
+  <text x="482" y="132" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#64748B">Customer: Rajesh Kumar (Khata Active)</text>
+  
+  <line x1="482" y1="144" x2="668" y2="144" stroke="#F1F5F9" stroke-width="1.5" />
+  
+  <!-- Cart Items -->
+  <text x="482" y="168" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="600" fill="#0B1F3A">1. Jeera (Cumin)</text>
+  <text x="482" y="184" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#64748B">500g × ₹320</text>
+  <text x="635" y="176" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="700" fill="#0B1F3A">₹160.00</text>
+
+  <text x="482" y="210" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="600" fill="#0B1F3A">2. Green Cardamom</text>
+  <text x="482" y="226" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#64748B">100g × ₹240</text>
+  <text x="635" y="218" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="700" fill="#0B1F3A">₹240.00</text>
+
+  <text x="482" y="252" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="600" fill="#0B1F3A">3. Salem Turmeric</text>
+  <text x="482" y="268" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#64748B">1 kg × ₹190</text>
+  <text x="635" y="260" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="700" fill="#0B1F3A">₹190.00</text>
+
+  <line x1="482" y1="284" x2="668" y2="284" stroke="#E2E8F0" stroke-width="1.5" />
+
+  <text x="482" y="306" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" fill="#64748B">Previous Balance:</text>
+  <text x="635" y="306" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="600" fill="#475569">₹250.00</text>
+
+  <text x="482" y="332" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14" font-weight="700" fill="#0B1F3A">Total Payable:</text>
+  <text x="620" y="332" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="16" font-weight="800" fill="#2563EB">₹840.00</text>
+
+  <!-- Action Buttons -->
+  <rect x="482" y="352" width="186" height="34" rx="6" fill="#2563EB" />
+  <text x="515" y="374" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Print &amp; WhatsApp</text>
+
+  <rect x="482" y="394" width="186" height="28" rx="6" fill="#F1F5F9" stroke="#E2E8F0" />
+  <text x="528" y="413" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="600" fill="#475569">Record To Khata</text>
+</svg>

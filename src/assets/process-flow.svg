@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 240" fill="none" aria-label="Tetravate 6-Step Process Flow">
+  <!-- Horizontal Connecting Track -->
+  <line x1="80" y1="110" x2="920" y2="110" stroke="#E2E8F0" stroke-width="3" stroke-dasharray="6 6" />
+  <line x1="80" y1="110" x2="920" y2="110" stroke="#2563EB" stroke-width="2" opacity="0.4" />
+
+  <!-- Step 1: Understand -->
+  <g transform="translate(40, 40)">
+    <circle cx="45" cy="70" r="32" fill="#0B1F3A" stroke="#FFFFFF" stroke-width="3" />
+    <text x="45" y="65" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="700" fill="#60A5FA" text-anchor="middle">STEP</text>
+    <text x="45" y="80" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">01</text>
+    <text x="45" y="125" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="700" fill="#0B1F3A" text-anchor="middle">Understand</text>
+    <text x="45" y="142" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#64748B" text-anchor="middle">Listen to people</text>
+  </g>
+
+  <!-- Step 2: Plan -->
+  <g transform="translate(204, 40)">
+    <circle cx="45" cy="70" r="32" fill="#F1F5F9" stroke="#0B1F3A" stroke-width="2" />
+    <text x="45" y="65" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="700" fill="#64748B" text-anchor="middle">STEP</text>
+    <text x="45" y="80" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14" font-weight="800" fill="#0B1F3A" text-anchor="middle">02</text>
+    <text x="45" y="125" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="700" fill="#0B1F3A" text-anchor="middle">Plan</text>
+    <text x="45" y="142" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#64748B" text-anchor="middle">Define scope &amp; path</text>
+  </g>
+
+  <!-- Step 3: Design -->
+  <g transform="translate(368, 40)">
+    <circle cx="45" cy="70" r="32" fill="#F1F5F9" stroke="#2563EB" stroke-width="2" />
+    <text x="45" y="65" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="700" fill="#2563EB" text-anchor="middle">STEP</text>
+    <text x="45" y="80" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14" font-weight="800" fill="#2563EB" text-anchor="middle">03</text>
+    <text x="45" y="125" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="700" fill="#0B1F3A" text-anchor="middle">Design</text>
+    <text x="45" y="142" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#64748B" text-anchor="middle">Human experience</text>
+  </g>
+
+  <!-- Step 4: Build -->
+  <g transform="translate(532, 40)">
+    <circle cx="45" cy="70" r="32" fill="#2563EB" stroke="#FFFFFF" stroke-width="3" />
+    <text x="45" y="65" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">STEP</text>
+    <text x="45" y="80" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">04</text>
+    <text x="45" y="125" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="700" fill="#0B1F3A" text-anchor="middle">Build</text>
+    <text x="45" y="142" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#64748B" text-anchor="middle">Clean, resilient code</text>
+  </g>
+
+  <!-- Step 5: Improve -->
+  <g transform="translate(696, 40)">
+    <circle cx="45" cy="70" r="32" fill="#F1F5F9" stroke="#0B1F3A" stroke-width="2" />
+    <text x="45" y="65" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="700" fill="#64748B" text-anchor="middle">STEP</text>
+    <text x="45" y="80" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14" font-weight="800" fill="#0B1F3A" text-anchor="middle">05</text>
+    <text x="45" y="125" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="700" fill="#0B1F3A" text-anchor="middle">Improve</text>
+    <text x="45" y="142" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#64748B" text-anchor="middle">Test &amp; refine</text>
+  </g>
+
+  <!-- Step 6: Deliver -->
+  <g transform="translate(860, 40)">
+    <circle cx="45" cy="70" r="32" fill="#0B1F3A" stroke="#2563EB" stroke-width="3" />
+    <text x="45" y="65" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="700" fill="#60A5FA" text-anchor="middle">STEP</text>
+    <text x="45" y="80" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">06</text>
+    <text x="45" y="125" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="700" fill="#0B1F3A" text-anchor="middle">Deliver</text>
+    <text x="45" y="142" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#64748B" text-anchor="middle">Launch &amp; support</text>
+  </g>
+</svg>

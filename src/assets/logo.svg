@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" fill="none" aria-label="Tetravate Logo">
+  <!-- Tetravate Monogram: 4 interlocking geometric facets representing Thought, Understanding, Craft, and Thing -->
+  <g transform="translate(6, 10)">
+    <!-- Deep Navy facet -->
+    <path d="M22 2 L42 22 L22 42 L2 22 Z" fill="#0B1F3A" />
+    <!-- Tetravate Blue inner accent facet -->
+    <path d="M22 8 L36 22 L22 36 L8 22 Z" fill="#2563EB" opacity="0.9" />
+    <!-- Center white core spark -->
+    <circle cx="22" cy="22" r="4.5" fill="#FFFFFF" />
+    <!-- Directional transformation lines: Thought to Thing -->
+    <path d="M22 2 L22 14" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    <path d="M42 22 L30 22" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+  </g>
+  <!-- Wordmark -->
+  <text x="64" y="36" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="24" font-weight="800" letter-spacing="-0.03em" fill="#0B1F3A">
+    Tetravate
+  </text>
+  <text x="64" y="50" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="600" letter-spacing="0.12em" fill="#2563EB">
+    FROM THOUGHT TO THING
+  </text>
+</svg>
