@@ -274,7 +274,7 @@ function initFoundersRadialNetwork() {
         r="3.5"
       />
       <!-- Particle 1 flowing continuously from Founder toward Tetravate Center -->
-      <circle r="2.5" class="radial-flow-particle particle-lead" fill="#34D399" opacity="0.65">
+      <circle r="2.5" class="radial-flow-particle particle-lead" fill="#60A5FA" opacity="0.75">
         <animateMotion
           dur="3.8s"
           repeatCount="indefinite"
@@ -284,7 +284,7 @@ function initFoundersRadialNetwork() {
         />
       </circle>
       <!-- Particle 2 secondary staggered wave -->
-      <circle r="1.75" class="radial-flow-particle particle-trail" fill="#10B981" opacity="0.45">
+      <circle r="1.75" class="radial-flow-particle particle-trail" fill="#2563EB" opacity="0.55">
         <animateMotion
           dur="3.8s"
           begin="1.9s"
