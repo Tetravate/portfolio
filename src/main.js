@@ -209,7 +209,7 @@ function renderTeam() {
       <h4 class="team-member-name">${member.name}</h4>
       <div class="team-member-role">${member.role}</div>
       <p class="team-member-bio">${member.bio}</p>
-      <div class="team-member-focus">Core Focus: ${member.focus}</div>
+      <div class="team-member-focus">Key Strengths: ${member.strengths || member.focus}</div>
     </div>
   `).join('');
 }
