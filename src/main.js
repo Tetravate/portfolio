@@ -89,9 +89,23 @@ function renderFeaturedProjects(filterCategory = 'all') {
           </div>
         </div>
         <div class="project-content-side">
-          <span class="project-tag">${project.categoryTag}</span>
+          <div class="project-meta-row">
+            <span class="project-tag">${project.categoryTag}</span>
+            ${project.quickTags ? project.quickTags.map(t => `<span class="project-pill-tag">${t}</span>`).join('') : ''}
+          </div>
           <h3 class="project-title">${project.title}</h3>
           <p class="project-subtitle">${project.subtitle}</p>
+          ${project.outcomeNarrative ? `
+            <div class="project-outcome-frame">
+              <span class="project-outcome-label">
+                <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                Core Impact
+              </span>
+              <div class="project-outcome-text">${project.outcomeNarrative}</div>
+            </div>
+          ` : ''}
           <p class="project-summary">${project.summary}</p>
           
           <ul class="project-highlights-list">

@@ -8,6 +8,8 @@ export const featuredProjects = [
     subtitle: "Mobile-First Retail Billing & Business Management System",
     category: "Business Software",
     categoryTag: "Business Software / POS",
+    quickTags: ["Offline-First", "Retail POS", "WhatsApp Invoicing"],
+    outcomeNarrative: "Paper ledgers → Streamlined mobile billing with zero downtime",
     summary: "A reliable point-of-sale system built for a high-turnover masala retail business, supporting fast mobile billing, instant WhatsApp invoices, customer credit tracking, and resilient offline operation.",
     overview: "AGS Masalas needed a solution that eliminated slow handwritten bills, tracked pending customer balances without messy paper registers, and could operate seamlessly even when store internet connection fluctuated.",
     highlights: [
@@ -43,6 +45,8 @@ export const featuredProjects = [
     subtitle: "Geospatial Crime Intelligence & Pattern Analysis System",
     category: "AI & Analytics",
     categoryTag: "AI / Analytics / Intelligence",
+    quickTags: ["Geospatial", "Pattern Analytics", "PostGIS"],
+    outcomeNarrative: "Fragmented spreadsheets → Unified geospatial intelligence with explainable clustering",
     summary: "An analytics platform designed to help investigative and analytical teams detect incident clusters, visualize spatial crime trends, and uncover relationship patterns without speculative predictions.",
     overview: "Law enforcement and civic analytics bodies struggle with fragmented spreadsheets and siloed incident records. DRISHYAM unifies historical incident data onto an intuitive geospatial map with relationship network graphs.",
     highlights: [
@@ -78,6 +82,8 @@ export const featuredProjects = [
     subtitle: "Dedicated Rest-Point Network Platform for Gig Workers",
     category: "Social Impact",
     categoryTag: "Social Impact / Digital Product",
+    quickTags: ["Lightweight PWA", "Accessible UI", "Social Impact"],
+    outcomeNarrative: "Disconnected street navigation → Instant low-bandwidth access to verified worker rest hubs",
     summary: "A human-centered digital platform mapping and coordinating verified rest points equipped with clean drinking water, washrooms, shade, and phone charging for delivery riders and cab operators.",
     overview: "Millions of gig delivery workers spend 10 to 14 hours a day on the road with no access to basic sanitary facilities or safe places to rest between orders. Oivu turns empty community spaces into verified rest hubs.",
     highlights: [
@@ -113,6 +119,8 @@ export const featuredProjects = [
     subtitle: "Cognitive Mistake Prediction & Personalized Learning Assistance",
     category: "Education & ML",
     categoryTag: "Machine Learning / Education",
+    quickTags: ["Adaptive Learning", "Trajectory ML", "Cognitive Scaffolding"],
+    outcomeNarrative: "Punitive right/wrong scoring → Supportive step-level guidance that prevents student frustration",
     summary: "An educational intelligence concept that models student problem-solving trajectories to anticipate specific cognitive pitfalls and provide timely, gentle hints before frustration sets in.",
     overview: "Traditional learning software only grades answers as right or wrong after the fact. MISTIQ analyzes intermediate problem-solving steps to understand where misconceptions originate and intervenes with personalized micro-explanations.",
     highlights: [
