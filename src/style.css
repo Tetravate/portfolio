@@ -1831,7 +1831,7 @@ p:last-child {
 
 /* Skills Block */
 .showcase-skills-block {
-  margin-bottom: 1.75rem;
+  margin-bottom: 0;
 }
 
 .showcase-tags-wrap {

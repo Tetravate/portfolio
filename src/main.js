@@ -210,7 +210,6 @@ function initFoundersRadialNetwork() {
   const showcaseVersatileTag = document.getElementById('showcaseVersatileTag');
   const activeDesc = document.getElementById('activeFounderDesc');
   const activeTags = document.getElementById('activeFounderTags');
-  const showcaseUplinkText = document.getElementById('showcaseUplinkText');
 
   if (!foundersLayer || !linesGroup) return;
 
@@ -362,15 +361,6 @@ function initFoundersRadialNetwork() {
       if (activeTags) {
         activeTags.innerHTML = activeMember.skills.map(s => `<span class="active-tag-chip is-highlighted">${s}</span>`).join('');
       }
-      if (showcaseUplinkText) {
-        showcaseUplinkText.innerHTML = `
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M12 3v6m0 6v6"/>
-          </svg>
-          <span>LEAF NODE ${activeMember.number} &bull; DIRECT TETRAVATE UPLINK (72.0&deg;)</span>
-        `;
-      }
     }
   }
 
@@ -404,16 +394,6 @@ function initFoundersRadialNetwork() {
     }
     if (activeTags) {
       activeTags.innerHTML = defaultTagsHTML;
-    }
-    if (showcaseUplinkText) {
-      showcaseUplinkText.innerHTML = `
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="9"/>
-          <path d="M12 3v18"/>
-          <path d="M3 12h18"/>
-        </svg>
-        <span>DIRECT SINGLE-VECTOR CONNECTIONS &bull; EQUIDISTANT 72.0&deg;</span>
-      `;
     }
   }
 
