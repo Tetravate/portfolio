@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initCaseStudyModal();
   initContactForm();
   checkInitialHash();
+  initHeroPathPipeline();
+  initSpotlightCards();
+  initScrollReveal();
 });
 
 // Mobile Navigation & Scroll Spy
@@ -162,6 +165,8 @@ function renderFeaturedProjects(filterCategory = 'all') {
       }
     });
   });
+
+  initSpotlightCards();
 }
 
 // Project Category Filters
@@ -208,6 +213,8 @@ function renderServices() {
       </a>
     </div>
   `).join('');
+
+  initSpotlightCards();
 }
 
 // Interactive Radial Network: The Founders (High-End Studio System)
@@ -590,7 +597,7 @@ function checkInitialHash() {
 }
 
 // Pre-select service in inquiry form
-window.preselectService = function(serviceName) {
+window.preselectService = function (serviceName) {
   const select = document.getElementById('inquiryService');
   if (!select) return;
   for (let i = 0; i < select.options.length; i++) {
@@ -697,4 +704,130 @@ function initContactForm() {
       errorEl.style.display = 'block';
     }
   }
+}
+
+// Interactive Hero Path Pipeline (Thought to Thing Stepper)
+function initHeroPathPipeline() {
+  const container = document.getElementById('manifestoStepsContainer');
+  const progressFill = document.getElementById('manifestoProgressFill');
+  const phaseChip = document.getElementById('manifestoPhaseChip');
+  const pathCard = document.getElementById('heroPathCard');
+
+  if (!container || !progressFill) return;
+
+  const steps = container.querySelectorAll('.manifesto-step');
+  const phaseTexts = {
+    1: 'Phase 01 • Human Problem Scope',
+    2: 'Phase 02 • Architecture & Logic',
+    3: 'Phase 03 • Zero-Friction UI',
+    4: 'Phase 04 • Resilient Stack',
+    5: 'Phase 05 • Shipped to Counter'
+  };
+
+  let currentStep = 1;
+  let autoTimer = null;
+  let isHovered = false;
+
+  function activateStep(stepNum) {
+    currentStep = stepNum;
+    steps.forEach(s => {
+      const num = parseInt(s.getAttribute('data-step'), 10);
+      if (num === stepNum) {
+        s.classList.add('is-active');
+      } else {
+        s.classList.remove('is-active');
+      }
+    });
+
+    const percent = stepNum * 20;
+    progressFill.style.width = `${percent}%`;
+
+    if (phaseChip && phaseTexts[stepNum]) {
+      phaseChip.textContent = phaseTexts[stepNum];
+    }
+  }
+
+  steps.forEach(s => {
+    const num = parseInt(s.getAttribute('data-step'), 10);
+
+    s.addEventListener('mouseenter', () => {
+      isHovered = true;
+      activateStep(num);
+    });
+
+    s.addEventListener('click', () => {
+      activateStep(num);
+    });
+  });
+
+  if (pathCard) {
+    pathCard.addEventListener('mouseenter', () => {
+      isHovered = true;
+    });
+    pathCard.addEventListener('mouseleave', () => {
+      isHovered = false;
+    });
+  }
+
+  // Smooth auto-advance every 3.8 seconds
+  autoTimer = setInterval(() => {
+    if (!isHovered) {
+      let next = currentStep + 1;
+      if (next > 5) next = 1;
+      activateStep(next);
+    }
+  }, 3800);
+}
+
+// Studio Spotlight Cursor-Following Light
+function initSpotlightCards() {
+  const cards = document.querySelectorAll(
+    '.service-card, .project-card, .process-card, .value-card, .metric-card, .credential-card, .hero-visual-card'
+  );
+
+  cards.forEach(card => {
+    if (card._hasSpotlightListener) return;
+    card._hasSpotlightListener = true;
+
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+}
+
+// Smooth Scroll Reveal
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll(
+    '.section-header, .service-card, .project-card, .process-card, .value-card, .metric-card, .credential-card, .value-banner-grid, .impact-layout'
+  );
+
+  if (!('IntersectionObserver' in window)) {
+    revealElements.forEach(el => el.classList.add('is-revealed'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  revealElements.forEach((el, idx) => {
+    el.classList.add('reveal-on-scroll');
+    const delay = (idx % 3) * 0.08;
+    if (delay > 0) {
+      el.style.transitionDelay = `${delay}s`;
+    }
+    observer.observe(el);
+  });
 }
