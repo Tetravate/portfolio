@@ -1,91 +1,575 @@
 import './style.css';
-import { featuredProjects, services, processSteps, teamMembers } from './data/projects.js';
+import {
+  featuredProjects,
+  services,
+  processSteps,
+  whyTetravateReasons,
+  technologyGroups,
+  teamMembers,
+  achievements,
+  testimonials
+} from './data/projects.js';
+
 import mockupPos from './assets/mockup-pos.svg';
 import mockupDrishyam from './assets/mockup-drishyam.svg';
+import mockupEcommerce from './assets/mockup-ecommerce.svg';
+import mockupSaas from './assets/mockup-saas.svg';
 import mockupOivu from './assets/mockup-oivu.svg';
 import mockupMistiq from './assets/mockup-mistiq.svg';
 
-// Visual Mockup Map for projects
+// Mockup image resolver
 const mockupMap = {
-  'ags-masalas-pos': mockupPos,
+  'ags-masalas': mockupPos,
   'drishyam': mockupDrishyam,
+  'ecommerce': mockupEcommerce,
+  'mistiq': mockupMistiq,
   'oivu': mockupOivu,
-  'mistiq': mockupMistiq
+  'ai-product': mockupSaas
 };
 
+// Global App State & Router
 document.addEventListener('DOMContentLoaded', () => {
-  initNavigation();
-  renderFeaturedProjects('all');
-  renderServices();
-  initFoundersRadialNetwork();
-  initProjectFilters();
-  initCaseStudyModal();
-  initContactForm();
-  checkInitialHash();
-  initHeroPathPipeline();
-  initSpotlightCards();
-  initScrollReveal();
+  initGlobalNavigation();
+  initRouter();
 });
 
-// Mobile Navigation & Scroll Spy
-function initNavigation() {
+// ==========================================================================
+// CLIENT-SIDE ROUTER (MULTI-PAGE NAVIGATION)
+// ==========================================================================
+function initRouter() {
+  // Intercept internal link clicks
+  document.body.addEventListener('click', (e) => {
+    const link = e.target.closest('a[data-link]') || e.target.closest('a[href^="/"]');
+    if (link && link.getAttribute('target') !== '_blank') {
+      const href = link.getAttribute('href');
+      if (href && !href.startsWith('mailto:') && !href.startsWith('tel:') && !href.startsWith('http')) {
+        e.preventDefault();
+        navigateTo(href);
+      }
+    }
+  });
+
+  // Handle browser back and forward buttons
+  window.addEventListener('popstate', () => {
+    handleRoute(window.location.pathname);
+  });
+
+  // Handle initial page load
+  handleRoute(window.location.pathname);
+}
+
+export function navigateTo(url) {
+  if (window.location.pathname !== url) {
+    window.history.pushState(null, '', url);
+  }
+  handleRoute(url);
+}
+window.navigateTo = navigateTo;
+
+function handleRoute(pathname) {
+  // Normalize path (strip trailing slash if not root)
+  const cleanPath = pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+  const app = document.getElementById('app-router');
+  if (!app) return;
+
+  // Scroll to top
+  window.scrollTo(0, 0);
+
+  // Close mobile drawer if open
+  const drawer = document.getElementById('mobileNavDrawer');
+  const menuBtn = document.getElementById('mobileMenuBtn');
+  if (drawer && drawer.classList.contains('open')) {
+    drawer.classList.remove('open');
+    menuBtn?.setAttribute('aria-expanded', 'false');
+  }
+
+  // Update navigation active states
+  updateNavActiveState(cleanPath);
+
+  // Route matching
+  if (cleanPath === '/' || cleanPath === '') {
+    renderHomePage(app);
+  } else if (cleanPath === '/work') {
+    renderWorkPage(app);
+  } else if (cleanPath.startsWith('/work/')) {
+    const slug = cleanPath.replace('/work/', '');
+    renderProjectDetailPage(app, slug);
+  } else if (cleanPath === '/services') {
+    renderServicesPage(app);
+  } else if (cleanPath === '/process') {
+    renderProcessPage(app);
+  } else if (cleanPath === '/about') {
+    renderAboutPage(app);
+  } else if (cleanPath === '/contact') {
+    renderContactPage(app);
+  } else {
+    renderNotFoundPage(app);
+  }
+
+  // Re-run micro-interactions on the newly rendered DOM
+  initSpotlightCards();
+  initScrollReveal();
+}
+
+function updateNavActiveState(currentPath) {
+  const links = document.querySelectorAll('.nav-link, .mobile-nav-link');
+  const normalized = (!currentPath || currentPath === '/') ? '/' : currentPath;
+  links.forEach(link => {
+    const href = link.getAttribute('href');
+    const isActive = href === '/' 
+      ? normalized === '/' 
+      : normalized.startsWith(href);
+    if (isActive) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+}
+
+// ==========================================================================
+// GLOBAL NAVBAR CONTROLLER
+// ==========================================================================
+function initGlobalNavigation() {
+  const navbar = document.getElementById('navbar');
   const menuBtn = document.getElementById('mobileMenuBtn');
   const drawer = document.getElementById('mobileNavDrawer');
-  const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      navbar?.classList.add('scrolled');
+    } else {
+      navbar?.classList.remove('scrolled');
+    }
+  }, { passive: true });
 
   if (menuBtn && drawer) {
     menuBtn.addEventListener('click', () => {
       const isOpen = drawer.classList.toggle('open');
       menuBtn.setAttribute('aria-expanded', isOpen);
     });
-
-    // Close mobile drawer upon link click
-    document.querySelectorAll('.mobile-nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        drawer.classList.remove('open');
-        menuBtn.setAttribute('aria-expanded', 'false');
-      });
-    });
   }
-
-  // Active link scroll spy
-  const sections = document.querySelectorAll('section[id]');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    const scrollPos = window.scrollY + 100;
-
-    sections.forEach(section => {
-      const top = section.offsetTop;
-      const height = section.offsetHeight;
-      if (scrollPos >= top && scrollPos < top + height) {
-        current = section.getAttribute('id');
-      }
-    });
-
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('active');
-      }
-    });
-  }, { passive: true });
 }
 
-// Render Featured Projects
-function renderFeaturedProjects(filterCategory = 'all') {
+// ==========================================================================
+// VIEW: HOME PAGE (CONCISE 30-SECOND STUDIO INTRODUCTION)
+// ==========================================================================
+function renderHomePage(container) {
+  document.title = 'Tetravate — Product Design & Engineering Studio | From Thought to Thing';
+
+  container.innerHTML = `
+    <div class="page-view">
+      <!-- HERO SECTION -->
+      <section class="hero-section" id="home">
+        <div class="hero-ambient-glow" aria-hidden="true"></div>
+        <div class="hero-grid-mesh" aria-hidden="true"></div>
+
+        <div class="container hero-grid">
+          <div class="hero-text-side">
+            <div class="hero-badge-group">
+              <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                TETRAVATE 2.0 &bull; PRODUCT STUDIO
+              </div>
+            </div>
+
+            <h1 class="hero-title">
+              FROM THOUGHT<br/><span>TO THING.</span>
+            </h1>
+            <p class="hero-lead">
+              We turn ideas and real-world problems into useful digital products. Technology is the tool — people, ideas, and real problems are the reason.
+            </p>
+            <div class="hero-ctas">
+              <a href="/work" class="btn btn-primary btn-lg" data-link>
+                See What We Build →
+              </a>
+              <a href="/contact" class="btn btn-secondary btn-lg" data-link>
+                Start a Conversation
+              </a>
+            </div>
+
+            <div class="hero-trust-bar">
+              <div class="trust-item">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd" />
+                </svg>
+                <span>Real Problems Solved</span>
+              </div>
+              <div class="trust-item">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd" />
+                </svg>
+                <span>Fact-Based Quality</span>
+              </div>
+              <div class="trust-item">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd" />
+                </svg>
+                <span>Human-Centered</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Interactive Pipeline Card -->
+          <div class="hero-visual-side">
+            <div class="hero-visual-card" id="heroPathCard">
+              <div class="hero-manifesto-title">
+                <div class="manifesto-title-group">
+                  <span class="manifesto-title-main">THE TETRAVATE TRANSFORMATION</span>
+                </div>
+                <span class="manifesto-pill-live" id="manifestoPhaseChip">02 // UNDERSTAND</span>
+              </div>
+
+              <div class="manifesto-progress-track">
+                <div class="manifesto-progress-fill" id="manifestoProgressFill"></div>
+              </div>
+
+              <div class="hero-manifesto-steps" id="manifestoStepsContainer">
+                <div class="manifesto-step is-active" data-step="1">
+                  <div class="manifesto-step-left">
+                    <span class="manifesto-step-num">01</span>
+                    <div>
+                      <div class="manifesto-step-label">Idea &amp; Need</div>
+                      <div class="manifesto-step-sub">Listening to real operational friction</div>
+                    </div>
+                  </div>
+                  <span class="manifesto-tag-status">Problem</span>
+                </div>
+
+                <div class="manifesto-step" data-step="2">
+                  <div class="manifesto-step-left">
+                    <span class="manifesto-step-num">02</span>
+                    <div>
+                      <div class="manifesto-step-label">Understanding</div>
+                      <div class="manifesto-step-sub">User journeys &amp; technical scoping</div>
+                    </div>
+                  </div>
+                  <span class="manifesto-tag-status">Strategy</span>
+                </div>
+
+                <div class="manifesto-step" data-step="3">
+                  <div class="manifesto-step-left">
+                    <span class="manifesto-step-num">03</span>
+                    <div>
+                      <div class="manifesto-step-label">Clean Design</div>
+                      <div class="manifesto-step-sub">Zero-friction, accessible UI</div>
+                    </div>
+                  </div>
+                  <span class="manifesto-tag-status">Prototype</span>
+                </div>
+
+                <div class="manifesto-step" data-step="4">
+                  <div class="manifesto-step-left">
+                    <span class="manifesto-step-num">04</span>
+                    <div>
+                      <div class="manifesto-step-label">Technology</div>
+                      <div class="manifesto-step-sub">Resilient databases &amp; modern APIs</div>
+                    </div>
+                  </div>
+                  <span class="manifesto-tag-status">Engineering</span>
+                </div>
+
+                <div class="manifesto-step is-outcome" data-step="5">
+                  <div class="manifesto-step-left">
+                    <span class="manifesto-step-num">05</span>
+                    <div>
+                      <div class="manifesto-step-label">Useful Product</div>
+                      <div class="manifesto-step-sub">Dependable, production-ready artifact</div>
+                    </div>
+                  </div>
+                  <span class="manifesto-tag-status highlight">Shipped Thing</span>
+                </div>
+              </div>
+
+              <div class="manifesto-footer-note">
+                <span class="manifesto-footer-dot"></span>
+                <span>"Technology is the tool. People and their everyday problems are the reason."</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SHORT TETRAVATE INTRODUCTION & CAPABILITIES OVERVIEW -->
+      <section class="section section-secondary">
+        <div class="container">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center;">
+            <div>
+              <div class="eyebrow">// PHILOSOPHY</div>
+              <h2 style="font-size: 2.25rem; font-weight: 800; color: var(--color-navy); margin-bottom: 1rem; line-height: 1.2;">
+                Turning complex problems into clean, usable software.
+              </h2>
+              <p style="font-size: 1.05rem; line-height: 1.6; color: var(--text-body); margin-bottom: 1.5rem;">
+                Ideas can stay in conversations, notes, sketches, and plans. Tetravate is built to cross the bridge from thought to thing — engineering dependable digital products for founders, operations, and communities.
+              </p>
+              <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="/about" class="btn btn-secondary btn-sm" data-link>Learn About the Studio →</a>
+                <a href="/services" class="btn btn-secondary btn-sm" data-link>Explore Our Capabilities →</a>
+              </div>
+            </div>
+
+            <div class="white-contrast-card" style="border-radius: var(--radius-md); padding: 2.25rem;">
+              <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-blue); font-weight: 800; text-transform: uppercase; margin-bottom: 1rem; letter-spacing: 0.1em;">
+                STUDIO PILLARS
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 1.15rem;">
+                <div style="display: flex; gap: 0.75rem;">
+                  <span style="color: var(--color-blue); font-weight: 800; font-family: var(--font-mono);">01</span>
+                  <div>
+                    <strong style="color: var(--color-navy);">Business-First Architecture:</strong>
+                    <span style="color: var(--text-dark-muted); font-size: 0.875rem;"> We understand operational workflows before writing code.</span>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 0.75rem;">
+                  <span style="color: var(--color-blue); font-weight: 800; font-family: var(--font-mono);">02</span>
+                  <div>
+                    <strong style="color: var(--color-navy);">Offline &amp; Spatial Resilience:</strong>
+                    <span style="color: var(--text-dark-muted); font-size: 0.875rem;"> Systems built to withstand network drops and high concurrency.</span>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 0.75rem;">
+                  <span style="color: var(--color-blue); font-weight: 800; font-family: var(--font-mono);">03</span>
+                  <div>
+                    <strong style="color: var(--color-navy);">Grounded AI &amp; Analytics:</strong>
+                    <span style="color: var(--text-dark-muted); font-size: 0.875rem;"> Explainable machine learning that delivers tangible utility without buzzword hype.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SELECTED WORK PREVIEW (TOP 3 PROJECTS LEADING TO /work) -->
+      <section class="section">
+        <div class="container">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem;">
+            <div>
+              <div class="eyebrow">FEATURED WORK</div>
+              <h2 class="section-title" style="margin-bottom: 0;">Selected Studio Projects</h2>
+            </div>
+            <a href="/work" class="btn btn-primary" data-link>
+              View All 6 Featured Projects →
+            </a>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;">
+            ${featuredProjects.slice(0, 3).map(p => `
+              <div class="service-card" style="padding: 1.75rem;">
+                <div style="background: #05101E; border: 1px solid var(--border-medium); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 1.25rem;">
+                  <img src="${mockupMap[p.id]}" alt="${p.title}" style="width: 100%; height: 180px; object-fit: cover;" />
+                </div>
+                <div class="project-tag" style="margin-bottom: 0.4rem;">${p.categoryTag}</div>
+                <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--text-heading); margin-bottom: 0.5rem;">${p.title}</h3>
+                <p style="font-size: 0.875rem; color: var(--text-body); line-height: 1.5; margin-bottom: 1.25rem; flex: 1;">
+                  ${p.summary}
+                </p>
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
+                  <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">${p.techStack.slice(0, 2).join(' · ')}</span>
+                  <a href="/work/${p.slug}" class="service-action-link" data-link>Case Study →</a>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </section>
+
+      <!-- WHAT WE BUILD PREVIEW (LEADING TO /services) -->
+      <section class="section section-secondary">
+        <div class="container">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem;">
+            <div>
+              <div class="eyebrow">CAPABILITIES</div>
+              <h2 class="section-title" style="margin-bottom: 0;">What We Build</h2>
+            </div>
+            <a href="/services" class="btn btn-secondary" data-link>
+              Full Services Overview →
+            </a>
+          </div>
+
+          <div class="services-grid">
+            ${services.map(s => `
+              <div class="service-card">
+                <div class="service-icon-wrap">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                  </svg>
+                </div>
+                <h3 class="service-title">${s.title}</h3>
+                <p class="service-desc">${s.shortDesc}</p>
+                <ul class="service-capabilities-list">
+                  ${s.capabilities.slice(0, 2).map(c => `<li class="service-cap-item">${c}</li>`).join('')}
+                </ul>
+                <a href="/services" class="service-action-link" data-link>Learn more →</a>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </section>
+
+      <!-- 5-STEP PROCESS PREVIEW (LEADING TO /process) -->
+      <section class="section">
+        <div class="container">
+          <div style="text-align: center; max-width: 700px; margin: 0 auto 3.5rem auto;">
+            <div class="eyebrow">OUR METHODOLOGY</div>
+            <h2 class="section-title">From Idea to Product</h2>
+            <p class="section-subtitle">
+              A disciplined 5-step engineering process turning ambiguous ideas into dependable digital products.
+            </p>
+          </div>
+
+          <div class="process-steps-grid">
+            ${processSteps.map(step => `
+              <div class="process-card">
+                <div class="process-num">${step.step}</div>
+                <div class="process-phase-badge">${step.phase}</div>
+                <h3 class="process-card-title">${step.title}</h3>
+                <p class="process-card-summary">${step.summary}</p>
+              </div>
+            `).join('')}
+          </div>
+
+          <div style="text-align: center; margin-top: 3rem;">
+            <a href="/process" class="btn btn-secondary" data-link>
+              View Full Process Workflow →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHY TETRAVATE PREVIEW -->
+      <section class="section section-secondary">
+        <div class="container">
+          <div class="section-header">
+            <div class="eyebrow">WHY TETRAVATE</div>
+            <h2 class="section-title">Built for substance, not hype.</h2>
+            <p class="section-subtitle">
+              Five reasons founders and businesses partner with Tetravate to design and engineer their digital products.
+            </p>
+          </div>
+
+          <div class="why-grid">
+            ${whyTetravateReasons.map(r => `
+              <div class="why-card">
+                <div class="why-card-num">${r.num}</div>
+                <h3 class="why-card-title">${r.title}</h3>
+                <p class="why-card-desc">${r.description}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </section>
+
+      <!-- FINAL CLOSING CTA -->
+      <section class="closing-cta-section">
+        <div class="container">
+          <div class="closing-cta-card">
+            <div class="eyebrow" style="margin-bottom: 1rem;">TURN THOUGHTS INTO THINGS</div>
+            <h2 class="closing-cta-title">Have an idea? Let's turn it into something real.</h2>
+            <p class="closing-cta-lead">
+              From web applications and SaaS platforms to offline business software and AI systems — let's build your next digital product.
+            </p>
+            <div class="closing-cta-buttons">
+              <a href="/contact" class="btn btn-primary btn-lg" data-link>
+                Start a Project
+              </a>
+              <a href="/work" class="btn btn-secondary btn-lg" data-link>
+                Explore All Projects
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  `;
+
+  initHeroPathPipeline();
+}
+
+// ==========================================================================
+// VIEW: DEDICATED WORK PAGE (/work) — SHOWS ALL 6 PROJECTS
+// ==========================================================================
+function renderWorkPage(container) {
+  document.title = 'Selected Work — Tetravate Studio Portfolio';
+
+  container.innerHTML = `
+    <div class="page-view">
+      <div class="page-hero">
+        <div class="container">
+          <div class="eyebrow">PORTFOLIO &bull; SELECTED WORK</div>
+          <h1 class="page-hero-title">Selected Work</h1>
+          <p class="page-hero-subtitle">
+            A selection of products, platforms and experiences we've designed and built. Every project represents real workflows, verified engineering decisions, and honest outcomes.
+          </p>
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="container">
+          <!-- Filter bar -->
+          <div class="work-filter-bar" id="workFilterBar">
+            <button type="button" class="filter-btn active" data-filter="all">All Projects (6)</button>
+            <button type="button" class="filter-btn" data-filter="Business Software">Business Software / POS</button>
+            <button type="button" class="filter-btn" data-filter="AI">AI &amp; Analytics</button>
+            <button type="button" class="filter-btn" data-filter="E-Commerce">E-Commerce</button>
+            <button type="button" class="filter-btn" data-filter="SaaS">SaaS Platform</button>
+            <button type="button" class="filter-btn" data-filter="Social Impact">Social Impact</button>
+          </div>
+
+          <div class="projects-list" id="projectsList">
+            <!-- Project Cards Rendered Below -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Closing CTA Banner -->
+      <section class="closing-cta-section">
+        <div class="container">
+          <div class="closing-cta-card">
+            <h2 class="closing-cta-title">Need a similar product built?</h2>
+            <p class="closing-cta-lead">
+              We turn difficult operational challenges into dependable software.
+            </p>
+            <a href="/contact" class="btn btn-primary btn-lg" data-link>
+              Start a Conversation
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  `;
+
+  renderWorkProjectCards('all');
+  initWorkFilterButtons();
+}
+
+function renderWorkProjectCards(filterCategory = 'all') {
   const container = document.getElementById('projectsList');
   if (!container) return;
 
   const filtered = filterCategory === 'all'
     ? featuredProjects
-    : featuredProjects.filter(p => p.category.toLowerCase().includes(filterCategory.toLowerCase()));
+    : featuredProjects.filter(p => {
+        const cat = p.category.toLowerCase();
+        const tag = p.categoryTag.toLowerCase();
+        const query = filterCategory.toLowerCase();
+        return cat.includes(query) || tag.includes(query);
+      });
 
   container.innerHTML = filtered.map((project, idx) => {
     const isReversed = idx % 2 === 1 ? 'reversed' : '';
-    const mockupSrc = mockupMap[project.id] || '/src/assets/mockup-pos.svg';
+    const mockupSrc = mockupMap[project.id] || mockupPos;
 
     return `
-      <article class="project-card ${isReversed}" id="project-card-${project.id}">
+      <article class="project-card ${isReversed}" id="project-card-${project.slug}">
         <div class="project-visual-side">
           <div class="project-mockup-frame">
             <img src="${mockupSrc}" alt="${project.title} Interface &amp; Architecture Overview" loading="lazy" />
@@ -94,27 +578,30 @@ function renderFeaturedProjects(filterCategory = 'all') {
         <div class="project-content-side">
           <div class="project-meta-row">
             <span class="project-tag">${project.categoryTag}</span>
+            ${project.demoLabel ? `<span class="project-pill-tag project-status-pill">${project.demoLabel}</span>` : ''}
             ${project.quickTags ? project.quickTags.map(t => `<span class="project-pill-tag">${t}</span>`).join('') : ''}
           </div>
           <h3 class="project-title">${project.title}</h3>
           <p class="project-subtitle">${project.subtitle}</p>
+          
           ${project.outcomeNarrative ? `
             <div class="project-outcome-frame">
               <span class="project-outcome-label">
                 <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
-                Core Impact
+                Core Workflow Impact
               </span>
               <div class="project-outcome-text">${project.outcomeNarrative}</div>
             </div>
           ` : ''}
+
           <p class="project-summary">${project.summary}</p>
           
           <ul class="project-highlights-list">
-            ${project.highlights.map(hl => `
+            ${project.highlights.slice(0, 4).map(hl => `
               <li class="project-hl-item">
-                <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                 </svg>
                 <span>${hl}</span>
@@ -127,14 +614,11 @@ function renderFeaturedProjects(filterCategory = 'all') {
           </div>
 
           <div class="project-card-actions">
-            <button type="button" class="btn btn-primary open-case-study" data-project-id="${project.id}">
-              Read Case Study
-              <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-              </svg>
-            </button>
-            <a href="#contact" class="btn btn-secondary start-similar-inquiry" data-service="${project.category}">
-              Build Similar
+            <a href="/work/${project.slug}" class="btn btn-primary" data-link>
+              View Full Case Study →
+            </a>
+            <a href="${project.liveDemo}" target="_blank" rel="noopener" class="btn btn-secondary">
+              Demo / Live Link ↗
             </a>
           </div>
         </div>
@@ -142,571 +626,983 @@ function renderFeaturedProjects(filterCategory = 'all') {
     `;
   }).join('');
 
-  // Re-bind click events for case studies
-  document.querySelectorAll('.open-case-study').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const pid = e.currentTarget.getAttribute('data-project-id');
-      openCaseStudy(pid);
-    });
-  });
-
-  // Re-bind pre-selection on build similar
-  document.querySelectorAll('.start-similar-inquiry').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const serv = e.currentTarget.getAttribute('data-service');
-      const select = document.getElementById('inquiryService');
-      if (select) {
-        for (let i = 0; i < select.options.length; i++) {
-          if (select.options[i].text.toLowerCase().includes(serv.toLowerCase())) {
-            select.selectedIndex = i;
-            break;
-          }
-        }
-      }
-    });
-  });
-
   initSpotlightCards();
 }
 
-// Project Category Filters
-function initProjectFilters() {
+function initWorkFilterButtons() {
   const filterBtns = document.querySelectorAll('.filter-btn');
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const filter = btn.getAttribute('data-filter') || 'all';
-      renderFeaturedProjects(filter);
+      renderWorkProjectCards(filter);
     });
   });
 }
 
-// Render Services
-function renderServices() {
-  const container = document.getElementById('servicesGrid');
-  if (!container) return;
+// ==========================================================================
+// VIEW: DEDICATED PROJECT DETAIL PAGE (/work/:slug) — PROPER ROUTE, NO MODAL!
+// ==========================================================================
+function renderProjectDetailPage(container, slug) {
+  const projectIndex = featuredProjects.findIndex(p => p.slug === slug || p.id === slug);
+  if (projectIndex === -1) {
+    renderNotFoundPage(container);
+    return;
+  }
 
-  const serviceIcons = {
-    'web-apps': `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>`,
-    'mobile-apps': `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>`,
-    'ai-ml': `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>`,
-    'automation': `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>`,
-    'business-software': `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`,
-    'custom-products': `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>`
-  };
+  const project = featuredProjects[projectIndex];
+  document.title = `${project.title} — Case Study | Tetravate Studio`;
 
-  container.innerHTML = services.map(service => `
-    <div class="service-card" id="service-${service.id}">
-      <div class="service-icon-wrap">
-        ${serviceIcons[service.id] || serviceIcons['web-apps']}
-      </div>
-      <h3 class="service-title">${service.title}</h3>
-      <p class="service-desc">${service.shortDesc}</p>
-      
-      <ul class="service-capabilities-list">
-        ${service.capabilities.map(cap => `<li class="service-cap-item">${cap}</li>`).join('')}
-      </ul>
+  const prevProject = projectIndex > 0 ? featuredProjects[projectIndex - 1] : featuredProjects[featuredProjects.length - 1];
+  const nextProject = projectIndex < featuredProjects.length - 1 ? featuredProjects[projectIndex + 1] : featuredProjects[0];
+  const mockupSrc = mockupMap[project.id] || mockupPos;
 
-      <a href="#contact" class="service-action-link" onclick="preselectService('${service.title}')">
-        Discuss this service →
-      </a>
+  container.innerHTML = `
+    <div class="page-view">
+      <!-- Project Hero Header -->
+      <section class="project-detail-hero">
+        <div class="container">
+          <a href="/work" class="project-back-link" data-link>
+            ← Back to Selected Work
+          </a>
+          <div class="project-meta-row" style="margin-bottom: 0.75rem;">
+            <span class="project-tag">${project.categoryTag}</span>
+            ${project.quickTags.map(t => `<span class="project-pill-tag">${t}</span>`).join('')}
+          </div>
+          <h1 class="project-detail-title">${project.title}</h1>
+          <p class="project-detail-subtitle">${project.subtitle}</p>
+
+          <div class="project-detail-header-actions">
+            <a href="${project.liveDemo}" target="_blank" rel="noopener" class="btn btn-primary">
+              Demo / Live Link ↗
+            </a>
+            <a href="/contact" class="btn btn-secondary" data-link>
+              Discuss a Similar Project
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <!-- Verified Technical Benchmarks -->
+          <div class="cs-meta-grid">
+            ${project.caseStudy.metrics.map(m => `
+              <div class="cs-meta-box">
+                <div class="cs-meta-label">${m.label}</div>
+                <div class="cs-meta-value">${m.value}</div>
+                <div class="cs-meta-note">${m.note}</div>
+              </div>
+            `).join('')}
+          </div>
+
+          <!-- Large Editorial Visual Preview -->
+          <div class="project-detail-visual">
+            <img src="${mockupSrc}" alt="${project.title} Interface &amp; Architecture Overview" />
+          </div>
+
+          <!-- The Problem & The Solution -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3.5rem;">
+            <div style="background: #FFFFFF; border: 1px solid var(--border-medium); border-radius: var(--radius-md); padding: 2.25rem; box-shadow: var(--shadow-sm);">
+              <div class="cs-stage-number" style="color: var(--color-blue); font-weight: 800;">THE PROBLEM</div>
+              <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--color-navy); margin-bottom: 0.75rem;">What needed to be solved?</h3>
+              <p style="font-size: 1rem; line-height: 1.65; color: var(--text-body);">${project.caseStudy.problem}</p>
+            </div>
+
+            <div class="white-contrast-card" style="border-radius: var(--radius-md); padding: 2.25rem;">
+              <div class="cs-stage-number" style="color: var(--color-blue); font-weight: 800;">THE SOLUTION</div>
+              <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--color-navy); margin-bottom: 0.75rem;">What Tetravate built</h3>
+              <p style="font-size: 1rem; line-height: 1.65; color: var(--text-dark-muted); font-weight: 500;">${project.caseStudy.solution}</p>
+            </div>
+          </div>
+
+          <!-- Key Features Section -->
+          <div style="margin-bottom: 3.5rem;">
+            <div class="eyebrow">SYSTEM CAPABILITIES</div>
+            <h2 class="section-title">Key Architectural Features</h2>
+            <div class="project-features-grid">
+              ${project.features.map(f => `
+                <div class="project-feature-card">
+                  <div class="project-feature-num">${f.num}</div>
+                  <h3 class="project-feature-title">${f.title}</h3>
+                  <p class="project-feature-desc">${f.desc}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Technology Section -->
+          <div style="background: #FFFFFF; border: 1px solid var(--border-medium); border-radius: var(--radius-lg); padding: 2.5rem; margin-bottom: 3.5rem; box-shadow: var(--shadow-sm);">
+            <div class="eyebrow">ENGINEERING STACK</div>
+            <h2 style="font-size: 1.75rem; font-weight: 800; color: var(--text-heading); margin-bottom: 1.5rem;">
+              Technologies Used in this Architecture
+            </h2>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+              ${Object.entries(project.techGrouped).map(([key, val]) => `
+                <div style="background: #F8FAFC; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem;">
+                  <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-blue); text-transform: uppercase; margin-bottom: 0.35rem; font-weight: 700; letter-spacing: 0.06em;">
+                    ${key.replace('_', ' ')}
+                  </div>
+                  <div style="font-size: 1.05rem; font-weight: 700; color: var(--color-navy);">
+                    ${val}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Short Narrative Case Study (Challenge, Approach, Outcome) -->
+          <div style="margin-bottom: 3.5rem;">
+            <div class="eyebrow">CASE STUDY NARRATIVE</div>
+            <h2 class="section-title">Challenge, Approach &amp; Outcome</h2>
+            <div class="cs-stages-list">
+              <div class="cs-stage-block">
+                <div class="cs-stage-number">CHALLENGE</div>
+                <h3 class="cs-stage-title">The Operational Hurdle</h3>
+                <p class="cs-stage-text">${project.caseStudy.narrative.challenge}</p>
+              </div>
+
+              <div class="cs-stage-block">
+                <div class="cs-stage-number">APPROACH</div>
+                <h3 class="cs-stage-title">How Tetravate Approached the Problem</h3>
+                <p class="cs-stage-text">${project.caseStudy.narrative.approach}</p>
+              </div>
+
+              <div class="cs-stage-block">
+                <div class="cs-stage-number">OUTCOME</div>
+                <h3 class="cs-stage-title">Verified Delivery &amp; Results</h3>
+                <p class="cs-stage-text">${project.caseStudy.narrative.outcome}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Previous / Next Project Navigation -->
+          <div class="project-pagination-bar">
+            <div class="pagination-item">
+              <span class="pagination-label">← Previous Project</span>
+              <a href="/work/${prevProject.slug}" class="pagination-title" data-link>
+                ${prevProject.title}
+              </a>
+            </div>
+
+            <a href="/work" class="btn btn-secondary btn-sm" data-link>
+              All 6 Projects
+            </a>
+
+            <div class="pagination-item" style="text-align: right;">
+              <span class="pagination-label">Next Project →</span>
+              <a href="/work/${nextProject.slug}" class="pagination-title" data-link>
+                ${nextProject.title}
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Closing CTA -->
+      <section class="closing-cta-section">
+        <div class="container">
+          <div class="closing-cta-card">
+            <h2 class="closing-cta-title">Ready to build your digital product?</h2>
+            <p class="closing-cta-lead">
+              Let's talk through your requirements and engineer a practical solution.
+            </p>
+            <a href="/contact" class="btn btn-primary btn-lg" data-link>
+              Start a Conversation
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
-  `).join('');
-
-  initSpotlightCards();
+  `;
 }
 
-// Interactive Radial Network: The Founders (High-End Studio System)
-function initFoundersRadialNetwork() {
-  const foundersLayer = document.getElementById('radialFoundersLayer');
-  const linesGroup = document.getElementById('radialLinesGroup');
-  const centralCoreCard = document.getElementById('centralCoreCard');
-  const showcasePanel = document.getElementById('founderShowcasePanel');
-  const showcaseNodeNum = document.getElementById('showcaseNodeNum');
-  const activeBadge = document.getElementById('activeFounderBadge');
-  const showcaseStatusText = document.getElementById('showcaseStatusText');
-  const showcaseTagline = document.getElementById('showcaseTagline');
-  const activeTitle = document.getElementById('activeFounderTitle');
-  const showcaseVersatileTag = document.getElementById('showcaseVersatileTag');
-  const activeDesc = document.getElementById('activeFounderDesc');
-  const activeTags = document.getElementById('activeFounderTags');
+// ==========================================================================
+// VIEW: SERVICES PAGE (/services)
+// ==========================================================================
+function renderServicesPage(container) {
+  document.title = 'What We Build — Tetravate Studio Services';
 
-  if (!foundersLayer || !linesGroup) return;
-
-  const centerX = 400;
-  const centerY = 400;
-  const radius = 275;
-
-  // 5 Founders positioned in a perfect circle at 72° intervals (-90°, -18°, 54°, 126°, 198°)
-  const nodeCoordinates = teamMembers.map((member, idx) => {
-    const angleDeg = -90 + idx * 72;
-    const angleRad = (angleDeg * Math.PI) / 180;
-    const x = centerX + radius * Math.cos(angleRad);
-    const y = centerY + radius * Math.sin(angleRad);
-
-    return {
-      idx,
-      member,
-      angleDeg,
-      x: Number(x.toFixed(1)),
-      y: Number(y.toFixed(1)),
-      xPercent: Number(((x / 800) * 100).toFixed(2)),
-      yPercent: Number(((y / 800) * 100).toFixed(2))
-    };
-  });
-
-  // Render SVG connecting lines with animated particle flows traveling toward Tetravate center
-  linesGroup.innerHTML = nodeCoordinates.map(n => `
-    <g class="radial-connection-group" id="connectionGroup-${n.idx}">
-      <!-- Underlying subtle direct connection path -->
-      <path
-        id="radialPath-${n.idx}"
-        class="radial-connector-path"
-        d="M 400 400 L ${n.x} ${n.y}"
-      />
-      <!-- Active glowing overlay path -->
-      <path
-        id="radialActiveGlow-${n.idx}"
-        class="radial-glow-overlay-path"
-        d="M 400 400 L ${n.x} ${n.y}"
-      />
-      <!-- Terminal node anchor dot -->
-      <circle
-        id="radialDot-${n.idx}"
-        class="radial-path-dot"
-        cx="${n.x}"
-        cy="${n.y}"
-        r="3.5"
-      />
-      <!-- Particle 1 flowing continuously from Founder toward Tetravate Center -->
-      <circle r="2.5" class="radial-flow-particle particle-lead" fill="#2563EB" opacity="0.8">
-        <animateMotion
-          dur="3.4s"
-          repeatCount="indefinite"
-          path="M ${n.x} ${n.y} L 400 400"
-          keyPoints="0;1"
-          keyTimes="0;1"
-        />
-      </circle>
-      <!-- Particle 2 secondary staggered wave -->
-      <circle r="1.75" class="radial-flow-particle particle-trail" fill="#60A5FA" opacity="0.6">
-        <animateMotion
-          dur="3.4s"
-          begin="1.7s"
-          repeatCount="indefinite"
-          path="M ${n.x} ${n.y} L 400 400"
-          keyPoints="0;1"
-          keyTimes="0;1"
-        />
-      </circle>
-    </g>
-  `).join('');
-
-  // Render HTML Founder Leaf Nodes (Clean capsule without local popups - details show on right showcase window)
-  foundersLayer.innerHTML = nodeCoordinates.map(n => `
-    <div
-      class="founder-leaf-node"
-      id="founderLeafNode-${n.idx}"
-      data-idx="${n.idx}"
-      style="left: ${n.xPercent}%; top: ${n.yPercent}%;"
-      tabindex="0"
-      role="button"
-      aria-label="${n.member.nameUpper}, FOUNDER. ${n.member.tagline}"
-    >
-      <div class="founder-leaf-capsule">
-        <div class="founder-leaf-header">
-          <span class="founder-leaf-number">${n.member.number}</span>
-          <span class="founder-leaf-role">
-            <span class="founder-live-dot"></span>
-            ${n.member.role}
-          </span>
+  container.innerHTML = `
+    <div class="page-view">
+      <div class="page-hero">
+        <div class="container">
+          <div class="eyebrow">WHAT WE BUILD</div>
+          <h1 class="page-hero-title">Services &amp; Capabilities</h1>
+          <p class="page-hero-subtitle">
+            Websites, e-commerce platforms, SaaS products, business systems, mobile applications and AI-powered products.
+          </p>
         </div>
-        <div class="founder-leaf-name">${n.member.nameUpper}</div>
-        <div class="founder-leaf-sub">${n.member.tagline}</div>
       </div>
+
+      <section class="section">
+        <div class="container">
+          <div class="services-grid" style="grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+            ${services.map(s => `
+              <div class="service-card" style="padding: 2.5rem;">
+                <div class="service-icon-wrap">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                  </svg>
+                </div>
+                <h3 class="service-title" style="font-size: 1.6rem;">${s.title}</h3>
+                <p class="service-desc" style="font-size: 1rem; margin-bottom: 1.5rem;">${s.detail}</p>
+                
+                <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-blue); font-weight: 700; text-transform: uppercase; margin-bottom: 0.75rem; letter-spacing: 0.08em;">
+                  Core Capabilities
+                </div>
+                <ul class="service-capabilities-list" style="margin-bottom: 1.5rem;">
+                  ${s.capabilities.map(c => `<li class="service-cap-item" style="font-size: 0.9rem; color: var(--text-body);">${c}</li>`).join('')}
+                </ul>
+
+                <div class="service-ideal-box">
+                  <span class="service-ideal-label">Ideal For:</span>
+                  <p class="service-ideal-text">${s.idealFor}</p>
+                </div>
+
+                <a href="/contact" class="btn btn-primary" style="width: 100%; justify-content: center;" data-link>
+                  Discuss ${s.title} →
+                </a>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </section>
+
+      <!-- Technical Capabilities Breakdown -->
+      <section class="section section-secondary">
+        <div class="container">
+          <div class="section-header">
+            <div class="eyebrow">ENGINEERING TOOLKIT</div>
+            <h2 class="section-title">Technical Stacks We Build With</h2>
+            <p class="section-subtitle">
+              We select modern, maintainable stacks suited to the technical demands of each product.
+            </p>
+          </div>
+
+          <div class="tech-groups-grid">
+            ${technologyGroups.map(group => `
+              <div class="tech-group-card">
+                <div class="tech-group-category">${group.category}</div>
+                <p class="tech-group-tagline">${group.tagline}</p>
+                <ul class="tech-group-list">
+                  ${group.items.map(item => `<li class="tech-group-item">${item}</li>`).join('')}
+                </ul>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="closing-cta-section">
+        <div class="container">
+          <div class="closing-cta-card">
+            <h2 class="closing-cta-title">Ready to begin?</h2>
+            <p class="closing-cta-lead">
+              Tell us what you want to build and let's scope a clear path forward.
+            </p>
+            <a href="/contact" class="btn btn-primary btn-lg" data-link>
+              Start a Project
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
-  `).join('');
+  `;
+}
 
-  // Interactive System Handlers
-  const founderNodes = foundersLayer.querySelectorAll('.founder-leaf-node');
-  const connectionGroups = linesGroup.querySelectorAll('.radial-connection-group');
+// ==========================================================================
+// VIEW: PROCESS PAGE (/process) — 5-STEP METHODOLOGY
+// ==========================================================================
+function renderProcessPage(container) {
+  document.title = 'From Idea to Product — Our Process | Tetravate';
 
-  const defaultTagsHTML = `
-    <span class="active-tag-chip">Frontend &amp; UI Systems</span>
-    <span class="active-tag-chip">Backend &amp; Applied AI</span>
-    <span class="active-tag-chip">Full-Stack &amp; Integration</span>
-    <span class="active-tag-chip">Product Logic &amp; Deployment</span>
-    <span class="active-tag-chip">Technology &amp; Product Development</span>
+  container.innerHTML = `
+    <div class="page-view">
+      <div class="page-hero">
+        <div class="container">
+          <div class="eyebrow">STUDIO METHODOLOGY</div>
+          <h1 class="page-hero-title">From Idea to Product</h1>
+          <p class="page-hero-subtitle">
+            Good products do not begin with code. They begin with understanding. Here is our disciplined 5-step process turning thoughts into real things.
+          </p>
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="container">
+          <div style="display: flex; flex-direction: column; gap: 2.5rem; max-width: 900px; margin: 0 auto;">
+            ${processSteps.map((step, idx) => `
+              <div style="display: flex; gap: 2rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem; transition: all var(--transition-normal);" class="process-detailed-card">
+                <div style="font-family: var(--font-mono); font-size: 2.75rem; font-weight: 800; color: var(--color-blue-light); line-height: 1; flex-shrink: 0;">
+                  ${step.step}
+                </div>
+                <div>
+                  <div class="eyebrow" style="margin-bottom: 0.35rem;">PHASE ${step.step} &bull; ${step.phase.toUpperCase()}</div>
+                  <h3 style="font-size: 1.75rem; font-weight: 800; color: var(--text-heading); margin-bottom: 0.75rem;">
+                    ${step.title}
+                  </h3>
+                  <p style="font-size: 1.05rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem; line-height: 1.5;">
+                    ${step.summary}
+                  </p>
+                  <p style="font-size: 0.95rem; color: var(--text-body); line-height: 1.65;">
+                    ${step.detail}
+                  </p>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="process-callout-quote" style="max-width: 900px; margin: 3.5rem auto 0 auto;">
+            <div>
+              <div class="process-quote-text">"Good products do not begin with code. They begin with understanding."</div>
+              <div class="process-quote-sub">The Tetravate Product &amp; Engineering Principle</div>
+            </div>
+            <a href="/contact" class="btn btn-primary" data-link>
+              Start a Project
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="closing-cta-section">
+        <div class="container">
+          <div class="closing-cta-card">
+            <h2 class="closing-cta-title">Have an idea? Let's turn it into something real.</h2>
+            <p class="closing-cta-lead">
+              Our 5-step sprint workflow will take your project from scope to production.
+            </p>
+            <a href="/contact" class="btn btn-primary btn-lg" data-link>
+              Start a Project
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  `;
+}
+
+// ==========================================================================
+// VIEW: ABOUT PAGE (/about) — FOUNDERS RADIAL NETWORK & ACHIEVEMENTS
+// ==========================================================================
+function renderAboutPage(container) {
+  document.title = 'About Tetravate — Founders & Philosophy';
+
+  container.innerHTML = `
+    <div class="page-view">
+      <div class="page-hero">
+        <div class="container">
+          <div class="eyebrow">ABOUT TETRAVATE</div>
+          <h1 class="page-hero-title">The Founders &amp; Philosophy</h1>
+          <p class="page-hero-subtitle">
+            Five builders. One core. Everyone builds across the stack, with responsibilities adapting to each project.
+          </p>
+        </div>
+      </div>
+
+      <!-- Story & Philosophy -->
+      <section class="section section-secondary">
+        <div class="container">
+          <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3.5rem; align-items: center;">
+            <div>
+              <div class="eyebrow">OUR STORY</div>
+              <h2 style="font-size: 2.25rem; font-weight: 800; color: var(--text-heading); margin-bottom: 1.25rem; line-height: 1.2;">
+                We started Tetravate to build things that matter.
+              </h2>
+              <p style="font-size: 1.05rem; line-height: 1.65; color: var(--text-body); margin-bottom: 1rem;">
+                Too much software is created for marketing hype rather than real operational utility. We wanted to build a product studio grounded in first principles: listening to users on the shop counter, observing where workers lose time, and engineering software that works with zero lag.
+              </p>
+              <p style="font-size: 1.05rem; line-height: 1.65; color: var(--text-body);">
+                From our roots in hackathons to in-store business deployments, our focus has always been the same: turn ideas and real-world problems into useful digital products.
+              </p>
+            </div>
+
+            <div class="white-contrast-card" style="border-radius: var(--radius-lg); padding: 2.25rem;">
+              <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-blue); font-weight: 800; text-transform: uppercase; margin-bottom: 1rem; letter-spacing: 0.1em;">
+                STUDIO MANIFESTO
+              </div>
+              <blockquote style="font-size: 1.25rem; font-style: italic; color: var(--color-navy); font-weight: 800; line-height: 1.5; margin-bottom: 1.5rem;">
+                "Technology is the tool. People and their everyday problems are the reason."
+              </blockquote>
+              <div style="font-size: 0.9rem; color: var(--text-dark-muted); font-weight: 500; line-height: 1.6;">
+                &bull; Zero fabricated statistics<br/>
+                &bull; Offline resilience over cloud fragility<br/>
+                &bull; Built to ship into real everyday use
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 Founders Section: Radial Network & Interactive Inspection Showcase -->
+      <section class="section founders-section">
+        <div class="container">
+          <div class="section-header text-center" style="max-width: 760px; margin: 0 auto 3.5rem auto;">
+            <div class="eyebrow">THE FOUNDING TEAM</div>
+            <h2 class="section-title">Five Builders &bull; One Core</h2>
+            <p class="section-subtitle">
+              Every founder actively engineers product systems across the stack — combining deep domain specialization with collaborative, end-to-end execution.
+            </p>
+          </div>
+
+          <!-- Dual Layout: Radial Network (Left) + Interactive Inspection Showcase Card (Right) -->
+          <div class="founders-dual-layout">
+            <!-- Left: Radial Topology Network -->
+            <div class="founders-network-wrapper">
+              <svg class="founders-svg-canvas" viewBox="0 0 580 500" aria-hidden="true">
+                <!-- Concentric Orbit Rings -->
+                <circle class="network-orbit-ring" cx="290" cy="250" r="125" />
+                <circle class="network-orbit-ring" cx="290" cy="250" r="215" />
+
+                <!-- Connecting Lines to 5 Nodes -->
+                <!-- Node 01: Top (290, 68) -->
+                <line class="network-connector-line" x1="290" y1="250" x2="290" y2="68" />
+                <!-- Node 02: East / Right (485, 205) -->
+                <line class="network-connector-line" x1="290" y1="250" x2="485" y2="205" />
+                <!-- Node 03: South-East / Bottom Right (412, 415) -->
+                <line class="network-connector-line is-active" x1="290" y1="250" x2="412" y2="415" />
+                <!-- Node 04: South-West / Bottom Left (168, 415) -->
+                <line class="network-connector-line" x1="290" y1="250" x2="168" y2="415" />
+                <!-- Node 05: West / Left (95, 205) -->
+                <line class="network-connector-line" x1="290" y1="250" x2="95" y2="205" />
+              </svg>
+
+              <!-- Central Core Node -->
+              <div class="central-core-node">
+                <img src="/src/assets/logo-emblem.png" alt="Tetravate Core Emblem" class="central-core-logo-img" />
+                <span class="central-core-title">TETRAVATE</span>
+                <span class="central-core-pill">
+                  <span class="core-dot"></span>CORE
+                </span>
+              </div>
+
+              <!-- Satellite Founder Nodes (01 to 05) -->
+              <!-- 01: Aadhithya Balu S (Top) -->
+              <div class="founder-satellite-node node-pos-1" data-index="0" style="left: 50%; top: 13.6%;">
+                <div class="satellite-card">
+                  <div class="satellite-top-row">
+                    <span class="satellite-num-badge">01</span>
+                    <span class="satellite-founder-label">Founder</span>
+                  </div>
+                  <div class="satellite-name">AADHITHYA BALU S</div>
+                  <div class="satellite-divider"></div>
+                  <div class="satellite-tagline">Frontend &amp; UI Systems</div>
+                </div>
+              </div>
+
+              <!-- 02: Aswin N S (Right) -->
+              <div class="founder-satellite-node node-pos-2" data-index="1" style="left: 83.6%; top: 41%;">
+                <div class="satellite-card">
+                  <div class="satellite-top-row">
+                    <span class="satellite-num-badge">02</span>
+                    <span class="satellite-founder-label">Founder</span>
+                  </div>
+                  <div class="satellite-name">ASWIN N S</div>
+                  <div class="satellite-divider"></div>
+                  <div class="satellite-tagline">Backend &amp; Applied AI Pipelines</div>
+                </div>
+              </div>
+
+              <!-- 03: Almas M (Bottom Right - Active Default) -->
+              <div class="founder-satellite-node node-pos-3 is-active" data-index="2" style="left: 71%; top: 83%;">
+                <div class="satellite-card">
+                  <div class="satellite-top-row">
+                    <span class="satellite-num-badge">03</span>
+                    <span class="satellite-founder-label">Founder</span>
+                  </div>
+                  <div class="satellite-name">ALMAS M</div>
+                  <div class="satellite-divider"></div>
+                  <div class="satellite-tagline">Full-Stack &amp; Integration</div>
+                </div>
+              </div>
+
+              <!-- 04: Giridharan P (Bottom Left) -->
+              <div class="founder-satellite-node node-pos-4" data-index="3" style="left: 29%; top: 83%;">
+                <div class="satellite-card">
+                  <div class="satellite-top-row">
+                    <span class="satellite-num-badge">04</span>
+                    <span class="satellite-founder-label">Founder</span>
+                  </div>
+                  <div class="satellite-name">GIRIDHARAN P</div>
+                  <div class="satellite-divider"></div>
+                  <div class="satellite-tagline">Product Logic &amp; Deployment</div>
+                </div>
+              </div>
+
+              <!-- 05: Ashwin S (Left) -->
+              <div class="founder-satellite-node node-pos-5" data-index="4" style="left: 16.4%; top: 41%;">
+                <div class="satellite-card">
+                  <div class="satellite-top-row">
+                    <span class="satellite-num-badge">05</span>
+                    <span class="satellite-founder-label">Founder</span>
+                  </div>
+                  <div class="satellite-name">ASHWIN S</div>
+                  <div class="satellite-divider"></div>
+                  <div class="satellite-tagline">Technology &amp; Product Development</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Inspection Showcase Card -->
+            <div class="founders-showcase-panel">
+              <div class="founders-showcase-card" id="founder-showcase-card">
+                <div class="showcase-header-row">
+                  <div class="showcase-pills-wrap">
+                    <span class="showcase-pill" id="showcase-node-pill">NODE 03</span>
+                    <span class="showcase-pill" id="showcase-role-pill">FOUNDER</span>
+                  </div>
+                  <div class="showcase-uplink-status">
+                    <span class="showcase-uplink-dot"></span>
+                    <span>LIVE UPLINK ACTIVE</span>
+                  </div>
+                </div>
+
+                <div class="showcase-domain" id="showcase-domain">FULL-STACK &amp; INTEGRATION</div>
+                <h3 class="showcase-name" id="showcase-name">ALMAS M</h3>
+                <div class="showcase-tagline" id="showcase-tagline">Builds across the stack &bull; Adapts per project</div>
+
+                <hr class="showcase-rule" />
+
+                <div class="showcase-section-label">FOCUS &amp; SYSTEMS SCOPE</div>
+                <p class="showcase-bio" id="showcase-bio">
+                  Focuses on end-to-end full-stack integration, service coordination, and resilient system engineering across web and mobile products.
+                </p>
+
+                <div class="showcase-section-label">ARCHITECTURE &amp; CAPABILITIES</div>
+                <div class="showcase-skills-wrap" id="showcase-skills-wrap">
+                  <span class="showcase-skill-chip">Full-Stack &amp; Integration</span>
+                  <span class="showcase-skill-chip">Product Logic</span>
+                  <span class="showcase-skill-chip">Cloud Services</span>
+                  <span class="showcase-skill-chip">APIs</span>
+                </div>
+
+                <div class="showcase-footer-row">
+                  <div class="showcase-leaf-uplink" id="showcase-uplink">
+                    ✦ LEAF NODE 03 &bull; DIRECT TETRAVATE UPLINK (72.0°)
+                  </div>
+                  <div class="showcase-social-links" id="showcase-social-links">
+                    <a href="https://www.linkedin.com/company/tetravate/" target="_blank" rel="noopener" class="showcase-social-btn" id="showcase-link-li" title="LinkedIn">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                      </svg>
+                      LinkedIn
+                    </a>
+                    <a href="https://github.com/orgs/Tetravate" target="_blank" rel="noopener" class="showcase-social-btn" id="showcase-link-gh" title="GitHub">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                      </svg>
+                      GitHub
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Core Brand Principles Grid (3 on 1st line, 2 centered on 2nd line) -->
+          <div class="founders-values-wrapper">
+            <div class="founders-values-header">
+              <div class="eyebrow">FOUNDATIONAL ETHOS</div>
+              <h3 class="section-title">Our Core Principles</h3>
+              <p class="section-subtitle" style="margin: 0 auto;">
+                The engineering values, architectural honesty, and human standards that guide every line of code we ship.
+              </p>
+            </div>
+            <div class="values-grid">
+              <div class="value-card">
+                <div class="value-card-num">01</div>
+                <h4 class="value-card-title">Trust</h4>
+                <p class="value-card-desc">No exaggerated claims or speculative promises. Reliable timelines, transparent architecture, and honest status updates throughout delivery.</p>
+              </div>
+              <div class="value-card">
+                <div class="value-card-num">02</div>
+                <h4 class="value-card-title">Quality</h4>
+                <p class="value-card-desc">Resilient code, accessible ergonomics, sub-second query speeds, and software built to endure in production without frequent rewrites.</p>
+              </div>
+              <div class="value-card">
+                <div class="value-card-num">03</div>
+                <h4 class="value-card-title">Thoughts</h4>
+                <p class="value-card-desc">Deliberate thinking before coding. Clear problem framing, observing actual operational friction, and listening to users before writing software.</p>
+              </div>
+              <div class="value-card">
+                <div class="value-card-num">04</div>
+                <h4 class="value-card-title">Kindness</h4>
+                <p class="value-card-desc">Respectful communication, patience with complex business requirements, and deep empathy for every person who interacts with our digital products.</p>
+              </div>
+              <div class="value-card">
+                <div class="value-card-num">05</div>
+                <h4 class="value-card-title">Humanity</h4>
+                <p class="value-card-desc">Technology exists to serve people and human dignity, never the reverse. We build dependable, useful tools for real people solving real problems.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Verified Achievements & Proof -->
+      <section class="section section-secondary">
+        <div class="container">
+          <div class="section-header">
+            <div class="eyebrow">VERIFIABLE EVIDENCE</div>
+            <h2 class="section-title">Achievements &amp; Proof</h2>
+            <p class="section-subtitle">
+              We never manufacture marketing statistics. Genuine hackathon achievements, verified store deployments, and research-backed systems.
+            </p>
+          </div>
+
+          <div class="achievements-grid">
+            ${achievements.map(a => `
+              <div class="achievement-card">
+                <div class="achievement-badge">${a.badge}</div>
+                <h3 class="achievement-title">${a.title}</h3>
+                <p class="achievement-desc">${a.description}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section class="section">
+        <div class="container">
+          <div class="section-header text-center">
+            <div class="eyebrow">PARTNER PERSPECTIVES</div>
+            <h2 class="section-title">What People Say</h2>
+            <p class="section-subtitle">
+              Verified feedback from business operators and technical mentors.
+            </p>
+          </div>
+
+          <div class="testimonials-grid">
+            ${testimonials.map(t => `
+              <div class="testimonial-card">
+                <div class="testimonial-quote-mark">“</div>
+                <p class="testimonial-quote-text">${t.quote}</p>
+                <div class="testimonial-author-row">
+                  <span class="testimonial-author-name">${t.author}</span>
+                  <span class="testimonial-author-meta">${t.role} &bull; ${t.context}</span>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="closing-cta-section">
+        <div class="container">
+          <div class="closing-cta-card">
+            <h2 class="closing-cta-title">Work with our founding engineering team.</h2>
+            <p class="closing-cta-lead">
+              Direct founder collaboration from first concept through to launch.
+            </p>
+            <a href="/contact" class="btn btn-primary btn-lg" data-link>
+              Start a Conversation
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
   `;
 
-  function setActiveFounder(activeIdx) {
-    founderNodes.forEach((node, idx) => {
-      if (idx === activeIdx) {
-        node.classList.add('is-active');
-        node.classList.remove('is-dimmed');
-      } else {
-        node.classList.remove('is-active');
-        node.classList.add('is-dimmed');
-      }
+  // Initialize interactive radial network showcase
+  initFoundersNetworkShowcase(container);
+}
+
+function initFoundersNetworkShowcase(container) {
+  const nodes = container.querySelectorAll('.founder-satellite-node');
+  const showcaseCard = container.querySelector('#founder-showcase-card');
+  if (!nodes.length || !showcaseCard) return;
+
+  const nodePill = showcaseCard.querySelector('#showcase-node-pill');
+  const rolePill = showcaseCard.querySelector('#showcase-role-pill');
+  const domainEl = showcaseCard.querySelector('#showcase-domain');
+  const nameEl = showcaseCard.querySelector('#showcase-name');
+  const taglineEl = showcaseCard.querySelector('#showcase-tagline');
+  const bioEl = showcaseCard.querySelector('#showcase-bio');
+  const skillsWrap = showcaseCard.querySelector('#showcase-skills-wrap');
+  const uplinkEl = showcaseCard.querySelector('#showcase-uplink');
+  const linkLi = showcaseCard.querySelector('#showcase-link-li');
+  const linkGh = showcaseCard.querySelector('#showcase-link-gh');
+
+  function setActiveFounder(idx) {
+    const founder = teamMembers[idx];
+    if (!founder) return;
+
+    // Update active satellite node styling
+    nodes.forEach((n, i) => {
+      n.classList.toggle('is-active', i === idx);
     });
 
-    connectionGroups.forEach((group, idx) => {
-      if (idx === activeIdx) {
-        group.classList.add('is-active');
-        group.classList.remove('is-dimmed');
-      } else {
-        group.classList.remove('is-active');
-        group.classList.add('is-dimmed');
-      }
+    // Update active SVG connector line
+    const lines = container.querySelectorAll('.network-connector-line');
+    lines.forEach((line, i) => {
+      line.classList.toggle('is-active', i === idx);
     });
 
-    // Central core node reacts with a pulse
-    if (centralCoreCard) {
-      centralCoreCard.classList.add('core-pulse-active');
+    // Update showcase card content
+    if (nodePill) nodePill.textContent = `NODE ${founder.number}`;
+    if (rolePill) rolePill.textContent = (founder.role || 'FOUNDER').toUpperCase();
+    if (domainEl) domainEl.textContent = (founder.focus || founder.tagline).toUpperCase();
+    if (nameEl) nameEl.textContent = founder.nameUpper || founder.name.toUpperCase();
+    if (taglineEl) taglineEl.textContent = founder.summary || founder.tagline;
+    if (bioEl) bioEl.textContent = founder.bio;
+    if (skillsWrap) {
+      skillsWrap.innerHTML = founder.skills.map(s => `<span class="showcase-skill-chip">${s}</span>`).join('');
     }
-
-    if (showcasePanel) {
-      showcasePanel.classList.add('is-inspecting');
-    }
-
-    const activeMember = teamMembers[activeIdx];
-    if (activeMember) {
-      if (showcaseNodeNum) showcaseNodeNum.textContent = `NODE ${activeMember.number}`;
-      if (activeBadge) activeBadge.textContent = 'FOUNDER';
-      if (showcaseStatusText) showcaseStatusText.textContent = 'LIVE UPLINK ACTIVE';
-      if (showcaseTagline) showcaseTagline.textContent = activeMember.focus.toUpperCase();
-      if (activeTitle) activeTitle.textContent = activeMember.nameUpper;
-      if (showcaseVersatileTag) showcaseVersatileTag.textContent = 'Builds across the stack • Adapts per project';
-      if (activeDesc) activeDesc.textContent = activeMember.bio;
-      if (activeTags) {
-        activeTags.innerHTML = activeMember.skills.map(s => `<span class="active-tag-chip is-highlighted">${s}</span>`).join('');
-      }
-    }
+    if (uplinkEl) uplinkEl.textContent = `✦ ${founder.uplink || `LEAF NODE ${founder.number} • DIRECT TETRAVATE UPLINK`}`;
+    if (linkLi && founder.linkedin) linkLi.href = founder.linkedin;
+    if (linkGh && founder.github) linkGh.href = founder.github;
   }
 
-  function resetActiveFounder() {
-    founderNodes.forEach(node => {
-      node.classList.remove('is-active');
-      node.classList.remove('is-dimmed');
-    });
-
-    connectionGroups.forEach(group => {
-      group.classList.remove('is-active');
-      group.classList.remove('is-dimmed');
-    });
-
-    if (centralCoreCard) {
-      centralCoreCard.classList.remove('core-pulse-active');
-    }
-
-    if (showcasePanel) {
-      showcasePanel.classList.remove('is-inspecting');
-    }
-
-    if (showcaseNodeNum) showcaseNodeNum.textContent = 'CORE';
-    if (activeBadge) activeBadge.textContent = 'VERSATILE CORE';
-    if (showcaseStatusText) showcaseStatusText.textContent = 'ACTIVE TOPOLOGY';
-    if (showcaseTagline) showcaseTagline.textContent = 'TETRAVATE ENGINEERING STUDIO';
-    if (activeTitle) activeTitle.textContent = 'Five Builders • One Core';
-    if (showcaseVersatileTag) showcaseVersatileTag.textContent = 'Adaptive Responsibilities • Full-Stack Versatility';
-    if (activeDesc) {
-      activeDesc.textContent = 'Five builders, one team — everyone builds across the stack, with responsibilities adapting to each project. Hover or tap any founder node on the left to inspect individual architecture domains and engineering capabilities.';
-    }
-    if (activeTags) {
-      activeTags.innerHTML = defaultTagsHTML;
-    }
-  }
-
-  founderNodes.forEach(node => {
-    const idx = parseInt(node.getAttribute('data-idx'), 10);
-
+  nodes.forEach((node) => {
+    const idx = parseInt(node.getAttribute('data-index'), 10);
     node.addEventListener('mouseenter', () => setActiveFounder(idx));
-    node.addEventListener('focus', () => setActiveFounder(idx));
-
-    node.addEventListener('mouseleave', resetActiveFounder);
-    node.addEventListener('blur', resetActiveFounder);
-
-    node.addEventListener('click', (e) => {
-      // Toggle on touch / click
-      if (node.classList.contains('is-active')) {
-        resetActiveFounder();
-      } else {
-        setActiveFounder(idx);
-      }
-    });
+    node.addEventListener('click', () => setActiveFounder(idx));
   });
 }
 
-// Case Study Modal System
-function initCaseStudyModal() {
-  const backdrop = document.getElementById('caseStudyModalBackdrop');
-  const closeBtn = document.getElementById('modalCloseBtn');
+// ==========================================================================
+// VIEW: CONTACT PAGE (/contact) — FORM & DIRECT CHANNELS
+// ==========================================================================
+function renderContactPage(container) {
+  document.title = 'Start a Project — Contact Tetravate';
 
-  if (!backdrop) return;
-
-  if (closeBtn) {
-    closeBtn.addEventListener('click', closeCaseStudy);
-  }
-
-  backdrop.addEventListener('click', (e) => {
-    if (e.target === backdrop) {
-      closeCaseStudy();
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && backdrop.classList.contains('open')) {
-      closeCaseStudy();
-    }
-  });
-}
-
-export function openCaseStudy(projectId) {
-  const project = featuredProjects.find(p => p.id === projectId);
-  if (!project) return;
-
-  const backdrop = document.getElementById('caseStudyModalBackdrop');
-  const modalBody = document.getElementById('caseStudyModalBody');
-  const modalTag = document.getElementById('modalProjectTag');
-  const modalTitle = document.getElementById('modalProjectTitle');
-
-  if (!backdrop || !modalBody) return;
-
-  modalTag.textContent = project.categoryTag;
-  modalTitle.textContent = project.title;
-
-  const mockupSrc = mockupMap[project.id] || '/src/assets/mockup-pos.svg';
-
-  modalBody.innerHTML = `
-    <!-- Top Visual Diagram -->
-    <div class="cs-visual-container">
-      <img src="${mockupSrc}" alt="${project.title} Architecture &amp; User Interface" style="max-height: 400px; width: auto; margin: 0 auto;" />
-    </div>
-
-    <!-- Overview & Problem Context -->
-    <div style="margin-bottom: 2rem;">
-      <h4 style="font-size: 1.125rem; font-weight: 700; color: var(--color-navy); margin-bottom: 0.5rem;">Project Context</h4>
-      <p style="font-size: 1rem; line-height: 1.6; color: var(--text-body);">${project.overview}</p>
-    </div>
-
-    <!-- Verified Metrics Grid -->
-    <div class="cs-meta-grid">
-      ${project.caseStudy.metrics.map(m => `
-        <div class="cs-meta-box">
-          <div class="cs-meta-label">${m.label}</div>
-          <div class="cs-meta-value">${m.value}</div>
-          <div class="cs-meta-note">${m.note}</div>
+  container.innerHTML = `
+    <div class="page-view">
+      <div class="page-hero">
+        <div class="container">
+          <div class="eyebrow">START A PROJECT</div>
+          <h1 class="page-hero-title">Have an idea? Let's build it.</h1>
+          <p class="page-hero-subtitle">
+            Whether you have a complete technical specification or an idea on a napkin, let's discuss how we can turn it into a working product.
+          </p>
         </div>
-      `).join('')}
-    </div>
-
-    <!-- Full 8-Stage Case Study Experience -->
-    <div class="cs-stages-list">
-      <div class="cs-stage-block">
-        <div class="cs-stage-number">01 — The Problem</div>
-        <h4 class="cs-stage-title">What problem existed?</h4>
-        <p class="cs-stage-text">${project.caseStudy.problem}</p>
       </div>
 
-      <div class="cs-stage-block">
-        <div class="cs-stage-number">02 — The Goal</div>
-        <h4 class="cs-stage-title">What did the user need?</h4>
-        <p class="cs-stage-text">${project.caseStudy.goal}</p>
-      </div>
+      <section class="section">
+        <div class="container">
+          <div class="contact-layout">
+            <!-- Official Channels Hub -->
+            <div class="contact-info-panel">
+              <div class="contact-social-hub-title">OFFICIAL STUDIO CHANNELS</div>
 
-      <div class="cs-stage-block">
-        <div class="cs-stage-number">03 — The Challenge</div>
-        <h4 class="cs-stage-title">What made this problem difficult?</h4>
-        <p class="cs-stage-text">${project.caseStudy.challenge}</p>
-      </div>
+              <div class="contact-social-grid">
+                <a href="mailto:tetravate@gmail.com" class="contact-social-card">
+                  <div class="contact-social-left">
+                    <div class="contact-social-icon">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="contact-social-name-row">
+                        <span class="contact-social-name">Direct Email</span>
+                        <span class="contact-social-tag">Inbox</span>
+                      </div>
+                      <span class="contact-social-handle">tetravate@gmail.com</span>
+                    </div>
+                  </div>
+                  <span class="contact-social-arrow">&nearr;</span>
+                </a>
 
-      <div class="cs-stage-block">
-        <div class="cs-stage-number">04 — Our Approach</div>
-        <h4 class="cs-stage-title">How Tetravate thought through it</h4>
-        <p class="cs-stage-text">${project.caseStudy.approach}</p>
-      </div>
+                <a href="https://www.linkedin.com/company/tetravate/" target="_blank" rel="noopener" class="contact-social-card">
+                  <div class="contact-social-left">
+                    <div class="contact-social-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="contact-social-name-row">
+                        <span class="contact-social-name">LinkedIn</span>
+                        <span class="contact-social-tag">Network</span>
+                      </div>
+                      <span class="contact-social-handle">linkedin.com/company/tetravate</span>
+                    </div>
+                  </div>
+                  <span class="contact-social-arrow">&nearr;</span>
+                </a>
 
-      <div class="cs-stage-block">
-        <div class="cs-stage-number">05 — The Solution</div>
-        <h4 class="cs-stage-title">What was actually built</h4>
-        <p class="cs-stage-text">${project.caseStudy.solution}</p>
-      </div>
+                <a href="https://github.com/orgs/Tetravate" target="_blank" rel="noopener" class="contact-social-card">
+                  <div class="contact-social-left">
+                    <div class="contact-social-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="contact-social-name-row">
+                        <span class="contact-social-name">GitHub</span>
+                        <span class="contact-social-tag">Open Source</span>
+                      </div>
+                      <span class="contact-social-handle">github.com/orgs/Tetravate</span>
+                    </div>
+                  </div>
+                  <span class="contact-social-arrow">&nearr;</span>
+                </a>
 
-      <div class="cs-stage-block">
-        <div class="cs-stage-number">06 — Technical Decisions</div>
-        <h4 class="cs-stage-title">Why these specific tools were chosen</h4>
-        <p class="cs-stage-text">${project.caseStudy.technicalDecisions}</p>
-      </div>
+                <a href="https://www.instagram.com/tetra.vate?utm_source=ig_web_button_share_sheet&amp;stkn=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="contact-social-card">
+                  <div class="contact-social-left">
+                    <div class="contact-social-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="contact-social-name-row">
+                        <span class="contact-social-name">Instagram</span>
+                        <span class="contact-social-tag">Builds</span>
+                      </div>
+                      <span class="contact-social-handle">@tetra.vate</span>
+                    </div>
+                  </div>
+                  <span class="contact-social-arrow">&nearr;</span>
+                </a>
+              </div>
 
-      <div class="cs-stage-block">
-        <div class="cs-stage-number">07 — The Result</div>
-        <h4 class="cs-stage-title">What changed after delivery?</h4>
-        <p class="cs-stage-text">${project.caseStudy.result}</p>
-      </div>
+              <div class="white-contrast-card" style="border-radius: var(--radius-sm); padding: 1.5rem;">
+                <div style="font-size: 0.9375rem; font-weight: 800; color: var(--color-navy); margin-bottom: 0.35rem;">
+                  Direct Founder Communication
+                </div>
+                <p style="font-size: 0.84rem; color: var(--text-dark-muted); margin: 0; line-height: 1.55; font-weight: 500;">
+                  You will speak directly with the engineering and design founders who build the software — never a commissioned sales representative.
+                </p>
+              </div>
+            </div>
 
-      <div class="cs-stage-block">
-        <div class="cs-stage-number">08 — What We Learned</div>
-        <h4 class="cs-stage-title">Key takeaway from this project</h4>
-        <p class="cs-stage-text">${project.caseStudy.learned}</p>
-      </div>
-    </div>
+            <!-- Project Inquiry Form -->
+            <div class="contact-form-card">
+              <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--text-heading); margin-bottom: 0.5rem;">
+                Project Inquiry Form
+              </h3>
+              <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.75rem;">
+                Fill in the details below. We will analyze your requirements and reply within 24 hours.
+              </p>
 
-    <!-- Tech Stack Summary -->
-    <div style="background-color: var(--color-soft-slate); border: 1px solid var(--color-slate-200); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 2.5rem;">
-      <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--color-blue); margin-bottom: 0.5rem; letter-spacing: 0.08em;">Technologies Used</div>
-      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-        ${project.techStack.map(t => `<span class="tech-chip" style="background: white; border: 1px solid var(--color-slate-300);">${t}</span>`).join('')}
-      </div>
-    </div>
+              <form id="inquiryForm" novalidate>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="inquiryName" class="form-label">Your Name *</label>
+                    <input type="text" id="inquiryName" class="form-input" placeholder="e.g. Ramesh or Sarah" required />
+                    <div class="form-error-msg">Please enter your name.</div>
+                  </div>
 
-    <!-- Bottom Case Study CTA -->
-    <div class="cs-modal-cta-box">
-      <div>
-        <div class="cs-modal-cta-title">Have a similar problem or idea?</div>
-        <div class="cs-modal-cta-text">Let's talk through your requirements and find a practical solution.</div>
-      </div>
-      <a href="#contact" class="btn btn-primary" onclick="window.closeCaseStudy(); preselectService('${project.category}');">
-        Start a Conversation
-      </a>
+                  <div class="form-group">
+                    <label for="inquiryEmail" class="form-label">Email Address *</label>
+                    <input type="email" id="inquiryEmail" class="form-input" placeholder="name@company.com" required />
+                    <div class="form-error-msg">Please enter a valid email address.</div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="inquiryCompany" class="form-label">Company / Organization <span class="optional">(Optional)</span></label>
+                    <input type="text" id="inquiryCompany" class="form-input" placeholder="e.g. Acme Studio / Independent" />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="inquiryService" class="form-label">What do you need? *</label>
+                    <select id="inquiryService" class="form-select">
+                      <option value="Web Experiences">Web Experience / Studio Website</option>
+                      <option value="E-Commerce">E-Commerce Storefront</option>
+                      <option value="Business Systems">Business Software &amp; POS</option>
+                      <option value="SaaS Products">SaaS Platform / Dashboard</option>
+                      <option value="Mobile Applications">Mobile Application</option>
+                      <option value="AI &amp; ML">AI &amp; Machine Learning Solution</option>
+                      <option value="General Consultation">Not sure yet / General consultation</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inquiryMessage" class="form-label">Tell us about your project or problem *</label>
+                  <textarea id="inquiryMessage" class="form-textarea"
+                    placeholder="What problem are you trying to solve? Who is going to use it? What are the key features you need?"
+                    required></textarea>
+                  <div class="form-error-msg">Please describe your project in at least 10 characters.</div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="inquiryBudget" class="form-label">Budget Range <span class="optional">(Optional)</span></label>
+                    <input type="text" id="inquiryBudget" class="form-input" placeholder="e.g. Flexible / Staged / Milestone" />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="inquiryTimeline" class="form-label">Desired Timeline <span class="optional">(Optional)</span></label>
+                    <input type="text" id="inquiryTimeline" class="form-input" placeholder="e.g. 1–2 months / ASAP" />
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                  Send Project Inquiry
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                  </svg>
+                </button>
+              </form>
+
+              <!-- Success State Banner -->
+              <div class="form-success-banner" id="inquirySuccessBanner">
+                <div class="form-success-title">✓ Thank you for reaching out!</div>
+                <p class="form-success-desc">
+                  Your project brief has been recorded. You can also send this inquiry directly via your default email client or WhatsApp below:
+                </p>
+                <div class="form-success-actions">
+                  <a href="#" class="btn btn-primary btn-sm" id="openEmailClientBtn" target="_blank" rel="noopener">
+                    Send via Email Client
+                  </a>
+                  <a href="#" class="btn btn-secondary btn-sm" id="openWhatsAppBtn" target="_blank" rel="noopener">
+                    Send via WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   `;
 
-  backdrop.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  window.history.pushState(null, '', `#case-study-${project.id}`);
+  initContactForm();
 }
 
-export function closeCaseStudy() {
-  const backdrop = document.getElementById('caseStudyModalBackdrop');
-  if (backdrop) {
-    backdrop.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  // Clear hash without jump
-  window.history.pushState(null, '', window.location.pathname);
+// ==========================================================================
+// VIEW: 404 NOT FOUND PAGE
+// ==========================================================================
+function renderNotFoundPage(container) {
+  document.title = 'Page Not Found — Tetravate';
+
+  container.innerHTML = `
+    <div class="page-view not-found-view">
+      <div class="container">
+        <div class="not-found-code">404</div>
+        <h1 class="not-found-title">Page Not Found</h1>
+        <p class="not-found-desc">
+          The page or case study you requested does not exist or has been moved.
+        </p>
+        <a href="/" class="btn btn-primary btn-lg" data-link>
+          Return to Studio Home
+        </a>
+      </div>
+    </div>
+  `;
 }
 
-// Check initial hash on page load (deep-linking to case study)
-function checkInitialHash() {
-  const hash = window.location.hash;
-  if (hash.startsWith('#case-study-')) {
-    const pid = hash.replace('#case-study-', '');
-    openCaseStudy(pid);
-  }
-}
+// ==========================================================================
+// INTERACTIVE COMPONENT HANDLERS
+// ==========================================================================
 
-// Pre-select service in inquiry form
-window.preselectService = function (serviceName) {
-  const select = document.getElementById('inquiryService');
-  if (!select) return;
-  for (let i = 0; i < select.options.length; i++) {
-    if (select.options[i].text.toLowerCase().includes(serviceName.toLowerCase())) {
-      select.selectedIndex = i;
-      break;
-    }
-  }
-};
-
-window.closeCaseStudy = closeCaseStudy;
-
-// Interactive Contact Form
-function initContactForm() {
-  const form = document.getElementById('inquiryForm');
-  const successBanner = document.getElementById('inquirySuccessBanner');
-  if (!form) return;
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const nameInput = document.getElementById('inquiryName');
-    const emailInput = document.getElementById('inquiryEmail');
-    const serviceInput = document.getElementById('inquiryService');
-    const messageInput = document.getElementById('inquiryMessage');
-    const budgetInput = document.getElementById('inquiryBudget');
-    const timelineInput = document.getElementById('inquiryTimeline');
-
-    let isValid = true;
-
-    // Reset error states
-    document.querySelectorAll('.form-input, .form-textarea').forEach(el => el.classList.remove('input-error'));
-    document.querySelectorAll('.form-error-msg').forEach(el => el.style.display = 'none');
-
-    // Name Validation
-    if (!nameInput.value.trim()) {
-      showError(nameInput, 'Please tell us your name.');
-      isValid = false;
-    }
-
-    // Email Validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailInput.value.trim() || !emailRegex.test(emailInput.value.trim())) {
-      showError(emailInput, 'Please provide a valid email address so we can reply.');
-      isValid = false;
-    }
-
-    // Message Validation
-    if (!messageInput.value.trim() || messageInput.value.trim().length < 10) {
-      showError(messageInput, 'Please describe your idea or problem in a few words (at least 10 characters).');
-      isValid = false;
-    }
-
-    if (!isValid) return;
-
-    // Create inquiry mailto & WhatsApp links
-    const name = encodeURIComponent(nameInput.value.trim());
-    const email = encodeURIComponent(emailInput.value.trim());
-    const service = encodeURIComponent(serviceInput.value);
-    const message = encodeURIComponent(messageInput.value.trim());
-    const budget = encodeURIComponent(budgetInput.value.trim() || 'Flexible / To be discussed');
-    const timeline = encodeURIComponent(timelineInput.value.trim() || 'Flexible');
-
-    const mailSubject = encodeURIComponent(`Tetravate Inquiry: ${serviceInput.value} from ${nameInput.value.trim()}`);
-    const mailBody = encodeURIComponent(
-      `Hello Tetravate Team,\n\n` +
-      `Name: ${nameInput.value.trim()}\n` +
-      `Email: ${emailInput.value.trim()}\n` +
-      `Need: ${serviceInput.value}\n` +
-      `Budget: ${budgetInput.value.trim() || 'Flexible'}\n` +
-      `Timeline: ${timelineInput.value.trim() || 'Flexible'}\n\n` +
-      `Project Details:\n${messageInput.value.trim()}\n\n` +
-      `Looking forward to hearing from you.`
-    );
-
-    const whatsappText = encodeURIComponent(
-      `Hello Tetravate! My name is ${nameInput.value.trim()}. I'm reaching out about a ${serviceInput.value} project. Idea: ${messageInput.value.trim()}`
-    );
-
-    const emailBtn = document.getElementById('openEmailClientBtn');
-    const whatsappBtn = document.getElementById('openWhatsAppBtn');
-
-    if (emailBtn) {
-      emailBtn.href = `mailto:tetravate@gmail.com?subject=${mailSubject}&body=${mailBody}`;
-    }
-    if (whatsappBtn) {
-      whatsappBtn.href = `https://wa.me/?text=${whatsappText}`;
-    }
-
-    // Show confirmation
-    if (successBanner) {
-      successBanner.style.display = 'block';
-      successBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    form.reset();
-  });
-
-  function showError(inputEl, message) {
-    inputEl.classList.add('input-error');
-    const errorEl = inputEl.parentElement.querySelector('.form-error-msg');
-    if (errorEl) {
-      errorEl.textContent = message;
-      errorEl.style.display = 'block';
-    }
-  }
-}
-
-// Interactive Hero Path Pipeline (Thought to Thing Stepper)
+// Hero Pipeline Stepper
 function initHeroPathPipeline() {
   const container = document.getElementById('manifestoStepsContainer');
   const progressFill = document.getElementById('manifestoProgressFill');
@@ -717,15 +1613,14 @@ function initHeroPathPipeline() {
 
   const steps = container.querySelectorAll('.manifesto-step');
   const phaseTexts = {
-    1: 'Phase 01 • Human Problem Scope',
+    1: 'Phase 01 • Operational Problem Scope',
     2: 'Phase 02 • Architecture & Logic',
     3: 'Phase 03 • Zero-Friction UI',
     4: 'Phase 04 • Resilient Stack',
-    5: 'Phase 05 • Shipped to Counter'
+    5: 'Phase 05 • Shipped Digital Thing'
   };
 
   let currentStep = 1;
-  let autoTimer = null;
   let isHovered = false;
 
   function activateStep(stepNum) {
@@ -749,29 +1644,22 @@ function initHeroPathPipeline() {
 
   steps.forEach(s => {
     const num = parseInt(s.getAttribute('data-step'), 10);
-
     s.addEventListener('mouseenter', () => {
       isHovered = true;
       activateStep(num);
     });
-
     s.addEventListener('click', () => {
       activateStep(num);
     });
   });
 
   if (pathCard) {
-    pathCard.addEventListener('mouseenter', () => {
-      isHovered = true;
-    });
-    pathCard.addEventListener('mouseleave', () => {
-      isHovered = false;
-    });
+    pathCard.addEventListener('mouseenter', () => { isHovered = true; });
+    pathCard.addEventListener('mouseleave', () => { isHovered = false; });
   }
 
-  // Smooth auto-advance every 3.8 seconds
-  autoTimer = setInterval(() => {
-    if (!isHovered) {
+  setInterval(() => {
+    if (!isHovered && document.getElementById('manifestoStepsContainer')) {
       let next = currentStep + 1;
       if (next > 5) next = 1;
       activateStep(next);
@@ -779,10 +1667,99 @@ function initHeroPathPipeline() {
   }, 3800);
 }
 
-// Studio Spotlight Cursor-Following Light
+
+
+// Contact Form Handler
+function initContactForm() {
+  const form = document.getElementById('inquiryForm');
+  const successBanner = document.getElementById('inquirySuccessBanner');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const nameInput = document.getElementById('inquiryName');
+    const emailInput = document.getElementById('inquiryEmail');
+    const companyInput = document.getElementById('inquiryCompany');
+    const serviceInput = document.getElementById('inquiryService');
+    const messageInput = document.getElementById('inquiryMessage');
+    const budgetInput = document.getElementById('inquiryBudget');
+    const timelineInput = document.getElementById('inquiryTimeline');
+
+    let isValid = true;
+
+    // Reset error states
+    document.querySelectorAll('.form-input, .form-textarea').forEach(el => el.classList.remove('input-error'));
+    document.querySelectorAll('.form-error-msg').forEach(el => el.style.display = 'none');
+
+    if (!nameInput.value.trim()) {
+      showError(nameInput, 'Please tell us your name.');
+      isValid = false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailInput.value.trim() || !emailRegex.test(emailInput.value.trim())) {
+      showError(emailInput, 'Please provide a valid email address.');
+      isValid = false;
+    }
+
+    if (!messageInput.value.trim() || messageInput.value.trim().length < 10) {
+      showError(messageInput, 'Please describe your project in at least 10 characters.');
+      isValid = false;
+    }
+
+    if (!isValid) return;
+
+    const companyStr = companyInput.value.trim() ? ` (${companyInput.value.trim()})` : '';
+    const mailSubject = encodeURIComponent(`Tetravate Project Inquiry: ${serviceInput.value} from ${nameInput.value.trim()}${companyStr}`);
+    const mailBody = encodeURIComponent(
+      `Hello Tetravate Team,\n\n` +
+      `Name: ${nameInput.value.trim()}\n` +
+      `Email: ${emailInput.value.trim()}\n` +
+      `Company: ${companyInput.value.trim() || 'Independent'}\n` +
+      `Service Needed: ${serviceInput.value}\n` +
+      `Budget: ${budgetInput.value.trim() || 'Flexible / To be discussed'}\n` +
+      `Timeline: ${timelineInput.value.trim() || 'Flexible'}\n\n` +
+      `Project Brief:\n${messageInput.value.trim()}\n\n` +
+      `Looking forward to discussing next steps.`
+    );
+
+    const whatsappText = encodeURIComponent(
+      `Hello Tetravate! My name is ${nameInput.value.trim()}${companyStr}. I'm reaching out regarding a ${serviceInput.value} project. Brief: ${messageInput.value.trim()}`
+    );
+
+    const emailBtn = document.getElementById('openEmailClientBtn');
+    const whatsappBtn = document.getElementById('openWhatsAppBtn');
+
+    if (emailBtn) {
+      emailBtn.href = `mailto:tetravate@gmail.com?subject=${mailSubject}&body=${mailBody}`;
+    }
+    if (whatsappBtn) {
+      whatsappBtn.href = `https://wa.me/?text=${whatsappText}`;
+    }
+
+    if (successBanner) {
+      successBanner.style.display = 'block';
+      successBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    form.reset();
+  });
+
+  function showError(inputEl, message) {
+    inputEl.classList.add('input-error');
+    const errorEl = inputEl.parentElement.querySelector('.form-error-msg');
+    if (errorEl) {
+      errorEl.textContent = message;
+      errorEl.style.display = 'block';
+    }
+  }
+}
+
+// Spotlight Cursor Follower
 function initSpotlightCards() {
   const cards = document.querySelectorAll(
-    '.service-card, .project-card, .process-card, .value-card, .metric-card, .credential-card, .hero-visual-card'
+    '.service-card, .project-card, .process-card, .why-card, .achievement-card, .tech-group-card, .project-feature-card, .hero-visual-card'
   );
 
   cards.forEach(card => {
@@ -799,10 +1776,10 @@ function initSpotlightCards() {
   });
 }
 
-// Smooth Scroll Reveal
+// Scroll Reveal Observer
 function initScrollReveal() {
   const revealElements = document.querySelectorAll(
-    '.section-header, .service-card, .project-card, .process-card, .value-card, .metric-card, .credential-card, .value-banner-grid, .impact-layout'
+    '.section-header, .service-card, .project-card, .process-card, .why-card, .achievement-card, .tech-group-card, .closing-cta-card, .process-detailed-card'
   );
 
   if (!('IntersectionObserver' in window)) {
@@ -824,7 +1801,7 @@ function initScrollReveal() {
 
   revealElements.forEach((el, idx) => {
     el.classList.add('reveal-on-scroll');
-    const delay = (idx % 3) * 0.08;
+    const delay = (idx % 3) * 0.07;
     if (delay > 0) {
       el.style.transitionDelay = `${delay}s`;
     }

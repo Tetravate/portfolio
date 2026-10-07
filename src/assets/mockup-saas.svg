@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" fill="none" aria-label="Pulse SaaS Cloud Telemetry Dashboard Mockup">
+  <!-- Outer Frame -->
+  <rect width="720" height="480" rx="16" fill="#071527" />
+  
+  <!-- Browser Chrome Top Bar -->
+  <rect x="16" y="16" width="688" height="42" rx="8" fill="#0B1F3A" stroke="#1E3A5F" stroke-width="1" />
+  <circle cx="36" cy="37" r="5" fill="#EF4444" />
+  <circle cx="52" cy="37" r="5" fill="#F59E0B" />
+  <circle cx="68" cy="37" r="5" fill="#60A5FA" />
+  <rect x="96" y="27" width="360" height="20" rx="4" fill="#071527" stroke="#1E3A5F" stroke-width="1" />
+  <text x="110" y="41" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#CBD5E1">https://pulse.tetravate.io/cluster/production/telemetry</text>
+  <rect x="580" y="27" width="108" height="20" rx="4" fill="#102747" stroke="#2563EB" />
+  <circle cx="592" cy="37" r="3.5" fill="#60A5FA" />
+  <text x="602" y="41" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#60A5FA">CLUSTER READY</text>
+
+  <!-- Left Sidebar Nav -->
+  <rect x="16" y="66" width="160" height="398" fill="#102747" stroke="#1E3A5F" stroke-width="1" />
+  <text x="32" y="96" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" letter-spacing="1">PULSE // SAAS</text>
+  
+  <!-- Sidebar Menu Items -->
+  <rect x="24" y="112" width="144" height="30" rx="6" fill="#1E3A5F" stroke="#2563EB" stroke-width="1" />
+  <circle cx="38" cy="127" r="3.5" fill="#60A5FA" />
+  <text x="48" y="131" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF">Live Telemetry</text>
+
+  <rect x="24" y="148" width="144" height="30" rx="6" fill="#102747" />
+  <text x="48" y="167" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#CBD5E1">Node Clusters</text>
+
+  <rect x="24" y="184" width="144" height="30" rx="6" fill="#102747" />
+  <text x="48" y="203" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#CBD5E1">Access &amp; RBAC</text>
+
+  <rect x="24" y="220" width="144" height="30" rx="6" fill="#102747" />
+  <text x="48" y="239" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#CBD5E1">Audit Logs</text>
+
+  <rect x="24" y="256" width="144" height="30" rx="6" fill="#102747" />
+  <text x="48" y="275" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#CBD5E1">Billing &amp; Tiers</text>
+
+  <!-- Sidebar Footer Note -->
+  <rect x="24" y="410" width="144" height="42" rx="6" fill="#071527" stroke="#1E3A5F" />
+  <text x="34" y="426" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#60A5FA">EDGE NODE: US-EAST</text>
+  <text x="34" y="442" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" fill="#8E9CA8">Avg Latency: 18ms</text>
+
+  <!-- Main Content Area: Top Stat Cards (3) -->
+  <!-- Stat Card 1 -->
+  <rect x="190" y="66" width="160" height="76" rx="8" fill="#0B1F3A" stroke="#1E3A5F" stroke-width="1" />
+  <text x="204" y="86" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#8E9CA8">API REQUESTS / SEC</text>
+  <text x="204" y="112" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="20" font-weight="800" fill="#FFFFFF">42,890</text>
+  <text x="204" y="130" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#60A5FA">↑ 14.2% peak surge</text>
+
+  <!-- Stat Card 2 -->
+  <rect x="362" y="66" width="160" height="76" rx="8" fill="#0B1F3A" stroke="#2563EB" stroke-width="1.5" />
+  <text x="376" y="86" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#8E9CA8">ERROR BUDGET</text>
+  <text x="376" y="112" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="20" font-weight="800" fill="#60A5FA">99.98%</text>
+  <text x="376" y="130" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#2563EB">Optimal SLA Met</text>
+
+  <!-- Stat Card 3 -->
+  <rect x="534" y="66" width="170" height="76" rx="8" fill="#0B1F3A" stroke="#1E3A5F" stroke-width="1" />
+  <text x="548" y="86" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#8E9CA8">ACTIVE SEATS</text>
+  <text x="548" y="112" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="20" font-weight="800" fill="#FFFFFF">128 / 150</text>
+  <text x="548" y="130" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" fill="#8E9CA8">Enterprise Tier</text>
+
+  <!-- Telemetry Vector Chart Panel -->
+  <rect x="190" y="152" width="514" height="174" rx="8" fill="#0B1F3A" stroke="#1E3A5F" stroke-width="1" />
+  <text x="206" y="176" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">STREAMING THROUGHPUT &amp; TIME SERIES</text>
+  <rect x="620" y="162" width="70" height="20" rx="4" fill="#102747" stroke="#1E3A5F" />
+  <text x="632" y="176" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="600" fill="#60A5FA">LIVE 1m</text>
+
+  <!-- Grid lines -->
+  <line x1="206" y1="200" x2="684" y2="200" stroke="#1E3A5F" stroke-width="1" stroke-dasharray="3 3" />
+  <line x1="206" y1="240" x2="684" y2="240" stroke="#1E3A5F" stroke-width="1" stroke-dasharray="3 3" />
+  <line x1="206" y1="280" x2="684" y2="280" stroke="#1E3A5F" stroke-width="1" stroke-dasharray="3 3" />
+  <text x="664" y="204" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" fill="#8E9CA8">50k</text>
+  <text x="664" y="244" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" fill="#8E9CA8">25k</text>
+
+  <!-- Data Area Gradient Fill & Polyline -->
+  <polygon points="210,285 240,265 280,270 320,230 360,240 400,210 440,225 480,195 520,215 560,190 600,205 640,185 670,192 670,295 210,295" fill="#2563EB" fill-opacity="0.16" />
+  <polyline points="210,285 240,265 280,270 320,230 360,240 400,210 440,225 480,195 520,215 560,190 600,205 640,185 670,192" stroke="#2563EB" stroke-width="2.5" fill="none" stroke-linejoin="round" />
+  <circle cx="640" cy="185" r="4" fill="#60A5FA" />
+
+  <!-- Bottom Data Table / Recent Audit Events -->
+  <rect x="190" y="336" width="514" height="128" rx="8" fill="#0B1F3A" stroke="#1E3A5F" stroke-width="1" />
+  <text x="206" y="358" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">SECURITY &amp; AUDIT EVENT LOG</text>
+  
+  <!-- Row 1 -->
+  <line x1="206" y1="372" x2="684" y2="372" stroke="#1E3A5F" stroke-width="1" />
+  <circle cx="214" cy="386" r="3" fill="#2563EB" />
+  <text x="226" y="390" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#FFFFFF">AUTH_TOKEN_ROTATED</text>
+  <text x="400" y="390" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" fill="#8E9CA8">User: aswin@core • Scope: admin:write</text>
+  <text x="630" y="390" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" fill="#60A5FA">2m ago</text>
+
+  <!-- Row 2 -->
+  <line x1="206" y1="404" x2="684" y2="404" stroke="#1E3A5F" stroke-width="1" />
+  <circle cx="214" cy="418" r="3" fill="#60A5FA" />
+  <text x="226" y="422" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#FFFFFF">DEPLOYMENT_HEALTH_CHECK</text>
+  <text x="400" y="422" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" fill="#8E9CA8">Cluster us-east-1 pod #42 pass</text>
+  <text x="630" y="422" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" fill="#8E9CA8">6m ago</text>
+
+  <!-- Row 3 -->
+  <line x1="206" y1="436" x2="684" y2="436" stroke="#1E3A5F" stroke-width="1" />
+  <circle cx="214" cy="448" r="3" fill="#2563EB" />
+  <text x="226" y="452" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#FFFFFF">ROLE_ASSIGNED_RBAC</text>
+  <text x="400" y="452" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" fill="#8E9CA8">Role: SRE Analyst • User: dev-ops</text>
+  <text x="630" y="452" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" fill="#8E9CA8">14m ago</text>
+</svg>
