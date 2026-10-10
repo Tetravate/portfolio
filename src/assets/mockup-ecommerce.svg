@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" fill="none" aria-label="Modern E-Commerce Storefront Interface Mockup">
+  <!-- Outer Browser / Device Frame -->
+  <rect width="720" height="480" rx="16" fill="#071527" />
+  
+  <!-- Browser Chrome Top Bar -->
+  <rect x="16" y="16" width="688" height="42" rx="8" fill="#0B1F3A" stroke="#1E3A5F" stroke-width="1" />
+  <circle cx="36" cy="37" r="5" fill="#EF4444" />
+  <circle cx="52" cy="37" r="5" fill="#F59E0B" />
+  <circle cx="68" cy="37" r="5" fill="#60A5FA" />
+  <rect x="96" y="27" width="380" height="20" rx="4" fill="#071527" stroke="#1E3A5F" stroke-width="1" />
+  <text x="110" y="41" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#CBD5E1">https://store.tetravate.io/products/curated</text>
+  <rect x="620" y="27" width="68" height="20" rx="4" fill="#2563EB" />
+  <text x="632" y="41" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="700" fill="#FFFFFF">LIVE DEMO</text>
+
+  <!-- Store Header -->
+  <rect x="16" y="66" width="688" height="48" fill="#102747" stroke="#1E3A5F" stroke-width="1" />
+  <text x="36" y="96" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="15" font-weight="800" fill="#FFFFFF" letter-spacing="1">AURA // COMMERCE</text>
+  
+  <!-- Navigation Categories -->
+  <text x="210" y="95" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="600" fill="#60A5FA">New Arrivals</text>
+  <text x="300" y="95" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" fill="#CBD5E1">Collections</text>
+  <text x="385" y="95" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" fill="#CBD5E1">Accessories</text>
+  
+  <!-- Search and Cart Pill -->
+  <rect x="490" y="78" width="120" height="26" rx="13" fill="#0B1F3A" stroke="#1E3A5F" />
+  <text x="506" y="95" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#8E9CA8">Search catalog...</text>
+  <rect x="620" y="76" width="68" height="28" rx="6" fill="#2563EB" />
+  <text x="632" y="95" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF">Cart (2)</text>
+
+  <!-- Store Canvas: Left Sidebar Filters & Right Products Grid -->
+  <!-- Left Filter Drawer -->
+  <rect x="28" y="124" width="150" height="336" rx="8" fill="#0B1F3A" stroke="#1E3A5F" stroke-width="1" />
+  <text x="42" y="150" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">FACETED FILTERS</text>
+  
+  <text x="42" y="180" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#60A5FA" letter-spacing="0.5">CATEGORY</text>
+  <rect x="42" y="192" width="122" height="24" rx="4" fill="#102747" stroke="#2563EB" stroke-width="1" />
+  <text x="52" y="208" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Minimalist Studio (14)</text>
+  
+  <rect x="42" y="222" width="122" height="24" rx="4" fill="#071527" />
+  <text x="52" y="238" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#8E9CA8">Workstation Audio (8)</text>
+
+  <rect x="42" y="252" width="122" height="24" rx="4" fill="#071527" />
+  <text x="52" y="268" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#8E9CA8">Desk Accessories (22)</text>
+
+  <text x="42" y="306" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#60A5FA" letter-spacing="0.5">PRICE RANGE</text>
+  <line x1="42" y1="324" x2="164" y2="324" stroke="#1E3A5F" stroke-width="4" stroke-linecap="round" />
+  <line x1="42" y1="324" x2="120" y2="324" stroke="#2563EB" stroke-width="4" stroke-linecap="round" />
+  <circle cx="120" cy="324" r="5" fill="#60A5FA" />
+  <text x="42" y="344" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" fill="#8E9CA8">$25 — $240</text>
+
+  <!-- Stock Badge -->
+  <rect x="42" y="376" width="122" height="30" rx="6" fill="#102747" stroke="#1E3A5F" />
+  <circle cx="56" cy="391" r="3.5" fill="#60A5FA" />
+  <text x="66" y="395" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#FFFFFF">In Stock Only (38)</text>
+
+  <!-- Products Grid: 3 Editorial Product Cards -->
+  <!-- Product 1 -->
+  <rect x="190" y="124" width="158" height="216" rx="8" fill="#0B1F3A" stroke="#1E3A5F" stroke-width="1" />
+  <rect x="198" y="132" width="142" height="110" rx="6" fill="#102747" />
+  <circle cx="269" cy="180" r="32" fill="#0E2442" stroke="#2563EB" stroke-dasharray="3 3" />
+  <text x="248" y="184" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#60A5FA">STUDIO 01</text>
+  <rect x="206" y="140" width="46" height="16" rx="3" fill="#2563EB" />
+  <text x="212" y="152" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="700" fill="#FFFFFF">POPULAR</text>
+  <text x="206" y="260" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Precision Desk Mat</text>
+  <text x="206" y="276" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" fill="#8E9CA8">Water-resistant felt weave</text>
+  <text x="206" y="300" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="800" fill="#60A5FA">$48.00</text>
+  <rect x="282" y="286" width="58" height="22" rx="4" fill="#102747" stroke="#2563EB" />
+  <text x="290" y="301" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#FFFFFF">+ Add</text>
+
+  <!-- Product 2 -->
+  <rect x="358" y="124" width="158" height="216" rx="8" fill="#0B1F3A" stroke="#2563EB" stroke-width="1.5" />
+  <rect x="366" y="132" width="142" height="110" rx="6" fill="#102747" />
+  <polygon points="437,156 465,198 409,198" fill="#0E2442" stroke="#60A5FA" stroke-width="1.5" />
+  <text x="418" y="186" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#FFFFFF">ALU-STAND</text>
+  <text x="374" y="260" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Anodized Laptop Riser</text>
+  <text x="374" y="276" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" fill="#8E9CA8">Solid CNC machined aluminum</text>
+  <text x="374" y="300" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="800" fill="#60A5FA">$89.00</text>
+  <rect x="450" y="286" width="58" height="22" rx="4" fill="#2563EB" />
+  <text x="457" y="301" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="700" fill="#FFFFFF">In Cart</text>
+
+  <!-- Product 3 -->
+  <rect x="526" y="124" width="166" height="216" rx="8" fill="#0B1F3A" stroke="#1E3A5F" stroke-width="1" />
+  <rect x="534" y="132" width="150" height="110" rx="6" fill="#102747" />
+  <circle cx="609" cy="180" r="28" fill="#071527" />
+  <circle cx="609" cy="180" r="14" fill="#2563EB" />
+  <text x="542" y="260" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Modular Cable Hub</text>
+  <text x="542" y="276" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" fill="#8E9CA8">Magnetic under-desk anchor</text>
+  <text x="542" y="300" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="800" fill="#60A5FA">$34.00</text>
+  <rect x="626" y="286" width="58" height="22" rx="4" fill="#102747" stroke="#2563EB" />
+  <text x="634" y="301" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="#FFFFFF">+ Add</text>
+
+  <!-- Bottom Fast-Checkout Banner -->
+  <rect x="190" y="352" width="502" height="108" rx="8" fill="#102747" stroke="#1E3A5F" stroke-width="1" />
+  <text x="210" y="378" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="700" fill="#60A5FA">FAST-CHECKOUT PIPELINE</text>
+  <text x="210" y="398" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" fill="#CBD5E1">2 items selected • Subtotal: $137.00 • Taxes calculated at checkout</text>
+  <rect x="210" y="412" width="150" height="32" rx="6" fill="#2563EB" />
+  <text x="228" y="432" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Proceed to Checkout →</text>
+  <rect x="372" y="412" width="120" height="32" rx="6" fill="#0B1F3A" stroke="#1E3A5F" />
+  <text x="388" y="432" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Apple Pay / Cards</text>
+</svg>
