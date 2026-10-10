@@ -184,20 +184,41 @@ export const technologyGroups = [
   }
 ];
 
+export const companyInfo = {
+  number: "00",
+  nodeLabel: "CORE NODE",
+  role: "COMPANY",
+  name: "Tetravate",
+  nameUpper: "TETRAVATE",
+  domain: "STUDIO CORE",
+  tagline: "FROM THOUGHT TO THING",
+  summary: "FROM THOUGHT TO THING",
+  bio: "A product engineering team that transforms ideas into practical digital products through thoughtful design, software engineering, and AI-driven solutions.",
+  focus: "Product Engineering, Web Applications, AI & Data Systems, Digital Product Development.",
+  skills: [
+    "Product Development",
+    "Full-Stack Engineering",
+    "Applied AI",
+    "Data Systems",
+    "Deployment"
+  ],
+  linkedin: "https://www.linkedin.com/company/tetravate/",
+  github: "https://github.com/orgs/Tetravate"
+};
+
 export const teamMembers = [
   {
     number: "01",
     name: "Aadhithya Balu S",
     nameUpper: "AADHITHYA BALU S",
     role: "Founder",
-    tagline: "Frontend & UI Systems",
-    summary: "Designs intuitive interfaces • Obsessed with performance",
-    bio: "Focuses on clean interface architecture, high-performance UI systems, and responsive user experiences while building cross-functionally across the full product stack.",
-    focus: "Frontend & UI Systems",
-    skills: ["Frontend & UI Systems", "Architecture", "Full-Stack", "Web Performance"],
-    uplink: "LEAF NODE 01 • DIRECT TETRAVATE UPLINK (0.0°)",
-    linkedin: "https://www.linkedin.com/company/tetravate/",
-    github: "https://github.com/orgs/Tetravate"
+    tagline: "Deployment & DevOps",
+    summary: "Deployment workflows • Infrastructure & reliable delivery",
+    bio: "Focuses on deployment workflows, infrastructure, and reliable delivery of production-ready applications.",
+    focus: "Deployment & DevOps",
+    skills: ["Deployment & DevOps", "Infrastructure", "CI/CD Pipelines", "System Reliability"],
+    linkedin: "https://www.linkedin.com/in/aadhithyabalu",
+    github: "https://github.com/Aadhithya-balu"
   },
   {
     number: "02",
@@ -205,13 +226,12 @@ export const teamMembers = [
     nameUpper: "ASWIN N S",
     role: "Founder",
     tagline: "Backend & Applied AI Pipelines",
-    summary: "Architects robust pipelines • Scalable data systems",
-    bio: "Focuses on robust backend systems, data workflows, and applied AI pipelines while engineering scalable features across all layers of the stack.",
+    summary: "Backend systems & APIs • Applied AI pipelines",
+    bio: "Builds robust backend systems, scalable data workflows, APIs, and applied AI pipelines across the application stack.",
     focus: "Backend & Applied AI Pipelines",
     skills: ["Backend & Applied AI", "Data Pipelines", "APIs", "Distributed Systems"],
-    uplink: "LEAF NODE 02 • DIRECT TETRAVATE UPLINK (36.0°)",
-    linkedin: "https://www.linkedin.com/company/tetravate/",
-    github: "https://github.com/orgs/Tetravate"
+    linkedin: "https://www.linkedin.com/in/aswin022",
+    github: "https://github.com/AswinNS-dev"
   },
   {
     number: "03",
@@ -219,41 +239,38 @@ export const teamMembers = [
     nameUpper: "ALMAS M",
     role: "Founder",
     tagline: "Full-Stack & Integration",
-    summary: "Builds across the stack • Adapts per project",
-    bio: "Focuses on end-to-end full-stack integration, service coordination, and resilient system engineering across web and mobile products.",
+    summary: "Full-stack integration • End-to-end product systems",
+    bio: "Connects frontend experiences, backend services, and application components into cohesive, end-to-end product systems.",
     focus: "Full-Stack & Integration",
     skills: ["Full-Stack & Integration", "Product Logic", "Cloud Services", "APIs"],
-    uplink: "LEAF NODE 03 • DIRECT TETRAVATE UPLINK (72.0°)",
-    linkedin: "https://www.linkedin.com/company/tetravate/",
-    github: "https://github.com/orgs/Tetravate"
+    linkedin: "https://www.linkedin.com/in/almas06/",
+    github: "https://github.com/Almas786881"
   },
   {
     number: "04",
     name: "Giridharan P",
     nameUpper: "GIRIDHARAN P",
     role: "Founder",
-    tagline: "Product Logic & Deployment",
-    summary: "Streamlines deployment • Dependable product logic",
-    bio: "Focuses on product engineering, workflow optimization, and dependable deployment pipelines while contributing across the full software lifecycle.",
-    focus: "Product Logic & Deployment",
-    skills: ["Product Logic & Deployment", "System Architecture", "DevOps", "Reliability"],
-    uplink: "LEAF NODE 04 • DIRECT TETRAVATE UPLINK (144.0°)",
-    linkedin: "https://www.linkedin.com/company/tetravate/",
-    github: "https://github.com/orgs/Tetravate"
+    tagline: "Frontend & UI/UX",
+    summary: "Frontend & UI/UX • Usability & accessibility",
+    bio: "Develops intuitive user interfaces and responsive frontend experiences with an emphasis on usability, visual consistency, and accessibility.",
+    focus: "Frontend & UI/UX",
+    skills: ["Frontend & UI/UX", "Interface Design", "Design Systems", "Accessibility"],
+    linkedin: "https://www.linkedin.com/in/giridharan-p-223a78333/",
+    github: "https://github.com/Giridharanp1"
   },
   {
     number: "05",
     name: "Ashwin S",
     nameUpper: "ASHWIN S",
     role: "Founder",
-    tagline: "Technology & Product Development",
-    summary: "Drives product vision • End-to-end engineering",
-    bio: "Focuses on technology strategy, core product engineering, and modern application workflows while contributing across the technology stack.",
-    focus: "Technology & Product Development",
-    skills: ["Technology & Product", "Full-Stack", "Backend Services", "Software Delivery"],
-    uplink: "LEAF NODE 05 • DIRECT TETRAVATE UPLINK (288.0°)",
-    linkedin: "https://www.linkedin.com/company/tetravate/",
-    github: "https://github.com/orgs/Tetravate"
+    tagline: "Testing & Quality Assurance",
+    summary: "Testing & QA • Validation across workflows",
+    bio: "Focuses on software testing, quality assurance, regression prevention, and validating application behavior across workflows.",
+    focus: "Testing & Quality Assurance",
+    skills: ["Testing & QA", "Quality Assurance", "Test Automation", "Workflow Validation"],
+    linkedin: "https://www.linkedin.com/in/ashwin-s-a04850333/",
+    github: "https://github.com/Ashwin-2008"
   }
 ];
 

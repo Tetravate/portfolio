@@ -6,6 +6,7 @@ import {
   whyTetravateReasons,
   technologyGroups,
   teamMembers,
+  companyInfo,
   achievements,
   testimonials
 } from './data/projects.js';
@@ -1094,7 +1095,7 @@ function renderAboutPage(container) {
                 <!-- Node 02: East / Right (485, 205) -->
                 <line class="network-connector-line" x1="290" y1="250" x2="485" y2="205" />
                 <!-- Node 03: South-East / Bottom Right (412, 415) -->
-                <line class="network-connector-line is-active" x1="290" y1="250" x2="412" y2="415" />
+                <line class="network-connector-line" x1="290" y1="250" x2="412" y2="415" />
                 <!-- Node 04: South-West / Bottom Left (168, 415) -->
                 <line class="network-connector-line" x1="290" y1="250" x2="168" y2="415" />
                 <!-- Node 05: West / Left (95, 205) -->
@@ -1102,7 +1103,7 @@ function renderAboutPage(container) {
               </svg>
 
               <!-- Central Core Node -->
-              <div class="central-core-node">
+              <div class="central-core-node is-active" role="button" tabindex="0" aria-label="Tetravate Company Overview">
                 <img src="/src/assets/logo-emblem.png" alt="Tetravate Core Emblem" class="central-core-logo-img" />
                 <span class="central-core-title">TETRAVATE</span>
                 <span class="central-core-pill">
@@ -1112,7 +1113,7 @@ function renderAboutPage(container) {
 
               <!-- Satellite Founder Nodes (01 to 05) -->
               <!-- 01: Aadhithya Balu S (Top) -->
-              <div class="founder-satellite-node node-pos-1" data-index="0" style="left: 50%; top: 13.6%;">
+              <div class="founder-satellite-node node-pos-1" data-index="0" role="button" tabindex="0" aria-label="Founder 01: Aadhithya Balu S — Deployment &amp; DevOps" style="left: 50%; top: 13.6%;">
                 <div class="satellite-card">
                   <div class="satellite-top-row">
                     <span class="satellite-num-badge">01</span>
@@ -1120,12 +1121,12 @@ function renderAboutPage(container) {
                   </div>
                   <div class="satellite-name">AADHITHYA BALU S</div>
                   <div class="satellite-divider"></div>
-                  <div class="satellite-tagline">Frontend &amp; UI Systems</div>
+                  <div class="satellite-tagline">Deployment &amp; DevOps</div>
                 </div>
               </div>
 
               <!-- 02: Aswin N S (Right) -->
-              <div class="founder-satellite-node node-pos-2" data-index="1" style="left: 83.6%; top: 41%;">
+              <div class="founder-satellite-node node-pos-2" data-index="1" role="button" tabindex="0" aria-label="Founder 02: Aswin N S — Backend &amp; Applied AI Pipelines" style="left: 83.6%; top: 41%;">
                 <div class="satellite-card">
                   <div class="satellite-top-row">
                     <span class="satellite-num-badge">02</span>
@@ -1137,8 +1138,8 @@ function renderAboutPage(container) {
                 </div>
               </div>
 
-              <!-- 03: Almas M (Bottom Right - Active Default) -->
-              <div class="founder-satellite-node node-pos-3 is-active" data-index="2" style="left: 71%; top: 83%;">
+              <!-- 03: Almas M (Bottom Right) -->
+              <div class="founder-satellite-node node-pos-3" data-index="2" role="button" tabindex="0" aria-label="Founder 03: Almas M — Full-Stack &amp; Integration" style="left: 71%; top: 83%;">
                 <div class="satellite-card">
                   <div class="satellite-top-row">
                     <span class="satellite-num-badge">03</span>
@@ -1151,7 +1152,7 @@ function renderAboutPage(container) {
               </div>
 
               <!-- 04: Giridharan P (Bottom Left) -->
-              <div class="founder-satellite-node node-pos-4" data-index="3" style="left: 29%; top: 83%;">
+              <div class="founder-satellite-node node-pos-4" data-index="3" role="button" tabindex="0" aria-label="Founder 04: Giridharan P — Frontend &amp; UI/UX" style="left: 29%; top: 83%;">
                 <div class="satellite-card">
                   <div class="satellite-top-row">
                     <span class="satellite-num-badge">04</span>
@@ -1159,12 +1160,12 @@ function renderAboutPage(container) {
                   </div>
                   <div class="satellite-name">GIRIDHARAN P</div>
                   <div class="satellite-divider"></div>
-                  <div class="satellite-tagline">Product Logic &amp; Deployment</div>
+                  <div class="satellite-tagline">Frontend &amp; UI/UX</div>
                 </div>
               </div>
 
               <!-- 05: Ashwin S (Left) -->
-              <div class="founder-satellite-node node-pos-5" data-index="4" style="left: 16.4%; top: 41%;">
+              <div class="founder-satellite-node node-pos-5" data-index="4" role="button" tabindex="0" aria-label="Founder 05: Ashwin S — Testing &amp; Quality Assurance" style="left: 16.4%; top: 41%;">
                 <div class="satellite-card">
                   <div class="satellite-top-row">
                     <span class="satellite-num-badge">05</span>
@@ -1172,7 +1173,7 @@ function renderAboutPage(container) {
                   </div>
                   <div class="satellite-name">ASHWIN S</div>
                   <div class="satellite-divider"></div>
-                  <div class="satellite-tagline">Technology &amp; Product Development</div>
+                  <div class="satellite-tagline">Testing &amp; Quality Assurance</div>
                 </div>
               </div>
             </div>
@@ -1182,46 +1183,39 @@ function renderAboutPage(container) {
               <div class="founders-showcase-card" id="founder-showcase-card">
                 <div class="showcase-header-row">
                   <div class="showcase-pills-wrap">
-                    <span class="showcase-pill" id="showcase-node-pill">NODE 03</span>
-                    <span class="showcase-pill" id="showcase-role-pill">FOUNDER</span>
-                  </div>
-                  <div class="showcase-uplink-status">
-                    <span class="showcase-uplink-dot"></span>
-                    <span>LIVE UPLINK ACTIVE</span>
+                    <span class="showcase-pill" id="showcase-role-pill">COMPANY</span>
                   </div>
                 </div>
 
-                <div class="showcase-domain" id="showcase-domain">FULL-STACK &amp; INTEGRATION</div>
-                <h3 class="showcase-name" id="showcase-name">ALMAS M</h3>
-                <div class="showcase-tagline" id="showcase-tagline">Builds across the stack &bull; Adapts per project</div>
+                <div class="showcase-domain" id="showcase-domain">STUDIO CORE</div>
+                <h3 class="showcase-name" id="showcase-name">TETRAVATE</h3>
+                <div class="showcase-tagline" id="showcase-tagline">FROM THOUGHT TO THING</div>
 
                 <hr class="showcase-rule" />
 
                 <div class="showcase-section-label">FOCUS &amp; SYSTEMS SCOPE</div>
                 <p class="showcase-bio" id="showcase-bio">
-                  Focuses on end-to-end full-stack integration, service coordination, and resilient system engineering across web and mobile products.
+                  A product engineering team that transforms ideas into practical digital products through thoughtful design, software engineering, and AI-driven solutions.
                 </p>
 
                 <div class="showcase-section-label">ARCHITECTURE &amp; CAPABILITIES</div>
                 <div class="showcase-skills-wrap" id="showcase-skills-wrap">
-                  <span class="showcase-skill-chip">Full-Stack &amp; Integration</span>
-                  <span class="showcase-skill-chip">Product Logic</span>
-                  <span class="showcase-skill-chip">Cloud Services</span>
-                  <span class="showcase-skill-chip">APIs</span>
+                  <span class="showcase-skill-chip">Product Development</span>
+                  <span class="showcase-skill-chip">Full-Stack Engineering</span>
+                  <span class="showcase-skill-chip">Applied AI</span>
+                  <span class="showcase-skill-chip">Data Systems</span>
+                  <span class="showcase-skill-chip">Deployment</span>
                 </div>
 
                 <div class="showcase-footer-row">
-                  <div class="showcase-leaf-uplink" id="showcase-uplink">
-                    ✦ LEAF NODE 03 &bull; DIRECT TETRAVATE UPLINK (72.0°)
-                  </div>
                   <div class="showcase-social-links" id="showcase-social-links">
-                    <a href="https://www.linkedin.com/company/tetravate/" target="_blank" rel="noopener" class="showcase-social-btn" id="showcase-link-li" title="LinkedIn">
+                    <a href="https://www.linkedin.com/company/tetravate/" target="_blank" rel="noopener noreferrer" class="showcase-social-btn" id="showcase-link-li" title="LinkedIn">
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                       </svg>
                       LinkedIn
                     </a>
-                    <a href="https://github.com/orgs/Tetravate" target="_blank" rel="noopener" class="showcase-social-btn" id="showcase-link-gh" title="GitHub">
+                    <a href="https://github.com/orgs/Tetravate" target="_blank" rel="noopener noreferrer" class="showcase-social-btn" id="showcase-link-gh" title="GitHub">
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
                       </svg>
@@ -1344,56 +1338,149 @@ function renderAboutPage(container) {
 }
 
 function initFoundersNetworkShowcase(container) {
+  const networkWrapper = container.querySelector('.founders-network-wrapper');
+  const centralCoreNode = container.querySelector('.central-core-node');
   const nodes = container.querySelectorAll('.founder-satellite-node');
   const showcaseCard = container.querySelector('#founder-showcase-card');
-  if (!nodes.length || !showcaseCard) return;
+  const lines = container.querySelectorAll('.network-connector-line');
+  if (!networkWrapper || !nodes.length || !showcaseCard) return;
 
-  const nodePill = showcaseCard.querySelector('#showcase-node-pill');
   const rolePill = showcaseCard.querySelector('#showcase-role-pill');
   const domainEl = showcaseCard.querySelector('#showcase-domain');
   const nameEl = showcaseCard.querySelector('#showcase-name');
   const taglineEl = showcaseCard.querySelector('#showcase-tagline');
   const bioEl = showcaseCard.querySelector('#showcase-bio');
   const skillsWrap = showcaseCard.querySelector('#showcase-skills-wrap');
-  const uplinkEl = showcaseCard.querySelector('#showcase-uplink');
   const linkLi = showcaseCard.querySelector('#showcase-link-li');
   const linkGh = showcaseCard.querySelector('#showcase-link-gh');
 
+  let currentActiveIndex = undefined;
+
   function setActiveFounder(idx) {
-    const founder = teamMembers[idx];
-    if (!founder) return;
+    if (currentActiveIndex === idx) return;
+    currentActiveIndex = idx;
 
-    // Update active satellite node styling
-    nodes.forEach((n, i) => {
-      n.classList.toggle('is-active', i === idx);
-    });
+    if (idx !== null && idx !== undefined && teamMembers[idx]) {
+      const founder = teamMembers[idx];
 
-    // Update active SVG connector line
-    const lines = container.querySelectorAll('.network-connector-line');
-    lines.forEach((line, i) => {
-      line.classList.toggle('is-active', i === idx);
-    });
+      // Update active satellite node styling & accessible attributes
+      nodes.forEach((n, i) => {
+        const isActive = i === idx;
+        n.classList.toggle('is-active', isActive);
+        n.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
 
-    // Update showcase card content
-    if (nodePill) nodePill.textContent = `NODE ${founder.number}`;
-    if (rolePill) rolePill.textContent = (founder.role || 'FOUNDER').toUpperCase();
-    if (domainEl) domainEl.textContent = (founder.focus || founder.tagline).toUpperCase();
-    if (nameEl) nameEl.textContent = founder.nameUpper || founder.name.toUpperCase();
-    if (taglineEl) taglineEl.textContent = founder.summary || founder.tagline;
-    if (bioEl) bioEl.textContent = founder.bio;
-    if (skillsWrap) {
-      skillsWrap.innerHTML = founder.skills.map(s => `<span class="showcase-skill-chip">${s}</span>`).join('');
+      // Update active SVG connector line
+      lines.forEach((line, i) => {
+        line.classList.toggle('is-active', i === idx);
+      });
+
+      // Central node idle
+      if (centralCoreNode) {
+        centralCoreNode.classList.remove('is-active');
+        centralCoreNode.setAttribute('aria-pressed', 'false');
+      }
+
+      // Update showcase card content to Founder
+      if (rolePill) rolePill.textContent = (founder.role || 'FOUNDER').toUpperCase();
+      if (domainEl) domainEl.textContent = (founder.focus || founder.tagline).toUpperCase();
+      if (nameEl) nameEl.textContent = founder.nameUpper || founder.name.toUpperCase();
+      if (taglineEl) taglineEl.textContent = founder.summary || founder.tagline;
+      if (bioEl) bioEl.textContent = founder.bio;
+      if (skillsWrap) {
+        skillsWrap.innerHTML = founder.skills.map(s => `<span class="showcase-skill-chip">${s}</span>`).join('');
+      }
+      if (linkLi && founder.linkedin) linkLi.href = founder.linkedin;
+      if (linkGh && founder.github) linkGh.href = founder.github;
+    } else {
+      // Default / Core: Tetravate Company Info
+      nodes.forEach((n) => {
+        n.classList.remove('is-active');
+        n.setAttribute('aria-pressed', 'false');
+      });
+
+      lines.forEach((line) => {
+        line.classList.remove('is-active');
+      });
+
+      if (centralCoreNode) {
+        centralCoreNode.classList.add('is-active');
+        centralCoreNode.setAttribute('aria-pressed', 'true');
+      }
+
+      // Update showcase card content to Tetravate
+      if (rolePill) rolePill.textContent = companyInfo.role || 'COMPANY';
+      if (domainEl) domainEl.textContent = companyInfo.domain || 'STUDIO CORE';
+      if (nameEl) nameEl.textContent = companyInfo.nameUpper || 'TETRAVATE';
+      if (taglineEl) taglineEl.textContent = companyInfo.tagline || 'FROM THOUGHT TO THING';
+      if (bioEl) bioEl.textContent = companyInfo.bio;
+      if (skillsWrap) {
+        skillsWrap.innerHTML = companyInfo.skills.map(s => `<span class="showcase-skill-chip">${s}</span>`).join('');
+      }
+      if (linkLi && companyInfo.linkedin) linkLi.href = companyInfo.linkedin;
+      if (linkGh && companyInfo.github) linkGh.href = companyInfo.github;
     }
-    if (uplinkEl) uplinkEl.textContent = `✦ ${founder.uplink || `LEAF NODE ${founder.number} • DIRECT TETRAVATE UPLINK`}`;
-    if (linkLi && founder.linkedin) linkLi.href = founder.linkedin;
-    if (linkGh && founder.github) linkGh.href = founder.github;
   }
 
+  // Pointer movement resolver: returns founder index if cursor is over a founder node, or null
+  function resolveTargetIndex(target) {
+    if (!target || !target.closest) return null;
+    const founderNode = target.closest('.founder-satellite-node');
+    if (founderNode && networkWrapper.contains(founderNode)) {
+      const idx = parseInt(founderNode.getAttribute('data-index'), 10);
+      return isNaN(idx) ? null : idx;
+    }
+    return null;
+  }
+
+  function handlePointerMove(e) {
+    const idx = resolveTargetIndex(e.target);
+    setActiveFounder(idx);
+  }
+
+  // Hover tracking over the entire radial network area
+  networkWrapper.addEventListener('mouseover', handlePointerMove);
+  networkWrapper.addEventListener('mousemove', handlePointerMove);
+  networkWrapper.addEventListener('mouseleave', () => setActiveFounder(null));
+
+  // Central node explicit interaction (hover, click, keyboard)
+  if (centralCoreNode) {
+    centralCoreNode.addEventListener('mouseenter', () => setActiveFounder(null));
+    centralCoreNode.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setActiveFounder(null);
+    });
+    centralCoreNode.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        setActiveFounder(null);
+      }
+    });
+  }
+
+  // Satellite node interactions (tap / click & keyboard)
   nodes.forEach((node) => {
     const idx = parseInt(node.getAttribute('data-index'), 10);
-    node.addEventListener('mouseenter', () => setActiveFounder(idx));
-    node.addEventListener('click', () => setActiveFounder(idx));
+    node.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setActiveFounder(idx);
+    });
+    node.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        setActiveFounder(idx);
+      }
+    });
   });
+
+  // Empty space click on network wrapper resets to company info (mobile touch friendly)
+  networkWrapper.addEventListener('click', (e) => {
+    const idx = resolveTargetIndex(e.target);
+    setActiveFounder(idx);
+  });
+
+  // Default state: Tetravate Company Info
+  setActiveFounder(null);
 }
 
 // ==========================================================================
