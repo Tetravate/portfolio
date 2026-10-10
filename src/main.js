@@ -10,21 +10,125 @@ import {
   testimonials
 } from './data/projects.js';
 
-import mockupPos from './assets/mockup-pos.svg';
-import mockupDrishyam from './assets/mockup-drishyam.svg';
-import mockupEcommerce from './assets/mockup-ecommerce.svg';
-import mockupSaas from './assets/mockup-saas.svg';
-import mockupOivu from './assets/mockup-oivu.svg';
-import mockupMistiq from './assets/mockup-mistiq.svg';
+import imgEcommerceHero from './assets/projects/tetravate-ecommerce-hero.png';
+import imgEcommerceCatalog from './assets/projects/tetravate-ecommerce-catalog.png';
+import imgMaraHero from './assets/projects/mara-restaurant-hero.jpg';
+import imgMaraMenu from './assets/projects/mara-restaurant-menu.jpg';
+import imgNivaraDashboard from './assets/projects/nivara-erp-dashboard.jpg';
+import imgNivaraLogin from './assets/projects/nivara-erp-login.jpg';
+import imgMistiqAnalysis from './assets/projects/mistiq-platform-analysis.png';
+import imgMistiqDna from './assets/projects/mistiq-platform-dna.jpg';
+import imgSakshaNetwork from './assets/projects/saksha-crime-network.jpg';
+import imgSakshaDashboard from './assets/projects/saksha-crime-dashboard.jpg';
+import imgAgsDashboard from './assets/projects/ags-masalas-dashboard.jpg';
+import imgAgsMobile from './assets/projects/ags-masalas-pos-mobile.png';
+import imgPustakabhritaMobile from './assets/projects/pustakabhrita-tuition-mobile.png';
+import imgAgaInterface from './assets/projects/aga-ai-assistant-interface.jpg';
+import imgAgaChat from './assets/projects/aga-ai-assistant-chat.jpg';
+import imgWorkspaceGithub from './assets/projects/tetravate-workspace-github.png';
 
-// Mockup image resolver
+// Project screenshot and gallery resolvers
 const mockupMap = {
-  'ags-masalas': mockupPos,
-  'drishyam': mockupDrishyam,
-  'ecommerce': mockupEcommerce,
-  'mistiq': mockupMistiq,
-  'oivu': mockupOivu,
-  'ai-product': mockupSaas
+  'tetravate-ecommerce': imgEcommerceHero,
+  'mara-dining': imgMaraHero,
+  'nivara-erp': imgNivaraDashboard,
+  'mistiq': imgMistiqAnalysis,
+  'saksha': imgSakshaNetwork,
+  'ags-masalas': imgAgsDashboard,
+  'pustakabhrita': imgPustakabhritaMobile,
+  'aga-ai-assistant': imgAgaInterface,
+  'tetravate-workspace': imgWorkspaceGithub,
+};
+
+const assetMap = {
+  '/projects/tetravate-ecommerce-hero.png': imgEcommerceHero,
+  '/projects/tetravate-ecommerce-catalog.png': imgEcommerceCatalog,
+  '/projects/mara-restaurant-hero.jpg': imgMaraHero,
+  '/projects/mara-restaurant-menu.jpg': imgMaraMenu,
+  '/projects/nivara-erp-dashboard.jpg': imgNivaraDashboard,
+  '/projects/nivara-erp-login.jpg': imgNivaraLogin,
+  '/projects/mistiq-platform-analysis.png': imgMistiqAnalysis,
+  '/projects/mistiq-platform-dna.jpg': imgMistiqDna,
+  '/projects/saksha-crime-network.jpg': imgSakshaNetwork,
+  '/projects/saksha-crime-dashboard.jpg': imgSakshaDashboard,
+  '/projects/ags-masalas-dashboard.jpg': imgAgsDashboard,
+  '/projects/ags-masalas-pos-mobile.png': imgAgsMobile,
+  '/projects/pustakabhrita-tuition-mobile.png': imgPustakabhritaMobile,
+  '/projects/aga-ai-assistant-interface.jpg': imgAgaInterface,
+  '/projects/aga-ai-assistant-chat.jpg': imgAgaChat,
+  '/projects/tetravate-workspace-github.png': imgWorkspaceGithub,
+};
+
+export function resolveImageSrc(src) {
+  if (!src) return '';
+  return assetMap[src] || src;
+}
+
+export function getProjectScreenshots(project) {
+  if (project.screenshots && project.screenshots.length > 0) {
+    return project.screenshots.map((s, idx) => ({
+      src: resolveImageSrc(s.src),
+      alt: s.alt || `${project.title} screenshot ${idx + 1}`,
+      caption: s.caption || `Screen ${idx + 1}`
+    }));
+  }
+  if (galleryMap[project.id] && galleryMap[project.id].length > 0) {
+    return galleryMap[project.id].map((g, idx) => ({
+      src: resolveImageSrc(g.src),
+      alt: `${project.title} — ${g.caption}`,
+      caption: g.caption
+    }));
+  }
+  if (project.gallery && project.gallery.length > 0) {
+    return project.gallery.map((g, idx) => ({
+      src: resolveImageSrc(g.src),
+      alt: `${project.title} — ${g.caption}`,
+      caption: g.caption
+    }));
+  }
+  const cover = resolveImageSrc(project.coverImage || project.primaryImage) || mockupMap[project.id];
+  return [{
+    src: cover,
+    alt: `${project.title} Interface & Architecture Overview`,
+    caption: 'Primary Application Interface'
+  }];
+}
+
+const galleryMap = {
+  'tetravate-ecommerce': [
+    { src: imgEcommerceHero, caption: 'Store Homepage & Featured Products' },
+    { src: imgEcommerceCatalog, caption: 'Category Navigation & Product Catalog' }
+  ],
+  'mara-dining': [
+    { src: imgMaraHero, caption: 'Restaurant Visual Identity & Hero Section' },
+    { src: imgMaraMenu, caption: 'Interactive Menu Browsing & Dish Details' }
+  ],
+  'nivara-erp': [
+    { src: imgNivaraDashboard, caption: 'Multi-Role ERP Overview & Operations' },
+    { src: imgNivaraLogin, caption: 'Institutional Authentication & Role Portal' }
+  ],
+  'mistiq': [
+    { src: imgMistiqAnalysis, caption: 'Automated Project Analysis & Risk Findings' },
+    { src: imgMistiqDna, caption: 'Project Failure DNA & Historical Risk Profiling' }
+  ],
+  'saksha': [
+    { src: imgSakshaNetwork, caption: 'Criminal Network Graph & Entity Relationships' },
+    { src: imgSakshaDashboard, caption: 'Case Investigation Dashboard & Record Index' }
+  ],
+  'ags-masalas': [
+    { src: imgAgsDashboard, caption: 'Retail POS Dashboard & Sales Ledger' },
+    { src: imgAgsMobile, caption: 'Touch-Optimized Mobile Billing Counter Screen' }
+  ],
+  'pustakabhrita': [
+    { src: imgPustakabhritaMobile, caption: 'Offline Tuition Fee Tracker & Student Profile' }
+  ],
+  'aga-ai-assistant': [
+    { src: imgAgaInterface, caption: 'AI Assistant Primary Interface & Prompt Workspace' },
+    { src: imgAgaChat, caption: 'Context-Aware Chat & Intelligent Task Assistance' }
+  ],
+  'tetravate-workspace': [
+    { src: imgWorkspaceGithub, caption: 'Central GitHub Organization & Team Development Workflow' }
+  ]
 };
 
 // Global App State & Router
@@ -71,6 +175,17 @@ function handleRoute(pathname) {
   const cleanPath = pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
   const app = document.getElementById('app-router');
   if (!app) return;
+
+  // Close any active lightbox and restore body scroll
+  const activeLb = document.getElementById('tetravate-lightbox-modal');
+  if (activeLb) {
+    activeLb.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+  if (window._activeLightboxKeyHandler) {
+    window.removeEventListener('keydown', window._activeLightboxKeyHandler);
+    window._activeLightboxKeyHandler = null;
+  }
 
   // Scroll to top
   window.scrollTo(0, 0);
@@ -362,16 +477,16 @@ function renderHomePage(container) {
           ${featuredProjects.length > 0 ? `
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;">
               ${featuredProjects.slice(0, 3).map(p => `
-                <div class="service-card" style="padding: 1.75rem;">
-                  <div style="background: #05101E; border: 1px solid var(--border-medium); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 1.25rem;">
-                    <img src="${mockupMap[p.id]}" alt="${p.title}" style="width: 100%; height: 180px; object-fit: cover;" />
+                <div class="service-card" style="padding: 1.75rem; display: flex; flex-direction: column;">
+                  <div style="background: #F4F8FF; border: 1px solid #D9E2EF; border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 1.25rem; height: 180px; display: flex; align-items: center; justify-content: center; padding: 0.65rem; box-sizing: border-box;">
+                    <img src="${resolveImageSrc(p.coverImage || p.primaryImage) || mockupMap[p.id]}" alt="${p.title}" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; object-position: center; border-radius: 4px;" />
                   </div>
-                  <div class="project-tag" style="margin-bottom: 0.4rem;">${p.categoryTag}</div>
+                  <div class="project-tag" style="margin-bottom: 0.4rem; align-self: flex-start;">${p.categoryTag}</div>
                   <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--text-heading); margin-bottom: 0.5rem;">${p.title}</h3>
                   <p style="font-size: 0.875rem; color: var(--text-body); line-height: 1.5; margin-bottom: 1.25rem; flex: 1;">
                     ${p.summary}
                   </p>
-                  <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 1rem; margin-top: auto;">
                     <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">${p.techStack.slice(0, 2).join(' · ')}</span>
                     <a href="/work/${p.slug}" class="service-action-link" data-link>Case Study →</a>
                   </div>
@@ -530,11 +645,11 @@ function renderWorkPage(container) {
           <!-- Filter bar -->
           <div class="work-filter-bar" id="workFilterBar">
             <button type="button" class="filter-btn active" data-filter="all">All Projects (${featuredProjects.length})</button>
-            <button type="button" class="filter-btn" data-filter="Business Software">Business Software / POS</button>
             <button type="button" class="filter-btn" data-filter="AI">AI &amp; Analytics</button>
+            <button type="button" class="filter-btn" data-filter="Business Software">Business Software</button>
             <button type="button" class="filter-btn" data-filter="E-Commerce">E-Commerce</button>
-            <button type="button" class="filter-btn" data-filter="SaaS">SaaS Platform</button>
-            <button type="button" class="filter-btn" data-filter="Social Impact">Social Impact</button>
+            <button type="button" class="filter-btn" data-filter="Web Development">Web Development</button>
+            <button type="button" class="filter-btn" data-filter="Developer Tools">Developer Tools</button>
           </div>
 
           <div class="projects-list" id="projectsList">
@@ -595,14 +710,32 @@ function renderWorkProjectCards(filterCategory = 'all') {
 
   container.innerHTML = filtered.map((project, idx) => {
     const isReversed = idx % 2 === 1 ? 'reversed' : '';
-    const mockupSrc = mockupMap[project.id] || mockupPos;
+    const mockupSrc = resolveImageSrc(project.coverImage || project.primaryImage) || mockupMap[project.id];
+    const isMobile = project.id === 'pustakabhrita' || (mockupSrc && mockupSrc.toLowerCase().includes('mobile'));
+    const address = project.liveDemo ? project.liveDemo.replace('https://', '').replace(/\/$/, '') : `${project.slug}.tetravate.studio`;
 
     return `
       <article class="project-card ${isReversed}" id="project-card-${project.slug}">
         <div class="project-visual-side">
-          <div class="project-mockup-frame">
-            <img src="${mockupSrc}" alt="${project.title} Interface &amp; Architecture Overview" loading="lazy" />
-          </div>
+          ${isMobile ? `
+            <div class="mockup-mobile-window" style="max-height: 350px;">
+              <img src="${mockupSrc}" alt="${project.title} Interface &amp; Architecture Overview" loading="lazy" />
+            </div>
+          ` : `
+            <div class="project-mockup-frame">
+              <div class="mockup-window-header">
+                <div class="mockup-window-dots">
+                  <span class="mockup-dot mockup-dot-red"></span>
+                  <span class="mockup-dot mockup-dot-yellow"></span>
+                  <span class="mockup-dot mockup-dot-green"></span>
+                </div>
+                <div class="mockup-window-address-bar">${address}</div>
+              </div>
+              <div class="mockup-window-content">
+                <img src="${mockupSrc}" alt="${project.title} Interface &amp; Architecture Overview" loading="lazy" />
+              </div>
+            </div>
+          `}
         </div>
         <div class="project-content-side">
           <div class="project-meta-row">
@@ -646,9 +779,11 @@ function renderWorkProjectCards(filterCategory = 'all') {
             <a href="/work/${project.slug}" class="btn btn-primary" data-link>
               View Full Case Study →
             </a>
-            <a href="${project.liveDemo}" target="_blank" rel="noopener" class="btn btn-secondary">
-              Demo / Live Link ↗
-            </a>
+            ${project.liveDemo ? `
+              <a href="${project.liveDemo}" target="_blank" rel="noopener" class="btn btn-secondary">
+                Live Demo ↗
+              </a>
+            ` : ''}
           </div>
         </div>
       </article>
@@ -685,7 +820,8 @@ function renderProjectDetailPage(container, slug) {
 
   const prevProject = projectIndex > 0 ? featuredProjects[projectIndex - 1] : featuredProjects[featuredProjects.length - 1];
   const nextProject = projectIndex < featuredProjects.length - 1 ? featuredProjects[projectIndex + 1] : featuredProjects[0];
-  const mockupSrc = mockupMap[project.id] || mockupPos;
+  const screenshots = getProjectScreenshots(project);
+  const activeScreenshot = screenshots[0];
 
   container.innerHTML = `
     <div class="page-view">
@@ -697,15 +833,18 @@ function renderProjectDetailPage(container, slug) {
           </a>
           <div class="project-meta-row" style="margin-bottom: 0.75rem;">
             <span class="project-tag">${project.categoryTag}</span>
-            ${project.quickTags.map(t => `<span class="project-pill-tag">${t}</span>`).join('')}
+            ${project.demoLabel ? `<span class="project-pill-tag project-status-pill">${project.demoLabel}</span>` : ''}
+            ${project.quickTags ? project.quickTags.map(t => `<span class="project-pill-tag">${t}</span>`).join('') : ''}
           </div>
           <h1 class="project-detail-title">${project.title}</h1>
           <p class="project-detail-subtitle">${project.subtitle}</p>
 
           <div class="project-detail-header-actions">
-            <a href="${project.liveDemo}" target="_blank" rel="noopener" class="btn btn-primary">
-              Demo / Live Link ↗
-            </a>
+            ${project.liveDemo ? `
+              <a href="${project.liveDemo}" target="_blank" rel="noopener" class="btn btn-primary">
+                Live Demo ↗
+              </a>
+            ` : ''}
             <a href="/contact" class="btn btn-secondary" data-link>
               Discuss a Similar Project
             </a>
@@ -715,6 +854,21 @@ function renderProjectDetailPage(container, slug) {
 
       <section class="section">
         <div class="container">
+          <!-- Development / Deployment Status Box -->
+          <div class="project-status-box">
+            <span class="project-status-dot"></span>
+            <span class="project-status-text">
+              <strong>Development &amp; Deployment Status:</strong> ${project.statusText || 'Portfolio Project'}
+            </span>
+          </div>
+
+          <!-- Project Overview & Purpose -->
+          <div style="background: #FFFFFF; border: 1px solid var(--border-medium); border-radius: var(--radius-md); padding: 2.25rem; margin-bottom: 3.5rem; box-shadow: var(--shadow-sm);">
+            <div class="eyebrow">PROJECT PURPOSE &amp; OVERVIEW</div>
+            <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-navy); margin-bottom: 0.75rem;">What is ${project.title}?</h2>
+            <p style="font-size: 1.05rem; line-height: 1.7; color: var(--text-body); margin: 0;">${project.overview}</p>
+          </div>
+
           <!-- Verified Technical Benchmarks -->
           <div class="cs-meta-grid">
             ${project.caseStudy.metrics.map(m => `
@@ -726,9 +880,98 @@ function renderProjectDetailPage(container, slug) {
             `).join('')}
           </div>
 
-          <!-- Large Editorial Visual Preview -->
-          <div class="project-detail-visual">
-            <img src="${mockupSrc}" alt="${project.title} Interface &amp; Architecture Overview" />
+          <!-- Interactive Screenshot Showcase Gallery -->
+          <div class="project-showcase-gallery" id="project-showcase-gallery">
+            <div class="gallery-header-bar">
+              <div class="gallery-header-title-group">
+                <span class="gallery-pill-badge">
+                  <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                  </svg>
+                  Interface &amp; System Showcase
+                </span>
+                <span style="font-size: 0.875rem; color: var(--text-muted); font-weight: 600;">
+                  ${screenshots.length > 1 ? `${screenshots.length} Genuine System Views Available` : 'Primary Application Interface'}
+                </span>
+              </div>
+              <button type="button" class="gallery-fullscreen-trigger-btn" id="gallery-expand-btn" aria-label="Open fullscreen screenshot viewer">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <line x1="21" y1="3" x2="14" y2="10"></line>
+                  <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+                Fullscreen Viewer
+              </button>
+            </div>
+
+            <div class="gallery-main-frame">
+              <div class="gallery-viewport-stage" id="gallery-viewport" title="Click to view enlarged screenshot">
+                <div class="gallery-badge-counter" id="gallery-counter-badge">1 / ${screenshots.length}</div>
+                <div class="gallery-zoom-hint-badge">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  Click to enlarge
+                </div>
+
+                ${screenshots.length > 1 ? `
+                  <button type="button" class="gallery-nav-btn prev" id="gallery-prev-btn" aria-label="Previous screenshot">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                  </button>
+                  <button type="button" class="gallery-nav-btn next" id="gallery-next-btn" aria-label="Next screenshot">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </button>
+                ` : ''}
+
+                <div class="mockup-frame-container" id="gallery-frame-container"></div>
+              </div>
+
+              <div class="gallery-caption-bar">
+                <div class="gallery-caption-text" id="gallery-caption-text">
+                  <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                  </svg>
+                  <span id="gallery-caption-content">${activeScreenshot.caption}</span>
+                </div>
+                <button type="button" class="gallery-click-zoom-link" id="gallery-caption-zoom-link">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                  </svg>
+                  Expand High-Res
+                </button>
+              </div>
+            </div>
+
+            ${screenshots.length > 1 ? `
+              <div class="gallery-thumbnails-section">
+                <div class="gallery-thumbnails-track" role="tablist" aria-label="Screenshot thumbnails">
+                  ${screenshots.map((s, idx) => `
+                    <button type="button" 
+                            role="tab" 
+                            class="gallery-thumb-card ${idx === 0 ? 'active' : ''}" 
+                            data-index="${idx}" 
+                            aria-selected="${idx === 0 ? 'true' : 'false'}" 
+                            aria-label="View screenshot ${idx + 1}: ${s.caption}">
+                      <div class="gallery-thumb-preview">
+                        <img src="${s.src}" alt="${s.alt}" loading="lazy" />
+                      </div>
+                      <div class="gallery-thumb-info">
+                        <span class="gallery-thumb-index">0${idx + 1}</span>
+                        <span class="gallery-thumb-label" title="${s.caption}">${s.caption}</span>
+                      </div>
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+            ` : ''}
           </div>
 
           <!-- The Problem & The Solution -->
@@ -761,6 +1004,29 @@ function renderProjectDetailPage(container, slug) {
             </div>
           </div>
 
+          <!-- Screenshots & Interface Evidence Grid -->
+          ${screenshots.length > 1 ? `
+            <div style="margin-bottom: 3.5rem;">
+              <div class="eyebrow">INTERFACE EVIDENCE &amp; SCREENSHOTS</div>
+              <h2 class="section-title">Application Screens &amp; Workflows</h2>
+              <div class="project-gallery-grid">
+                ${screenshots.map((img, idx) => `
+                  <div class="project-gallery-item" data-gallery-index="${idx}" style="cursor: pointer;" title="Click to inspect this screen in full resolution">
+                    <div class="project-gallery-img-wrap">
+                      <img src="${img.src}" alt="${img.caption}" loading="lazy" />
+                    </div>
+                    <div class="project-gallery-caption">
+                      <svg width="14" height="14" viewBox="0 0 20 20" fill="var(--color-blue)">
+                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                      </svg>
+                      <span>${img.caption}</span>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
+
           <!-- Technology Section -->
           <div style="background: #FFFFFF; border: 1px solid var(--border-medium); border-radius: var(--radius-lg); padding: 2.5rem; margin-bottom: 3.5rem; box-shadow: var(--shadow-sm);">
             <div class="eyebrow">ENGINEERING STACK</div>
@@ -780,6 +1046,15 @@ function renderProjectDetailPage(container, slug) {
               `).join('')}
             </div>
           </div>
+
+          <!-- Contributions Section -->
+          ${project.contributions ? `
+            <div class="project-contributions-card">
+              <div class="cs-stage-number" style="color: var(--color-blue); font-weight: 800; margin-bottom: 0.4rem;">ENGINEERING CONTRIBUTIONS</div>
+              <h3 class="project-contributions-title">Implementation &amp; Technical Scope</h3>
+              <p class="project-contributions-text">${project.contributions}</p>
+            </div>
+          ` : ''}
 
           <!-- Short Narrative Case Study (Challenge, Approach, Outcome) -->
           <div style="margin-bottom: 3.5rem;">
@@ -845,6 +1120,304 @@ function renderProjectDetailPage(container, slug) {
       </section>
     </div>
   `;
+
+  // Initialize interactive gallery and fullscreen lightbox viewer
+  initProjectGalleryAndLightbox(project, screenshots);
+}
+
+// ==========================================================================
+// INTERACTIVE SCREENSHOT GALLERY & FULLSCREEN LIGHTBOX CONTROLLER
+// ==========================================================================
+function initProjectGalleryAndLightbox(project, screenshots) {
+  if (!screenshots || screenshots.length === 0) return;
+
+  let currentIndex = 0;
+  const total = screenshots.length;
+
+  const frameContainer = document.getElementById('gallery-frame-container');
+  const counterBadge = document.getElementById('gallery-counter-badge');
+  const captionContent = document.getElementById('gallery-caption-content');
+  const prevBtn = document.getElementById('gallery-prev-btn');
+  const nextBtn = document.getElementById('gallery-next-btn');
+  const viewport = document.getElementById('gallery-viewport');
+  const expandBtn = document.getElementById('gallery-expand-btn');
+  const captionZoomLink = document.getElementById('gallery-caption-zoom-link');
+  const thumbCards = document.querySelectorAll('.gallery-thumb-card');
+  const lowerItems = document.querySelectorAll('.project-gallery-item[data-gallery-index]');
+
+  function updateGallery(newIndex, syncModal = true) {
+    currentIndex = (newIndex + total) % total;
+    const current = screenshots[currentIndex];
+    const isMobile = project.id === 'pustakabhrita' || 
+                     (current.src && current.src.toLowerCase().includes('mobile')) ||
+                     (current.caption && current.caption.toLowerCase().includes('mobile'));
+
+    const displayUrl = project.liveDemo
+      ? project.liveDemo.replace(/^https?:\/\//i, '').replace(/\/$/, '')
+      : `${project.slug || project.id}.tetravate.studio`;
+
+    if (frameContainer) {
+      if (isMobile) {
+        frameContainer.innerHTML = `
+          <div class="mockup-mobile-window">
+            <img id="gallery-main-img" class="gallery-main-image" src="${current.src}" alt="${current.alt || current.caption}" />
+          </div>
+        `;
+      } else {
+        frameContainer.innerHTML = `
+          <div class="mockup-presentation-window">
+            <div class="mockup-window-header">
+              <div class="mockup-window-dots">
+                <span class="mockup-dot mockup-dot-red"></span>
+                <span class="mockup-dot mockup-dot-yellow"></span>
+                <span class="mockup-dot mockup-dot-green"></span>
+              </div>
+              <div class="mockup-window-address-bar" id="mockup-window-url" title="${displayUrl}">
+                ${displayUrl}
+              </div>
+            </div>
+            <div class="mockup-window-content">
+              <img id="gallery-main-img" class="gallery-main-image" src="${current.src}" alt="${current.alt || current.caption}" />
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    if (counterBadge) {
+      counterBadge.textContent = `${currentIndex + 1} / ${total}`;
+    }
+
+    if (captionContent) {
+      captionContent.textContent = current.caption;
+    }
+
+    thumbCards.forEach((card, idx) => {
+      if (idx === currentIndex) {
+        card.classList.add('active');
+        card.setAttribute('aria-selected', 'true');
+      } else {
+        card.classList.remove('active');
+        card.setAttribute('aria-selected', 'false');
+      }
+    });
+
+    if (syncModal) {
+      syncLightboxContent();
+    }
+  }
+
+  // Populate initial mockup frame immediately
+  updateGallery(0, false);
+
+  thumbCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const idx = parseInt(card.getAttribute('data-index'), 10);
+      if (!isNaN(idx)) {
+        updateGallery(idx);
+      }
+    });
+  });
+
+  lowerItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const idx = parseInt(item.getAttribute('data-gallery-index'), 10);
+      if (!isNaN(idx)) {
+        updateGallery(idx);
+        openLightbox(idx);
+      }
+    });
+  });
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      updateGallery(currentIndex - 1);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      updateGallery(currentIndex + 1);
+    });
+  }
+
+  if (viewport) {
+    viewport.addEventListener('click', (e) => {
+      if (e.target.closest('.gallery-nav-btn')) return;
+      openLightbox(currentIndex);
+    });
+  }
+
+  if (expandBtn) {
+    expandBtn.addEventListener('click', () => openLightbox(currentIndex));
+  }
+
+  if (captionZoomLink) {
+    captionZoomLink.addEventListener('click', () => openLightbox(currentIndex));
+  }
+
+  // Ensure Lightbox Modal in DOM without stale event listeners
+  let lightboxModal = document.getElementById('tetravate-lightbox-modal');
+  if (lightboxModal) {
+    lightboxModal.remove();
+  }
+
+  lightboxModal = document.createElement('div');
+  lightboxModal.id = 'tetravate-lightbox-modal';
+  lightboxModal.className = 'lightbox-modal';
+  lightboxModal.setAttribute('role', 'dialog');
+  lightboxModal.setAttribute('aria-modal', 'true');
+  lightboxModal.setAttribute('aria-label', 'Fullscreen Screenshot Viewer');
+    lightboxModal.innerHTML = `
+      <div class="lightbox-backdrop" id="lightbox-backdrop" title="Click outside to close"></div>
+      <div class="lightbox-shell">
+        <div class="lightbox-topbar">
+          <div class="lightbox-meta-left">
+            <span class="lightbox-counter-tag" id="lb-counter">1 / 1</span>
+            <span class="lightbox-title-text" id="lb-title">${project.title}</span>
+          </div>
+          <div class="lightbox-controls-right">
+            <button type="button" class="lightbox-close-btn" id="lb-close-btn" aria-label="Close fullscreen viewer (Escape)" title="Close (Escape)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="lightbox-stage" id="lb-stage">
+          <button type="button" class="lightbox-stage-arrow prev" id="lb-prev-btn" aria-label="Previous screenshot (Left arrow)" title="Previous (Left Arrow)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <div class="lightbox-img-wrap" id="lb-img-wrap">
+            <img id="lb-img" class="lightbox-large-img" src="" alt="" />
+          </div>
+
+          <button type="button" class="lightbox-stage-arrow next" id="lb-next-btn" aria-label="Next screenshot (Right arrow)" title="Next (Right Arrow)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div class="lightbox-bottombar">
+          <div class="lightbox-caption-detail" id="lb-caption"></div>
+          <div class="lightbox-keyboard-hint">
+            <kbd>←</kbd> <kbd>→</kbd> Navigate &nbsp;•&nbsp; <kbd>ESC</kbd> Close
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(lightboxModal);
+
+  const lbCounter = document.getElementById('lb-counter');
+  const lbTitle = document.getElementById('lb-title');
+  const lbImg = document.getElementById('lb-img');
+  const lbCaption = document.getElementById('lb-caption');
+  const lbCloseBtn = document.getElementById('lb-close-btn');
+  const lbBackdrop = document.getElementById('lightbox-backdrop');
+  const lbPrevBtn = document.getElementById('lb-prev-btn');
+  const lbNextBtn = document.getElementById('lb-next-btn');
+  const lbStage = document.getElementById('lb-stage');
+
+  function syncLightboxContent() {
+    if (!lightboxModal.classList.contains('is-open')) return;
+    const current = screenshots[currentIndex];
+    if (lbCounter) lbCounter.textContent = `${currentIndex + 1} / ${total}`;
+    if (lbTitle) lbTitle.textContent = `${project.title}`;
+    if (lbCaption) lbCaption.textContent = current.caption;
+    if (lbImg) {
+      lbImg.classList.add('fade-out');
+      setTimeout(() => {
+        lbImg.src = current.src;
+        lbImg.alt = current.alt;
+        lbImg.classList.remove('fade-out');
+      }, 100);
+    }
+
+    if (total <= 1) {
+      if (lbPrevBtn) lbPrevBtn.style.display = 'none';
+      if (lbNextBtn) lbNextBtn.style.display = 'none';
+    } else {
+      if (lbPrevBtn) lbPrevBtn.style.display = 'flex';
+      if (lbNextBtn) lbNextBtn.style.display = 'flex';
+    }
+  }
+
+  function openLightbox(index) {
+    currentIndex = (index + total) % total;
+    lightboxModal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    syncLightboxContent();
+    if (lbCloseBtn) lbCloseBtn.focus();
+
+    if (window._activeLightboxKeyHandler) {
+      window.removeEventListener('keydown', window._activeLightboxKeyHandler);
+    }
+
+    window._activeLightboxKeyHandler = (e) => {
+      if (!lightboxModal.classList.contains('is-open')) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeLightbox();
+      } else if (e.key === 'ArrowLeft' && total > 1) {
+        e.preventDefault();
+        updateGallery(currentIndex - 1);
+      } else if (e.key === 'ArrowRight' && total > 1) {
+        e.preventDefault();
+        updateGallery(currentIndex + 1);
+      }
+    };
+
+    window.addEventListener('keydown', window._activeLightboxKeyHandler);
+  }
+
+  function closeLightbox() {
+    lightboxModal.classList.remove('is-open');
+    document.body.style.overflow = '';
+    if (window._activeLightboxKeyHandler) {
+      window.removeEventListener('keydown', window._activeLightboxKeyHandler);
+      window._activeLightboxKeyHandler = null;
+    }
+  }
+
+  if (lbCloseBtn) lbCloseBtn.onclick = closeLightbox;
+  if (lbBackdrop) lbBackdrop.onclick = closeLightbox;
+  if (lbPrevBtn) {
+    lbPrevBtn.onclick = (e) => {
+      e.stopPropagation();
+      updateGallery(currentIndex - 1);
+    };
+  }
+  if (lbNextBtn) {
+    lbNextBtn.onclick = (e) => {
+      e.stopPropagation();
+      updateGallery(currentIndex + 1);
+    };
+  }
+
+  // Mobile Touch Swipe
+  if (lbStage) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    lbStage.ontouchstart = (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    };
+    lbStage.ontouchend = (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50 && total > 1) {
+        updateGallery(currentIndex + 1);
+      } else if (touchEndX - touchStartX > 50 && total > 1) {
+        updateGallery(currentIndex - 1);
+      }
+    };
+  }
 }
 
 // ==========================================================================
