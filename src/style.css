@@ -1036,6 +1036,47 @@ button {
   gap: 3.5rem;
 }
 
+/* Clean Empty State for Projects */
+.empty-projects-state {
+  text-align: center;
+  padding: 4.5rem 2rem;
+  background: #FFFFFF;
+  border: 1px dashed var(--border-medium);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-projects-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-blue-subtle);
+  color: var(--color-blue);
+  border-radius: var(--radius-full);
+  margin-bottom: 1.25rem;
+}
+
+.empty-projects-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 0.5rem;
+}
+
+.empty-projects-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 480px;
+  line-height: 1.6;
+  margin: 0;
+}
+
 /* Editorial Project Cards */
 .project-card {
   background: #FFFFFF;

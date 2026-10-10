@@ -355,28 +355,41 @@ function renderHomePage(container) {
               <h2 class="section-title" style="margin-bottom: 0;">Selected Studio Projects</h2>
             </div>
             <a href="/work" class="btn btn-primary" data-link>
-              View All 6 Featured Projects →
+              ${featuredProjects.length > 0 ? `View All ${featuredProjects.length} Featured Projects →` : `Explore Selected Work →`}
             </a>
           </div>
 
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;">
-            ${featuredProjects.slice(0, 3).map(p => `
-              <div class="service-card" style="padding: 1.75rem;">
-                <div style="background: #05101E; border: 1px solid var(--border-medium); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 1.25rem;">
-                  <img src="${mockupMap[p.id]}" alt="${p.title}" style="width: 100%; height: 180px; object-fit: cover;" />
+          ${featuredProjects.length > 0 ? `
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;">
+              ${featuredProjects.slice(0, 3).map(p => `
+                <div class="service-card" style="padding: 1.75rem;">
+                  <div style="background: #05101E; border: 1px solid var(--border-medium); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 1.25rem;">
+                    <img src="${mockupMap[p.id]}" alt="${p.title}" style="width: 100%; height: 180px; object-fit: cover;" />
+                  </div>
+                  <div class="project-tag" style="margin-bottom: 0.4rem;">${p.categoryTag}</div>
+                  <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--text-heading); margin-bottom: 0.5rem;">${p.title}</h3>
+                  <p style="font-size: 0.875rem; color: var(--text-body); line-height: 1.5; margin-bottom: 1.25rem; flex: 1;">
+                    ${p.summary}
+                  </p>
+                  <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">${p.techStack.slice(0, 2).join(' · ')}</span>
+                    <a href="/work/${p.slug}" class="service-action-link" data-link>Case Study →</a>
+                  </div>
                 </div>
-                <div class="project-tag" style="margin-bottom: 0.4rem;">${p.categoryTag}</div>
-                <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--text-heading); margin-bottom: 0.5rem;">${p.title}</h3>
-                <p style="font-size: 0.875rem; color: var(--text-body); line-height: 1.5; margin-bottom: 1.25rem; flex: 1;">
-                  ${p.summary}
-                </p>
-                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
-                  <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">${p.techStack.slice(0, 2).join(' · ')}</span>
-                  <a href="/work/${p.slug}" class="service-action-link" data-link>Case Study →</a>
-                </div>
+              `).join('')}
+            </div>
+          ` : `
+            <div class="empty-projects-state">
+              <div class="empty-projects-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
               </div>
-            `).join('')}
-          </div>
+              <h3 class="empty-projects-title">New projects are coming soon.</h3>
+              <p class="empty-projects-desc">Our updated project portfolio is currently in preparation. Check back shortly to explore our latest case studies and shipped products.</p>
+            </div>
+          `}
         </div>
       </section>
 
@@ -516,7 +529,7 @@ function renderWorkPage(container) {
         <div class="container">
           <!-- Filter bar -->
           <div class="work-filter-bar" id="workFilterBar">
-            <button type="button" class="filter-btn active" data-filter="all">All Projects (6)</button>
+            <button type="button" class="filter-btn active" data-filter="all">All Projects (${featuredProjects.length})</button>
             <button type="button" class="filter-btn" data-filter="Business Software">Business Software / POS</button>
             <button type="button" class="filter-btn" data-filter="AI">AI &amp; Analytics</button>
             <button type="button" class="filter-btn" data-filter="E-Commerce">E-Commerce</button>
@@ -558,11 +571,27 @@ function renderWorkProjectCards(filterCategory = 'all') {
   const filtered = filterCategory === 'all'
     ? featuredProjects
     : featuredProjects.filter(p => {
-        const cat = p.category.toLowerCase();
-        const tag = p.categoryTag.toLowerCase();
+        const cat = (p.category || '').toLowerCase();
+        const tag = (p.categoryTag || '').toLowerCase();
         const query = filterCategory.toLowerCase();
         return cat.includes(query) || tag.includes(query);
       });
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="empty-projects-state">
+        <div class="empty-projects-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          </svg>
+        </div>
+        <h3 class="empty-projects-title">New projects are coming soon.</h3>
+        <p class="empty-projects-desc">Our updated project portfolio is currently in preparation. Check back shortly to explore our latest case studies and shipped products.</p>
+      </div>
+    `;
+    return;
+  }
 
   container.innerHTML = filtered.map((project, idx) => {
     const isReversed = idx % 2 === 1 ? 'reversed' : '';
@@ -787,7 +816,7 @@ function renderProjectDetailPage(container, slug) {
             </div>
 
             <a href="/work" class="btn btn-secondary btn-sm" data-link>
-              All 6 Projects
+              All Projects
             </a>
 
             <div class="pagination-item" style="text-align: right;">
