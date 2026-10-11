@@ -7,13 +7,13 @@ export const featuredProjects = [
     "slug": "tetravate-ecommerce",
     "title": "LUXORA — Premium E-Commerce",
     "subtitle": "Centralized Online Storefront & Order Management Platform",
-    "category": "E-Commerce",
-    "categoryTag": "E-Commerce & Web Development",
+    "category": "Web & Digital Products",
+    "categoryTag": "Web & Digital Products / E-Commerce",
     "quickTags": [
-      "Full-Stack Web",
+      "Storefront Architecture",
       "Product Catalog",
-      "Order Management",
-      "Role-Based Access"
+      "Cart & Checkout",
+      "Customer & Admin Portals"
     ],
     "demoLabel": "Live Deployed Demo",
     "statusText": "Live deployed application (Deployed on Vercel)",
@@ -143,15 +143,13 @@ export const featuredProjects = [
     "slug": "mara-dining",
     "title": "MĀRA — Modern Indian Dining",
     "subtitle": "Brand-Led Interactive Dining Experience & Online Reservation Platform",
-    "category": "Web Development",
-    "categoryTag": "Web Development & Hospitality",
+    "category": "Web & Digital Products",
+    "categoryTag": "Web & Digital Products / Hospitality",
     "quickTags": [
-      "React",
-      "TypeScript",
-      "Vite",
-      "Tailwind CSS",
-      "Vercel Deployed",
-      "Live Demo"
+      "Brand Storytelling",
+      "Interactive Menu",
+      "Table Reservations",
+      "Online Order Tray"
     ],
     "demoLabel": "Live Public Demo",
     "statusText": "Live deployed demo / Portfolio project (Deployed on Vercel)",
@@ -284,15 +282,13 @@ export const featuredProjects = [
     "category": "Business Software",
     "categoryTag": "Enterprise Software / EdTech ERP",
     "quickTags": [
-      "React 19",
-      "Supabase",
-      "Row Level Security",
-      "8 User Roles",
-      "Vite 8",
-      "Lucide React"
+      "Institutional Administration",
+      "8 Role Portals",
+      "Student & Faculty Workflows",
+      "Examination System"
     ],
-    "demoLabel": "Live Deployed Demo",
-    "statusText": "Live deployed application (Deployed on Vercel)",
+    "demoLabel": "Live Interactive Demo",
+    "statusText": "Interactive architecture preview & prototype (Deployed on Vercel)",
     "outcomeNarrative": "Fragmented campus software and manual paper registers → Unified role-based ERP centralizing academics, exams, fees, and placements",
     "summary": "A role-based college ERP designed to centralize academic administration, attendance, examinations, fee management, and placement drives across 8 distinct institutional roles.",
     "overview": "Nivara ERP is a comprehensive, role-based college management system designed to centralize academic administration, student services, examinations, financial operations, and placement activities in one unified platform.",
@@ -419,21 +415,21 @@ export const featuredProjects = [
     "id": "mistiq",
     "slug": "mistiq",
     "title": "MISTIQ 2.0",
-    "subtitle": "AI-Powered Engineering Intelligence & Failure Prediction Platform",
-    "category": "AI",
-    "categoryTag": "AI & Engineering Intelligence",
+    "subtitle": "Educational Code Intelligence & Learning-Support Platform",
+    "category": "AI & Analytics",
+    "categoryTag": "AI & Code Intelligence",
     "quickTags": [
-      "Automated Analysis",
-      "Failure Prediction",
+      "Repository Analysis",
+      "Defect Pattern Discovery",
       "Risk Detection",
       "Git Monitoring",
-      "MISTIQ-APR"
+      "Learning Guidance"
     ],
     "demoLabel": "AI Research Platform",
-    "statusText": "AI/ML Engineering Platform (Research & Prototyping)",
-    "outcomeNarrative": "Isolated static linter warnings → Continuous repository failure lifecycle tracking and ML next-failure prediction",
-    "summary": "An AI-powered engineering intelligence platform that continuously analyzes software repositories, detects code risks, tracks finding lifecycles, and predicts future failure categories.",
-    "overview": "MISTIQ 2.0 continuously analyzes software repositories, identifies engineering risks, tracks project evolution, detects recurring failure patterns, and predicts potential future failure categories using historical project observations.",
+    "statusText": "Educational learning-support & code intelligence prototype",
+    "outcomeNarrative": "Isolated linter errors without context → Continuous repository defect analysis and proactive code reliability guidance",
+    "summary": "An educational code intelligence platform that helps students and developers analyze software projects, understand defect patterns, catch configuration risks early, and improve code reliability.",
+    "overview": "MISTIQ 2.0 is an educational learning-support platform designed to help students, educators, and developers inspect project health. By analyzing source code repositories, it identifies recurring defect patterns, tracks finding lifecycles, and provides actionable guidance to help teams build dependable software.",
     "highlights": [
       "Evidence-based Project Failure DNA profiling across security, testing, and architecture",
       "MISTIQ-APR predictive algorithm forecasting emerging repository failure categories",
@@ -555,23 +551,21 @@ export const featuredProjects = [
   {
     "id": "saksha",
     "slug": "saksha",
-    "title": "SAKSHA",
-    "subtitle": "AI Crime Intelligence & Criminal Network Analytics Platform",
-    "category": "AI",
+    "title": "SAKSHA / DRISHYAM",
+    "subtitle": "AI Crime Intelligence & Geospatial Analytics Platform",
+    "category": "AI & Analytics",
     "categoryTag": "AI & Crime Analytics",
     "quickTags": [
-      "Network Graph",
-      "FastAPI",
-      "PostgreSQL",
-      "Geospatial",
-      "SIH26189",
-      "Entity Mapping"
+      "Entity Link Graphs",
+      "Geospatial Analytics",
+      "Timeline Reconstruction",
+      "Pattern Discovery"
     ],
-    "demoLabel": "SIH Academic Project",
-    "statusText": "Academic / Hackathon Project (SIH26189 Problem Statement)",
+    "demoLabel": "Analytics Prototype",
+    "statusText": "Crime intelligence & geospatial analytics prototype (SIH26189 Concept)",
     "outcomeNarrative": "Fragmented FIR logs and disconnected phone records → Multi-hop criminal network graph with geospatial and timeline intelligence",
-    "summary": "An AI-assisted crime intelligence platform designed for law enforcement to explore criminal records, map multi-hop entity relationships, and visualize geospatial incident patterns.",
-    "overview": "SAKSHA is an AI-powered crime intelligence and analytics platform designed to help law enforcement personnel analyze criminal records, identify relationships between entities, and discover potentially significant connections across multiple investigations.",
+    "summary": "An AI crime intelligence and geospatial analytics platform prototype designed to organize investigative records, map multi-hop entity relationships, and visualize regional incident patterns.",
+    "overview": "SAKSHA (DRISHYAM) is an AI crime intelligence and geospatial analytics platform prototype designed to help investigators analyze case records, discover multi-hop connections across suspects and vehicles, and identify regional crime patterns on interactive maps.",
     "highlights": [
       "Developed for the Smart India Hackathon (SIH26189) problem statement",
       "Multi-hop relationship discovery across suspects, phone numbers, and vehicles",
@@ -699,22 +693,20 @@ export const featuredProjects = [
     "category": "Business Software",
     "categoryTag": "Business Software / POS",
     "quickTags": [
-      "React 19",
-      "TypeScript 5.9",
-      "Tailwind CSS v4",
-      "Supabase",
-      "Capacitor Android",
-      "Dexie.js Offline"
+      "Retail Billing POS",
+      "Offline Continuity",
+      "WhatsApp Invoices",
+      "Stock & Khata Ledger"
     ],
-    "demoLabel": "Android & Web App",
-    "statusText": "Functional application with Android and browser support",
-    "outcomeNarrative": "Manual paper bills and ledger books → Rapid mobile counter billing with offline IndexedDB storage and WhatsApp invoices",
+    "demoLabel": "Android & Web POS",
+    "statusText": "In-store retail deployment with Android and browser support",
+    "outcomeNarrative": "Manual paper bills and ledger books → Rapid mobile counter billing with offline continuity and WhatsApp invoices",
     "summary": "A mobile-first retail management application digitizing billing, inventory, customer khata credit tracking, and WhatsApp invoicing with resilient offline continuity.",
     "overview": "A mobile-first billing and inventory management application developed for AGS Masalas to simplify daily retail operations. The application manages product stock, generates customer bills, tracks sales, maintains customer details, and handles pending payments.",
     "highlights": [
-      "Built with React 19, TypeScript 5.9, Tailwind CSS v4, and packaged for Android via Capacitor",
-      "100% offline continuity powered by Dexie.js IndexedDB and Zustand persist",
-      "Instant WhatsApp invoice delivery and thermal/PDF print support",
+      "Sub-second counter checkout optimized for busy retail store counters",
+      "100% offline continuity keeping billing operations active during network drops",
+      "Instant WhatsApp invoice delivery and thermal/PDF receipt support",
       "Centralized retail dashboard tracking daily sales, inventory levels, and customer credit"
     ],
     "features": [
@@ -839,12 +831,10 @@ export const featuredProjects = [
     "category": "Business Software",
     "categoryTag": "Business Software / EdTech",
     "quickTags": [
-      "React",
-      "TypeScript",
-      "Vite",
-      "Capacitor Android",
-      "SQLite Local",
-      "WhatsApp Reminders"
+      "Offline Student Records",
+      "Tuition Fee Ledger",
+      "WhatsApp Reminders",
+      "Mobile Utility"
     ],
     "demoLabel": "Mobile Prototype",
     "statusText": "Offline-first application project / prototype",
@@ -965,7 +955,7 @@ export const featuredProjects = [
     "slug": "aga-ai-assistant",
     "title": "AGA AI Assistant",
     "subtitle": "Context-Aware Conversational Intelligence & Task Assistance Platform",
-    "category": "AI",
+    "category": "AI & Analytics",
     "categoryTag": "AI & Conversational Assistant",
     "quickTags": [
       "Generative AI",
@@ -1102,14 +1092,13 @@ export const featuredProjects = [
     "slug": "tetravate-workspace",
     "title": "Tetravate Workspace",
     "subtitle": "Collaborative Software Development Platform & Engineering Workflow",
-    "category": "Developer Tools",
-    "categoryTag": "Developer Tools & Team Collaboration",
+    "category": "Web & Digital Products",
+    "categoryTag": "Web & Developer Tools",
     "quickTags": [
-      "GitHub Organization",
-      "Git Workflow",
-      "Branching Strategy",
-      "CI/CD & Vercel",
-      "Code Review"
+      "Repository Architecture",
+      "Git Team Workflow",
+      "CI/CD Pipelines",
+      "Code Governance"
     ],
     "demoLabel": "Active Workspace",
     "statusText": "Active development workspace (Shared GitHub development environment)",
@@ -1231,8 +1220,8 @@ export const featuredProjects = [
     "slug": "oivu",
     "title": "Oivu — Rest Point Network",
     "subtitle": "Dedicated Civic Rest-Point & Sanitation Discovery Platform for Gig Workers",
-    "category": "Mobile & Civic Welfare",
-    "categoryTag": "Mobile / Civic Welfare Technology / PWA",
+    "category": "Mobile & Social Impact",
+    "categoryTag": "Mobile & Social Impact / PWA",
     "quickTags": [
       "Lightweight PWA",
       "Accessible UI",
@@ -1374,41 +1363,41 @@ export const services = [
     id: "ecommerce",
     categoryKey: "E-Commerce",
     title: "E-Commerce",
-    shortDesc: "Online stores and digital commerce experiences focused on conversion.",
-    detail: "Bespoke digital storefronts with fluid product discovery, persistent micro-carts, and friction-free checkout flows that drive sales without plugin bloat.",
+    shortDesc: "Online stores and digital commerce storefronts focused on customer conversion.",
+    detail: "Bespoke digital storefronts with fluid product discovery, persistent carts, and streamlined checkout flows that convert visitors into paying customers.",
     capabilities: [
       "Custom storefront architecture",
       "Fast faceted product search",
       "Secure payment gateway integrations",
       "Inventory & order sync pipelines"
     ],
-    idealFor: "Retailers and brands who want a lightning-fast shopping experience that outperforms off-the-shelf templates."
+    idealFor: "Retailers and brands seeking a fast, dependable shopping experience tailored to their customers."
   },
   {
     id: "business-systems",
     categoryKey: "Business Systems",
     title: "Business Systems",
-    shortDesc: "Billing, inventory, CRM and internal platforms tailored to real operations.",
-    detail: "Custom software engineered around how your business actually operates. Point-of-sale systems, customer ledgers, and operational tools your team can master on day one.",
+    shortDesc: "Billing, inventory, customer ledgers and internal software tailored to real operations.",
+    detail: "Custom software engineered around how your business actually operates. Point-of-sale systems, customer balance ledgers, and operational tools your team can master immediately.",
     capabilities: [
-      "Point of Sale (POS) & billing",
-      "Inventory tracking & auto-alerts",
-      "Customer credit (Khata) ledgers",
-      "Offline-first operational tools"
+      "Point of Sale (POS) & counter billing",
+      "Live stock tracking & low-inventory alerts",
+      "Customer credit (Khata) ledger tracking",
+      "Offline continuity when internet is unavailable"
     ],
-    idealFor: "Retailers, distributors, and businesses replacing chaotic paper ledgers and fragmented spreadsheets."
+    idealFor: "Retailers, distributors, and business owners replacing manual paper ledgers and fragmented spreadsheets."
   },
   {
     id: "saas-products",
     categoryKey: "SaaS Products",
     title: "SaaS Products",
-    shortDesc: "Dashboards, platforms and subscription products built for scalability.",
-    detail: "Full-cycle SaaS architecture from authentication and role-based permissions to real-time analytics dashboards and billing tier management.",
+    shortDesc: "Web platforms, customer dashboards and subscription software built for reliability.",
+    detail: "Full-cycle web application architecture from secure authentication and team permissions to real-time operational dashboards and subscription management.",
     capabilities: [
-      "Multi-tenant application architecture",
-      "Real-time analytics & telemetry",
-      "Role-Based Access Control (RBAC)",
-      "Subscription billing & audit logs"
+      "Multi-user application architecture",
+      "Real-time analytics & activity monitoring",
+      "Role-based team permissions and access controls",
+      "Subscription billing & audit logging"
     ],
     idealFor: "Founders and enterprises building software products designed to scale to thousands of users."
   },
@@ -1416,13 +1405,13 @@ export const services = [
     id: "mobile-apps",
     categoryKey: "Mobile Applications",
     title: "Mobile Applications",
-    shortDesc: "Cross-platform mobile experiences designed for touch and real-world utility.",
-    detail: "Mobile applications that focus on clear tasks, smooth navigation, and dependable offline capabilities. We design apps that respect battery life, storage constraints, and human attention.",
+    shortDesc: "Cross-platform mobile applications designed for touch and real-world utility.",
+    detail: "Mobile applications that focus on clear tasks, smooth navigation, and dependable offline capabilities. We design apps that respect battery life, storage constraints, and user convenience.",
     capabilities: [
       "Cross-platform iOS and Android builds",
       "Offline-first mobile workflows",
       "Field & workforce utility apps",
-      "Tactile, accessible touch interfaces"
+      "Accessible, touch-friendly interfaces"
     ],
     idealFor: "Teams with on-the-move staff, field operations, or consumer mobile services."
   },
@@ -1430,13 +1419,13 @@ export const services = [
     id: "ai-ml",
     categoryKey: "AI & ML",
     title: "AI & ML",
-    shortDesc: "AI-powered applications, intelligent automation and predictive analytics.",
-    detail: "We do not bolt on AI for marketing hype. We implement machine learning and GenAI where they create concrete value: spatial clustering, document intelligence, intelligent assistants, and automation.",
+    shortDesc: "Practical AI solutions, workflow automation and intelligent data insights.",
+    detail: "We apply artificial intelligence where it creates concrete operational value: intelligent categorization, document data extraction, location pattern analysis, and smart workflow assistants.",
     capabilities: [
-      "Applied ML & spatial clustering",
-      "GenAI & intelligent workflow agents",
-      "Explainable classification systems",
-      "Automated data extraction & cleanup"
+      "Location clustering & pattern discovery",
+      "Intelligent assistants & practical task automation",
+      "Automated document data extraction & cleanup",
+      "Transparent categorization & recommendation systems"
     ],
     idealFor: "Organizations with rich data seeking verified patterns, automation, and decision-making clarity."
   }

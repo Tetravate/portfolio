@@ -255,6 +255,13 @@ function handleRoute(pathname) {
 function updateNavActiveState(currentPath) {
   const links = document.querySelectorAll('.nav-link, .mobile-nav-link');
   const normalized = (!currentPath || currentPath === '/') ? '/' : currentPath;
+
+  if (normalized === '/contact') {
+    document.body.classList.add('on-contact-page');
+  } else {
+    document.body.classList.remove('on-contact-page');
+  }
+
   links.forEach(link => {
     const href = link.getAttribute('href');
     const isActive = href === '/'
@@ -709,11 +716,10 @@ function renderWorkPage(container) {
           <!-- Filter bar -->
           <div class="work-filter-bar" id="workFilterBar">
             <button type="button" class="filter-btn active" data-filter="all">All Projects (${featuredProjects.length})</button>
-            <button type="button" class="filter-btn" data-filter="AI">AI &amp; Analytics</button>
             <button type="button" class="filter-btn" data-filter="Business Software">Business Software</button>
-            <button type="button" class="filter-btn" data-filter="E-Commerce">E-Commerce</button>
-            <button type="button" class="filter-btn" data-filter="Web Development">Web Development</button>
-            <button type="button" class="filter-btn" data-filter="Developer Tools">Developer Tools</button>
+            <button type="button" class="filter-btn" data-filter="AI & Analytics">AI &amp; Analytics</button>
+            <button type="button" class="filter-btn" data-filter="Web & Digital Products">Web &amp; Digital Products</button>
+            <button type="button" class="filter-btn" data-filter="Mobile & Social Impact">Mobile &amp; Social Impact</button>
           </div>
 
           <div class="projects-grid" id="projectsList">
@@ -753,6 +759,19 @@ function renderWorkProjectCards(filterCategory = 'all') {
       const cat = (p.category || '').toLowerCase();
       const tag = (p.categoryTag || '').toLowerCase();
       const query = filterCategory.toLowerCase();
+
+      if (query.includes('business')) {
+        return cat.includes('business') || tag.includes('business') || tag.includes('pos') || tag.includes('erp');
+      }
+      if (query.includes('ai') || query.includes('analytics')) {
+        return cat.includes('ai') || cat.includes('analytics') || tag.includes('ai') || tag.includes('analytics');
+      }
+      if (query.includes('web') || query.includes('digital')) {
+        return cat.includes('web') || cat.includes('digital') || tag.includes('web') || tag.includes('digital') || tag.includes('commerce') || cat.includes('commerce') || cat.includes('developer');
+      }
+      if (query.includes('mobile') || query.includes('social') || query.includes('civic')) {
+        return cat.includes('mobile') || cat.includes('social') || cat.includes('civic') || tag.includes('mobile') || tag.includes('social') || tag.includes('civic');
+      }
       return cat.includes(query) || tag.includes(query);
     });
 
@@ -1613,9 +1632,6 @@ function renderProcessPage(container) {
               <div class="process-quote-text">"Good products do not begin with code. They begin with understanding."</div>
               <div class="process-quote-sub">The Tetravate Product &amp; Engineering Principle</div>
             </div>
-            <a href="/contact" class="btn btn-primary" data-link>
-              Start a Project
-            </a>
           </div>
         </div>
       </section>
@@ -1943,6 +1959,34 @@ function renderAboutPage(container) {
               </div>
             </div>
           </div>
+
+          <!-- Client Working Principles (Clear, practical client commitments) -->
+          <div class="working-principles-wrapper">
+            <div class="section-header text-center" style="margin-bottom: 2rem;">
+              <div class="eyebrow">WORKING PRINCIPLES</div>
+              <h3 class="section-title">How We Collaborate</h3>
+              <p class="section-subtitle" style="margin: 0 auto;">
+                Clear expectations, honest communication, and practical engineering commitments we uphold for every client.
+              </p>
+            </div>
+            <div class="working-principles-grid">
+              <div class="working-principle-card">
+                <div class="principle-number">01</div>
+                <h4 class="principle-title">Technology That Respects Your Budget</h4>
+                <p class="principle-desc">We believe good solutions start with understanding your needs, priorities, and budget. We aim to recommend practical approaches, explain costs clearly, and avoid unnecessary complexity.</p>
+              </div>
+              <div class="working-principle-card">
+                <div class="principle-number">02</div>
+                <h4 class="principle-title">Support Beyond Launch</h4>
+                <p class="principle-desc">Delivering a product is an important milestone, not the end of the journey. We discuss maintenance, updates, and ongoing support so clients understand what their product needs after launch and what those responsibilities may cost.</p>
+              </div>
+              <div class="working-principle-card">
+                <div class="principle-number">03</div>
+                <h4 class="principle-title">Built Together, Delivered With Care</h4>
+                <p class="principle-desc">We value clear communication, collaboration, and honest feedback throughout the development process. Our goal is to deliver a solution that meets the agreed requirements and gives clients confidence in the product they receive.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -2264,7 +2308,7 @@ function renderContactPage(container) {
                 </a>
               </div>
 
-              <!-- WhatsApp Channels in Studio Channels Panel -->
+              <!-- WhatsApp Channels in Studio Channels Panel (Single Official WhatsApp Section) -->
               <div class="contact-whatsapp-hub-card">
                 <div class="contact-whatsapp-hub-header">
                   <div class="contact-social-icon whatsapp-icon-bg">
@@ -2280,6 +2324,9 @@ function renderContactPage(container) {
                     <span class="contact-social-handle">Chat with the founders</span>
                   </div>
                 </div>
+                <p style="font-size: 0.8125rem; color: var(--text-dark-muted); margin: 0.75rem 0 0.85rem 0; line-height: 1.5;">
+                  Prefer discussing directly via chat? Connect with our founders on WhatsApp — both numbers open with a prefilled project brief ready to send:
+                </p>
                 <div class="contact-whatsapp-hub-buttons">
                   <a href="${WHATSAPP_PRIMARY_URL}" target="_blank" rel="noopener noreferrer" class="contact-whatsapp-sub-pill primary" aria-label="Chat on WhatsApp with Primary contact ${WHATSAPP_PRIMARY_NUMBER}">
                     <span class="sub-pill-tag">Primary</span>
@@ -2312,47 +2359,6 @@ function renderContactPage(container) {
               <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem;">
                 Fill in the details below. We will analyze your requirements and reply directly to your email within 24 hours.
               </p>
-
-              <!-- Prefer WhatsApp Contact Option (Alongside Email Inquiry Form) -->
-              <div class="contact-whatsapp-option-card">
-                <div class="contact-whatsapp-option-header">
-                  <div class="contact-whatsapp-option-title-wrap">
-                    <span class="contact-whatsapp-inline-badge">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.59 20.15 12.04 20.15C10.64 20.15 9.27 19.78 8.08 19.07L7.79 18.9L4.69 19.72L5.52 16.7L5.32 16.39C4.54 15.14 4.12 13.7 4.12 11.91C4.12 7.37 7.82 3.67 12.05 3.67ZM8.73 7.34C8.57 7.34 8.31 7.4 8.09 7.64C7.87 7.88 7.24 8.47 7.24 9.68C7.24 10.89 8.12 12.06 8.24 12.22C8.36 12.38 9.97 14.88 12.44 15.95C14.5 16.84 14.92 16.66 15.37 16.62C15.82 16.58 16.82 16.03 17.03 15.45C17.23 14.86 17.23 14.36 17.17 14.26C17.11 14.15 16.96 14.09 16.73 13.98C16.51 13.86 15.43 13.33 15.22 13.26C15.02 13.18 14.87 13.14 14.72 13.37C14.57 13.6 14.14 14.11 14.01 14.26C13.88 14.41 13.75 14.43 13.53 14.32C13.3 14.2 12.58 13.97 11.73 13.21C11.07 12.62 10.62 11.89 10.49 11.67C10.37 11.45 10.48 11.33 10.59 11.22C10.69 11.12 10.82 10.95 10.93 10.82C11.05 10.69 11.09 10.6 11.16 10.45C11.24 10.3 11.2 10.17 11.14 10.05C11.09 9.94 10.63 8.81 10.44 8.35C10.25 7.91 10.06 7.97 9.92 7.96C9.79 7.96 9.64 7.95 9.49 7.95C9.33 7.95 9.08 8.01 8.86 8.25L8.73 7.34Z"/>
-                      </svg>
-                      Direct Messaging
-                    </span>
-                    <h4 class="contact-whatsapp-option-heading">Prefer WhatsApp? Chat with our team.</h4>
-                  </div>
-                  <span class="contact-whatsapp-pill-active">Instant Response</span>
-                </div>
-                <p class="contact-whatsapp-option-desc">
-                  Prefer discussing directly via chat? Connect with our founders on WhatsApp — both numbers open with a prefilled project brief ready to send:
-                </p>
-                <div class="contact-whatsapp-channels-grid">
-                  <a href="${WHATSAPP_PRIMARY_URL}" target="_blank" rel="noopener noreferrer" class="contact-whatsapp-channel-btn primary-channel" aria-label="Open Primary WhatsApp chat with ${WHATSAPP_PRIMARY_NUMBER}">
-                    <div class="whatsapp-channel-meta">
-                      <span class="whatsapp-channel-badge primary">Primary</span>
-                      <span class="whatsapp-channel-num">${WHATSAPP_PRIMARY_NUMBER}</span>
-                    </div>
-                    <span class="whatsapp-channel-cta">
-                      <span>Chat</span>
-                      <span class="channel-arrow" aria-hidden="true">&rarr;</span>
-                    </span>
-                  </a>
-                  <a href="${WHATSAPP_SECONDARY_URL}" target="_blank" rel="noopener noreferrer" class="contact-whatsapp-channel-btn secondary-channel" aria-label="Open Secondary WhatsApp chat with ${WHATSAPP_SECONDARY_NUMBER}">
-                    <div class="whatsapp-channel-meta">
-                      <span class="whatsapp-channel-badge secondary">Secondary</span>
-                      <span class="whatsapp-channel-num">${WHATSAPP_SECONDARY_NUMBER}</span>
-                    </div>
-                    <span class="whatsapp-channel-cta">
-                      <span>Chat</span>
-                      <span class="channel-arrow" aria-hidden="true">&rarr;</span>
-                    </span>
-                  </a>
-                </div>
-              </div>
 
               <!-- Submission Error Banner -->
               <div class="form-status-banner form-error-banner" id="inquiryErrorBanner" style="display: none;" role="alert">
