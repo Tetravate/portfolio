@@ -290,7 +290,7 @@ function renderHomePage(container) {
             </div>
 
             <h1 class="hero-title">
-              FROM THOUGHT<br/><span>TO THING.</span>
+              FROM THOUGHT<br class="desktop-br"/> <span>TO THING.</span>
             </h1>
             <p class="hero-lead">
               We turn ideas and real-world problems into useful digital products. Technology is the tool — people, ideas, and real problems are the reason.
@@ -415,7 +415,7 @@ function renderHomePage(container) {
       <!-- SHORT TETRAVATE INTRODUCTION & CAPABILITIES OVERVIEW -->
       <section class="section section-secondary">
         <div class="container">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center;">
+          <div class="philosophy-grid">
             <div>
               <div class="eyebrow">// PHILOSOPHY</div>
               <h2 style="font-size: 2.25rem; font-weight: 800; color: var(--color-navy); margin-bottom: 1rem; line-height: 1.2;">
@@ -465,7 +465,7 @@ function renderHomePage(container) {
       <!-- SELECTED WORK PREVIEW (TOP 3 PROJECTS LEADING TO /work) -->
       <section class="section">
         <div class="container">
-          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem;">
+          <div class="section-header-flex">
             <div>
               <div class="eyebrow">FEATURED WORK</div>
               <h2 class="section-title" style="margin-bottom: 0;">Selected Studio Projects</h2>
@@ -476,23 +476,61 @@ function renderHomePage(container) {
           </div>
 
           ${featuredProjects.length > 0 ? `
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;">
-              ${featuredProjects.slice(0, 3).map(p => `
-                <div class="service-card" style="padding: 1.75rem; display: flex; flex-direction: column;">
-                  <div style="background: #F4F8FF; border: 1px solid #D9E2EF; border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 1.25rem; height: 180px; display: flex; align-items: center; justify-content: center; padding: 0.65rem; box-sizing: border-box;">
-                    <img src="${resolveImageSrc(p.coverImage || p.primaryImage) || mockupMap[p.id]}" alt="${p.title}" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; object-position: center; border-radius: 4px;" />
-                  </div>
-                  <div class="project-tag" style="margin-bottom: 0.4rem; align-self: flex-start;">${p.categoryTag}</div>
-                  <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--text-heading); margin-bottom: 0.5rem;">${p.title}</h3>
-                  <p style="font-size: 0.875rem; color: var(--text-body); line-height: 1.5; margin-bottom: 1.25rem; flex: 1;">
-                    ${p.summary}
-                  </p>
-                  <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 1rem; margin-top: auto;">
-                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">${p.techStack.slice(0, 2).join(' · ')}</span>
-                    <a href="/work/${p.slug}" class="service-action-link" data-link>Case Study →</a>
-                  </div>
-                </div>
-              `).join('')}
+            <div class="home-projects-grid">
+              ${featuredProjects.slice(0, 3).map(p => {
+                const mockupSrc = resolveImageSrc(p.coverImage || p.primaryImage) || mockupMap[p.id];
+                const isMobile = p.id === 'pustakabhrita' || (mockupSrc && mockupSrc.toLowerCase().includes('mobile'));
+                return `
+                  <article class="project-portfolio-card project-card" id="home-project-${p.slug}">
+                    <div class="project-portfolio-media-wrapper">
+                      <div class="project-portfolio-media">
+                        ${mockupSrc ? `
+                          <img 
+                            src="${mockupSrc}" 
+                            alt="${p.title} Interface &amp; Architecture Overview" 
+                            loading="lazy" 
+                            class="project-portfolio-img ${isMobile ? 'img-contain' : ''}" 
+                          />
+                        ` : `
+                          <div class="project-portfolio-placeholder">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                              <line x1="8" y1="21" x2="16" y2="21"></line>
+                              <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                            <span>Studio Case Study</span>
+                          </div>
+                        `}
+                        ${p.demoLabel ? `
+                          <span class="project-card-badge">
+                            <span class="status-pulse-dot"></span>
+                            ${p.demoLabel}
+                          </span>
+                        ` : ''}
+                      </div>
+                    </div>
+                    <div class="project-portfolio-body">
+                      <div class="project-portfolio-header">
+                        <span class="project-tag">${p.categoryTag}</span>
+                      </div>
+                      <h3 class="project-portfolio-title">
+                        <a href="/work/${p.slug}" data-link>${p.title}</a>
+                      </h3>
+                      <p class="project-portfolio-desc">
+                        ${p.summary}
+                      </p>
+                      <div class="project-portfolio-tech">
+                        ${p.techStack.slice(0, 4).map(t => `<span class="tech-chip">${t}</span>`).join('')}
+                      </div>
+                      <div class="project-portfolio-actions">
+                        <a href="/work/${p.slug}" class="btn btn-primary project-btn-primary" data-link>
+                          Explore Case Study →
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                `;
+              }).join('')}
             </div>
           ` : `
             <div class="empty-projects-state">
@@ -512,7 +550,7 @@ function renderHomePage(container) {
       <!-- WHAT WE BUILD PREVIEW (LEADING TO /services) -->
       <section class="section section-secondary">
         <div class="container">
-          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem;">
+          <div class="section-header-flex">
             <div>
               <div class="eyebrow">CAPABILITIES</div>
               <h2 class="section-title" style="margin-bottom: 0;">What We Build</h2>
@@ -653,7 +691,7 @@ function renderWorkPage(container) {
             <button type="button" class="filter-btn" data-filter="Developer Tools">Developer Tools</button>
           </div>
 
-          <div class="projects-list" id="projectsList">
+          <div class="projects-grid" id="projectsList">
             <!-- Project Cards Rendered Below -->
           </div>
         </div>
@@ -709,79 +747,64 @@ function renderWorkProjectCards(filterCategory = 'all') {
     return;
   }
 
-  container.innerHTML = filtered.map((project, idx) => {
-    const isReversed = idx % 2 === 1 ? 'reversed' : '';
+  container.innerHTML = filtered.map(project => {
     const mockupSrc = resolveImageSrc(project.coverImage || project.primaryImage) || mockupMap[project.id];
     const isMobile = project.id === 'pustakabhrita' || (mockupSrc && mockupSrc.toLowerCase().includes('mobile'));
-    const address = project.liveDemo ? project.liveDemo.replace('https://', '').replace(/\/$/, '') : `${project.slug}.tetravate.studio`;
 
     return `
-      <article class="project-card ${isReversed}" id="project-card-${project.slug}">
-        <div class="project-visual-side">
-          ${isMobile ? `
-            <div class="mockup-mobile-window" style="max-height: 350px;">
-              <img src="${mockupSrc}" alt="${project.title} Interface &amp; Architecture Overview" loading="lazy" />
-            </div>
-          ` : `
-            <div class="project-mockup-frame">
-              <div class="mockup-window-header">
-                <div class="mockup-window-dots">
-                  <span class="mockup-dot mockup-dot-red"></span>
-                  <span class="mockup-dot mockup-dot-yellow"></span>
-                  <span class="mockup-dot mockup-dot-green"></span>
-                </div>
-                <div class="mockup-window-address-bar">${address}</div>
-              </div>
-              <div class="mockup-window-content">
-                <img src="${mockupSrc}" alt="${project.title} Interface &amp; Architecture Overview" loading="lazy" />
-              </div>
-            </div>
-          `}
-        </div>
-        <div class="project-content-side">
-          <div class="project-meta-row">
-            <span class="project-tag">${project.categoryTag}</span>
-            ${project.demoLabel ? `<span class="project-pill-tag project-status-pill">${project.demoLabel}</span>` : ''}
-            ${project.quickTags ? project.quickTags.map(t => `<span class="project-pill-tag">${t}</span>`).join('') : ''}
-          </div>
-          <h3 class="project-title">${project.title}</h3>
-          <p class="project-subtitle">${project.subtitle}</p>
-          
-          ${project.outcomeNarrative ? `
-            <div class="project-outcome-frame">
-              <span class="project-outcome-label">
-                <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+      <article class="project-portfolio-card project-card" id="project-card-${project.slug}">
+        <div class="project-portfolio-media-wrapper">
+          <div class="project-portfolio-media">
+            ${mockupSrc ? `
+              <img 
+                src="${mockupSrc}" 
+                alt="${project.title} Interface &amp; Architecture Overview" 
+                loading="lazy" 
+                class="project-portfolio-img ${isMobile ? 'img-contain' : ''}" 
+              />
+            ` : `
+              <div class="project-portfolio-placeholder">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
                 </svg>
-                Core Workflow Impact
+                <span>Studio Case Study</span>
+              </div>
+            `}
+            ${project.demoLabel ? `
+              <span class="project-card-badge">
+                <span class="status-pulse-dot"></span>
+                ${project.demoLabel}
               </span>
-              <div class="project-outcome-text">${project.outcomeNarrative}</div>
-            </div>
-          ` : ''}
+            ` : ''}
+          </div>
+        </div>
 
-          <p class="project-summary">${project.summary}</p>
-          
-          <ul class="project-highlights-list">
-            ${project.highlights.slice(0, 4).map(hl => `
-              <li class="project-hl-item">
-                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                </svg>
-                <span>${hl}</span>
-              </li>
-            `).join('')}
-          </ul>
-
-          <div class="project-tech-chips">
-            ${project.techStack.map(t => `<span class="tech-chip">${t}</span>`).join('')}
+        <div class="project-portfolio-body">
+          <div class="project-portfolio-header">
+            <span class="project-tag">${project.categoryTag}</span>
           </div>
 
-          <div class="project-card-actions">
-            <a href="/work/${project.slug}" class="btn btn-primary" data-link>
-              View Full Case Study →
+          <h3 class="project-portfolio-title">
+            <a href="/work/${project.slug}" data-link>${project.title}</a>
+          </h3>
+
+          <p class="project-portfolio-desc">
+            ${project.summary}
+          </p>
+
+          <div class="project-portfolio-tech">
+            ${project.techStack.slice(0, 5).map(t => `<span class="tech-chip">${t}</span>`).join('')}
+            ${project.techStack.length > 5 ? `<span class="tech-chip tech-chip-more">+${project.techStack.length - 5}</span>` : ''}
+          </div>
+
+          <div class="project-portfolio-actions">
+            <a href="/work/${project.slug}" class="btn btn-primary project-btn-primary" data-link>
+              Explore Case Study →
             </a>
             ${project.liveDemo ? `
-              <a href="${project.liveDemo}" target="_blank" rel="noopener" class="btn btn-secondary">
+              <a href="${project.liveDemo}" target="_blank" rel="noopener" class="btn btn-secondary project-btn-secondary">
                 Live Demo ↗
               </a>
             ` : ''}
@@ -976,7 +999,7 @@ function renderProjectDetailPage(container, slug) {
           </div>
 
           <!-- The Problem & The Solution -->
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 3.5rem;">
+          <div class="cs-problem-solution-grid">
             <div style="background: #FFFFFF; border: 1px solid var(--border-medium); border-radius: var(--radius-md); padding: 2.25rem; box-shadow: var(--shadow-sm);">
               <div class="cs-stage-number" style="color: var(--color-blue); font-weight: 800;">THE PROBLEM</div>
               <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--color-navy); margin-bottom: 0.75rem;">What needed to be solved?</h3>
@@ -1034,7 +1057,7 @@ function renderProjectDetailPage(container, slug) {
             <h2 style="font-size: 1.75rem; font-weight: 800; color: var(--text-heading); margin-bottom: 1.5rem;">
               Technologies Used in this Architecture
             </h2>
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+            <div class="cs-tech-grid">
               ${Object.entries(project.techGrouped).map(([key, val]) => `
                 <div style="background: #F8FAFC; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem;">
                   <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-blue); text-transform: uppercase; margin-bottom: 0.35rem; font-weight: 700; letter-spacing: 0.06em;">
@@ -1441,7 +1464,7 @@ function renderServicesPage(container) {
 
       <section class="section">
         <div class="container">
-          <div class="services-grid" style="grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+          <div class="services-grid services-page-grid">
             ${services.map(s => `
               <div class="service-card" style="padding: 2.5rem;">
                 <div class="service-icon-wrap">
@@ -1540,7 +1563,7 @@ function renderProcessPage(container) {
         <div class="container">
           <div style="display: flex; flex-direction: column; gap: 2.5rem; max-width: 900px; margin: 0 auto;">
             ${processSteps.map((step, idx) => `
-              <div style="display: flex; gap: 2rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem; transition: all var(--transition-normal);" class="process-detailed-card">
+              <div class="process-detailed-card">
                 <div style="font-family: var(--font-mono); font-size: 2.75rem; font-weight: 800; color: var(--color-blue-light); line-height: 1; flex-shrink: 0;">
                   ${step.step}
                 </div>
@@ -1611,7 +1634,7 @@ function renderAboutPage(container) {
       <!-- Story & Philosophy -->
       <section class="section section-secondary">
         <div class="container">
-          <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3.5rem; align-items: center;">
+          <div class="about-story-grid">
             <div>
               <div class="eyebrow">OUR STORY</div>
               <h2 style="font-size: 2.25rem; font-weight: 800; color: var(--text-heading); margin-bottom: 1.25rem; line-height: 1.2;">
@@ -1654,9 +1677,10 @@ function renderAboutPage(container) {
           </div>
 
           <!-- Dual Layout: Radial Network (Left) + Interactive Inspection Showcase Card (Right) -->
-          <div class="founders-dual-layout">
+          <div class="founders-dual-layout founders-radial-desktop">
             <!-- Left: Radial Topology Network -->
-            <div class="founders-network-wrapper">
+            <div class="founders-network-stage">
+              <div class="founders-network-wrapper">
               <svg class="founders-svg-canvas" viewBox="0 0 580 500" aria-hidden="true">
                 <!-- Concentric Orbit Rings -->
                 <circle class="network-orbit-ring" cx="290" cy="250" r="125" />
@@ -1750,6 +1774,7 @@ function renderAboutPage(container) {
                 </div>
               </div>
             </div>
+          </div>
 
             <!-- Right: Inspection Showcase Card -->
             <div class="founders-showcase-panel">
@@ -1798,6 +1823,62 @@ function renderAboutPage(container) {
                 </div>
               </div>
             </div>
+          </div>
+
+          <!-- Mobile Founders Stack (Clean, Accessible Cards for Viewports <= 768px) -->
+          <div class="founders-mobile-stack">
+            <!-- Studio Core Overview Card -->
+            <div class="founder-mobile-card founder-mobile-core-card">
+              <div class="founder-mobile-card-header">
+                <div class="founder-mobile-badge-group">
+                  <span class="showcase-pill">STUDIO CORE</span>
+                </div>
+                <div class="founder-mobile-socials">
+                  <a href="https://www.linkedin.com/company/tetravate/" target="_blank" rel="noopener noreferrer" class="founder-mobile-social-link" aria-label="Tetravate LinkedIn">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                  </a>
+                  <a href="https://github.com/orgs/Tetravate" target="_blank" rel="noopener noreferrer" class="founder-mobile-social-link" aria-label="Tetravate GitHub">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="founder-mobile-domain">STUDIO CORE &bull; FROM THOUGHT TO THING</div>
+              <h3 class="founder-mobile-name">TETRAVATE</h3>
+              <p class="founder-mobile-bio">${companyInfo.bio}</p>
+              <div class="founder-mobile-skills">
+                ${companyInfo.skills.map(s => `<span class="showcase-skill-chip">${s}</span>`).join('')}
+              </div>
+            </div>
+
+            <!-- 5 Founders Cards -->
+            ${teamMembers.map(founder => `
+              <div class="founder-mobile-card">
+                <div class="founder-mobile-card-header">
+                  <div class="founder-mobile-badge-group">
+                    <span class="satellite-num-badge">${founder.number}</span>
+                    <span class="showcase-pill">${(founder.role || 'FOUNDER').toUpperCase()}</span>
+                  </div>
+                  <div class="founder-mobile-socials">
+                    ${founder.linkedin ? `
+                      <a href="${founder.linkedin}" target="_blank" rel="noopener noreferrer" class="founder-mobile-social-link" aria-label="${founder.name} LinkedIn">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                      </a>
+                    ` : ''}
+                    ${founder.github ? `
+                      <a href="${founder.github}" target="_blank" rel="noopener noreferrer" class="founder-mobile-social-link" aria-label="${founder.name} GitHub">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                      </a>
+                    ` : ''}
+                  </div>
+                </div>
+                <div class="founder-mobile-domain">${founder.focus || founder.tagline}</div>
+                <h3 class="founder-mobile-name">${founder.name}</h3>
+                <p class="founder-mobile-bio">${founder.bio}</p>
+                <div class="founder-mobile-skills">
+                  ${founder.skills.map(s => `<span class="showcase-skill-chip">${s}</span>`).join('')}
+                </div>
+              </div>
+            `).join('')}
           </div>
 
           <!-- Core Brand Principles Grid (3 on 1st line, 2 centered on 2nd line) -->
