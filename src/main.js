@@ -304,7 +304,7 @@ function renderHomePage(container) {
             <div class="hero-badge-group">
               <div class="hero-badge">
                 <span class="hero-badge-dot"></span>
-                TETRAVATE 2.0 &bull; PRODUCT STUDIO
+                TETRAVATE
               </div>
             </div>
 
