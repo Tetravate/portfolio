@@ -27,6 +27,8 @@ import imgPustakabhritaMobile from './assets/projects/pustakabhrita-tuition-mobi
 import imgAgaInterface from './assets/projects/aga-ai-assistant-interface.jpg';
 import imgAgaChat from './assets/projects/aga-ai-assistant-chat.jpg';
 import imgWorkspaceGithub from './assets/projects/tetravate-workspace-github.png';
+import imgRestora1 from './assets/projects/restora-1.jpeg';
+import imgRestora2 from './assets/projects/restora-2.jpeg';
 import imgOivuMockup from './assets/mockup-oivu.svg';
 import logoEmblem from './assets/logo-emblem.png';
 
@@ -59,7 +61,7 @@ const mockupMap = {
   'pustakabhrita': imgPustakabhritaMobile,
   'aga-ai-assistant': imgAgaInterface,
   'tetravate-workspace': imgWorkspaceGithub,
-  'oivu': imgOivuMockup,
+  'oivu': imgRestora1,
 };
 
 const assetMap = {
@@ -68,6 +70,7 @@ const assetMap = {
   '/projects/mara-restaurant-hero.jpg': imgMaraHero,
   '/projects/mara-restaurant-menu.jpg': imgMaraMenu,
   '/projects/nivara-erp-dashboard.jpg': imgNivaraDashboard,
+  '/projects/nivara-erp-dashboard.jpeg': imgNivaraDashboard,
   '/projects/nivara-erp-login.jpg': imgNivaraLogin,
   '/projects/mistiq-platform-analysis.png': imgMistiqAnalysis,
   '/projects/mistiq-platform-dna.jpg': imgMistiqDna,
@@ -79,7 +82,9 @@ const assetMap = {
   '/projects/aga-ai-assistant-interface.jpg': imgAgaInterface,
   '/projects/aga-ai-assistant-chat.jpg': imgAgaChat,
   '/projects/tetravate-workspace-github.png': imgWorkspaceGithub,
-  '/assets/mockup-oivu.svg': imgOivuMockup,
+  '/projects/restora-1.jpeg': imgRestora1,
+  '/projects/restora-2.jpeg': imgRestora2,
+  '/assets/mockup-oivu.svg': imgRestora1,
 };
 
 export function resolveImageSrc(src) {
@@ -153,7 +158,8 @@ const galleryMap = {
     { src: imgWorkspaceGithub, caption: 'Central GitHub Organization & Team Development Workflow' }
   ],
   'oivu': [
-    { src: imgOivuMockup, caption: 'Zero-Barrier Rest Hub & Amenity Discovery Interface' }
+    { src: imgRestora1, caption: 'Rest Point Discovery & Worker Navigation Interface' },
+    { src: imgRestora2, caption: 'Live GPS Location, Corridor Search & Verified Amenities Map' }
   ]
 };
 

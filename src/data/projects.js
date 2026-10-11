@@ -1324,19 +1324,28 @@ export const featuredProjects = [
       }
     },
     "mockupType": "rest-network",
-    "coverImage": "/assets/mockup-oivu.svg",
-    "primaryImage": "/assets/mockup-oivu.svg",
+    "coverImage": "/projects/restora-1.jpeg",
+    "primaryImage": "/projects/restora-1.jpeg",
     "screenshots": [
       {
-        "src": "/assets/mockup-oivu.svg",
-        "alt": "Oivu — Dedicated Rest-Point Network Platform for Gig Workers",
-        "caption": "Zero-Barrier Rest Hub & Amenity Discovery Interface"
+        "src": "/projects/restora-1.jpeg",
+        "alt": "Oivu — Rest-Point Network Platform — Worker Dashboard & Rest Recommendations",
+        "caption": "Rest Point Discovery & Worker Navigation Interface"
+      },
+      {
+        "src": "/projects/restora-2.jpeg",
+        "alt": "Oivu — Rest-Point Network Platform — Live GPS Corridor Search and Verified Amenities Map",
+        "caption": "Live GPS Location, Corridor Search & Verified Amenities Map"
       }
     ],
     "gallery": [
       {
-        "src": "/assets/mockup-oivu.svg",
-        "caption": "Zero-Barrier Rest Hub & Amenity Discovery Interface"
+        "src": "/projects/restora-1.jpeg",
+        "caption": "Rest Point Discovery & Worker Navigation Interface"
+      },
+      {
+        "src": "/projects/restora-2.jpeg",
+        "caption": "Live GPS Location, Corridor Search & Verified Amenities Map"
       }
     ],
     "liveDemo": null,
