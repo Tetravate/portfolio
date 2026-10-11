@@ -27,6 +27,7 @@ import imgPustakabhritaMobile from './assets/projects/pustakabhrita-tuition-mobi
 import imgAgaInterface from './assets/projects/aga-ai-assistant-interface.jpg';
 import imgAgaChat from './assets/projects/aga-ai-assistant-chat.jpg';
 import imgWorkspaceGithub from './assets/projects/tetravate-workspace-github.png';
+import logoEmblem from './assets/logo-emblem.png';
 
 // ==========================================================================
 // GOOGLE APPS SCRIPT WEB APP CONFIGURATION (PROJECT INQUIRY FORM)
@@ -1719,7 +1720,7 @@ function renderAboutPage(container) {
 
               <!-- Central Core Node -->
               <div class="central-core-node is-active" role="button" tabindex="0" aria-label="Tetravate Company Overview">
-                <img src="/src/assets/logo-emblem.png" alt="Tetravate Core Emblem" class="central-core-logo-img" />
+                <img src="${logoEmblem}" alt="Tetravate Core Emblem" class="central-core-logo-img" onerror="this.onerror=null; this.src='/logo-emblem.png';" />
                 <span class="central-core-title">TETRAVATE</span>
                 <span class="central-core-pill">
                   <span class="core-dot"></span>CORE
@@ -2329,14 +2330,20 @@ function renderContactPage(container) {
                       <span class="whatsapp-channel-badge primary">Primary</span>
                       <span class="whatsapp-channel-num">${WHATSAPP_PRIMARY_NUMBER}</span>
                     </div>
-                    <span class="whatsapp-channel-cta">Chat on WhatsApp &rarr;</span>
+                    <span class="whatsapp-channel-cta">
+                      <span>Chat</span>
+                      <span class="channel-arrow" aria-hidden="true">&rarr;</span>
+                    </span>
                   </a>
                   <a href="${WHATSAPP_SECONDARY_URL}" target="_blank" rel="noopener noreferrer" class="contact-whatsapp-channel-btn secondary-channel" aria-label="Open Secondary WhatsApp chat with ${WHATSAPP_SECONDARY_NUMBER}">
                     <div class="whatsapp-channel-meta">
                       <span class="whatsapp-channel-badge secondary">Secondary</span>
                       <span class="whatsapp-channel-num">${WHATSAPP_SECONDARY_NUMBER}</span>
                     </div>
-                    <span class="whatsapp-channel-cta">Chat on WhatsApp &rarr;</span>
+                    <span class="whatsapp-channel-cta">
+                      <span>Chat</span>
+                      <span class="channel-arrow" aria-hidden="true">&rarr;</span>
+                    </span>
                   </a>
                 </div>
               </div>
