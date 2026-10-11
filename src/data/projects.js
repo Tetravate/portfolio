@@ -1225,6 +1225,133 @@ export const featuredProjects = [
     ],
     "liveDemo": null,
     "github": null
+  },
+  {
+    "id": "oivu",
+    "slug": "oivu",
+    "title": "Oivu — Rest Point Network",
+    "subtitle": "Dedicated Civic Rest-Point & Sanitation Discovery Platform for Gig Workers",
+    "category": "Mobile & Civic Welfare",
+    "categoryTag": "Mobile / Civic Welfare Technology / PWA",
+    "quickTags": [
+      "Lightweight PWA",
+      "Accessible UI",
+      "Zero Login",
+      "Offline Map"
+    ],
+    "demoLabel": "Civic PWA Prototype",
+    "statusText": "Civic welfare prototype & PWA concept architecture",
+    "outcomeNarrative": "Severe on-road fatigue and facility denial → Instant low-bandwidth access to verified worker rest hubs",
+    "summary": "A human-centered digital platform concept mapping verified rest points equipped with clean drinking water, washrooms, shade, and phone charging for delivery riders and cab operators.",
+    "overview": "Millions of gig delivery workers spend 10 to 14 hours a day on the road with no access to basic sanitary facilities or safe places to rest between orders. Oivu was conceptualized to turn community spaces into verified rest hubs through an ultra-accessible, zero-friction interface.",
+    "highlights": [
+      "Real-time map concept of verified shelter hubs with amenity tags",
+      "Crowdsourced status updates on water and charging availability",
+      "Low-bandwidth, multi-language interface designed for on-road mobile use",
+      "Partner dashboard concept for local businesses offering rest spaces",
+      "Zero account barriers for immediate on-demand discovery"
+    ],
+    "features": [
+      {
+        "num": "01",
+        "title": "Verified Amenity Map",
+        "desc": "Location interface designed to index clean water, charging, shade, and restrooms."
+      },
+      {
+        "num": "02",
+        "title": "Zero Login Friction",
+        "desc": "Direct location lookup without mandatory registration or account barriers."
+      },
+      {
+        "num": "03",
+        "title": "Ultra-Lightweight PWA Target",
+        "desc": "Engineered under 400KB target to load smoothly on budget phones and 2G/3G signals."
+      },
+      {
+        "num": "04",
+        "title": "Crowdsourced Status Reports",
+        "desc": "Facility condition reporting concept to keep amenity availability current."
+      },
+      {
+        "num": "05",
+        "title": "Partner Space Portal",
+        "desc": "Registration workflow concept for cafes and fuel stations offering shelter."
+      },
+      {
+        "num": "06",
+        "title": "Offline Zone Caching",
+        "desc": "Local caching architecture designed to retain operational district maps through mobile dead zones."
+      }
+    ],
+    "techStack": [
+      "Progressive Web App (PWA)",
+      "Tailored Location Engine",
+      "Supabase Realtime",
+      "Multi-Language UI",
+      "Accessible Touch System"
+    ],
+    "techGrouped": {
+      "frontend": "Progressive Web App (PWA) · Touch-First High Contrast UI",
+      "backend": "Supabase Realtime · Edge Functions",
+      "database": "PostgreSQL · Local Browser Geo Cache",
+      "localization": "Lightweight Multi-Language Translation Engine"
+    },
+    "contributions": "Architected ultra-lightweight PWA prototype under 400KB for budget mobile hardware, engineered high-contrast outdoor interface with oversized tap targets, structured zero-login immediate geo-discovery with debounced GPS polling to preserve phone battery, designed offline zone caching for patchy network zones, and categorized essential amenity tagging for clean water, washrooms, and charging.",
+    "caseStudy": {
+      "problem": "Food delivery riders, parcel couriers, and ride-hailing drivers spend long hours in extreme weather conditions. Despite being the backbone of urban logistics, they are routinely denied access to basic restrooms, clean water, and shelter in commercial complexes where they pick up deliveries.",
+      "goal": "Design a lightweight, universally accessible platform that helps gig workers locate safe, welcoming rest spaces nearby, verify available amenities in advance, and report facility conditions in real time.",
+      "challenge": "Riders use entry-level smartphones with limited data plans and battery constraints. They cannot navigate complicated apps or read dense text while on short delivery breaks in bright sunlight.",
+      "approach": "We designed Oivu with high-contrast UI, ultra-large tap targets, minimal data consumption, and zero friction. We categorized facilities using intuitive icons (water, washroom, charging, shade, bike parking) so that language is never a barrier.",
+      "solution": "A mobile Progressive Web App (PWA) prototype displaying nearest verified hubs with live amenity status, operating hours, and walking/riding directions. A lightweight partner portal concept allows cafes, community centers, and fuel stations to register their spaces as verified rest points.",
+      "technicalDecisions": "We architected the client as an ultra-lightweight PWA (under 400KB initial bundle target) that functions in low-connectivity areas with locally cached maps of recent operational zones. Geo-queries are debounced to preserve smartphone battery.",
+      "result": "Created a functional, dignifying digital framework concept connecting urban gig workers with compassionate physical infrastructure. Positioned as a social-impact prototype showing how software can address human welfare.",
+      "learned": "Social impact software must prioritize extreme simplicity and empathy. If a worker under 40-degree heat cannot find clean water in two taps, the technology has failed regardless of the code behind it.",
+      "metrics": [
+        {
+          "label": "App Architecture",
+          "value": "< 400 KB PWA",
+          "note": "Technical Benchmark: Designed for budget mobile hardware and minimal data consumption"
+        },
+        {
+          "label": "Key Amenities",
+          "value": "4 Core Facilities",
+          "note": "Design Specification: Categorized for drinking water, restrooms, charging, and shaded rest"
+        },
+        {
+          "label": "Access Architecture",
+          "value": "Zero Login Required",
+          "note": "Implemented Principle: Immediate geolocation discovery without account registration friction"
+        },
+        {
+          "label": "Project Classification",
+          "value": "Civic PWA Prototype",
+          "note": "Design Intention: Human-centered welfare platform engineered to reduce on-road heat and fatigue"
+        }
+      ],
+      "narrative": {
+        "challenge": "Gig delivery workers lack basic access to clean water, rest, and charging during 12-hour shifts.",
+        "approach": "Ultra-lightweight PWA prototype, zero login barriers, high-contrast outdoor UI, verified hub pins.",
+        "outcome": "A functional civic prototype platform connecting workers with dignified resting infrastructure."
+      }
+    },
+    "mockupType": "rest-network",
+    "coverImage": "/assets/mockup-oivu.svg",
+    "primaryImage": "/assets/mockup-oivu.svg",
+    "screenshots": [
+      {
+        "src": "/assets/mockup-oivu.svg",
+        "alt": "Oivu — Dedicated Rest-Point Network Platform for Gig Workers",
+        "caption": "Zero-Barrier Rest Hub & Amenity Discovery Interface"
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/assets/mockup-oivu.svg",
+        "caption": "Zero-Barrier Rest Hub & Amenity Discovery Interface"
+      }
+    ],
+    "liveDemo": null,
+    "github": null
   }
 ];
 
@@ -1501,10 +1628,10 @@ export const teamMembers = [
 
 export const achievements = [
   {
-    badge: "COMPETITIVE EXCELLENCE",
-    title: "2nd Prize — Hack Odyssey 4.0",
-    description: "Awarded 2nd Prize in Hack Odyssey 4.0 for engineering a high-impact technical solution under strict hackathon evaluation criteria.",
-    type: "Award"
+    badge: "CIVIC WELFARE TECHNOLOGY",
+    title: "Oivu — Rest Point Network",
+    description: "Architected an ultra-lightweight (<400KB) PWA prototype enabling zero-barrier rest point and clean water discovery for urban gig workers.",
+    type: "Civic"
   },
   {
     badge: "COMMERCIAL DEPLOYMENT",
@@ -1519,10 +1646,10 @@ export const achievements = [
     type: "Architecture"
   },
   {
-    badge: "SOCIAL PURPOSE",
-    title: "Civic Welfare Technology",
-    description: "Designed Oivu to provide zero-barrier rest point discovery for urban gig workers, engineered under 400KB for budget mobile hardware.",
-    type: "Civic"
+    badge: "INSTITUTIONAL PLATFORM",
+    title: "Campus ERP Architecture",
+    description: "Engineered Nivara ERP, unifying academic scheduling, student records, and institutional administration into a multi-tier web application.",
+    type: "Architecture"
   }
 ];
 
@@ -1532,11 +1659,5 @@ export const testimonials = [
     author: "Retail Business Partner",
     role: "AGS Masalas",
     context: "In-Store POS Deployment"
-  },
-  {
-    quote: "Transparent, fact-based engineering. They understand the difference between practical AI that works and hype that wastes time.",
-    author: "Technical Mentor & Reviewer",
-    role: "Hack Odyssey 4.0 Evaluation",
-    context: "Engineering Review"
   }
 ];

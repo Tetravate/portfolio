@@ -27,6 +27,7 @@ import imgPustakabhritaMobile from './assets/projects/pustakabhrita-tuition-mobi
 import imgAgaInterface from './assets/projects/aga-ai-assistant-interface.jpg';
 import imgAgaChat from './assets/projects/aga-ai-assistant-chat.jpg';
 import imgWorkspaceGithub from './assets/projects/tetravate-workspace-github.png';
+import imgOivuMockup from './assets/mockup-oivu.svg';
 import logoEmblem from './assets/logo-emblem.png';
 
 // ==========================================================================
@@ -58,6 +59,7 @@ const mockupMap = {
   'pustakabhrita': imgPustakabhritaMobile,
   'aga-ai-assistant': imgAgaInterface,
   'tetravate-workspace': imgWorkspaceGithub,
+  'oivu': imgOivuMockup,
 };
 
 const assetMap = {
@@ -77,6 +79,7 @@ const assetMap = {
   '/projects/aga-ai-assistant-interface.jpg': imgAgaInterface,
   '/projects/aga-ai-assistant-chat.jpg': imgAgaChat,
   '/projects/tetravate-workspace-github.png': imgWorkspaceGithub,
+  '/assets/mockup-oivu.svg': imgOivuMockup,
 };
 
 export function resolveImageSrc(src) {
@@ -148,6 +151,9 @@ const galleryMap = {
   ],
   'tetravate-workspace': [
     { src: imgWorkspaceGithub, caption: 'Central GitHub Organization & Team Development Workflow' }
+  ],
+  'oivu': [
+    { src: imgOivuMockup, caption: 'Zero-Barrier Rest Hub & Amenity Discovery Interface' }
   ]
 };
 
@@ -1663,7 +1669,7 @@ function renderAboutPage(container) {
                 Too much software is created for marketing hype rather than real operational utility. We wanted to build a product studio grounded in first principles: listening to users on the shop counter, observing where workers lose time, and engineering software that works with zero lag.
               </p>
               <p style="font-size: 1.05rem; line-height: 1.65; color: var(--text-body);">
-                From our roots in hackathons to in-store business deployments, our focus has always been the same: turn ideas and real-world problems into useful digital products.
+                From civic welfare platforms like Oivu to in-store business deployments, our focus has always been the same: turn ideas and real-world problems into useful digital products.
               </p>
             </div>
 
@@ -1947,7 +1953,7 @@ function renderAboutPage(container) {
             <div class="eyebrow">VERIFIABLE EVIDENCE</div>
             <h2 class="section-title">Achievements &amp; Proof</h2>
             <p class="section-subtitle">
-              We never manufacture marketing statistics. Genuine hackathon achievements, verified store deployments, and research-backed systems.
+              We never manufacture marketing statistics. Verified civic welfare platforms, active store deployments, and research-backed systems.
             </p>
           </div>
 
@@ -1970,7 +1976,7 @@ function renderAboutPage(container) {
             <div class="eyebrow">PARTNER PERSPECTIVES</div>
             <h2 class="section-title">What People Say</h2>
             <p class="section-subtitle">
-              Verified feedback from business operators and technical mentors.
+              Verified feedback from business operators and partners.
             </p>
           </div>
 
