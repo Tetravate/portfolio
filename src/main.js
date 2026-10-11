@@ -2298,6 +2298,12 @@ function renderContactPage(container) {
               </div>
 
               <form id="inquiryForm" novalidate>
+                <!-- Honeypot Anti-Spam field (Hidden from humans, bots fill it out) -->
+                <div style="display: none !important;" aria-hidden="true">
+                  <label for="inquiryWebsite">Website</label>
+                  <input type="text" id="inquiryWebsite" name="website" tabindex="-1" autocomplete="off" />
+                </div>
+
                 <div class="form-row">
                   <div class="form-group">
                     <label for="inquiryName" class="form-label">Your Name *</label>
@@ -2527,6 +2533,18 @@ function initContactForm() {
 
     if (!isValid) return;
 
+    const honeypotInput = document.getElementById('inquiryWebsite');
+    if (honeypotInput && honeypotInput.value.trim().length > 0) {
+      // Spam bot detected: silent drop without sending email
+      form.reset();
+      form.style.display = 'none';
+      if (successBanner) {
+        successBanner.style.display = 'block';
+        successBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+      return;
+    }
+
     // Check if Google Apps Script URL has been configured
     const isPlaceholderUrl = !GOOGLE_APPS_SCRIPT_INQUIRY_URL ||
       GOOGLE_APPS_SCRIPT_INQUIRY_URL.includes('YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') ||
@@ -2556,6 +2574,7 @@ function initContactForm() {
       message: messageInput.value.trim(),
       budget: budgetInput.value.trim() || 'Flexible / To be discussed',
       timeline: timelineInput.value.trim() || 'Flexible',
+      website: (honeypotInput ? honeypotInput.value.trim() : ''),
       submittedAt: new Date().toISOString()
     };
 
