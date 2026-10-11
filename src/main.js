@@ -28,6 +28,14 @@ import imgAgaInterface from './assets/projects/aga-ai-assistant-interface.jpg';
 import imgAgaChat from './assets/projects/aga-ai-assistant-chat.jpg';
 import imgWorkspaceGithub from './assets/projects/tetravate-workspace-github.png';
 
+// ==========================================================================
+// GOOGLE APPS SCRIPT WEB APP CONFIGURATION (PROJECT INQUIRY FORM)
+// ==========================================================================
+// 1. In your Google Apps Script project, deploy as Web App (Deploy -> New deployment)
+// 2. Set "Execute as": "Me" and "Who has access": "Anyone"
+// 3. Paste the deployed Web App URL below (e.g., https://script.google.com/macros/s/AKfycb.../exec)
+export const GOOGLE_APPS_SCRIPT_INQUIRY_URL = 'https://script.google.com/macros/s/AKfycbwFNF5WtffNhm-p3UlqH4e4bW_SnizCNXw5GTIADvNdboDcexQS9jw1S7blbmi0dS4l/exec';
+
 // Project screenshot and gallery resolvers
 const mockupMap = {
   'tetravate-ecommerce': imgEcommerceHero,
@@ -232,8 +240,8 @@ function updateNavActiveState(currentPath) {
   const normalized = (!currentPath || currentPath === '/') ? '/' : currentPath;
   links.forEach(link => {
     const href = link.getAttribute('href');
-    const isActive = href === '/' 
-      ? normalized === '/' 
+    const isActive = href === '/'
+      ? normalized === '/'
       : normalized.startsWith(href);
     if (isActive) {
       link.classList.add('active');
@@ -478,9 +486,9 @@ function renderHomePage(container) {
           ${featuredProjects.length > 0 ? `
             <div class="home-projects-grid">
               ${featuredProjects.slice(0, 3).map(p => {
-                const mockupSrc = resolveImageSrc(p.coverImage || p.primaryImage) || mockupMap[p.id];
-                const isMobile = p.id === 'pustakabhrita' || (mockupSrc && mockupSrc.toLowerCase().includes('mobile'));
-                return `
+    const mockupSrc = resolveImageSrc(p.coverImage || p.primaryImage) || mockupMap[p.id];
+    const isMobile = p.id === 'pustakabhrita' || (mockupSrc && mockupSrc.toLowerCase().includes('mobile'));
+    return `
                   <article class="project-portfolio-card project-card" id="home-project-${p.slug}">
                     <div class="project-portfolio-media-wrapper">
                       <div class="project-portfolio-media">
@@ -530,7 +538,7 @@ function renderHomePage(container) {
                     </div>
                   </article>
                 `;
-              }).join('')}
+  }).join('')}
             </div>
           ` : `
             <div class="empty-projects-state">
@@ -725,11 +733,11 @@ function renderWorkProjectCards(filterCategory = 'all') {
   const filtered = filterCategory === 'all'
     ? featuredProjects
     : featuredProjects.filter(p => {
-        const cat = (p.category || '').toLowerCase();
-        const tag = (p.categoryTag || '').toLowerCase();
-        const query = filterCategory.toLowerCase();
-        return cat.includes(query) || tag.includes(query);
-      });
+      const cat = (p.category || '').toLowerCase();
+      const tag = (p.categoryTag || '').toLowerCase();
+      const query = filterCategory.toLowerCase();
+      return cat.includes(query) || tag.includes(query);
+    });
 
   if (filtered.length === 0) {
     container.innerHTML = `
@@ -1172,9 +1180,9 @@ function initProjectGalleryAndLightbox(project, screenshots) {
   function updateGallery(newIndex, syncModal = true) {
     currentIndex = (newIndex + total) % total;
     const current = screenshots[currentIndex];
-    const isMobile = project.id === 'pustakabhrita' || 
-                     (current.src && current.src.toLowerCase().includes('mobile')) ||
-                     (current.caption && current.caption.toLowerCase().includes('mobile'));
+    const isMobile = project.id === 'pustakabhrita' ||
+      (current.src && current.src.toLowerCase().includes('mobile')) ||
+      (current.caption && current.caption.toLowerCase().includes('mobile'));
 
     const displayUrl = project.liveDemo
       ? project.liveDemo.replace(/^https?:\/\//i, '').replace(/\/$/, '')
@@ -1294,7 +1302,7 @@ function initProjectGalleryAndLightbox(project, screenshots) {
   lightboxModal.setAttribute('role', 'dialog');
   lightboxModal.setAttribute('aria-modal', 'true');
   lightboxModal.setAttribute('aria-label', 'Fullscreen Screenshot Viewer');
-    lightboxModal.innerHTML = `
+  lightboxModal.innerHTML = `
       <div class="lightbox-backdrop" id="lightbox-backdrop" title="Click outside to close"></div>
       <div class="lightbox-shell">
         <div class="lightbox-topbar">
@@ -1338,7 +1346,7 @@ function initProjectGalleryAndLightbox(project, screenshots) {
         </div>
       </div>
     `;
-    document.body.appendChild(lightboxModal);
+  document.body.appendChild(lightboxModal);
 
   const lbCounter = document.getElementById('lb-counter');
   const lbTitle = document.getElementById('lb-title');
@@ -2255,8 +2263,39 @@ function renderContactPage(container) {
                 Project Inquiry Form
               </h3>
               <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.75rem;">
-                Fill in the details below. We will analyze your requirements and reply within 24 hours.
+                Fill in the details below. We will analyze your requirements and reply directly to your email within 24 hours.
               </p>
+
+              <!-- Submission Error Banner -->
+              <div class="form-status-banner form-error-banner" id="inquiryErrorBanner" style="display: none;" role="alert">
+                <div class="form-status-header">
+                  <svg class="form-status-icon error-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                  </svg>
+                  <div class="form-status-title">Unable to Send Inquiry</div>
+                </div>
+                <p class="form-status-desc" id="inquiryErrorMsg">
+                  We could not deliver your message right now. Please try again or write directly to <a href="mailto:tetravate@gmail.com">tetravate@gmail.com</a>.
+                </p>
+              </div>
+
+              <!-- Confirmed Success Banner -->
+              <div class="form-status-banner form-success-banner" id="inquirySuccessBanner" style="display: none;" role="status">
+                <div class="form-status-header">
+                  <svg class="form-status-icon success-icon" width="22" height="22" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  <div class="form-status-title">Inquiry Sent Successfully!</div>
+                </div>
+                <p class="form-status-desc" id="inquirySuccessMsg">
+                  Thank you for reaching out. Your project brief has been delivered to the Tetravate team. We will review your requirements and reply directly to your email within 24 hours.
+                </p>
+                <div style="margin-top: 1.25rem;">
+                  <button type="button" class="btn btn-secondary btn-sm" id="sendAnotherInquiryBtn">
+                    Send Another Inquiry
+                  </button>
+                </div>
+              </div>
 
               <form id="inquiryForm" novalidate>
                 <div class="form-row">
@@ -2313,29 +2352,19 @@ function renderContactPage(container) {
                   </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
-                  Send Project Inquiry
-                  <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                <button type="submit" class="btn btn-primary btn-lg" id="inquirySubmitBtn" style="width: 100%;">
+                  <span class="btn-text">Send Project Inquiry</span>
+                  <svg class="btn-icon" width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
                   </svg>
+                  <span class="btn-spinner" style="display: none;" aria-hidden="true">
+                    <svg class="animate-spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-opacity="0.25"></circle>
+                      <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
                 </button>
               </form>
-
-              <!-- Success State Banner -->
-              <div class="form-success-banner" id="inquirySuccessBanner">
-                <div class="form-success-title">✓ Thank you for reaching out!</div>
-                <p class="form-success-desc">
-                  Your project brief has been recorded. You can also send this inquiry directly via your default email client or WhatsApp below:
-                </p>
-                <div class="form-success-actions">
-                  <a href="#" class="btn btn-primary btn-sm" id="openEmailClientBtn" target="_blank" rel="noopener">
-                    Send via Email Client
-                  </a>
-                  <a href="#" class="btn btn-secondary btn-sm" id="openWhatsAppBtn" target="_blank" rel="noopener">
-                    Send via WhatsApp
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -2439,13 +2468,29 @@ function initHeroPathPipeline() {
 
 
 
-// Contact Form Handler
+// Contact Form Handler (Connected to Google Apps Script Web App)
 function initContactForm() {
   const form = document.getElementById('inquiryForm');
+  const submitBtn = document.getElementById('inquirySubmitBtn');
   const successBanner = document.getElementById('inquirySuccessBanner');
+  const errorBanner = document.getElementById('inquiryErrorBanner');
+  const errorMsgEl = document.getElementById('inquiryErrorMsg');
+  const sendAnotherBtn = document.getElementById('sendAnotherInquiryBtn');
+
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  if (sendAnotherBtn) {
+    sendAnotherBtn.addEventListener('click', () => {
+      if (successBanner) successBanner.style.display = 'none';
+      if (errorBanner) errorBanner.style.display = 'none';
+      form.style.display = 'block';
+      form.reset();
+      const firstInput = document.getElementById('inquiryName');
+      if (firstInput) firstInput.focus();
+    });
+  }
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const nameInput = document.getElementById('inquiryName');
@@ -2456,11 +2501,13 @@ function initContactForm() {
     const budgetInput = document.getElementById('inquiryBudget');
     const timelineInput = document.getElementById('inquiryTimeline');
 
-    let isValid = true;
-
     // Reset error states
     document.querySelectorAll('.form-input, .form-textarea').forEach(el => el.classList.remove('input-error'));
     document.querySelectorAll('.form-error-msg').forEach(el => el.style.display = 'none');
+    if (errorBanner) errorBanner.style.display = 'none';
+    if (successBanner) successBanner.style.display = 'none';
+
+    let isValid = true;
 
     if (!nameInput.value.trim()) {
       showError(nameInput, 'Please tell us your name.');
@@ -2480,41 +2527,100 @@ function initContactForm() {
 
     if (!isValid) return;
 
-    const companyStr = companyInput.value.trim() ? ` (${companyInput.value.trim()})` : '';
-    const mailSubject = encodeURIComponent(`Tetravate Project Inquiry: ${serviceInput.value} from ${nameInput.value.trim()}${companyStr}`);
-    const mailBody = encodeURIComponent(
-      `Hello Tetravate Team,\n\n` +
-      `Name: ${nameInput.value.trim()}\n` +
-      `Email: ${emailInput.value.trim()}\n` +
-      `Company: ${companyInput.value.trim() || 'Independent'}\n` +
-      `Service Needed: ${serviceInput.value}\n` +
-      `Budget: ${budgetInput.value.trim() || 'Flexible / To be discussed'}\n` +
-      `Timeline: ${timelineInput.value.trim() || 'Flexible'}\n\n` +
-      `Project Brief:\n${messageInput.value.trim()}\n\n` +
-      `Looking forward to discussing next steps.`
-    );
+    // Check if Google Apps Script URL has been configured
+    const isPlaceholderUrl = !GOOGLE_APPS_SCRIPT_INQUIRY_URL ||
+      GOOGLE_APPS_SCRIPT_INQUIRY_URL.includes('YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') ||
+      GOOGLE_APPS_SCRIPT_INQUIRY_URL.trim() === '';
 
-    const whatsappText = encodeURIComponent(
-      `Hello Tetravate! My name is ${nameInput.value.trim()}${companyStr}. I'm reaching out regarding a ${serviceInput.value} project. Brief: ${messageInput.value.trim()}`
-    );
-
-    const emailBtn = document.getElementById('openEmailClientBtn');
-    const whatsappBtn = document.getElementById('openWhatsAppBtn');
-
-    if (emailBtn) {
-      emailBtn.href = `mailto:tetravate@gmail.com?subject=${mailSubject}&body=${mailBody}`;
-    }
-    if (whatsappBtn) {
-      whatsappBtn.href = `https://wa.me/?text=${whatsappText}`;
+    if (isPlaceholderUrl) {
+      if (errorBanner) {
+        if (errorMsgEl) {
+          errorMsgEl.innerHTML = `The Google Apps Script Web App URL has not been configured yet.<br /><br />
+            <strong>Developer handover note:</strong> Please deploy your Google Apps Script Web App and update <code>GOOGLE_APPS_SCRIPT_INQUIRY_URL</code> in <code>src/main.js</code>.<br /><br />
+            In the meantime, you can reach out directly via email at <a href="mailto:tetravate@gmail.com" style="color: inherit; text-decoration: underline; font-weight: 700;">tetravate@gmail.com</a>.`;
+        }
+        errorBanner.style.display = 'block';
+        errorBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+      return;
     }
 
-    if (successBanner) {
-      successBanner.style.display = 'block';
-      successBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
+    // Set loading state
+    setLoadingState(true);
 
-    form.reset();
+    const payload = {
+      name: nameInput.value.trim(),
+      email: emailInput.value.trim(),
+      company: companyInput.value.trim() || 'Independent',
+      service: serviceInput.value,
+      message: messageInput.value.trim(),
+      budget: budgetInput.value.trim() || 'Flexible / To be discussed',
+      timeline: timelineInput.value.trim() || 'Flexible',
+      submittedAt: new Date().toISOString()
+    };
+
+    try {
+      // Send as text/plain to avoid CORS preflight OPTIONS rejection on Google Apps Script
+      const response = await fetch(GOOGLE_APPS_SCRIPT_INQUIRY_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server returned HTTP ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      if (result && (result.status === 'success' || result.result === 'success')) {
+        // Confirmed successful delivery
+        form.reset();
+        form.style.display = 'none';
+        if (successBanner) {
+          successBanner.style.display = 'block';
+          successBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      } else {
+        const errorDetail = result && (result.message || result.error) ? (result.message || result.error) : 'The server handler could not process the request.';
+        throw new Error(errorDetail);
+      }
+    } catch (err) {
+      console.error('Project inquiry submission error:', err);
+      if (errorBanner) {
+        if (errorMsgEl) {
+          errorMsgEl.innerHTML = `We could not deliver your project brief due to a connection or server error (${escapeHtml(err.message || 'Network error')}).<br /><br />
+            Your entered details have been preserved. Please try clicking <strong>Send Project Inquiry</strong> again, or write directly to <a href="mailto:tetravate@gmail.com" style="color: inherit; text-decoration: underline; font-weight: 700;">tetravate@gmail.com</a>.`;
+        }
+        errorBanner.style.display = 'block';
+        errorBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    } finally {
+      setLoadingState(false);
+    }
   });
+
+  function setLoadingState(isLoading) {
+    if (!submitBtn) return;
+    submitBtn.disabled = isLoading;
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnIcon = submitBtn.querySelector('.btn-icon');
+    const btnSpinner = submitBtn.querySelector('.btn-spinner');
+
+    if (isLoading) {
+      if (btnText) btnText.textContent = 'Sending Inquiry...';
+      if (btnIcon) btnIcon.style.display = 'none';
+      if (btnSpinner) btnSpinner.style.display = 'inline-flex';
+      submitBtn.classList.add('is-loading');
+    } else {
+      if (btnText) btnText.textContent = 'Send Project Inquiry';
+      if (btnIcon) btnIcon.style.display = 'inline-block';
+      if (btnSpinner) btnSpinner.style.display = 'none';
+      submitBtn.classList.remove('is-loading');
+    }
+  }
 
   function showError(inputEl, message) {
     inputEl.classList.add('input-error');
@@ -2523,6 +2629,16 @@ function initContactForm() {
       errorEl.textContent = message;
       errorEl.style.display = 'block';
     }
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/[&<>'"]/g, tag => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    }[tag] || tag));
   }
 }
 
