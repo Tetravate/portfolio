@@ -894,7 +894,7 @@ button {
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
 }
 
@@ -1024,6 +1024,183 @@ button {
   line-height: 1.55;
   font-weight: 500;
   margin: 0;
+}
+
+/* Service Card Subservices Section */
+.service-subservices-block {
+  margin-bottom: 1.5rem;
+  padding: 1.15rem 1.25rem;
+  background: #F8FAFC;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.service-subservices-header {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--color-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.service-subservices-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+}
+
+.service-subservice-item {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-body);
+}
+
+.service-subservice-item strong {
+  display: block;
+  color: var(--color-navy);
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 0.15rem;
+}
+
+/* Service Card Verified Studio Evidence Box */
+.service-proof-box {
+  background: var(--color-blue-subtle);
+  border: 1px solid rgba(0, 101, 255, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1.1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.service-proof-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-blue);
+  letter-spacing: 0.08em;
+}
+
+.service-proof-link-wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+}
+
+.service-proof-link {
+  font-weight: 700;
+  color: var(--color-blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast);
+}
+
+.service-proof-link:hover {
+  color: var(--color-blue-hover);
+}
+
+.service-proof-type {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Service Card Related Capabilities Chips */
+.service-related-box {
+  margin-bottom: 1.5rem;
+}
+
+.service-related-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.45rem;
+  display: block;
+}
+
+.service-related-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.service-related-chip {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-xs);
+}
+
+/* Connected Services Philosophy Banner */
+.services-progression-banner {
+  background: #FFFFFF;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 2.25rem;
+  margin-bottom: 3.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.services-progression-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+  position: relative;
+}
+
+.services-progression-step {
+  background: #F8FAFC;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 1rem 0.85rem;
+  text-align: center;
+}
+
+.services-progression-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--color-blue);
+  margin-bottom: 0.25rem;
+}
+
+.services-progression-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--color-navy);
+  margin-bottom: 0.25rem;
+}
+
+.services-progression-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .services-progression-steps {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ==========================================================================

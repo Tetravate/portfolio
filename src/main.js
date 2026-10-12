@@ -92,6 +92,65 @@ export function resolveImageSrc(src) {
   return assetMap[src] || src;
 }
 
+export function getServiceSvgIcon(serviceId) {
+  switch (serviceId) {
+    case 'website-development':
+      return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path>
+      </svg>`;
+    case 'ecommerce-development':
+      return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+      </svg>`;
+    case 'web-application-development':
+      return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+        <line x1="8" y1="21" x2="16" y2="21"></line>
+        <line x1="12" y1="17" x2="12" y2="21"></line>
+      </svg>`;
+    case 'ui-ux-design':
+      return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+        <path d="M2 2l7.586 7.586"></path>
+        <circle cx="11" cy="11" r="2"></circle>
+      </svg>`;
+    case 'ai-machine-learning':
+      return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+      </svg>`;
+    case 'data-science-analytics':
+      return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="20" x2="18" y2="10"></line>
+        <line x1="12" y1="20" x2="12" y2="4"></line>
+        <line x1="6" y1="20" x2="6" y2="14"></line>
+        <line x1="2" y1="20" x2="22" y2="20"></line>
+      </svg>`;
+    case 'backend-database':
+      return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+      </svg>`;
+    case 'deployment-support':
+      return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+        <path d="M2 17l10 5 10-5"></path>
+        <path d="M2 12l10 5 10-5"></path>
+      </svg>`;
+    default:
+      return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+        <line x1="8" y1="21" x2="16" y2="21"></line>
+        <line x1="12" y1="17" x2="12" y2="21"></line>
+      </svg>`;
+  }
+}
+
 export function getProjectScreenshots(project) {
   if (project.screenshots && project.screenshots.length > 0) {
     return project.screenshots.map((s, idx) => ({
@@ -600,20 +659,16 @@ function renderHomePage(container) {
 
           <div class="services-grid">
             ${services.map(s => `
-              <div class="service-card">
+              <div class="service-card" id="home-service-${s.id}">
                 <div class="service-icon-wrap">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                    <line x1="8" y1="21" x2="16" y2="21"></line>
-                    <line x1="12" y1="17" x2="12" y2="21"></line>
-                  </svg>
+                  ${getServiceSvgIcon(s.id)}
                 </div>
                 <h3 class="service-title">${s.title}</h3>
                 <p class="service-desc">${s.shortDesc}</p>
                 <ul class="service-capabilities-list">
-                  ${s.capabilities.slice(0, 2).map(c => `<li class="service-cap-item">${c}</li>`).join('')}
+                  ${s.capabilities.slice(0, 3).map(c => `<li class="service-cap-item">${c}</li>`).join('')}
                 </ul>
-                <a href="/services" class="service-action-link" data-link>Learn more →</a>
+                <a href="/services#service-${s.id}" class="service-action-link" data-link>Learn more →</a>
               </div>
             `).join('')}
           </div>
@@ -883,7 +938,14 @@ function initWorkFilterButtons() {
 // VIEW: DEDICATED PROJECT DETAIL PAGE (/work/:slug) — PROPER ROUTE, NO MODAL!
 // ==========================================================================
 function renderProjectDetailPage(container, slug) {
-  const projectIndex = featuredProjects.findIndex(p => p.slug === slug || p.id === slug);
+  const aliasMap = {
+    'drishyam': 'saksha',
+    'ecommerce': 'tetravate-ecommerce',
+    'ai-product': 'aga-ai-assistant',
+    'restora': 'oivu'
+  };
+  const resolvedSlug = aliasMap[slug] || slug;
+  const projectIndex = featuredProjects.findIndex(p => p.slug === resolvedSlug || p.id === resolvedSlug);
   if (projectIndex === -1) {
     renderNotFoundPage(container);
     return;
@@ -1498,50 +1560,131 @@ function initProjectGalleryAndLightbox(project, screenshots) {
 // VIEW: SERVICES PAGE (/services)
 // ==========================================================================
 function renderServicesPage(container) {
-  document.title = 'What We Build — Tetravate Studio Services';
+  document.title = 'Services & Capabilities — Tetravate Digital Product Studio';
 
   container.innerHTML = `
     <div class="page-view">
       <div class="page-hero">
         <div class="container">
-          <div class="eyebrow">WHAT WE BUILD</div>
-          <h1 class="page-hero-title">Services &amp; Capabilities</h1>
+          <div class="eyebrow">STUDIO CAPABILITIES</div>
+          <h1 class="page-hero-title">Our Services &amp; Working Philosophy</h1>
           <p class="page-hero-subtitle">
-            Websites, e-commerce platforms, SaaS products, business systems, mobile applications and AI-powered products.
+            From problem discovery to dependable delivery — eight connected engineering capabilities turning ideas into useful digital products.
           </p>
         </div>
       </div>
 
       <section class="section">
         <div class="container">
-          <div class="services-grid services-page-grid">
-            ${services.map(s => `
-              <div class="service-card" style="padding: 2.5rem;">
-                <div class="service-icon-wrap">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                    <line x1="8" y1="21" x2="16" y2="21"></line>
-                    <line x1="12" y1="17" x2="12" y2="21"></line>
-                  </svg>
-                </div>
-                <h3 class="service-title" style="font-size: 1.6rem;">${s.title}</h3>
-                <p class="service-desc" style="font-size: 1rem; margin-bottom: 1.5rem;">${s.detail}</p>
-                
-                <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-blue); font-weight: 700; text-transform: uppercase; margin-bottom: 0.75rem; letter-spacing: 0.08em;">
-                  Core Capabilities
-                </div>
-                <ul class="service-capabilities-list" style="margin-bottom: 1.5rem;">
-                  ${s.capabilities.map(c => `<li class="service-cap-item" style="font-size: 0.9rem; color: var(--text-body);">${c}</li>`).join('')}
-                </ul>
+          <!-- Progression banner connecting the studio's thinking -->
+          <div class="services-progression-banner">
+            <div style="max-width: 820px;">
+              <div class="eyebrow" style="margin-bottom: 0.35rem;">CONNECTED STUDIO DISCIPLINE</div>
+              <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-navy); margin-bottom: 0.65rem;">
+                One unified capability. Zero isolated silos.
+              </h2>
+              <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-body); margin: 0;">
+                At Tetravate, our eight service areas are not disconnected agency departments — they are parts of one coherent product discipline. Every project follows a natural progression from understanding the problem to delivering a product people can genuinely rely on.
+              </p>
+            </div>
 
+            <div class="services-progression-steps">
+              <div class="services-progression-step">
+                <div class="services-progression-num">01 // UNDERSTAND</div>
+                <div class="services-progression-title">The Real Need</div>
+                <p class="services-progression-desc">Observe real operations and listen to real users before writing software.</p>
+              </div>
+              <div class="services-progression-step">
+                <div class="services-progression-num">02 // DEFINE</div>
+                <div class="services-progression-title">The Solution</div>
+                <p class="services-progression-desc">Scope realistic architecture, select reliable tools, and respect client budgets.</p>
+              </div>
+              <div class="services-progression-step">
+                <div class="services-progression-num">03 // DESIGN</div>
+                <div class="services-progression-title">The Experience</div>
+                <p class="services-progression-desc">Create accessible, high-contrast interfaces that everyday people can navigate.</p>
+              </div>
+              <div class="services-progression-step">
+                <div class="services-progression-num">04 // BUILD</div>
+                <div class="services-progression-title">The Product</div>
+                <p class="services-progression-desc">Write clean, resilient code with offline continuity and reliable databases.</p>
+              </div>
+              <div class="services-progression-step">
+                <div class="services-progression-num">05 // DELIVER</div>
+                <div class="services-progression-title">Useful Outcome</div>
+                <p class="services-progression-desc">Deploy to production, verify in real use, and discuss honest support beyond launch.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- The 8 Established Services Grid -->
+          <div class="services-grid services-page-grid">
+            ${services.map((s, idx) => `
+              <div class="service-card" style="padding: 2.25rem;" id="service-${s.id}">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem;">
+                  <div class="service-icon-wrap" style="margin-bottom: 0;">
+                    ${getServiceSvgIcon(s.id)}
+                  </div>
+                  <span style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 800; color: var(--color-blue); background: var(--color-blue-subtle); padding: 0.25rem 0.65rem; border-radius: var(--radius-xs);">
+                    0${idx + 1}
+                  </span>
+                </div>
+
+                <h3 class="service-title" style="font-size: 1.5rem; margin-bottom: 0.5rem;">${s.title}</h3>
+                <p class="service-desc" style="font-size: 0.95rem; margin-bottom: 1.25rem; line-height: 1.6;">${s.detail}</p>
+                
+                <!-- Established Sub-Services -->
+                <div class="service-subservices-block">
+                  <div class="service-subservices-header">
+                    <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    Established Offerings
+                  </div>
+                  <ul class="service-subservices-list">
+                    ${(s.subServices || []).map(sub => `
+                      <li class="service-subservice-item">
+                        <strong>${sub.name}</strong>
+                        <span>${sub.desc}</span>
+                      </li>
+                    `).join('')}
+                  </ul>
+                </div>
+
+                <!-- Ideal For Box -->
                 <div class="service-ideal-box">
-                  <span class="service-ideal-label">Ideal For:</span>
+                  <span class="service-ideal-label">Appropriate For</span>
                   <p class="service-ideal-text">${s.idealFor}</p>
                 </div>
 
-                <a href="/contact" class="btn btn-primary" style="width: 100%; justify-content: center;" data-link>
-                  Discuss ${s.title} →
-                </a>
+                <!-- Related Capabilities -->
+                ${s.relatedCapabilities && s.relatedCapabilities.length > 0 ? `
+                  <div class="service-related-box">
+                    <span class="service-related-label">Connected Disciplines</span>
+                    <div class="service-related-chips">
+                      ${s.relatedCapabilities.map(rc => `<span class="service-related-chip">${rc}</span>`).join('')}
+                    </div>
+                  </div>
+                ` : ''}
+
+                <!-- Verified Portfolio Proof Link if available -->
+                ${s.portfolioProof ? `
+                  <div class="service-proof-box">
+                    <span class="service-proof-label">Verified Studio Demonstration</span>
+                    <div class="service-proof-link-wrap">
+                      <a href="/work/${s.portfolioProof.slug}" class="service-proof-link" data-link>
+                        ${s.portfolioProof.title} ↗
+                      </a>
+                      <span class="service-proof-type">— ${s.portfolioProof.type}</span>
+                    </div>
+                  </div>
+                ` : ''}
+
+                <div style="margin-top: auto; padding-top: 1rem;">
+                  <a href="/contact" class="btn btn-primary" style="width: 100%; justify-content: center;" data-link>
+                    ${s.ctaText || `Discuss ${s.title} →`}
+                  </a>
+                </div>
               </div>
             `).join('')}
           </div>
@@ -1747,7 +1890,7 @@ function renderAboutPage(container) {
               </svg>
 
               <!-- Central Core Node -->
-              <div class="central-core-node is-active" role="button" tabindex="0" aria-label="Tetravate Company Overview">
+              <div class="central-core-node is-active" role="button" tabindex="0" aria-label="Tetravate Company Overview" title="Click to view Tetravate Studio Core">
                 <img src="${logoEmblem}" alt="Tetravate Core Emblem" class="central-core-logo-img" onerror="this.onerror=null; this.src='/logo-emblem.png';" />
                 <span class="central-core-title">TETRAVATE</span>
                 <span class="central-core-pill">
@@ -2151,30 +2294,8 @@ function initFoundersNetworkShowcase(container) {
     }
   }
 
-  // Pointer movement resolver: returns founder index if cursor is over a founder node, or null
-  function resolveTargetIndex(target) {
-    if (!target || !target.closest) return null;
-    const founderNode = target.closest('.founder-satellite-node');
-    if (founderNode && networkWrapper.contains(founderNode)) {
-      const idx = parseInt(founderNode.getAttribute('data-index'), 10);
-      return isNaN(idx) ? null : idx;
-    }
-    return null;
-  }
-
-  function handlePointerMove(e) {
-    const idx = resolveTargetIndex(e.target);
-    setActiveFounder(idx);
-  }
-
-  // Hover tracking over the entire radial network area
-  networkWrapper.addEventListener('mouseover', handlePointerMove);
-  networkWrapper.addEventListener('mousemove', handlePointerMove);
-  networkWrapper.addEventListener('mouseleave', () => setActiveFounder(null));
-
-  // Central node explicit interaction (hover, click, keyboard)
+  // Central node explicit interaction (click or keyboard Enter/Space switches back to Tetravate in center)
   if (centralCoreNode) {
-    centralCoreNode.addEventListener('mouseenter', () => setActiveFounder(null));
     centralCoreNode.addEventListener('click', (e) => {
       e.stopPropagation();
       setActiveFounder(null);
@@ -2187,28 +2308,37 @@ function initFoundersNetworkShowcase(container) {
     });
   }
 
-  // Satellite node interactions (tap / click & keyboard)
+  // Satellite node interactions: hover (mouseenter), click, keyboard, focus
+  // Persists on the selected founder card without resetting on mouseout
   nodes.forEach((node) => {
     const idx = parseInt(node.getAttribute('data-index'), 10);
+    if (isNaN(idx)) return;
+
+    // Hover switches to this founder card and stays there
+    node.addEventListener('mouseenter', () => {
+      setActiveFounder(idx);
+    });
+
+    // Click switches to this founder card and stays there
     node.addEventListener('click', (e) => {
       e.stopPropagation();
       setActiveFounder(idx);
     });
+
+    // Keyboard accessibility
     node.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         setActiveFounder(idx);
       }
     });
+
+    node.addEventListener('focus', () => {
+      setActiveFounder(idx);
+    });
   });
 
-  // Empty space click on network wrapper resets to company info (mobile touch friendly)
-  networkWrapper.addEventListener('click', (e) => {
-    const idx = resolveTargetIndex(e.target);
-    setActiveFounder(idx);
-  });
-
-  // Default state: Tetravate Company Info
+  // Default state on page load / redirect: Tetravate Company Info
   setActiveFounder(null);
 }
 
@@ -2427,12 +2557,14 @@ function renderContactPage(container) {
                   <div class="form-group">
                     <label for="inquiryService" class="form-label">What do you need? *</label>
                     <select id="inquiryService" class="form-select">
-                      <option value="Web Experiences">Web Experience / Studio Website</option>
-                      <option value="E-Commerce">E-Commerce Storefront</option>
-                      <option value="Business Systems">Business Software &amp; POS</option>
-                      <option value="SaaS Products">SaaS Platform / Dashboard</option>
-                      <option value="Mobile Applications">Mobile Application</option>
-                      <option value="AI &amp; ML">AI &amp; Machine Learning Solution</option>
+                      <option value="Website Development">Website Development (Static, Dynamic, Portfolio)</option>
+                      <option value="E-Commerce Development">E-Commerce Development (Storefront, Cart, Orders)</option>
+                      <option value="Web Application Development">Web Application Development (Custom Apps, Admin Panels, Bookings)</option>
+                      <option value="UI/UX & Website Design">UI/UX &amp; Website Design (Responsive Interfaces, Redesigns)</option>
+                      <option value="AI & Machine Learning">AI &amp; Machine Learning (Assistants, ML Solutions)</option>
+                      <option value="Data Science & Analytics">Data Science &amp; Analytics (Visualizations, Dashboards)</option>
+                      <option value="Backend & Database Development">Backend &amp; Database Development (APIs, Schemas, Auth)</option>
+                      <option value="Deployment & Technical Support">Deployment &amp; Technical Support (Testing, Deployment, Performance)</option>
                       <option value="General Consultation">Not sure yet / General consultation</option>
                     </select>
                   </div>
