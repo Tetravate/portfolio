@@ -138,6 +138,13 @@ body::before {
   outline-offset: 3px;
 }
 
+h1:focus:not(:focus-visible),
+h2:focus:not(:focus-visible),
+#app-router:focus:not(:focus-visible),
+.page-view:focus:not(:focus-visible) {
+  outline: none;
+}
+
 img,
 svg {
   display: block;

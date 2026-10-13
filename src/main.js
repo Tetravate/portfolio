@@ -11,26 +11,26 @@ import {
   testimonials
 } from './data/projects.js';
 
-import imgEcommerceHero from './assets/projects/tetravate-ecommerce-hero.png';
-import imgEcommerceCatalog from './assets/projects/tetravate-ecommerce-catalog.png';
+import imgEcommerceHero from './assets/projects/tetravate-ecommerce-hero.webp';
+import imgEcommerceCatalog from './assets/projects/tetravate-ecommerce-catalog.webp';
 import imgMaraHero from './assets/projects/mara-restaurant-hero.jpg';
 import imgMaraMenu from './assets/projects/mara-restaurant-menu.jpg';
 import imgNivaraDashboard from './assets/projects/nivara-erp-dashboard.jpg';
 import imgNivaraLogin from './assets/projects/nivara-erp-login.jpg';
-import imgMistiqAnalysis from './assets/projects/mistiq-platform-analysis.png';
+import imgMistiqAnalysis from './assets/projects/mistiq-platform-analysis.webp';
 import imgMistiqDna from './assets/projects/mistiq-platform-dna.jpg';
 import imgSakshaNetwork from './assets/projects/saksha-crime-network.jpg';
 import imgSakshaDashboard from './assets/projects/saksha-crime-dashboard.jpg';
 import imgAgsDashboard from './assets/projects/ags-masalas-dashboard.jpg';
-import imgAgsMobile from './assets/projects/ags-masalas-pos-mobile.png';
-import imgPustakabhritaMobile from './assets/projects/pustakabhrita-tuition-mobile.png';
+import imgAgsMobile from './assets/projects/ags-masalas-pos-mobile.webp';
+import imgPustakabhritaMobile from './assets/projects/pustakabhrita-tuition-mobile.webp';
 import imgAgaInterface from './assets/projects/aga-ai-assistant-interface.jpg';
 import imgAgaChat from './assets/projects/aga-ai-assistant-chat.jpg';
-import imgWorkspaceGithub from './assets/projects/tetravate-workspace-github.png';
+import imgWorkspaceGithub from './assets/projects/tetravate-workspace-github.webp';
 import imgRestora1 from './assets/projects/restora-1.jpeg';
-import imgRestora2 from './assets/projects/restora-2.jpeg';
+import imgRestora2 from './assets/projects/restora-2.webp';
 import imgOivuMockup from './assets/mockup-oivu.svg';
-import logoEmblem from './assets/logo-emblem.png';
+import logoEmblem from './assets/logo-emblem.webp';
 
 // ==========================================================================
 // GOOGLE APPS SCRIPT WEB APP CONFIGURATION (PROJECT INQUIRY FORM)
@@ -66,25 +66,34 @@ const mockupMap = {
 
 const assetMap = {
   '/projects/tetravate-ecommerce-hero.png': imgEcommerceHero,
+  '/projects/tetravate-ecommerce-hero.webp': imgEcommerceHero,
   '/projects/tetravate-ecommerce-catalog.png': imgEcommerceCatalog,
+  '/projects/tetravate-ecommerce-catalog.webp': imgEcommerceCatalog,
   '/projects/mara-restaurant-hero.jpg': imgMaraHero,
   '/projects/mara-restaurant-menu.jpg': imgMaraMenu,
   '/projects/nivara-erp-dashboard.jpg': imgNivaraDashboard,
   '/projects/nivara-erp-dashboard.jpeg': imgNivaraDashboard,
   '/projects/nivara-erp-login.jpg': imgNivaraLogin,
   '/projects/mistiq-platform-analysis.png': imgMistiqAnalysis,
+  '/projects/mistiq-platform-analysis.webp': imgMistiqAnalysis,
   '/projects/mistiq-platform-dna.jpg': imgMistiqDna,
   '/projects/saksha-crime-network.jpg': imgSakshaNetwork,
   '/projects/saksha-crime-dashboard.jpg': imgSakshaDashboard,
   '/projects/ags-masalas-dashboard.jpg': imgAgsDashboard,
   '/projects/ags-masalas-pos-mobile.png': imgAgsMobile,
+  '/projects/ags-masalas-pos-mobile.webp': imgAgsMobile,
   '/projects/pustakabhrita-tuition-mobile.png': imgPustakabhritaMobile,
+  '/projects/pustakabhrita-tuition-mobile.webp': imgPustakabhritaMobile,
   '/projects/aga-ai-assistant-interface.jpg': imgAgaInterface,
   '/projects/aga-ai-assistant-chat.jpg': imgAgaChat,
   '/projects/tetravate-workspace-github.png': imgWorkspaceGithub,
+  '/projects/tetravate-workspace-github.webp': imgWorkspaceGithub,
   '/projects/restora-1.jpeg': imgRestora1,
   '/projects/restora-2.jpeg': imgRestora2,
+  '/projects/restora-2.webp': imgRestora2,
   '/assets/mockup-oivu.svg': imgRestora1,
+  '/assets/logo-emblem.png': logoEmblem,
+  '/assets/logo-emblem.webp': logoEmblem,
 };
 
 export function resolveImageSrc(src) {
@@ -94,48 +103,42 @@ export function resolveImageSrc(src) {
 
 export function getServiceSvgIcon(serviceId) {
   switch (serviceId) {
+    case 'websites-digital-experiences':
     case 'website-development':
+    case 'ui-ux-design':
       return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10"></circle>
         <line x1="2" y1="12" x2="22" y2="12"></line>
         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path>
       </svg>`;
+    case 'ecommerce-solutions':
     case 'ecommerce-development':
       return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
         <line x1="3" y1="6" x2="21" y2="6"></line>
         <path d="M16 10a4 4 0 0 1-8 0"></path>
       </svg>`;
+    case 'web-applications-systems':
     case 'web-application-development':
       return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
         <line x1="8" y1="21" x2="16" y2="21"></line>
         <line x1="12" y1="17" x2="12" y2="21"></line>
       </svg>`;
-    case 'ui-ux-design':
-      return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
-        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
-        <path d="M2 2l7.586 7.586"></path>
-        <circle cx="11" cy="11" r="2"></circle>
-      </svg>`;
+    case 'ai-data-solutions':
     case 'ai-machine-learning':
+    case 'data-science-analytics':
       return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
       </svg>`;
-    case 'data-science-analytics':
-      return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="20" x2="18" y2="10"></line>
-        <line x1="12" y1="20" x2="12" y2="4"></line>
-        <line x1="6" y1="20" x2="6" y2="14"></line>
-        <line x1="2" y1="20" x2="22" y2="20"></line>
-      </svg>`;
+    case 'backend-integrations':
     case 'backend-database':
       return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
         <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
         <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
       </svg>`;
+    case 'deployment-technical-support':
     case 'deployment-support':
       return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
@@ -229,7 +232,57 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================================================
-// CLIENT-SIDE ROUTER (MULTI-PAGE NAVIGATION)
+// SEARCH ENGINE & SOCIAL METADATA SYNC (CANONICAL, OPEN GRAPH, TITLES)
+// ==========================================================================
+const BASE_PRODUCTION_URL = 'https://tetravate.vercel.app';
+
+export function updatePageMetadata({ title, description, canonicalPath, ogImage }) {
+  if (title) {
+    document.title = title;
+  }
+
+  // Update Meta Description
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc && description) {
+    metaDesc.setAttribute('content', description);
+  }
+
+  // Update Canonical Link Tag
+  const canonicalEl = document.getElementById('canonical-link') || document.querySelector('link[rel="canonical"]');
+  const fullCanonical = canonicalPath
+    ? `${BASE_PRODUCTION_URL}${canonicalPath === '/' ? '' : canonicalPath}`
+    : `${BASE_PRODUCTION_URL}/`;
+  if (canonicalEl) {
+    canonicalEl.setAttribute('href', fullCanonical);
+  }
+
+  // Update Open Graph Tags
+  const ogTitleEl = document.getElementById('og-title') || document.querySelector('meta[property="og:title"]');
+  if (ogTitleEl && title) {
+    ogTitleEl.setAttribute('content', title);
+  }
+
+  const ogDescEl = document.getElementById('og-desc') || document.querySelector('meta[property="og:description"]');
+  if (ogDescEl && description) {
+    ogDescEl.setAttribute('content', description);
+  }
+
+  const ogUrlEl = document.getElementById('og-url') || document.querySelector('meta[property="og:url"]');
+  if (ogUrlEl) {
+    ogUrlEl.setAttribute('content', fullCanonical);
+  }
+
+  const ogImageEl = document.getElementById('og-image') || document.querySelector('meta[property="og:image"]');
+  if (ogImageEl && ogImage) {
+    const fullOgImage = ogImage.startsWith('http')
+      ? ogImage
+      : `${BASE_PRODUCTION_URL}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`;
+    ogImageEl.setAttribute('content', fullOgImage);
+  }
+}
+
+// ==========================================================================
+// CLIENT-SIDE ROUTER (MULTI-PAGE NAVIGATION WITH FOCUS MANAGEMENT)
 // ==========================================================================
 function initRouter() {
   // Intercept internal link clicks
@@ -246,24 +299,33 @@ function initRouter() {
 
   // Handle browser back and forward buttons
   window.addEventListener('popstate', () => {
-    handleRoute(window.location.pathname);
+    handleRoute(window.location.pathname + window.location.search);
   });
 
   // Handle initial page load
-  handleRoute(window.location.pathname);
+  handleRoute(window.location.pathname + window.location.search);
 }
 
 export function navigateTo(url) {
-  if (window.location.pathname !== url) {
+  if (window.location.pathname + window.location.search !== url) {
     window.history.pushState(null, '', url);
   }
   handleRoute(url);
 }
 window.navigateTo = navigateTo;
 
-function handleRoute(pathname) {
+function handleRoute(rawUrl) {
+  // Parse path and query parameters safely (e.g., /contact?service=...)
+  const urlToParse = rawUrl || (window.location.pathname + window.location.search);
+  let pathname = urlToParse;
+  if (urlToParse.includes('?')) {
+    pathname = urlToParse.split('?')[0];
+  } else if (urlToParse.includes('#')) {
+    pathname = urlToParse.split('#')[0];
+  }
+
   // Normalize path (strip trailing slash if not root)
-  const cleanPath = pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+  const cleanPath = pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : (pathname || '/');
   const app = document.getElementById('app-router');
   if (!app) return;
 
@@ -289,7 +351,7 @@ function handleRoute(pathname) {
     menuBtn?.setAttribute('aria-expanded', 'false');
   }
 
-  // Update navigation active states
+  // Update navigation active states and aria-current="page"
   updateNavActiveState(cleanPath);
 
   // Route matching
@@ -315,6 +377,18 @@ function handleRoute(pathname) {
   // Re-run micro-interactions on the newly rendered DOM
   initSpotlightCards();
   initScrollReveal();
+
+  // Route Accessibility: Shift focus to the new page's primary heading or view container
+  // Allows screen readers and keyboard navigators to identify the newly mounted content
+  requestAnimationFrame(() => {
+    const focusTarget = app.querySelector('h1') || app.querySelector('h2') || app;
+    if (focusTarget) {
+      if (!focusTarget.hasAttribute('tabindex')) {
+        focusTarget.setAttribute('tabindex', '-1');
+      }
+      focusTarget.focus({ preventScroll: true });
+    }
+  });
 }
 
 function updateNavActiveState(currentPath) {
@@ -331,11 +405,13 @@ function updateNavActiveState(currentPath) {
     const href = link.getAttribute('href');
     const isActive = href === '/'
       ? normalized === '/'
-      : normalized.startsWith(href);
+      : (normalized.startsWith(href) && href !== '/');
     if (isActive) {
       link.classList.add('active');
+      link.setAttribute('aria-current', 'page');
     } else {
       link.classList.remove('active');
+      link.removeAttribute('aria-current');
     }
   });
 }
@@ -368,7 +444,12 @@ function initGlobalNavigation() {
 // VIEW: HOME PAGE (CONCISE 30-SECOND STUDIO INTRODUCTION)
 // ==========================================================================
 function renderHomePage(container) {
-  document.title = 'Tetravate — Product Design & Engineering Studio | From Thought to Thing';
+  updatePageMetadata({
+    title: 'Tetravate — Product Design & Engineering Studio | From Thought to Thing',
+    description: 'Tetravate is a digital product design and software engineering studio building websites, software, SaaS platforms, mobile apps and AI solutions. From Thought to Thing.',
+    canonicalPath: '/',
+    ogImage: logoEmblem
+  });
 
   container.innerHTML = `
     <div class="page-view">
@@ -758,7 +839,12 @@ function renderHomePage(container) {
 // VIEW: DEDICATED WORK PAGE (/work) — SHOWS ALL 6 PROJECTS
 // ==========================================================================
 function renderWorkPage(container) {
-  document.title = 'Selected Work — Tetravate Studio Portfolio';
+  updatePageMetadata({
+    title: 'Selected Work & Case Studies — Tetravate Studio',
+    description: 'Explore digital products, bespoke software, retail POS systems, web applications, and AI prototypes engineered by Tetravate.',
+    canonicalPath: '/work',
+    ogImage: logoEmblem
+  });
 
   container.innerHTML = `
     <div class="page-view">
@@ -952,7 +1038,31 @@ function renderProjectDetailPage(container, slug) {
   }
 
   const project = featuredProjects[projectIndex];
-  document.title = `${project.title} — Case Study | Tetravate Studio`;
+
+  // Service mapping for contextual inquiry preselection
+  const servicePreselectMap = {
+    'tetravate-ecommerce': 'E-Commerce Solutions',
+    'mara-dining': 'Websites & Digital Experiences',
+    'nivara-erp': 'Web Applications & Systems',
+    'mistiq': 'AI & Data Solutions',
+    'saksha': 'AI & Data Solutions',
+    'ags-masalas': 'Web Applications & Systems',
+    'pustakabhrita': 'Web Applications & Systems',
+    'aga-ai-assistant': 'AI & Data Solutions',
+    'tetravate-workspace': 'Web Applications & Systems',
+    'oivu': 'Websites & Digital Experiences'
+  };
+  const mappedService = servicePreselectMap[project.slug] || servicePreselectMap[project.id] || '';
+  const ctaInquiryHref = mappedService
+    ? `/contact?service=${encodeURIComponent(mappedService)}`
+    : '/contact';
+
+  updatePageMetadata({
+    title: `${project.title} — Case Study | Tetravate Studio`,
+    description: project.summary || (project.caseStudy && project.caseStudy.problem ? project.caseStudy.problem.slice(0, 155) + '...' : 'Explore this digital product case study by Tetravate Studio.'),
+    canonicalPath: `/work/${project.slug}`,
+    ogImage: resolveImageSrc(project.coverImage || project.primaryImage)
+  });
 
   const prevProject = projectIndex > 0 ? featuredProjects[projectIndex - 1] : featuredProjects[featuredProjects.length - 1];
   const nextProject = projectIndex < featuredProjects.length - 1 ? featuredProjects[projectIndex + 1] : featuredProjects[0];
@@ -1240,16 +1350,16 @@ function renderProjectDetailPage(container, slug) {
         </div>
       </section>
 
-      <!-- Closing CTA -->
+      <!-- Contextual Project Inquiry CTA -->
       <section class="closing-cta-section">
         <div class="container">
           <div class="closing-cta-card">
-            <h2 class="closing-cta-title">Ready to build your digital product?</h2>
+            <h2 class="closing-cta-title">Interested in building something similar?</h2>
             <p class="closing-cta-lead">
-              Let's talk through your requirements and engineer a practical solution.
+              Tell us what you're working on. We'll discuss your requirements and help you explore an appropriate solution.
             </p>
-            <a href="/contact" class="btn btn-primary btn-lg" data-link>
-              Start a Conversation
+            <a href="${ctaInquiryHref}" class="btn btn-primary btn-lg" data-link>
+              Discuss a Similar Project
             </a>
           </div>
         </div>
@@ -1560,7 +1670,12 @@ function initProjectGalleryAndLightbox(project, screenshots) {
 // VIEW: SERVICES PAGE (/services)
 // ==========================================================================
 function renderServicesPage(container) {
-  document.title = 'Services & Capabilities — Tetravate Digital Product Studio';
+  updatePageMetadata({
+    title: 'Studio Capabilities & Services — Tetravate Studio',
+    description: 'Our six core capabilities: Websites & Digital Experiences, E-Commerce Solutions, Web Applications & Systems, AI & Data Solutions, Backend & Integrations, and Deployment & Technical Support.',
+    canonicalPath: '/services',
+    ogImage: logoEmblem
+  });
 
   container.innerHTML = `
     <div class="page-view">
@@ -1569,7 +1684,7 @@ function renderServicesPage(container) {
           <div class="eyebrow">STUDIO CAPABILITIES</div>
           <h1 class="page-hero-title">Our Services &amp; Working Philosophy</h1>
           <p class="page-hero-subtitle">
-            From problem discovery to dependable delivery — eight connected engineering capabilities turning ideas into useful digital products.
+            From problem discovery to dependable delivery — six connected engineering capabilities turning ideas into useful digital products.
           </p>
         </div>
       </div>
@@ -1584,7 +1699,7 @@ function renderServicesPage(container) {
                 One unified capability. Zero isolated silos.
               </h2>
               <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-body); margin: 0;">
-                At Tetravate, our eight service areas are not disconnected agency departments — they are parts of one coherent product discipline. Every project follows a natural progression from understanding the problem to delivering a product people can genuinely rely on.
+                At Tetravate, our six service areas are not disconnected agency departments — they are parts of one coherent product discipline. Every project follows a natural progression from understanding the problem to delivering a product people can genuinely rely on.
               </p>
             </div>
 
@@ -1617,7 +1732,7 @@ function renderServicesPage(container) {
             </div>
           </div>
 
-          <!-- The 8 Established Services Grid -->
+          <!-- The 6 Official Services Grid -->
           <div class="services-grid services-page-grid">
             ${services.map((s, idx) => `
               <div class="service-card" style="padding: 2.25rem;" id="service-${s.id}">
@@ -1738,7 +1853,12 @@ function renderServicesPage(container) {
 // VIEW: PROCESS PAGE (/process) — 5-STEP METHODOLOGY
 // ==========================================================================
 function renderProcessPage(container) {
-  document.title = 'From Idea to Product — Our Process | Tetravate';
+  updatePageMetadata({
+    title: 'From Idea to Product — Our 5-Stage Process | Tetravate Studio',
+    description: 'Discover, Define, Design, Develop, and Deliver. Learn how Tetravate turns business requirements into working, dependable digital products.',
+    canonicalPath: '/process',
+    ogImage: logoEmblem
+  });
 
   container.innerHTML = `
     <div class="page-view">
@@ -1807,7 +1927,12 @@ function renderProcessPage(container) {
 // VIEW: ABOUT PAGE (/about) — FOUNDERS RADIAL NETWORK & ACHIEVEMENTS
 // ==========================================================================
 function renderAboutPage(container) {
-  document.title = 'About Tetravate — Founders & Philosophy';
+  updatePageMetadata({
+    title: 'The Founders & Studio Story — Tetravate Studio',
+    description: 'Meet the five founding engineers and designers behind Tetravate. Practical problem-solving, engineering excellence, and transparent collaboration.',
+    canonicalPath: '/about',
+    ogImage: logoEmblem
+  });
 
   container.innerHTML = `
     <div class="page-view">
@@ -2346,7 +2471,12 @@ function initFoundersNetworkShowcase(container) {
 // VIEW: CONTACT PAGE (/contact) — FORM & DIRECT CHANNELS
 // ==========================================================================
 function renderContactPage(container) {
-  document.title = 'Start a Project — Contact Tetravate';
+  updatePageMetadata({
+    title: 'Start a Project — Contact Tetravate Studio',
+    description: 'Discuss your product requirements directly with our founding engineers. Inquire via our project brief form, direct email, or WhatsApp.',
+    canonicalPath: '/contact',
+    ogImage: logoEmblem
+  });
 
   container.innerHTML = `
     <div class="page-view">
@@ -2557,14 +2687,12 @@ function renderContactPage(container) {
                   <div class="form-group">
                     <label for="inquiryService" class="form-label">What do you need? *</label>
                     <select id="inquiryService" class="form-select">
-                      <option value="Website Development">Website Development (Static, Dynamic, Portfolio)</option>
-                      <option value="E-Commerce Development">E-Commerce Development (Storefront, Cart, Orders)</option>
-                      <option value="Web Application Development">Web Application Development (Custom Apps, Admin Panels, Bookings)</option>
-                      <option value="UI/UX & Website Design">UI/UX &amp; Website Design (Responsive Interfaces, Redesigns)</option>
-                      <option value="AI & Machine Learning">AI &amp; Machine Learning (Assistants, ML Solutions)</option>
-                      <option value="Data Science & Analytics">Data Science &amp; Analytics (Visualizations, Dashboards)</option>
-                      <option value="Backend & Database Development">Backend &amp; Database Development (APIs, Schemas, Auth)</option>
-                      <option value="Deployment & Technical Support">Deployment &amp; Technical Support (Testing, Deployment, Performance)</option>
+                      <option value="Websites & Digital Experiences">Websites &amp; Digital Experiences (Websites, Landers, UI/UX)</option>
+                      <option value="E-Commerce Solutions">E-Commerce Solutions (Storefronts, Catalogues, Checkout)</option>
+                      <option value="Web Applications & Systems">Web Applications &amp; Systems (Custom Apps, Admin Panels, Bookings)</option>
+                      <option value="AI & Data Solutions">AI &amp; Data Solutions (AI Apps, Chatbots, ML, Data Analytics)</option>
+                      <option value="Backend & Integrations">Backend &amp; Integrations (APIs, Databases, Auth, Integrations)</option>
+                      <option value="Deployment & Technical Support">Deployment &amp; Technical Support (Testing, Deployment, Performance, Support)</option>
                       <option value="General Consultation">Not sure yet / General consultation</option>
                     </select>
                   </div>
@@ -2617,7 +2745,12 @@ function renderContactPage(container) {
 // VIEW: 404 NOT FOUND PAGE
 // ==========================================================================
 function renderNotFoundPage(container) {
-  document.title = 'Page Not Found — Tetravate';
+  updatePageMetadata({
+    title: 'Page Not Found — Tetravate Studio',
+    description: 'The requested page or case study does not exist or has been moved. Explore our selected work, studio capabilities, or contact the team.',
+    canonicalPath: '/404',
+    ogImage: logoEmblem
+  });
 
   container.innerHTML = `
     <div class="page-view not-found-view">
@@ -2716,6 +2849,36 @@ function initContactForm() {
   const sendAnotherBtn = document.getElementById('sendAnotherInquiryBtn');
 
   if (!form) return;
+
+  // Pre-select service from URL query parameter (e.g., /contact?service=E-Commerce%20Solutions)
+  const urlParams = new URLSearchParams(window.location.search);
+  const serviceParam = urlParams.get('service');
+  const serviceSelect = document.getElementById('inquiryService');
+  if (serviceParam && serviceSelect) {
+    const rawTarget = decodeURIComponent(serviceParam).trim().toLowerCase();
+    const legacyToOfficialMap = {
+      'website development': 'websites & digital experiences',
+      'ui/ux & website design': 'websites & digital experiences',
+      'ui/ux design': 'websites & digital experiences',
+      'ecommerce development': 'e-commerce solutions',
+      'e-commerce development': 'e-commerce solutions',
+      'web application development': 'web applications & systems',
+      'ai & machine learning': 'ai & data solutions',
+      'data science & analytics': 'ai & data solutions',
+      'backend & database development': 'backend & integrations',
+      'backend & database': 'backend & integrations',
+      'deployment & technical support': 'deployment & technical support',
+      'deployment & support': 'deployment & technical support'
+    };
+    const targetService = legacyToOfficialMap[rawTarget] || rawTarget;
+    for (let i = 0; i < serviceSelect.options.length; i++) {
+      const optVal = serviceSelect.options[i].value.toLowerCase();
+      if (optVal === targetService || optVal === rawTarget || optVal.includes(targetService) || targetService.includes(optVal)) {
+        serviceSelect.selectedIndex = i;
+        break;
+      }
+    }
+  }
 
   if (sendAnotherBtn) {
     sendAnotherBtn.addEventListener('click', () => {

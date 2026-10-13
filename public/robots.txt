@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tetravate.vercel.app/sitemap.xml

@@ -964,8 +964,8 @@ export const featuredProjects = [
       "Task Automation",
       "Conversational AI"
     ],
-    "demoLabel": "Live Deployed Demo",
-    "statusText": "Live deployed application (Deployed on Vercel)",
+    "demoLabel": "AI Prototype",
+    "statusText": "Conversational task assistant prototype (Research & development build)",
     "outcomeNarrative": "Rigid command-line bots and disjointed prompt tools → Context-aware conversational AI assistant for task execution",
     "summary": "An AI-powered assistant designed to comprehend complex user requests, maintain conversational context, and assist with multi-step workflows.",
     "overview": "AGA AI Assistant is an intelligent conversational agent developed to understand user requests and help complete tasks through intelligent responses, contextual understanding, and AI-driven assistance.",
@@ -1084,7 +1084,7 @@ export const featuredProjects = [
         "caption": "Context-Aware Chat & Intelligent Task Responses"
       }
     ],
-    "liveDemo": "https://aga-ai-github-assistant.vercel.app/",
+    "liveDemo": null,
     "github": null
   },
   {
@@ -1355,57 +1355,61 @@ export const featuredProjects = [
 
 export const services = [
   {
-    id: "website-development",
-    categoryKey: "Website Development",
-    title: "Website Development",
-    shortDesc: "Purpose-built websites engineered according to audience, goals, and project requirements.",
-    detail: "We develop websites tailored to the specific purpose, audience, and functional requirements of each project. We help clients understand the distinction between a focused static landing page, an interactive dynamic website, and a comprehensive business or portfolio site, selecting the appropriate approach without unnecessary complexity or bloated costs.",
+    id: "websites-digital-experiences",
+    categoryKey: "Websites & Digital Experiences",
+    title: "Websites & Digital Experiences",
+    shortDesc: "Purpose-built websites, landing pages, and ergonomic UI/UX designs that communicate clearly and load fast.",
+    detail: "We engineer websites and digital experiences tailored to audience, business goals, and brand positioning. From fast, high-converting landing pages to structured multi-page company portfolios and complete UI/UX interface redesigns, we build clear, accessible web experiences without unnecessary complexity or bloated overhead.",
     subServices: [
       {
-        name: "Static Websites & Landing Pages",
+        name: "Websites and Landing Pages",
         desc: "Fast, focused web pages engineered for clarity, product introductions, and high-impact campaign messaging."
       },
       {
-        name: "Dynamic Websites",
-        desc: "Interactive web experiences with dynamic content presentation, client-side interactivity, and live integrations."
+        name: "Business and Portfolio Websites",
+        desc: "Structured multi-page company and studio sites that articulate brand identity, showcase work, and guide prospective clients."
       },
       {
-        name: "Business & Portfolio Websites",
-        desc: "Structured multi-page company sites that articulate brand identity, showcase work, and guide prospective clients toward clear contact actions."
+        name: "UI/UX Design and Redesigns",
+        desc: "Modern, responsive interface design, ergonomic micro-interactions, and website restructuring that eliminate user friction."
       }
     ],
     capabilities: [
-      "Static Websites & Landing Pages",
-      "Dynamic Websites",
-      "Business & Portfolio Websites"
+      "Websites and Landing Pages",
+      "Business and Portfolio Websites",
+      "UI/UX Design and Redesigns"
     ],
-    idealFor: "Businesses, independent creators, and professional studios seeking a credible, high-performing online presence.",
+    idealFor: "Businesses, independent creators, and studios launching a new digital venture or upgrading the clarity, usability, and design of existing web assets.",
     relatedCapabilities: [
-      "UI/UX & Website Design",
+      "Web Applications & Systems",
       "Deployment & Technical Support"
     ],
     portfolioProof: {
-      title: "MĀRA Modern Dining",
+      title: "MĀRA Modern Dining & Oivu",
       slug: "mara-dining",
-      type: "Interactive Brand & Menu Website"
+      type: "Interactive Brand & Menu Experience / Touch-First PWA"
     },
-    ctaText: "Discuss Website Requirements →",
-    inquiryOption: "Website Development"
+    ctaText: "Discuss Website & UI/UX Requirements →",
+    inquiryOption: "Websites & Digital Experiences"
   },
   {
-    id: "ecommerce-development",
-    categoryKey: "E-Commerce Development",
-    title: "E-Commerce Development",
-    shortDesc: "Online stores and digital commerce storefronts built to present products and streamline orders.",
-    detail: "We build digital storefronts that support businesses needing to present products clearly, accept customer orders, and manage online purchases. We structure intuitive product catalogues, persistent shopping carts, and organized order tracking to support a dependable customer purchasing journey.",
+    id: "ecommerce-solutions",
+    categoryKey: "E-Commerce Solutions",
+    title: "E-Commerce Solutions",
+    shortDesc: "Centralized online stores, product catalogues, and checkout workflows built for dependable retail operations.",
+    detail: "We build digital storefronts that support merchants and direct-to-consumer brands needing to present products clearly, accept orders, and manage retail lifecycles. We structure intuitive product catalogues, persistent shopping carts, seamless checkout steps, and organized order management to support a dependable customer purchasing journey.",
     subServices: [
       {
-        name: "Online Stores & Product Catalogues",
-        desc: "Structured category navigation, faceted product filtering, and detailed product displays tailored to store merchandise."
+        name: "Online Stores",
+        desc: "Unified online storefronts with mobile-first browsing, clear navigation, and brand-aligned visual merchandising."
       },
       {
-        name: "Shopping Cart & Checkout Integration",
-        desc: "Persistent cart calculations, customer address handling, order review flows, and clear checkout completion steps."
+        name: "Product Catalogues",
+        desc: "Structured category hierarchies, faceted product filtering, and detailed product showcase views tailored to inventory."
+      },
+      {
+        name: "Shopping Carts & Checkout Integrations",
+        desc: "Persistent cart calculations, customer address handling, order review flows, and secure checkout completion."
       },
       {
         name: "Order Management Systems",
@@ -1413,52 +1417,54 @@ export const services = [
       }
     ],
     capabilities: [
-      "Online Stores & Product Catalogues",
-      "Shopping Cart & Checkout Integration",
+      "Online Stores",
+      "Product Catalogues",
+      "Shopping Carts & Checkout Integrations",
       "Order Management Systems"
     ],
-    idealFor: "Retailers, independent brands, and direct-to-consumer businesses needing an organized online store and order tracking.",
+    idealFor: "Retailers, independent brands, and direct-to-consumer businesses needing an organized online storefront and dependable order tracking.",
     relatedCapabilities: [
-      "Backend & Database Development",
-      "UI/UX & Website Design"
+      "Web Applications & Systems",
+      "Backend & Integrations"
     ],
     portfolioProof: {
-      title: "LUXORA E-Commerce Storefront",
+      title: "LUXORA E-Commerce Platform",
       slug: "tetravate-ecommerce",
       type: "Online Storefront & Order Management Platform"
     },
-    ctaText: "Discuss E-Commerce Needs →",
-    inquiryOption: "E-Commerce Development"
+    ctaText: "Discuss E-Commerce Architecture →",
+    inquiryOption: "E-Commerce Solutions"
   },
   {
-    id: "web-application-development",
-    categoryKey: "Web Application Development",
-    title: "Web Application Development",
-    shortDesc: "Custom web software, administrative panels, and operational tools designed for real daily workflows.",
-    detail: "We build web applications that support business operations, administration, team workflows, and customer-facing processes. From multi-role management dashboards to custom booking and scheduling interfaces, we turn complicated operational workflows into straightforward, reliable web software.",
+    id: "web-applications-systems",
+    categoryKey: "Web Applications & Systems",
+    title: "Web Applications & Systems",
+    shortDesc: "Custom web software, administrative panels, management systems, and booking platforms tailored to real operations.",
+    detail: "We build web applications and digital systems that support business operations, administration, team workflows, and customer self-service. From role-governed management backoffices to custom booking and scheduling interfaces, we turn complicated operational workflows into straightforward, reliable web software.",
     subServices: [
       {
         name: "Custom Web Applications",
-        desc: "Bespoke web applications built around specific business logic, data structures, and operational team requirements."
+        desc: "Bespoke browser applications built around specific business logic, data models, and operational team requirements."
       },
       {
         name: "Admin Panels & Management Systems",
         desc: "Role-governed administrative backoffices for data oversight, user permissions, audit tracking, and team management."
       },
       {
-        name: "Booking & Reservation Platforms",
-        desc: "Interactive scheduling tools, availability calendars, and customer appointment management systems."
+        name: "Booking and Reservation Platforms",
+        desc: "Interactive scheduling tools, availability calendars, and customer appointment or table reservation systems."
       }
     ],
     capabilities: [
       "Custom Web Applications",
-      "Admin Panels & Management Systems",
-      "Booking & Reservation Platforms"
+      "Admin Panels",
+      "Management Systems",
+      "Booking and Reservation Platforms"
     ],
     idealFor: "Operating teams, educational institutions, service businesses, and founders replacing disconnected spreadsheets with purpose-built software.",
     relatedCapabilities: [
-      "Backend & Database Development",
-      "UI/UX & Website Design"
+      "Backend & Integrations",
+      "Deployment & Technical Support"
     ],
     portfolioProof: {
       title: "Nivara ERP & AGS Masalas POS",
@@ -1466,132 +1472,61 @@ export const services = [
       type: "Institutional Management & In-Store Operations"
     },
     ctaText: "Scope a Web Application →",
-    inquiryOption: "Web Application Development"
+    inquiryOption: "Web Applications & Systems"
   },
   {
-    id: "ui-ux-design",
-    categoryKey: "UI/UX & Website Design",
-    title: "UI/UX & Website Design",
-    shortDesc: "Clean, responsive interfaces and purposeful interactions designed around usability and ergonomics.",
-    detail: "Design at Tetravate focuses on usability, clear information architecture, responsive ergonomics, and appropriate interactions. We believe design is fundamentally about how clearly a product works, not mere decoration. We ensure layouts are accessible, comfortable across screen sizes, and easy for everyday users to navigate.",
-    subServices: [
-      {
-        name: "Modern, Responsive Interfaces",
-        desc: "Clean, mobile-first and desktop-refined layouts built with legible typography, strong contrast, and consistent spatial rhythm."
-      },
-      {
-        name: "Website Redesigns",
-        desc: "Restructuring existing websites to eliminate navigation friction, clarify content hierarchy, and modernize user perception."
-      },
-      {
-        name: "Interactive UI & Animations",
-        desc: "Purposeful micro-interactions, state transitions, and responsive cues that give feedback without distracting users."
-      }
-    ],
-    capabilities: [
-      "Modern, Responsive Interfaces",
-      "Website Redesigns",
-      "Interactive UI & Animations"
-    ],
-    idealFor: "Teams launching new digital products or seeking to improve the usability, clarity, and visual consistency of existing web assets.",
-    relatedCapabilities: [
-      "Website Development",
-      "Web Application Development"
-    ],
-    portfolioProof: {
-      title: "MĀRA Dining & Oivu Prototype",
-      slug: "mara-dining",
-      type: "Ergonomic & Touch-First Design"
-    },
-    ctaText: "Discuss Interface Design →",
-    inquiryOption: "UI/UX & Website Design"
-  },
-  {
-    id: "ai-machine-learning",
-    categoryKey: "AI & Machine Learning",
-    title: "AI & Machine Learning",
-    shortDesc: "Practical AI applications and intelligent assistants designed for genuine operational utility.",
-    detail: "We explain artificial intelligence in accessible language, focusing on practical tasks where intelligent automation genuinely helps. We help clients evaluate whether an AI-based feature or intelligent assistant is appropriate for their specific problem, building conversational assistants and domain-specific classification without exaggerated promises of perfection.",
+    id: "ai-data-solutions",
+    categoryKey: "AI & Data Solutions",
+    title: "AI & Data Solutions",
+    shortDesc: "Practical AI applications, intelligent conversational assistants, machine learning, and data analytics dashboards.",
+    detail: "We build practical artificial intelligence and data analytics tools designed for genuine operational utility. From task-specific conversational assistants to machine learning classification models and visual business intelligence dashboards, we turn disparate data sets and repetitive workflows into transparent, actionable software solutions.",
     subServices: [
       {
         name: "AI-Powered Applications",
         desc: "Software integrating practical machine intelligence, structured prompt handling, and automated text or workflow assistance."
       },
       {
-        name: "Chatbots & Intelligent Assistants",
+        name: "Chatbots and Intelligent Assistants",
         desc: "Context-aware conversational interfaces for customer inquiry support, internal knowledge assistance, or prompt execution."
       },
       {
         name: "Machine Learning Solutions",
         desc: "Structured pattern analysis and defect classification based on historical domain data and deterministic engineering rules."
+      },
+      {
+        name: "Data Analysis & Business Insights",
+        desc: "Transforming operational records and relational datasets into legible graphical representations, geospatial maps, and dashboards."
       }
     ],
     capabilities: [
       "AI-Powered Applications",
-      "Chatbots & Intelligent Assistants",
-      "Machine Learning Solutions"
+      "Chatbots and Intelligent Assistants",
+      "Machine Learning",
+      "Data Analysis & Business Insights"
     ],
-    idealFor: "Organizations with repetitive categorization or inquiry tasks looking to explore intelligent assistance with clear constraints.",
+    idealFor: "Organizations with repetitive categorization or inquiry tasks, or businesses seeking clear operational visibility through structured data dashboards.",
     relatedCapabilities: [
-      "Data Science & Analytics",
-      "Backend & Database Development"
+      "Backend & Integrations",
+      "Web Applications & Systems"
     ],
     portfolioProof: {
-      title: "AGA AI Assistant & MISTIQ 2.0",
-      slug: "aga-ai-assistant",
-      type: "Task Assistant & Code Intelligence Prototype"
-    },
-    ctaText: "Explore AI Solutions →",
-    inquiryOption: "AI & Machine Learning"
-  },
-  {
-    id: "data-science-analytics",
-    categoryKey: "Data Science & Analytics",
-    title: "Data Science & Analytics",
-    shortDesc: "Data analysis, visual reporting, and business dashboards that make information understandable.",
-    detail: "We organize and present structured data to help people understand operational information and support sound decision-making. Through clear charts, geospatial mapping, and centralized business dashboards, we turn disparate record sets into transparent visual summaries.",
-    subServices: [
-      {
-        name: "Data Analysis & Visualization",
-        desc: "Transforming numerical records and relational datasets into legible graphical representations and summary charts."
-      },
-      {
-        name: "Business Dashboards",
-        desc: "Operational metric centers providing real-time visibility into sales, inventory levels, activity logs, and key metrics."
-      },
-      {
-        name: "Data-Driven Insights",
-        desc: "Structured exploratory analysis uncovering regional clusters, incident hotspots, and recurring operational patterns."
-      }
-    ],
-    capabilities: [
-      "Data Analysis & Visualization",
-      "Business Dashboards",
-      "Data-Driven Insights"
-    ],
-    idealFor: "Businesses and organizations seeking to visualize their operational records, transaction histories, or spatial datasets.",
-    relatedCapabilities: [
-      "Web Application Development",
-      "Backend & Database Development"
-    ],
-    portfolioProof: {
-      title: "DRISHYAM / SAKSHA",
+      title: "SAKSHA / DRISHYAM & AGA AI",
       slug: "saksha",
-      type: "Geospatial Crime Analytics Prototype"
+      type: "Geospatial Crime Analytics & Code Intelligence Prototypes"
     },
-    ctaText: "Discuss Analytics & Dashboards →",
-    inquiryOption: "Data Science & Analytics"
+    ctaText: "Explore AI & Data Solutions →",
+    inquiryOption: "AI & Data Solutions"
   },
   {
-    id: "backend-database",
-    categoryKey: "Backend & Database Development",
-    title: "Backend & Database Development",
-    shortDesc: "Solid database schemas, structured APIs, authentication logic, and resilient server architecture.",
-    detail: "Backend systems support the functionality, data handling, access control, and integrations required by digital products. We architect clear database schemas, build maintainable APIs, and implement secure authentication, avoiding unnecessary jargon and focusing on data integrity, predictable query execution, and clean system boundaries.",
+    id: "backend-integrations",
+    categoryKey: "Backend & Integrations",
+    title: "Backend & Integrations",
+    shortDesc: "Solid database schemas, structured RESTful APIs, authentication logic, and third-party service integrations.",
+    detail: "Backend systems support the functionality, data integrity, access control, and integrations required by digital products. We architect clear database schemas, build maintainable APIs, implement secure authentication, and integrate third-party services, focusing on data reliability, query performance, and clean system boundaries.",
     subServices: [
       {
         name: "API Development & Integration",
-        desc: "Clean, documented RESTful services and external API integrations connecting frontends to backend logic."
+        desc: "Clean, documented RESTful services and third-party API integrations connecting frontends to backend logic."
       },
       {
         name: "Database Design & Management",
@@ -1600,35 +1535,40 @@ export const services = [
       {
         name: "Authentication & Application Logic",
         desc: "Secure user registration, session management, role-based access control, and server-side business rules."
+      },
+      {
+        name: "Third-Party Integrations",
+        desc: "Connecting web platforms with external payment gateways, communications, storage, and cloud service providers."
       }
     ],
     capabilities: [
-      "API Development & Integration",
-      "Database Design & Management",
-      "Authentication & Application Logic"
+      "API Development",
+      "Database Design",
+      "Authentication & Logic",
+      "Third-Party Integrations"
     ],
-    idealFor: "Products requiring multi-user access, complex data relationships, dependable authentication, and custom business logic.",
+    idealFor: "Products requiring multi-user access, complex data relationships, dependable authentication, and custom server-side integrations.",
     relatedCapabilities: [
-      "Web Application Development",
+      "Web Applications & Systems",
       "Deployment & Technical Support"
     ],
     portfolioProof: {
-      title: "Nivara ERP & AGS Masalas",
+      title: "Nivara ERP & Tetravate Workspace",
       slug: "nivara-erp",
-      type: "Multi-Tier Relational Backend & Local Sync"
+      type: "Multi-Tier Relational Backend & Local Data Synchronization"
     },
     ctaText: "Discuss Backend Architecture →",
-    inquiryOption: "Backend & Database Development"
+    inquiryOption: "Backend & Integrations"
   },
   {
-    id: "deployment-support",
+    id: "deployment-technical-support",
     categoryKey: "Deployment & Technical Support",
     title: "Deployment & Technical Support",
-    shortDesc: "Production releases, code testing, performance tuning, and structured handover for ongoing reliability.",
-    detail: "Developing a product also involves making it available for use, checking its behavior across devices, correcting issues, and improving performance where necessary. We assist with initial deployment, functional testing, and performance optimization, while clarifying ongoing hosting and maintenance responsibilities and costs transparently.",
+    shortDesc: "Production releases, cross-device testing, bug fixes, performance improvements, and ongoing support.",
+    detail: "Developing a product also involves making it available for use, verifying its behavior across devices, correcting issues, and optimizing performance. We assist with initial production deployment, functional testing, bug fixing, and performance tuning, while providing clear, ongoing technical support for operational reliability.",
     subServices: [
       {
-        name: "Website Deployment",
+        name: "Website & Cloud Deployment",
         desc: "Setting up production hosting environments, DNS records, SSL certificates, and automated deployment pipelines."
       },
       {
@@ -1636,22 +1576,23 @@ export const services = [
         desc: "Cross-device verification, workflow testing, regression checks, and addressing software defects."
       },
       {
-        name: "Performance Improvements",
-        desc: "Auditing bundle sizes, optimizing asset delivery, reducing load times, and ensuring smooth browser responsiveness."
+        name: "Performance Improvements & Ongoing Support",
+        desc: "Auditing bundle sizes, optimizing asset delivery, reducing load times, and ensuring ongoing technical reliability."
       }
     ],
     capabilities: [
       "Website Deployment",
       "Application Testing & Bug Fixes",
-      "Performance Improvements"
+      "Performance Improvements",
+      "Ongoing Technical Support"
     ],
-    idealFor: "Clients preparing to launch a product or seeking to test, stabilize, and improve the performance of an existing web application.",
+    idealFor: "Clients preparing to launch a product or seeking to test, stabilize, optimize, and maintain an existing web application.",
     relatedCapabilities: [
-      "Website Development",
-      "Web Application Development"
+      "Websites & Digital Experiences",
+      "Web Applications & Systems"
     ],
     portfolioProof: {
-      title: "Live Cloud Deployments & In-Store Field Rollout",
+      title: "Live Cloud Deployments & Field Rollout",
       slug: "ags-masalas",
       type: "Continuous Deployment & In-Store Field Reliability"
     },
@@ -1728,29 +1669,29 @@ export const whyTetravateReasons = [
 
 export const technologyGroups = [
   {
-    category: "Frontend",
-    tagline: "High-performance user interfaces & design systems",
-    items: ["React", "Next.js", "React Native", "Vanilla JS", "Modern CSS", "Mapbox GL"]
+    category: "Web & User Interfaces",
+    tagline: "Clean, responsive interfaces and modern web applications",
+    items: ["React", "JavaScript", "TypeScript", "HTML & CSS", "Responsive Design"]
   },
   {
-    category: "Backend",
-    tagline: "Resilient APIs, streaming services & business logic",
-    items: ["Node.js", "FastAPI", "Python", "Go", "REST & WebSockets", "Express"]
+    category: "Backend & APIs",
+    tagline: "APIs, application logic, and system communication",
+    items: ["Node.js", "Python", "FastAPI", "REST APIs", "Authentication"]
   },
   {
-    category: "Data & Storage",
-    tagline: "Relational, spatial & offline-first data engines",
-    items: ["PostgreSQL", "PostGIS", "Supabase", "IndexedDB", "Redis", "TimescaleDB"]
+    category: "Databases & Data",
+    tagline: "Structured databases and dependable data storage",
+    items: ["PostgreSQL", "Supabase", "SQLite", "Data Modelling", "Offline Data Storage"]
   },
   {
-    category: "AI & Analytics",
-    tagline: "Deterministic clustering, NLP & applied intelligence",
-    items: ["Python", "Scikit-learn", "DBSCAN", "NetworkX", "LLM Integration", "Computer Vision"]
+    category: "AI & Intelligent Systems",
+    tagline: "Practical AI assistance, machine learning, and data analysis",
+    items: ["AI Integrations", "Chatbots & Assistants", "Machine Learning", "Data Analysis", "Data Visualisation"]
   },
   {
-    category: "Tools & Cloud",
-    tagline: "Modern deployment, containerization & CI/CD",
-    items: ["Git & GitHub", "Docker", "Cloudflare", "AWS", "Vite", "PWA Architecture"]
+    category: "Development & Deployment",
+    tagline: "Version control, build automation, and production releases",
+    items: ["Git & GitHub", "Vite", "Application Deployment", "Cross-Device Testing", "Progressive Web Apps"]
   }
 ];
 
