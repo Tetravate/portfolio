@@ -6,10 +6,9 @@
 ---
 
 ## 1. Portfolio Governance & Credibility Principles
-
 1. **No Fabricated Claims:** Do not invent clients, adoption numbers, government affiliations, funding milestones, or fake metrics.
 2. **Accurate Status Representation:** Clearly distinguish between live public deployments, interactive deployed prototypes, and concept architectures.
-3. **Verified Testimonial:** The only authorized client testimonial in the portfolio is the genuine retail partner quote for **AGS Masalas**.
+3. **Client & Project Feedback:** Feedback is limited to substantiated sources: genuine feedback from **AGS Masalas** (Retail POS Implementation) and carefully labelled paraphrase for the **Oivu Project** (Hackathon Feedback). No unverified formal partnerships or customer testimonials may be claimed.
 4. **Project Disambiguation:**
    * **Oivu** is a civic welfare rest-point PWA concept for gig workers. Do not confuse it with a dining app or refer to it as "Restora".
    * **SAKSHA / DRISHYAM** is an AI crime intelligence & geospatial analytics prototype developed under SIH26189.
@@ -98,9 +97,9 @@
 * **GitHub URL:** None
 * **Problem:** Heavy retail foot traffic during evening rush hours caused billing bottlenecks; frequent local network drops crashed cloud-only billing software.
 * **Solution:** Resilient, offline-first Point of Sale (POS) application with barcode scanning, local SQLite storage, background cloud sync, thermal receipt printing, and Android tablet support.
-* **Verified Testimonial:**
+* **Verified Feedback:**
   > *"Tetravate observed our billing counter directly and built exactly what we needed: quick billing that never stops working when the Wi-Fi cuts out."*  
-  > — **Retail Business Partner**, AGS Masalas (In-Store POS Deployment)
+  > — **AGS Masalas**, Retail POS Implementation
 * **Screenshots:**
   1. `/projects/ags-masalas-dashboard.jpg` (Retail Sales Analytics & Stock Oversight)
   2. `/projects/ags-masalas-pos-mobile.png` (High-Speed In-Store Billing Interface)

@@ -10,16 +10,122 @@
   <meta name="author" content="Tetravate" />
   <meta name="theme-color" content="#071527" />
 
+  <!-- Search Engine Robots Directives for Complete Indexing -->
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="keywords" content="Tetravate, Tetravate Studio, Tetravate Technologies, digital product studio, software engineering, web applications, SaaS platforms, AI solutions, from thought to thing" />
+  <meta name="application-name" content="Tetravate" />
+  <meta name="apple-mobile-web-app-title" content="Tetravate" />
+
+  <!-- Google Search Console Verification Meta Tag -->
+  <meta name="google-site-verification" content="lZilFm9KF2nR2IAqOixM97SpjFBHdnaQvTe7k38lncA" />
+
   <!-- Canonical URL Link -->
   <link rel="canonical" href="https://tetravate.vercel.app/" id="canonical-link" />
 
   <!-- Open Graph / Meta -->
+  <meta property="og:site_name" content="Tetravate" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://tetravate.vercel.app/" id="og-url" />
   <meta property="og:title" content="Tetravate — Product Design &amp; Engineering Studio" id="og-title" />
   <meta property="og:description"
     content="From Thought to Thing: We build websites, software, SaaS platforms, mobile apps, and AI solutions." id="og-desc" />
   <meta property="og:image" content="https://tetravate.vercel.app/logo-emblem.png" id="og-image" />
+
+  <!-- Twitter Card Metadata -->
+  <meta name="twitter:card" content="summary_large_image" id="twitter-card" />
+  <meta name="twitter:url" content="https://tetravate.vercel.app/" id="twitter-url" />
+  <meta name="twitter:title" content="Tetravate — Product Design &amp; Engineering Studio" id="twitter-title" />
+  <meta name="twitter:description"
+    content="From Thought to Thing: We build websites, software, SaaS platforms, mobile apps, and AI solutions." id="twitter-desc" />
+  <meta name="twitter:image" content="https://tetravate.vercel.app/logo-emblem.png" id="twitter-image" />
+
+  <!-- JSON-LD Structured Data: Organization & WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://tetravate.vercel.app/#organization",
+        "name": "Tetravate",
+        "alternateName": [
+          "Tetravate Studio",
+          "Tetravate Technologies",
+          "Tetravate Digital",
+          "Tetravate Engineering Studio"
+        ],
+        "url": "https://tetravate.vercel.app/",
+        "logo": "https://tetravate.vercel.app/logo-emblem.png",
+        "description": "Digital product design and software engineering studio building websites, web applications, SaaS platforms, and AI solutions. From Thought to Thing.",
+        "slogan": "From Thought to Thing",
+        "knowsAbout": [
+          "Web Development",
+          "Software Engineering",
+          "Product Design",
+          "AI Solutions",
+          "E-Commerce Solutions",
+          "Web Applications & Systems"
+        ],
+        "sameAs": [
+          "https://github.com/orgs/Tetravate",
+          "https://www.linkedin.com/company/tetravate/",
+          "https://www.instagram.com/tetra.vate",
+          "https://www.reddit.com/user/Tetravate/"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "tetravate@gmail.com",
+          "contactType": "Customer Support"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://tetravate.vercel.app/#website",
+        "url": "https://tetravate.vercel.app/",
+        "name": "Tetravate",
+        "alternateName": ["Tetravate", "Tetravate Studio"],
+        "description": "From Thought to Thing: Product Design & Engineering Studio",
+        "publisher": {
+          "@id": "https://tetravate.vercel.app/#organization"
+        }
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "@id": "https://tetravate.vercel.app/#navigation",
+        "name": "Studio Navigation",
+        "hasPart": [
+          {
+            "@type": "WebPage",
+            "name": "Selected Studio Projects",
+            "url": "https://tetravate.vercel.app/work"
+          },
+          {
+            "@type": "WebPage",
+            "name": "What We Build",
+            "url": "https://tetravate.vercel.app/services"
+          },
+          {
+            "@type": "WebPage",
+            "name": "From Idea to Product",
+            "url": "https://tetravate.vercel.app/process"
+          },
+          {
+            "@type": "WebPage",
+            "name": "The Founders",
+            "url": "https://tetravate.vercel.app/about"
+          },
+          {
+            "@type": "WebPage",
+            "name": "Start a Project",
+            "url": "https://tetravate.vercel.app/contact"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,6 +141,11 @@
 </head>
 
 <body>
+
+  <!-- ==========================================================================
+       ACCESSIBLE SKIP TO CONTENT (WCAG 2.2 AA SC 2.4.1)
+       ========================================================================== -->
+  <a href="#app-router" class="skip-link">Skip to main content</a>
 
   <!-- ==========================================================================
        GLOBAL STICKY NAVIGATION
@@ -109,7 +220,35 @@
        DYNAMIC MULTI-PAGE ROUTER CONTAINER
        ========================================================================== -->
   <main id="app-router">
-    <!-- Active route content is injected dynamically here via main.js router -->
+    <!-- Prerendered Semantic SEO Shell for Search Engine Indexing (Googlebot / Bingbot) -->
+    <noscript>
+      <section style="padding: 3rem 1.5rem; max-width: 900px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #011641;">
+        <h1 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 1rem;">Tetravate — Digital Product Design &amp; Software Engineering Studio</h1>
+        <p style="font-size: 1.125rem; margin-bottom: 1.5rem;">
+          <strong>From Thought to Thing:</strong> Tetravate builds high-performance websites, custom web applications, SaaS platforms, and AI-powered products. Technology is our tool; solving real everyday operational problems is our purpose.
+        </p>
+
+        <h2 style="font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 0.75rem;">Our Official Studio Services</h2>
+        <ul style="padding-left: 1.25rem; margin-bottom: 1.5rem;">
+          <li><a href="/services">Websites &amp; Digital Experiences</a> — Modern high-converting web applications and brand experiences.</li>
+          <li><a href="/services">E-Commerce Solutions</a> — Scalable online stores, catalogs, and integrated checkout flows.</li>
+          <li><a href="/services">Web Applications &amp; Systems</a> — Custom software, dashboards, and enterprise management tools.</li>
+          <li><a href="/services">AI &amp; Data Solutions</a> — Explainable machine learning, intelligent assistants, and data analytics.</li>
+          <li><a href="/services">Backend &amp; Integrations</a> — Robust APIs, database architectures, and third-party integrations.</li>
+          <li><a href="/services">Deployment &amp; Technical Support</a> — Cloud infrastructure, continuous deployment, and performance monitoring.</li>
+        </ul>
+
+        <h2 style="font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 0.75rem;">Featured Studio Work &amp; Case Studies</h2>
+        <ul style="padding-left: 1.25rem; margin-bottom: 1.5rem;">
+          <li><a href="/work/tetravate-ecommerce">LUXORA</a> — Luxury E-Commerce Platform with dynamic cart and checkout.</li>
+          <li><a href="/work/mara-dining">MĀRA</a> — Interactive modern Indian dining web experience and table reservations.</li>
+          <li><a href="/work/nivara-erp">Nivara ERP</a> — Role-based college management system across 8 institutional modules.</li>
+        </ul>
+
+        <h2 style="font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 0.75rem;">Get in Touch with Tetravate</h2>
+        <p>Email: <a href="mailto:tetravate@gmail.com">tetravate@gmail.com</a> | WhatsApp: <a href="https://wa.me/916381077598">+91 63810 77598</a></p>
+      </section>
+    </noscript>
   </main>
 
   <!-- ==========================================================================

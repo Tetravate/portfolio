@@ -138,6 +138,32 @@ body::before {
   outline-offset: 3px;
 }
 
+/* Accessibility Skip Link (WCAG 2.2 AA SC 2.4.1) */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1.5rem;
+  z-index: 99999;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--color-navy);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--color-blue);
+  box-shadow: 0 4px 14px rgba(0, 101, 255, 0.35);
+  text-decoration: none;
+  transition: top 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: 1rem;
+  outline: 2px solid var(--color-blue);
+  outline-offset: 2px;
+}
+
 h1:focus:not(:focus-visible),
 h2:focus:not(:focus-visible),
 #app-router:focus:not(:focus-visible),
@@ -177,9 +203,17 @@ button {
 
 /* Section Common — Consistent Blueprint Spacing (56-80px scale) */
 .section {
-  padding: 4.25rem 0;
+  padding: 3.75rem 0;
   position: relative;
   z-index: 1;
+}
+
+.home-projects-section {
+  padding-bottom: 2.5rem;
+}
+
+.home-services-section {
+  padding-top: 2.5rem;
 }
 
 .section-secondary {
@@ -201,10 +235,27 @@ button {
 .section-header-flex {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 2.25rem;
+  align-items: center;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
   gap: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .home-projects-section {
+    padding-bottom: 2rem;
+  }
+  .home-services-section {
+    padding-top: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .section-header-flex {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
 }
 
 .section-header.text-center {
@@ -901,8 +952,121 @@ button {
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+}
+
+/* Homepage Compact Clickable Service Cards Grid: 3 columns x 2 rows on desktop */
+.home-services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.home-service-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 175px;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal), transform var(--transition-normal);
+  cursor: pointer;
+}
+
+.home-service-card:hover {
+  border-color: var(--color-blue);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.home-service-card:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+}
+
+.home-service-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.home-service-card-top .service-icon-wrap {
+  margin-bottom: 0;
+}
+
+.home-service-num {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-blue);
+  background: var(--color-blue-subtle);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-xs);
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+.home-service-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.home-service-title {
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  line-height: 1.3;
+  margin: 0;
+  letter-spacing: -0.015em;
+  transition: color var(--transition-fast);
+}
+
+.home-service-card:hover .home-service-title {
+  color: var(--color-blue);
+}
+
+.home-service-arrow {
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-page-subtle);
+  border: 1px solid var(--border-subtle);
+  transition: all var(--transition-fast);
+}
+
+.home-service-card:hover .home-service-arrow {
+  color: #FFFFFF;
+  background: var(--color-blue);
+  border-color: var(--color-blue);
+  transform: translateX(3px);
+}
+
+.home-service-card:hover .service-icon-wrap {
+  background: var(--color-blue);
+  color: #FFFFFF;
+  border-color: var(--color-blue);
+  box-shadow: var(--shadow-blue);
+}
+
+/* Scroll margin so sticky navbar never obscures service section headings */
+[id^="service-"] {
+  scroll-margin-top: 5.5rem;
 }
 
 .services-page-grid {
@@ -1078,51 +1242,33 @@ button {
   margin-bottom: 0.15rem;
 }
 
-/* Service Card Verified Studio Evidence Box */
-.service-proof-box {
-  background: var(--color-blue-subtle);
-  border: 1px solid rgba(0, 101, 255, 0.2);
-  border-radius: var(--radius-sm);
-  padding: 0.85rem 1.1rem;
-  margin-bottom: 1.5rem;
+/* Service Card Actions & Project Example Button */
+.service-card-actions {
+  margin-top: auto;
+  padding-top: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.65rem;
 }
 
-.service-proof-label {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: var(--color-blue);
-  letter-spacing: 0.08em;
-}
-
-.service-proof-link-wrap {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  font-size: 0.875rem;
-}
-
-.service-proof-link {
+.service-example-btn {
+  background: #FFFFFF;
+  color: var(--color-navy);
+  border: 1px solid var(--border-medium);
   font-weight: 700;
+  font-size: 0.875rem;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.service-example-btn:hover {
+  background: var(--bg-page-subtle);
+  border-color: var(--color-blue);
   color: var(--color-blue);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color var(--transition-fast);
+  transform: translateY(-1.5px);
+  box-shadow: var(--shadow-md);
 }
 
-.service-proof-link:hover {
-  color: var(--color-blue-hover);
-}
-
-.service-proof-type {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
 
 /* Service Card Related Capabilities Chips */
 .service-related-box {
@@ -3653,7 +3799,7 @@ button {
 /* Testimonials */
 .testimonials-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   margin-bottom: 2rem;
 }
@@ -3664,35 +3810,78 @@ button {
   border-radius: var(--radius-md);
   padding: 2.25rem;
   box-shadow: var(--shadow-sm);
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.testimonial-quote-mark {
-  font-size: 2.5rem;
-  line-height: 1;
-  color: var(--color-blue);
-  margin-bottom: 0.75rem;
-  font-family: serif;
+.testimonial-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(0, 101, 255, 0.35);
+}
+
+.feedback-card-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .testimonial-quote-text {
-  font-size: 1.05rem;
-  line-height: 1.6;
+  font-size: 1.0625rem;
+  line-height: 1.65;
   color: var(--color-navy);
-  margin-bottom: 1.5rem;
-  font-style: italic;
+  margin-bottom: 1.75rem;
   font-weight: 500;
+  flex-grow: 1;
+}
+
+.achievement-card-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-blue);
+  margin-bottom: 0.5rem;
+}
+
+.achievement-card-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--color-navy);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.achievement-card-text {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-body);
+  margin-bottom: 1.75rem;
+  flex-grow: 1;
+}
+
+.testimonial-author-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-subtle);
 }
 
 .testimonial-author-name {
   font-size: 0.9375rem;
   font-weight: 800;
   color: var(--color-navy);
+  letter-spacing: -0.01em;
 }
 
 .testimonial-author-meta {
   font-size: 0.8125rem;
   color: var(--text-muted);
+  font-weight: 500;
 }
 
 /* ==========================================================================
@@ -4490,7 +4679,8 @@ button {
     gap: 2.5rem;
   }
 
-  .services-grid {
+  .services-grid,
+  .home-services-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -4526,9 +4716,15 @@ button {
   }
 
   .value-card,
-  .value-card:nth-child(4),
-  .value-card:nth-child(5) {
+  .value-card:nth-child(4) {
     grid-column: auto;
+  }
+
+  .value-card:nth-child(5) {
+    grid-column: 1 / -1;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
   }
 
   .achievements-grid {
@@ -4650,9 +4846,10 @@ button {
   }
 
   .services-grid,
+  .home-services-grid,
   .services-page-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .service-card {
@@ -4716,6 +4913,8 @@ button {
   .tech-group-card:nth-child(5) {
     grid-column: 1 / -1 !important;
     width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
     box-sizing: border-box;
   }
 
@@ -5213,8 +5412,10 @@ button {
     padding: 0.2rem 0.45rem;
   }
 
-  .service-card {
+  .service-card,
+  .home-service-card {
     padding: 1.25rem 1rem;
+    min-height: 145px;
   }
 
   .process-detailed-card {

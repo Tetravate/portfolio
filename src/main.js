@@ -279,6 +279,30 @@ export function updatePageMetadata({ title, description, canonicalPath, ogImage 
       : `${BASE_PRODUCTION_URL}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`;
     ogImageEl.setAttribute('content', fullOgImage);
   }
+
+  // Update Twitter Tags
+  const twitterTitleEl = document.getElementById('twitter-title') || document.querySelector('meta[name="twitter:title"]');
+  if (twitterTitleEl && title) {
+    twitterTitleEl.setAttribute('content', title);
+  }
+
+  const twitterDescEl = document.getElementById('twitter-desc') || document.querySelector('meta[name="twitter:description"]');
+  if (twitterDescEl && description) {
+    twitterDescEl.setAttribute('content', description);
+  }
+
+  const twitterUrlEl = document.getElementById('twitter-url') || document.querySelector('meta[name="twitter:url"]');
+  if (twitterUrlEl) {
+    twitterUrlEl.setAttribute('content', fullCanonical);
+  }
+
+  const twitterImageEl = document.getElementById('twitter-image') || document.querySelector('meta[name="twitter:image"]');
+  if (twitterImageEl && ogImage) {
+    const fullTwitterImage = ogImage.startsWith('http')
+      ? ogImage
+      : `${BASE_PRODUCTION_URL}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`;
+    twitterImageEl.setAttribute('content', fullTwitterImage);
+  }
 }
 
 // ==========================================================================
@@ -315,13 +339,21 @@ export function navigateTo(url) {
 window.navigateTo = navigateTo;
 
 function handleRoute(rawUrl) {
-  // Parse path and query parameters safely (e.g., /contact?service=...)
-  const urlToParse = rawUrl || (window.location.pathname + window.location.search);
+  // Parse path, query parameters, and anchor hash safely (e.g., /services#service-ecommerce-solutions)
+  const urlToParse = rawUrl || (window.location.pathname + window.location.search + window.location.hash);
   let pathname = urlToParse;
-  if (urlToParse.includes('?')) {
-    pathname = urlToParse.split('?')[0];
-  } else if (urlToParse.includes('#')) {
-    pathname = urlToParse.split('#')[0];
+  let hash = '';
+
+  if (urlToParse.includes('#')) {
+    const hashParts = urlToParse.split('#');
+    pathname = hashParts[0];
+    hash = hashParts[1] || '';
+  } else if (window.location.hash) {
+    hash = window.location.hash.slice(1);
+  }
+
+  if (pathname.includes('?')) {
+    pathname = pathname.split('?')[0];
   }
 
   // Normalize path (strip trailing slash if not root)
@@ -378,9 +410,19 @@ function handleRoute(rawUrl) {
   initSpotlightCards();
   initScrollReveal();
 
-  // Route Accessibility: Shift focus to the new page's primary heading or view container
-  // Allows screen readers and keyboard navigators to identify the newly mounted content
+  // Route Accessibility: Shift focus and scroll to anchor target if present, or to primary heading
   requestAnimationFrame(() => {
+    if (hash) {
+      const targetEl = document.getElementById(hash);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (!targetEl.hasAttribute('tabindex')) {
+          targetEl.setAttribute('tabindex', '-1');
+        }
+        targetEl.focus({ preventScroll: true });
+        return;
+      }
+    }
     const focusTarget = app.querySelector('h1') || app.querySelector('h2') || app;
     if (focusTarget) {
       if (!focusTarget.hasAttribute('tabindex')) {
@@ -641,11 +683,10 @@ function renderHomePage(container) {
       </section>
 
       <!-- SELECTED WORK PREVIEW (TOP 3 PROJECTS LEADING TO /work) -->
-      <section class="section">
+      <section class="section home-projects-section">
         <div class="container">
           <div class="section-header-flex">
             <div>
-              <div class="eyebrow">FEATURED WORK</div>
               <h2 class="section-title" style="margin-bottom: 0;">Selected Studio Projects</h2>
             </div>
             <a href="/work" class="btn btn-primary" data-link>
@@ -726,11 +767,10 @@ function renderHomePage(container) {
       </section>
 
       <!-- WHAT WE BUILD PREVIEW (LEADING TO /services) -->
-      <section class="section section-secondary">
+      <section class="section section-secondary home-services-section">
         <div class="container">
           <div class="section-header-flex">
             <div>
-              <div class="eyebrow">CAPABILITIES</div>
               <h2 class="section-title" style="margin-bottom: 0;">What We Build</h2>
             </div>
             <a href="/services" class="btn btn-secondary" data-link>
@@ -738,19 +778,25 @@ function renderHomePage(container) {
             </a>
           </div>
 
-          <div class="services-grid">
-            ${services.map(s => `
-              <div class="service-card" id="home-service-${s.id}">
-                <div class="service-icon-wrap">
-                  ${getServiceSvgIcon(s.id)}
+          <div class="home-services-grid">
+            ${services.map((s, idx) => `
+              <a href="/services/#service-${s.id}" class="home-service-card" id="home-service-${s.id}" data-link aria-label="${s.title} — View detailed service capabilities">
+                <div class="home-service-card-top">
+                  <div class="service-icon-wrap" aria-hidden="true">
+                    ${getServiceSvgIcon(s.id)}
+                  </div>
+                  <span class="home-service-num">0${idx + 1}</span>
                 </div>
-                <h3 class="service-title">${s.title}</h3>
-                <p class="service-desc">${s.shortDesc}</p>
-                <ul class="service-capabilities-list">
-                  ${s.capabilities.slice(0, 3).map(c => `<li class="service-cap-item">${c}</li>`).join('')}
-                </ul>
-                <a href="/services#service-${s.id}" class="service-action-link" data-link>Learn more →</a>
-              </div>
+                <div class="home-service-card-bottom">
+                  <h3 class="home-service-title">${s.title}</h3>
+                  <span class="home-service-arrow" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </span>
+                </div>
+              </a>
             `).join('')}
           </div>
         </div>
@@ -1091,7 +1137,7 @@ function renderProjectDetailPage(container, slug) {
                 Live Demo ↗
               </a>
             ` : ''}
-            <a href="/contact" class="btn btn-secondary" data-link>
+            <a href="${ctaInquiryHref}" class="btn btn-secondary" data-link>
               Discuss a Similar Project
             </a>
           </div>
@@ -1671,8 +1717,8 @@ function initProjectGalleryAndLightbox(project, screenshots) {
 // ==========================================================================
 function renderServicesPage(container) {
   updatePageMetadata({
-    title: 'Studio Capabilities & Services — Tetravate Studio',
-    description: 'Our six core capabilities: Websites & Digital Experiences, E-Commerce Solutions, Web Applications & Systems, AI & Data Solutions, Backend & Integrations, and Deployment & Technical Support.',
+    title: 'Services Built Around Real Needs — Tetravate Studio',
+    description: 'Explore six connected capabilities that help turn ideas into useful digital products: Websites & Digital Experiences, E-Commerce Solutions, Web Applications & Systems, AI & Data Solutions, Backend & Integrations, and Deployment & Technical Support.',
     canonicalPath: '/services',
     ogImage: logoEmblem
   });
@@ -1682,56 +1728,15 @@ function renderServicesPage(container) {
       <div class="page-hero">
         <div class="container">
           <div class="eyebrow">STUDIO CAPABILITIES</div>
-          <h1 class="page-hero-title">Our Services &amp; Working Philosophy</h1>
+          <h1 class="page-hero-title">Services Built Around Real Needs</h1>
           <p class="page-hero-subtitle">
-            From problem discovery to dependable delivery — six connected engineering capabilities turning ideas into useful digital products.
+            Explore six connected capabilities that help turn ideas into useful digital products.
           </p>
         </div>
       </div>
 
       <section class="section">
         <div class="container">
-          <!-- Progression banner connecting the studio's thinking -->
-          <div class="services-progression-banner">
-            <div style="max-width: 820px;">
-              <div class="eyebrow" style="margin-bottom: 0.35rem;">CONNECTED STUDIO DISCIPLINE</div>
-              <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-navy); margin-bottom: 0.65rem;">
-                One unified capability. Zero isolated silos.
-              </h2>
-              <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-body); margin: 0;">
-                At Tetravate, our six service areas are not disconnected agency departments — they are parts of one coherent product discipline. Every project follows a natural progression from understanding the problem to delivering a product people can genuinely rely on.
-              </p>
-            </div>
-
-            <div class="services-progression-steps">
-              <div class="services-progression-step">
-                <div class="services-progression-num">01 // UNDERSTAND</div>
-                <div class="services-progression-title">The Real Need</div>
-                <p class="services-progression-desc">Observe real operations and listen to real users before writing software.</p>
-              </div>
-              <div class="services-progression-step">
-                <div class="services-progression-num">02 // DEFINE</div>
-                <div class="services-progression-title">The Solution</div>
-                <p class="services-progression-desc">Scope realistic architecture, select reliable tools, and respect client budgets.</p>
-              </div>
-              <div class="services-progression-step">
-                <div class="services-progression-num">03 // DESIGN</div>
-                <div class="services-progression-title">The Experience</div>
-                <p class="services-progression-desc">Create accessible, high-contrast interfaces that everyday people can navigate.</p>
-              </div>
-              <div class="services-progression-step">
-                <div class="services-progression-num">04 // BUILD</div>
-                <div class="services-progression-title">The Product</div>
-                <p class="services-progression-desc">Write clean, resilient code with offline continuity and reliable databases.</p>
-              </div>
-              <div class="services-progression-step">
-                <div class="services-progression-num">05 // DELIVER</div>
-                <div class="services-progression-title">Useful Outcome</div>
-                <p class="services-progression-desc">Deploy to production, verify in real use, and discuss honest support beyond launch.</p>
-              </div>
-            </div>
-          </div>
-
           <!-- The 6 Official Services Grid -->
           <div class="services-grid services-page-grid">
             ${services.map((s, idx) => `
@@ -1782,20 +1787,12 @@ function renderServicesPage(container) {
                   </div>
                 ` : ''}
 
-                <!-- Verified Portfolio Proof Link if available -->
-                ${s.portfolioProof ? `
-                  <div class="service-proof-box">
-                    <span class="service-proof-label">Verified Studio Demonstration</span>
-                    <div class="service-proof-link-wrap">
-                      <a href="/work/${s.portfolioProof.slug}" class="service-proof-link" data-link>
-                        ${s.portfolioProof.title} ↗
-                      </a>
-                      <span class="service-proof-type">— ${s.portfolioProof.type}</span>
-                    </div>
-                  </div>
-                ` : ''}
-
-                <div style="margin-top: auto; padding-top: 1rem;">
+                <div class="service-card-actions">
+                  ${s.portfolioProof ? `
+                    <a href="/work/${s.portfolioProof.slug}" class="btn btn-secondary service-example-btn" aria-label="View ${s.portfolioProof.title} project example" style="width: 100%; justify-content: center;" data-link>
+                      Project Example →
+                    </a>
+                  ` : ''}
                   <a href="/contact" class="btn btn-primary" style="width: 100%; justify-content: center;" data-link>
                     ${s.ctaText || `Discuss ${s.title} →`}
                   </a>
@@ -1835,12 +1832,12 @@ function renderServicesPage(container) {
       <section class="closing-cta-section">
         <div class="container">
           <div class="closing-cta-card">
-            <h2 class="closing-cta-title">Ready to begin?</h2>
+            <h2 class="closing-cta-title">One idea. The right capabilities to build it.</h2>
             <p class="closing-cta-lead">
-              Tell us what you want to build and let's scope a clear path forward.
+              From initial planning to deployment, we bring the right skills together to deliver practical digital solutions.
             </p>
             <a href="/contact" class="btn btn-primary btn-lg" data-link>
-              Start a Project
+              Start a Project →
             </a>
           </div>
         </div>
@@ -2202,34 +2199,34 @@ function renderAboutPage(container) {
               <div class="eyebrow">FOUNDATIONAL ETHOS</div>
               <h3 class="section-title">Our Core Principles</h3>
               <p class="section-subtitle" style="margin: 0 auto;">
-                The engineering values, architectural honesty, and human standards that guide every line of code we ship.
+                The values that guide how we work, build, and earn trust.
               </p>
             </div>
             <div class="values-grid">
               <div class="value-card">
                 <div class="value-card-num">01</div>
                 <h4 class="value-card-title">Trust</h4>
-                <p class="value-card-desc">No exaggerated claims or speculative promises. Reliable timelines, transparent architecture, and honest status updates throughout delivery.</p>
+                <p class="value-card-desc">Honest communication, transparent decisions, realistic commitments, and relationships built on trust.</p>
               </div>
               <div class="value-card">
                 <div class="value-card-num">02</div>
                 <h4 class="value-card-title">Quality</h4>
-                <p class="value-card-desc">Resilient code, accessible ergonomics, sub-second query speeds, and software built to endure in production without frequent rewrites.</p>
+                <p class="value-card-desc">Thoughtfully engineered solutions with attention to reliability, usability, accessibility, and lasting value.</p>
               </div>
               <div class="value-card">
                 <div class="value-card-num">03</div>
-                <h4 class="value-card-title">Thoughts</h4>
-                <p class="value-card-desc">Deliberate thinking before coding. Clear problem framing, observing actual operational friction, and listening to users before writing software.</p>
+                <h4 class="value-card-title">Integrity</h4>
+                <p class="value-card-desc">Doing what is right, communicating honestly, and being transparent about our capabilities, decisions, and limitations.</p>
               </div>
               <div class="value-card">
                 <div class="value-card-num">04</div>
-                <h4 class="value-card-title">Kindness</h4>
-                <p class="value-card-desc">Respectful communication, patience with complex business requirements, and deep empathy for every person who interacts with our digital products.</p>
+                <h4 class="value-card-title">Innovation</h4>
+                <p class="value-card-desc">Turning thoughtful ideas into practical solutions through purposeful technology, experimentation, and continuous learning.</p>
               </div>
               <div class="value-card">
                 <div class="value-card-num">05</div>
-                <h4 class="value-card-title">Humanity</h4>
-                <p class="value-card-desc">Technology exists to serve people and human dignity, never the reverse. We build dependable, useful tools for real people solving real problems.</p>
+                <h4 class="value-card-title">Accountability</h4>
+                <p class="value-card-desc">Taking ownership of our work, addressing challenges, and standing behind the commitments we make.</p>
               </div>
             </div>
           </div>
@@ -2287,25 +2284,28 @@ function renderAboutPage(container) {
         </div>
       </section>
 
-      <!-- Testimonials -->
-      <section class="section">
+      <!-- Feedback & Recognition -->
+      <section class="section" id="feedback">
         <div class="container">
           <div class="section-header text-center">
-            <div class="eyebrow">PARTNER PERSPECTIVES</div>
-            <h2 class="section-title">What People Say</h2>
+            <div class="eyebrow">FEEDBACK & RECOGNITION</div>
+            <h2 class="section-title">Feedback & Recognition</h2>
             <p class="section-subtitle">
-              Verified feedback from business operators and partners.
+              Experiences, feedback, and milestones from our work.
             </p>
           </div>
 
           <div class="testimonials-grid">
             ${testimonials.map(t => `
               <div class="testimonial-card">
-                <div class="testimonial-quote-mark">“</div>
-                <p class="testimonial-quote-text">${t.quote}</p>
-                <div class="testimonial-author-row">
+                <div class="feedback-card-content">
+                  <div class="achievement-card-tag">${t.heading}</div>
+                  <h3 class="achievement-card-title">${t.title}</h3>
+                  <p class="achievement-card-text">${t.description}</p>
+                </div>
+                <div class="testimonial-author-row" aria-label="${t.attribution || (t.author + ' · ' + t.role)}">
                   <span class="testimonial-author-name">${t.author}</span>
-                  <span class="testimonial-author-meta">${t.role} &bull; ${t.context}</span>
+                  <span class="testimonial-author-meta">${t.role}</span>
                 </div>
               </div>
             `).join('')}
@@ -2667,13 +2667,13 @@ function renderContactPage(container) {
                 <div class="form-row">
                   <div class="form-group">
                     <label for="inquiryName" class="form-label">Your Name *</label>
-                    <input type="text" id="inquiryName" class="form-input" placeholder="e.g. Ramesh or Sarah" required />
+                    <input type="text" id="inquiryName" class="form-input" placeholder="e.g. Ramesh or Sarah" required aria-required="true" />
                     <div class="form-error-msg">Please enter your name.</div>
                   </div>
 
                   <div class="form-group">
                     <label for="inquiryEmail" class="form-label">Email Address *</label>
-                    <input type="email" id="inquiryEmail" class="form-input" placeholder="name@company.com" required />
+                    <input type="email" id="inquiryEmail" class="form-input" placeholder="name@company.com" required aria-required="true" />
                     <div class="form-error-msg">Please enter a valid email address.</div>
                   </div>
                 </div>
@@ -2686,7 +2686,7 @@ function renderContactPage(container) {
 
                   <div class="form-group">
                     <label for="inquiryService" class="form-label">What do you need? *</label>
-                    <select id="inquiryService" class="form-select">
+                    <select id="inquiryService" class="form-select" aria-required="true">
                       <option value="Websites & Digital Experiences">Websites &amp; Digital Experiences (Websites, Landers, UI/UX)</option>
                       <option value="E-Commerce Solutions">E-Commerce Solutions (Storefronts, Catalogues, Checkout)</option>
                       <option value="Web Applications & Systems">Web Applications &amp; Systems (Custom Apps, Admin Panels, Bookings)</option>
@@ -2702,7 +2702,7 @@ function renderContactPage(container) {
                   <label for="inquiryMessage" class="form-label">Tell us about your project or problem *</label>
                   <textarea id="inquiryMessage" class="form-textarea"
                     placeholder="What problem are you trying to solve? Who is going to use it? What are the key features you need?"
-                    required></textarea>
+                    required aria-required="true"></textarea>
                   <div class="form-error-msg">Please describe your project in at least 10 characters.</div>
                 </div>
 
@@ -3059,7 +3059,7 @@ function initContactForm() {
 // Spotlight Cursor Follower
 function initSpotlightCards() {
   const cards = document.querySelectorAll(
-    '.service-card, .project-card, .process-card, .why-card, .achievement-card, .tech-group-card, .project-feature-card, .hero-visual-card'
+    '.service-card, .home-service-card, .project-card, .process-card, .why-card, .achievement-card, .tech-group-card, .project-feature-card, .hero-visual-card'
   );
 
   cards.forEach(card => {
@@ -3079,7 +3079,7 @@ function initSpotlightCards() {
 // Scroll Reveal Observer
 function initScrollReveal() {
   const revealElements = document.querySelectorAll(
-    '.section-header, .service-card, .project-card, .process-card, .why-card, .achievement-card, .tech-group-card, .closing-cta-card, .process-detailed-card'
+    '.section-header, .service-card, .home-service-card, .project-card, .process-card, .why-card, .achievement-card, .tech-group-card, .closing-cta-card, .process-detailed-card'
   );
 
   if (!('IntersectionObserver' in window)) {

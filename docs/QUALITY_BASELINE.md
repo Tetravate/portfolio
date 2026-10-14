@@ -94,8 +94,31 @@
 
 ## 5. Conversion & Customer Journey
 
-* **Contextual Project Inquiry CTA:** Added at the bottom of every project case study view:
+* **Contextual Project Inquiry CTA:** Integrated across all 10 project case study views (both in the top hero actions and the bottom closing card):
   * **Heading:** *"Interested in building something similar?"*
   * **Description:** *"Tell us what you're working on. We'll discuss your requirements and help you explore an appropriate solution."*
   * **Button:** *"Discuss a Similar Project"*
   * **Dynamic Pre-Selection:** Automatically links to `/contact?service=${projectService}` so interested prospective clients arrive with their project type already pre-selected.
+
+---
+
+## 6. Master Website Audit & Production Verification (October 2026)
+
+* **Automated Test Suite (`npm test`):**
+  * Script: `scripts/run_audit_tests.cjs`
+  * Execution: **66 / 66 tests passing (100% pass rate)**.
+  * Test Domains: Vite build, index.html metadata, 6 official services taxonomy, 5 tech showcase categories, portfolio credibility & live demos, technical SEO/robots/sitemap, contact form pipeline & WhatsApp, and security headers.
+* **Public Live Demo Availability Verification:**
+  * `https://luxora-nine-eta.vercel.app/` &rarr; Verified active (HTTP 200 OK)
+  * `https://mara-restaurant-28hy.vercel.app/` &rarr; Verified active (HTTP 200 OK)
+  * `https://tetravate-nivara.vercel.app/` &rarr; Verified active (HTTP 200 OK)
+  * AGA AI Assistant, MISTIQ 2.0, SAKSHA / DRISHYAM, AGS Masalas, Pustakabhrita, Tetravate Workspace, and Oivu correctly restricted from public live demo buttons.
+* **Accessibility Enhancements (WCAG 2.2 AA):**
+  * Skip Link: `.skip-link` added to top of `<body>` targeting `#app-router` (SC 2.4.1 Bypass Blocks).
+  * Smooth Hash Anchor Navigation: `handleRoute()` enhanced to support deep-linking (e.g. `/services#service-ecommerce-solutions`) with smooth scroll and accessible `-1` tabindex focus.
+  * Form Fields: `aria-required="true"` added to mandatory contact inputs.
+* **Search Visibility & Schema Markup:**
+  * JSON-LD: Dual `@graph` schema added for `Organization` and `WebSite`.
+  * Twitter Cards: `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`, and `twitter:url` added and dynamically synchronized on all route transitions.
+* **Production Security Headers:**
+  * `Permissions-Policy: camera=(), microphone=(), geolocation=()` added to `vercel.json` alongside existing nosniff, DENY, and strict-origin headers.

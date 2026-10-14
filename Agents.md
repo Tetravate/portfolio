@@ -55,7 +55,7 @@ Do not make assumptions about Tetravate. The repository includes an evidence-bas
 
 1. **No Invented Facts:**
    * Never invent clients, partners, user counts, revenue metrics, or government affiliations.
-   * Never create fake testimonials. The only authorized testimonial is the **AGS Masalas** retail partner quote.
+   * Never create fake testimonials. Authorized feedback items are the genuine **AGS Masalas** (Retail POS Implementation) feedback and the paraphrased **Oivu Project** (Hackathon Feedback). Never claim unverified business partnerships or customer reviews.
 2. **Project Naming & Truth:**
    * **Oivu** is a civic rest-point PWA concept for gig workers. Do not confuse it with a dining app or label it "Restora".
    * **SAKSHA / DRISHYAM** is an AI crime intelligence prototype (SIH26189 concept).

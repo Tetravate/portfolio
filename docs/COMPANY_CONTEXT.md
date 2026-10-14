@@ -22,14 +22,13 @@
 
 ## 2. Core Studio Values
 
-Tetravate operates under six practical, engineering-first values:
+Tetravate operates under five foundational ethos principles:
 
-1. **Practical Problem-Solving:** Software is built to address verified operational friction (e.g. offline-first retail billing, gig worker rest stops, campus ERP), not to showcase superficial technology stacks.
-2. **Engineering Integrity:** Clear data schemas, deterministic business logic, resilient error boundaries, and zero fake metrics or fabricated testimonials.
-3. **Transparent Client Communication:** Clear explanations in accessible language, frank technical assessments, and transparent discussions of trade-offs.
-4. **Budget Awareness:** Thoughtful scoping that respects client capital; selecting lightweight serverless or standard hosting options rather than imposing costly, unnecessary infrastructure.
-5. **Close Collaboration:** Working side-by-side with domain operators, business partners, and clients to capture real user workflows.
-6. **Responsible Product Delivery:** End-to-end follow-through including cross-device testing, deployment automation, responsive polish, and maintainable handovers.
+1. **Trust:** Honest communication, transparent decisions, realistic commitments, and relationships built on trust.
+2. **Quality:** Thoughtfully engineered solutions with attention to reliability, usability, accessibility, and lasting value.
+3. **Integrity:** Doing what is right, communicating honestly, and being transparent about our capabilities, decisions, and limitations.
+4. **Innovation:** Turning thoughtful ideas into practical solutions through purposeful technology, experimentation, and continuous learning.
+5. **Accountability:** Taking ownership of our work, addressing challenges, and standing behind the commitments we make.
 
 ---
 

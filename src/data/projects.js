@@ -1385,10 +1385,11 @@ export const services = [
       "Deployment & Technical Support"
     ],
     portfolioProof: {
-      title: "MĀRA Modern Dining & Oivu",
+      title: "MĀRA Modern Dining",
       slug: "mara-dining",
-      type: "Interactive Brand & Menu Experience / Touch-First PWA"
+      type: "Interactive Brand & Menu Web Experience"
     },
+    relatedProjectSlugs: ["mara-dining", "oivu"],
     ctaText: "Discuss Website & UI/UX Requirements →",
     inquiryOption: "Websites & Digital Experiences"
   },
@@ -1428,10 +1429,11 @@ export const services = [
       "Backend & Integrations"
     ],
     portfolioProof: {
-      title: "LUXORA E-Commerce Platform",
+      title: "LUXORA",
       slug: "tetravate-ecommerce",
       type: "Online Storefront & Order Management Platform"
     },
+    relatedProjectSlugs: ["tetravate-ecommerce"],
     ctaText: "Discuss E-Commerce Architecture →",
     inquiryOption: "E-Commerce Solutions"
   },
@@ -1467,10 +1469,11 @@ export const services = [
       "Deployment & Technical Support"
     ],
     portfolioProof: {
-      title: "Nivara ERP & AGS Masalas POS",
+      title: "Nivara ERP",
       slug: "nivara-erp",
-      type: "Institutional Management & In-Store Operations"
+      type: "Role-Based Institutional Campus Management"
     },
+    relatedProjectSlugs: ["nivara-erp", "ags-masalas"],
     ctaText: "Scope a Web Application →",
     inquiryOption: "Web Applications & Systems"
   },
@@ -1510,10 +1513,11 @@ export const services = [
       "Web Applications & Systems"
     ],
     portfolioProof: {
-      title: "SAKSHA / DRISHYAM & AGA AI",
+      title: "SAKSHA",
       slug: "saksha",
-      type: "Geospatial Crime Analytics & Code Intelligence Prototypes"
+      type: "Geospatial Crime Analytics & Network Graph"
     },
+    relatedProjectSlugs: ["saksha", "aga-ai-assistant", "mistiq"],
     ctaText: "Explore AI & Data Solutions →",
     inquiryOption: "AI & Data Solutions"
   },
@@ -1553,10 +1557,11 @@ export const services = [
       "Deployment & Technical Support"
     ],
     portfolioProof: {
-      title: "Nivara ERP & Tetravate Workspace",
+      title: "Nivara ERP",
       slug: "nivara-erp",
-      type: "Multi-Tier Relational Backend & Local Data Synchronization"
+      type: "Multi-Tier Relational Database & Role Architecture"
     },
+    relatedProjectSlugs: ["nivara-erp", "tetravate-workspace", "ags-masalas"],
     ctaText: "Discuss Backend Architecture →",
     inquiryOption: "Backend & Integrations"
   },
@@ -1592,10 +1597,11 @@ export const services = [
       "Web Applications & Systems"
     ],
     portfolioProof: {
-      title: "Live Cloud Deployments & Field Rollout",
+      title: "AGS Masalas POS",
       slug: "ags-masalas",
       type: "Continuous Deployment & In-Store Field Reliability"
     },
+    relatedProjectSlugs: ["ags-masalas", "tetravate-workspace"],
     ctaText: "Plan Deployment & Support →",
     inquiryOption: "Deployment & Technical Support"
   }
@@ -1814,9 +1820,23 @@ export const achievements = [
 
 export const testimonials = [
   {
+    heading: "AGS MASALAS",
+    title: "Direct Counter Observation. Resilient Offline Billing.",
     quote: "Tetravate observed our billing counter directly and built exactly what we needed: quick billing that never stops working when the Wi-Fi cuts out.",
-    author: "Retail Business Partner",
-    role: "AGS Masalas",
-    context: "In-Store POS Deployment"
+    description: "“Tetravate observed our billing counter directly and built exactly what we needed: quick billing that never stops working when the Wi-Fi cuts out.”",
+    author: "AGS Masalas",
+    role: "Retail POS Implementation",
+    context: "Retail POS Implementation",
+    attribution: "AGS Masalas · Retail POS Implementation"
+  },
+  {
+    heading: "OIVU",
+    title: "Understanding the Problem. Building the Solution.",
+    quote: "Oivu was developed around the challenges faced by gig workers seeking accessible rest points. Our hackathon feedback recognised our understanding of the problem and our implementation of the proposed solution.",
+    description: "Oivu was developed around the challenges faced by gig workers seeking accessible rest points. Our hackathon feedback recognised our understanding of the problem and our implementation of the proposed solution.",
+    author: "Oivu Project",
+    role: "Hackathon Experience",
+    context: "Hackathon Experience",
+    attribution: "Oivu Project · Hackathon Experience"
   }
 ];
