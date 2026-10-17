@@ -1146,30 +1146,11 @@ function renderProjectDetailPage(container, slug) {
 
       <section class="section">
         <div class="container">
-          <!-- Development / Deployment Status Box -->
-          <div class="project-status-box">
-            <span class="project-status-dot"></span>
-            <span class="project-status-text">
-              <strong>Development &amp; Deployment Status:</strong> ${project.statusText || 'Portfolio Project'}
-            </span>
-          </div>
-
           <!-- Project Overview & Purpose -->
           <div style="background: #FFFFFF; border: 1px solid var(--border-medium); border-radius: var(--radius-md); padding: 2.25rem; margin-bottom: 3.5rem; box-shadow: var(--shadow-sm);">
             <div class="eyebrow">PROJECT PURPOSE &amp; OVERVIEW</div>
             <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-navy); margin-bottom: 0.75rem;">What is ${project.title}?</h2>
             <p style="font-size: 1.05rem; line-height: 1.7; color: var(--text-body); margin: 0;">${project.overview}</p>
-          </div>
-
-          <!-- Verified Technical Benchmarks -->
-          <div class="cs-meta-grid">
-            ${project.caseStudy.metrics.map(m => `
-              <div class="cs-meta-box">
-                <div class="cs-meta-label">${m.label}</div>
-                <div class="cs-meta-value">${m.value}</div>
-                <div class="cs-meta-note">${m.note}</div>
-              </div>
-            `).join('')}
           </div>
 
           <!-- Interactive Screenshot Showcase Gallery -->
@@ -1198,17 +1179,8 @@ function renderProjectDetailPage(container, slug) {
             </div>
 
             <div class="gallery-main-frame">
-              <div class="gallery-viewport-stage" id="gallery-viewport" title="Click to view enlarged screenshot">
+              <div class="gallery-viewport-stage" id="gallery-viewport">
                 <div class="gallery-badge-counter" id="gallery-counter-badge">1 / ${screenshots.length}</div>
-                <div class="gallery-zoom-hint-badge">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    <line x1="11" y1="8" x2="11" y2="14"></line>
-                    <line x1="8" y1="11" x2="14" y2="11"></line>
-                  </svg>
-                  Click to enlarge
-                </div>
 
                 ${screenshots.length > 1 ? `
                   <button type="button" class="gallery-nav-btn prev" id="gallery-prev-btn" aria-label="Previous screenshot">
@@ -1241,29 +1213,6 @@ function renderProjectDetailPage(container, slug) {
                 </button>
               </div>
             </div>
-
-            ${screenshots.length > 1 ? `
-              <div class="gallery-thumbnails-section">
-                <div class="gallery-thumbnails-track" role="tablist" aria-label="Screenshot thumbnails">
-                  ${screenshots.map((s, idx) => `
-                    <button type="button" 
-                            role="tab" 
-                            class="gallery-thumb-card ${idx === 0 ? 'active' : ''}" 
-                            data-index="${idx}" 
-                            aria-selected="${idx === 0 ? 'true' : 'false'}" 
-                            aria-label="View screenshot ${idx + 1}: ${s.caption}">
-                      <div class="gallery-thumb-preview">
-                        <img src="${s.src}" alt="${s.alt}" loading="lazy" />
-                      </div>
-                      <div class="gallery-thumb-info">
-                        <span class="gallery-thumb-index">0${idx + 1}</span>
-                        <span class="gallery-thumb-label" title="${s.caption}">${s.caption}</span>
-                      </div>
-                    </button>
-                  `).join('')}
-                </div>
-              </div>
-            ` : ''}
           </div>
 
           <!-- The Problem & The Solution -->
@@ -1296,29 +1245,6 @@ function renderProjectDetailPage(container, slug) {
             </div>
           </div>
 
-          <!-- Screenshots & Interface Evidence Grid -->
-          ${screenshots.length > 1 ? `
-            <div style="margin-bottom: 3.5rem;">
-              <div class="eyebrow">INTERFACE EVIDENCE &amp; SCREENSHOTS</div>
-              <h2 class="section-title">Application Screens &amp; Workflows</h2>
-              <div class="project-gallery-grid">
-                ${screenshots.map((img, idx) => `
-                  <div class="project-gallery-item" data-gallery-index="${idx}" style="cursor: pointer;" title="Click to inspect this screen in full resolution">
-                    <div class="project-gallery-img-wrap">
-                      <img src="${img.src}" alt="${img.caption}" loading="lazy" />
-                    </div>
-                    <div class="project-gallery-caption">
-                      <svg width="14" height="14" viewBox="0 0 20 20" fill="var(--color-blue)">
-                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
-                      </svg>
-                      <span>${img.caption}</span>
-                    </div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-          ` : ''}
-
           <!-- Technology Section -->
           <div style="background: #FFFFFF; border: 1px solid var(--border-medium); border-radius: var(--radius-lg); padding: 2.5rem; margin-bottom: 3.5rem; box-shadow: var(--shadow-sm);">
             <div class="eyebrow">ENGINEERING STACK</div>
@@ -1338,15 +1264,6 @@ function renderProjectDetailPage(container, slug) {
               `).join('')}
             </div>
           </div>
-
-          <!-- Contributions Section -->
-          ${project.contributions ? `
-            <div class="project-contributions-card">
-              <div class="cs-stage-number" style="color: var(--color-blue); font-weight: 800; margin-bottom: 0.4rem;">ENGINEERING CONTRIBUTIONS</div>
-              <h3 class="project-contributions-title">Implementation &amp; Technical Scope</h3>
-              <p class="project-contributions-text">${project.contributions}</p>
-            </div>
-          ` : ''}
 
           <!-- Short Narrative Case Study (Challenge, Approach, Outcome) -->
           <div style="margin-bottom: 3.5rem;">
@@ -1434,8 +1351,6 @@ function initProjectGalleryAndLightbox(project, screenshots) {
   const viewport = document.getElementById('gallery-viewport');
   const expandBtn = document.getElementById('gallery-expand-btn');
   const captionZoomLink = document.getElementById('gallery-caption-zoom-link');
-  const thumbCards = document.querySelectorAll('.gallery-thumb-card');
-  const lowerItems = document.querySelectorAll('.project-gallery-item[data-gallery-index]');
 
   function updateGallery(newIndex, syncModal = true) {
     currentIndex = (newIndex + total) % total;
@@ -1484,16 +1399,6 @@ function initProjectGalleryAndLightbox(project, screenshots) {
       captionContent.textContent = current.caption;
     }
 
-    thumbCards.forEach((card, idx) => {
-      if (idx === currentIndex) {
-        card.classList.add('active');
-        card.setAttribute('aria-selected', 'true');
-      } else {
-        card.classList.remove('active');
-        card.setAttribute('aria-selected', 'false');
-      }
-    });
-
     if (syncModal) {
       syncLightboxContent();
     }
@@ -1501,25 +1406,6 @@ function initProjectGalleryAndLightbox(project, screenshots) {
 
   // Populate initial mockup frame immediately
   updateGallery(0, false);
-
-  thumbCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const idx = parseInt(card.getAttribute('data-index'), 10);
-      if (!isNaN(idx)) {
-        updateGallery(idx);
-      }
-    });
-  });
-
-  lowerItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const idx = parseInt(item.getAttribute('data-gallery-index'), 10);
-      if (!isNaN(idx)) {
-        updateGallery(idx);
-        openLightbox(idx);
-      }
-    });
-  });
 
   if (prevBtn) {
     prevBtn.addEventListener('click', (e) => {

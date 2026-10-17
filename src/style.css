@@ -2036,7 +2036,7 @@ button {
   justify-content: center;
   padding: 2.25rem 3.5rem;
   box-sizing: border-box;
-  cursor: zoom-in;
+  cursor: default;
   user-select: none;
   overflow: hidden;
 }

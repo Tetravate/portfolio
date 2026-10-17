@@ -252,8 +252,8 @@ export const featuredProjects = [
     "screenshots": [
           {
                 "src": "/projects/mara-restaurant-hero.jpg",
-                "alt": "MĀRA — Modern Indian Dining — Restaurant Branding, Navigation & Hero Section",
-                "caption": "Restaurant Branding, Navigation & Hero Section"
+                "alt": "MĀRA — Modern Indian Dining — Restaurant Branding & Hero Section",
+                "caption": "Restaurant Branding & Hero Section"
           },
           {
                 "src": "/projects/mara-restaurant-menu.jpg",
@@ -264,7 +264,7 @@ export const featuredProjects = [
     "gallery": [
       {
         "src": "/projects/mara-restaurant-hero.jpg",
-        "caption": "Restaurant Branding, Navigation & Hero Section"
+        "caption": "Restaurant Branding & Hero Section"
       },
       {
         "src": "/projects/mara-restaurant-menu.jpg",
